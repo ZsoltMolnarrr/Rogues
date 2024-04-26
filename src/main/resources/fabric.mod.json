@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "id": "rogues",
+  "version": "${version}",
+  "name": "Rogues & Warriors (RPG Series)",
+  "description": "",
+  "authors": [],
+  "contact": {
+    "repo": "https://github.com/zsoltmolnarrr/Rogues"
+  },
+  "license": "All-Rights-Reserved",
+  "icon": "assets/rogues/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "client": [
+      "net.rogues.client.RoguesClient"
+    ],
+    "main": [
+      "net.rogues.RoguesMod"
+    ]
+  },
+  "mixins": [
+    "rogues.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=${fabric_loader_version}",
+    "fabric": "*",
+    "minecraft": "${minecraft_version}"
+  }
+}
