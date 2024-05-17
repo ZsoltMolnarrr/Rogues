@@ -110,7 +110,6 @@ if(project.hasProperty('release_type')) {
                 requiredDependency 'fabric-api'
                 requiredDependency 'azurelib-armor'
                 requiredDependency 'spell-engine'
-                requiredDependency 'ranged-weapon-api'
             }
 
             mainArtifact(remapJar)
@@ -140,7 +139,6 @@ if(project.hasProperty('release_type')) {
             required.project 'fabric-api'
             required.project 'azurelib-armor'
             required.project 'spell-engine'
-            required.project 'ranged-weapon-api'
         }
     }
 
