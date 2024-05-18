@@ -8,6 +8,7 @@ import net.minecraft.registry.Registry;
 import net.minecraft.text.Text;
 import net.rogues.config.Default;
 import net.rogues.item.Group;
+import net.rogues.item.Weapons;
 import net.rogues.item.armor.Armors;
 import net.spell_engine.api.item.ItemConfig;
 import net.tinyconfig.ConfigManager;
@@ -32,8 +33,8 @@ public class RoguesMod implements ModInitializer {
                 .displayName(Text.translatable("itemGroup." + NAMESPACE + ".general"))
                 .build();
         Registry.register(Registries.ITEM_GROUP, Group.KEY, Group.ROGUES);
+        Weapons.register(itemConfig.value.weapons);
         Armors.register(itemConfig.value.armor_sets);
-
         itemConfig.save();
     }
 }

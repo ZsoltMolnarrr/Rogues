@@ -10,10 +10,8 @@ import net.rogues.RoguesMod;
 import net.rogues.item.Group;
 import net.spell_engine.api.item.ItemConfig;
 import net.spell_engine.api.item.armor.Armor;
-import net.spell_power.api.SpellSchools;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 public class Armors {
@@ -81,7 +79,7 @@ public class Armors {
     public static final Armor.Set RogueArmorSet_t2 =
             create(
                     new Armor.CustomMaterial(
-                            "strider_armor",
+                            "stalker_armor",
                             20,
                             10,
                             RogueArmor.equipSound,
