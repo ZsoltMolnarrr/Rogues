@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "rogues:block/arms_workbench"
+    },
+    "facing=south": {
+      "model": "rogues:block/arms_workbench",
+      "y": 180
+    },
+    "facing=east": {
+      "model": "rogues:block/arms_workbench",
+      "y": 90
+    },
+    "facing=west": {
+      "model": "rogues:block/arms_workbench",
+      "y": 270
+    }
+  }
+}

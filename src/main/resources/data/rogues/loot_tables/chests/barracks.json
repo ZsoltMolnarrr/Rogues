@@ -1,0 +1,143 @@
+{
+  "type": "minecraft:chest",
+  "pools": [
+    {
+      "rolls": {
+        "type": "minecraft:uniform",
+        "min": 1,
+        "max": 5
+      },
+      "bonus_rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "weight": 2,
+          "name": "minecraft:flint",
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 1,
+                "max": 2
+              },
+              "add": false
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 2,
+          "name": "minecraft:chain",
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 1,
+                "max": 12
+              },
+              "add": false
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 2,
+          "name": "minecraft:iron_ingot",
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 1,
+                "max": 5
+              },
+              "add": false
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 2,
+          "name": "minecraft:stick",
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 1,
+                "max": 5
+              },
+              "add": false
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 3,
+          "name": "minecraft:leather",
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 1,
+                "max": 8
+              },
+              "add": false
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "rogues:rogue_armor_head"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "rogues:rogue_armor_chest"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "rogues:rogue_armor_legs"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "rogues:rogue_armor_feet"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "rogues:warrior_armor_head"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "rogues:warrior_armor_chest"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "rogues:warrior_armor_legs"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "rogues:warrior_armor_feet"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "rogues:iron_dagger"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "rogues:iron_sickle"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "rogues:iron_double_axe"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "rogues:iron_glaive"
+        }
+      ]
+    }
+  ]
+}
