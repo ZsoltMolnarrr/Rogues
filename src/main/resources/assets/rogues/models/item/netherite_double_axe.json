@@ -1,5 +1,5 @@
 {
-  "parent": "rogues:item/base/double_axe_20",
+  "parent": "rogues:item/base/double_axe_18",
   "textures": {
     "layer0": "rogues:item/netherite_double_axe"
   }
