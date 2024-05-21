@@ -67,6 +67,10 @@ public class Weapons {
             Weapon.CustomMaterial.matching(ToolMaterials.DIAMOND, () -> Ingredient.ofItems(Items.DIAMOND)), 8F);
     public static final Weapon.Entry netherite_dagger = dagger("netherite_dagger",
             Weapon.CustomMaterial.matching(ToolMaterials.NETHERITE, () -> Ingredient.ofItems(Items.NETHERITE_INGOT)), 9F);
+    public static final Weapon.Entry aeternium_dagger = dagger("aeternium_dagger",
+            Weapon.CustomMaterial.matching(ToolMaterials.NETHERITE, () -> Ingredient.ofItems(Items.NETHERITE_INGOT)), 9F);
+    public static final Weapon.Entry ruby_dagger = dagger("ruby_dagger",
+            Weapon.CustomMaterial.matching(ToolMaterials.NETHERITE, () -> Ingredient.ofItems(Items.NETHERITE_INGOT)), 9F);
 
     private static Weapon.Entry sickle(String name, Weapon.CustomMaterial material, float damage) {
         return dagger(null, name, material, damage);
@@ -85,6 +89,10 @@ public class Weapons {
     public static final Weapon.Entry diamond_sickle = sickle("diamond_sickle",
             Weapon.CustomMaterial.matching(ToolMaterials.DIAMOND, () -> Ingredient.ofItems(Items.DIAMOND)), 8F);
     public static final Weapon.Entry netherite_sickle = sickle("netherite_sickle",
+            Weapon.CustomMaterial.matching(ToolMaterials.NETHERITE, () -> Ingredient.ofItems(Items.NETHERITE_INGOT)), 9F);
+    public static final Weapon.Entry aeternium_sickle = sickle("aeternium_sickle",
+            Weapon.CustomMaterial.matching(ToolMaterials.NETHERITE, () -> Ingredient.ofItems(Items.NETHERITE_INGOT)), 9F);
+    public static final Weapon.Entry ruby_sickle = sickle("ruby_sickle",
             Weapon.CustomMaterial.matching(ToolMaterials.NETHERITE, () -> Ingredient.ofItems(Items.NETHERITE_INGOT)), 9F);
 
     // MARK: Double Axe
@@ -111,6 +119,10 @@ public class Weapons {
             Weapon.CustomMaterial.matching(ToolMaterials.DIAMOND, () -> Ingredient.ofItems(Items.DIAMOND)), 11F);
     public static final Weapon.Entry netherite_double_axe = axe("netherite_double_axe",
             Weapon.CustomMaterial.matching(ToolMaterials.NETHERITE, () -> Ingredient.ofItems(Items.NETHERITE_INGOT)), 13F);
+    public static final Weapon.Entry aeternium_double_axe = axe("aeternium_double_axe",
+            Weapon.CustomMaterial.matching(ToolMaterials.NETHERITE, () -> Ingredient.ofItems(Items.NETHERITE_INGOT)), 13F);
+    public static final Weapon.Entry ruby_double_axe = axe("ruby_double_axe",
+            Weapon.CustomMaterial.matching(ToolMaterials.NETHERITE, () -> Ingredient.ofItems(Items.NETHERITE_INGOT)), 13F);
 
     // MARK: Glaives
 
@@ -131,6 +143,10 @@ public class Weapons {
     public static final Weapon.Entry diamond_glaive = glaive("diamond_glaive",
             Weapon.CustomMaterial.matching(ToolMaterials.DIAMOND, () -> Ingredient.ofItems(Items.DIAMOND)), 9.5F);
     public static final Weapon.Entry netherite_glaive = glaive("netherite_glaive",
+            Weapon.CustomMaterial.matching(ToolMaterials.NETHERITE, () -> Ingredient.ofItems(Items.NETHERITE_INGOT)), 11F);
+    public static final Weapon.Entry aeternium_glaive = glaive("aeternium_glaive",
+            Weapon.CustomMaterial.matching(ToolMaterials.NETHERITE, () -> Ingredient.ofItems(Items.NETHERITE_INGOT)), 11F);
+    public static final Weapon.Entry ruby_glaive = glaive("ruby_glaive",
             Weapon.CustomMaterial.matching(ToolMaterials.NETHERITE, () -> Ingredient.ofItems(Items.NETHERITE_INGOT)), 11F);
 
     // MARK: Register

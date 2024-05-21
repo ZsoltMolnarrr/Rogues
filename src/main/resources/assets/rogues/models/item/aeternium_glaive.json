@@ -1,0 +1,6 @@
+{
+  "parent": "rogues:item/base/glaive_30",
+  "textures": {
+    "layer0": "rogues:item/aeternium_glaive"
+  }
+}

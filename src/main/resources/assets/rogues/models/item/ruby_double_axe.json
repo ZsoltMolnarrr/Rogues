@@ -1,0 +1,6 @@
+{
+  "parent": "rogues:item/base/double_axe_18",
+  "textures": {
+    "layer0": "rogues:item/ruby_double_axe"
+  }
+}
