@@ -45,6 +45,9 @@ public class Weapons {
         };
     }
 
+    private static final String BETTER_END = "betterend";
+    private static final String BETTER_NETHER = "betternether";
+
     // MARK: Daggers
 
     private static Weapon.Entry dagger(String name, Weapon.CustomMaterial material, float damage) {
