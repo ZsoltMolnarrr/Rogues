@@ -10,6 +10,7 @@ import net.minecraft.text.Text;
 import net.rogues.block.CustomBlocks;
 import net.rogues.config.Default;
 import net.rogues.config.TweaksConfig;
+import net.rogues.item.Books;
 import net.rogues.item.Group;
 import net.rogues.item.Weapons;
 import net.rogues.item.armor.Armors;
@@ -47,6 +48,7 @@ public class RoguesMod implements ModInitializer {
         SoundHelper.registerSounds();
         CustomBlocks.register();
         itemConfig.refresh();
+        Books.register();
         Group.ROGUES = FabricItemGroup.builder()
                 .icon(() -> new ItemStack(Armors.RogueArmorSet_t2.head))
                 .displayName(Text.translatable("itemGroup." + NAMESPACE + ".general"))

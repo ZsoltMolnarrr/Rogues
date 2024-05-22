@@ -54,6 +54,6 @@
 
   "entity.minecraft.villager.arms_merchant": "Arms Merchant",
   "entity.minecraft.villager.rogues:arms_merchant": "Arms Merchant",
-  "block.rogues.arms_merchant": "Arms Station",
-  "block.rogues.arms_merchant.hint": "Workbench for Arms Merchant Villagers."
+  "block.rogues.arms_workbench": "Arms Station",
+  "block.rogues.arms_workbench.hint": "Workbench for Arms Merchant Villagers."
 }
