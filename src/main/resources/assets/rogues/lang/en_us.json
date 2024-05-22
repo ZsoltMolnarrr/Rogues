@@ -1,0 +1,59 @@
+{
+  "itemGroup.rogues.general": "Rogues & Warriors",
+
+  "item.rogues.rogue_spell_book": "Rogue Manual",
+  "item.rogues.warrior_spell_book": "Warrior's Book",
+
+  "item.rogues.flint_dagger": "Flint Dagger",
+  "item.rogues.golden_dagger": "Golden Dagger",
+  "item.rogues.iron_dagger": "Iron Dagger",
+  "item.rogues.diamond_dagger": "Diamond Dagger",
+  "item.rogues.netherite_dagger": "Netherite Dagger",
+  "item.rogues.aeternium_dagger": "Aeternium Dagger",
+  "item.rogues.ruby_dagger": "Ruby Dagger",
+
+  "item.rogues.iron_sickle": "Iron Sickle",
+  "item.rogues.golden_sickle": "Golden Sickle",
+  "item.rogues.diamond_sickle": "Diamond Sickle",
+  "item.rogues.netherite_sickle": "Netherite Sickle",
+  "item.rogues.aeternium_sickle": "Aeternium Sickle",
+  "item.rogues.ruby_sickle": "Ruby Sickle",
+
+  "item.rogues.stone_double_axe": "Stone Double Axe",
+  "item.rogues.iron_double_axe": "Iron Double Axe",
+  "item.rogues.golden_double_axe": "Golden Double Axe",
+  "item.rogues.diamond_double_axe": "Diamond Double Axe",
+  "item.rogues.netherite_double_axe": "Netherite Double Axe",
+  "item.rogues.aeternium_double_axe": "Aeternium Double Axe",
+  "item.rogues.ruby_double_axe": "Ruby Double Axe",
+
+  "item.rogues.iron_glaive": "Iron Glaive",
+  "item.rogues.golden_glaive": "Golden Glaive",
+  "item.rogues.diamond_glaive": "Diamond Glaive",
+  "item.rogues.netherite_glaive": "Netherite Glaive",
+  "item.rogues.aeternium_glaive": "Aeternium Glaive",
+  "item.rogues.ruby_glaive": "Ruby Glaive",
+
+  "item.rogues.rogue_armor_head": "Rogue Mask",
+  "item.rogues.rogue_armor_chest": "Rogue Tunic",
+  "item.rogues.rogue_armor_legs": "Rogue Pants",
+  "item.rogues.rogue_armor_feet": "Rogue Boots",
+  "item.rogues.stalker_armor_head": "Stalker Mask",
+  "item.rogues.stalker_armor_chest": "Stalker Tunic",
+  "item.rogues.stalker_armor_legs": "Stalker Pants",
+  "item.rogues.stalker_armor_feet": "Stalker Boots",
+
+  "item.rogues.warrior_armor_head": "Warrior Helmet",
+  "item.rogues.warrior_armor_chest": "Warrior Chestplate",
+  "item.rogues.warrior_armor_legs": "Warrior Leggings",
+  "item.rogues.warrior_armor_feet": "Warrior Boots",
+  "item.rogues.berserker_armor_head": "Berserker Helmet",
+  "item.rogues.berserker_armor_chest": "Berserker Chestplate",
+  "item.rogues.berserker_armor_legs": "Berserker Leggings",
+  "item.rogues.berserker_armor_feet": "Berserker Boots",
+
+  "entity.minecraft.villager.arms_merchant": "Arms Merchant",
+  "entity.minecraft.villager.rogues:arms_merchant": "Arms Merchant",
+  "block.rogues.arms_merchant": "Arms Station",
+  "block.rogues.arms_merchant.hint": "Workbench for Arms Merchant Villagers."
+}
