@@ -43,6 +43,8 @@ dependencies {
 
     modImplementation("maven.modrinth:spell-engine:${project.spell_engine_version}")
     modImplementation("maven.modrinth:spell-power:${project.spell_power_version}-fabric")
+//    modImplementation(files("run/mods/dev/spell_engine-${project.spell_engine_version}.jar"))
+//    modImplementation(files("run/mods/dev/spell_power-${project.spell_power_version}.jar"))
 }
 
 processResources {

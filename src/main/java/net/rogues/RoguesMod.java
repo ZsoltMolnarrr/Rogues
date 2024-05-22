@@ -9,6 +9,7 @@ import net.minecraft.registry.Registry;
 import net.minecraft.text.Text;
 import net.rogues.block.CustomBlocks;
 import net.rogues.config.Default;
+import net.rogues.config.TweaksConfig;
 import net.rogues.item.Group;
 import net.rogues.item.Weapons;
 import net.rogues.item.armor.Armors;
@@ -33,9 +34,16 @@ public class RoguesMod implements ModInitializer {
             .setDirectory(NAMESPACE)
             .sanitize(true)
             .build();
+    public static ConfigManager<TweaksConfig> tweaksConfig = new ConfigManager<>
+            ("tweaks", new TweaksConfig())
+            .builder()
+            .setDirectory(NAMESPACE)
+            .sanitize(true)
+            .build();
 
     @Override
     public void onInitialize() {
+        tweaksConfig.refresh();
         SoundHelper.registerSounds();
         CustomBlocks.register();
         itemConfig.refresh();

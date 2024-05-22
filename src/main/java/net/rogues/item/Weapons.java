@@ -1,5 +1,6 @@
 package net.rogues.item;
 
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 import net.minecraft.item.ToolMaterials;
@@ -32,17 +33,19 @@ public class Weapons {
         return entry;
     }
 
-    private static Supplier<Ingredient> ingredient(String idString) {
-        return ingredient(idString, Items.DIAMOND);
-    }
-
-    private static Supplier<Ingredient> ingredient(String idString, Item fallback) {
+    private static Supplier<Ingredient> ingredient(String idString, boolean requirement, Item fallback) {
         var id = new Identifier(idString);
-        return () -> {
-            var item = Registries.ITEM.get(id);
-            var ingredient = item != null ? item : fallback;
-            return Ingredient.ofItems(ingredient);
-        };
+        if (requirement) {
+            return () -> {
+                return Ingredient.ofItems(fallback);
+            };
+        } else {
+            return () -> {
+                var item = Registries.ITEM.get(id);
+                var ingredient = item != null ? item : fallback;
+                return Ingredient.ofItems(ingredient);
+            };
+        }
     }
 
     private static final String BETTER_END = "betterend";
@@ -70,10 +73,6 @@ public class Weapons {
             Weapon.CustomMaterial.matching(ToolMaterials.DIAMOND, () -> Ingredient.ofItems(Items.DIAMOND)), 8F);
     public static final Weapon.Entry netherite_dagger = dagger("netherite_dagger",
             Weapon.CustomMaterial.matching(ToolMaterials.NETHERITE, () -> Ingredient.ofItems(Items.NETHERITE_INGOT)), 9F);
-    public static final Weapon.Entry aeternium_dagger = dagger("aeternium_dagger",
-            Weapon.CustomMaterial.matching(ToolMaterials.NETHERITE, () -> Ingredient.ofItems(Items.NETHERITE_INGOT)), 9F);
-    public static final Weapon.Entry ruby_dagger = dagger("ruby_dagger",
-            Weapon.CustomMaterial.matching(ToolMaterials.NETHERITE, () -> Ingredient.ofItems(Items.NETHERITE_INGOT)), 9F);
 
     private static Weapon.Entry sickle(String name, Weapon.CustomMaterial material, float damage) {
         return dagger(null, name, material, damage);
@@ -92,10 +91,6 @@ public class Weapons {
     public static final Weapon.Entry diamond_sickle = sickle("diamond_sickle",
             Weapon.CustomMaterial.matching(ToolMaterials.DIAMOND, () -> Ingredient.ofItems(Items.DIAMOND)), 8F);
     public static final Weapon.Entry netherite_sickle = sickle("netherite_sickle",
-            Weapon.CustomMaterial.matching(ToolMaterials.NETHERITE, () -> Ingredient.ofItems(Items.NETHERITE_INGOT)), 9F);
-    public static final Weapon.Entry aeternium_sickle = sickle("aeternium_sickle",
-            Weapon.CustomMaterial.matching(ToolMaterials.NETHERITE, () -> Ingredient.ofItems(Items.NETHERITE_INGOT)), 9F);
-    public static final Weapon.Entry ruby_sickle = sickle("ruby_sickle",
             Weapon.CustomMaterial.matching(ToolMaterials.NETHERITE, () -> Ingredient.ofItems(Items.NETHERITE_INGOT)), 9F);
 
     // MARK: Double Axe
@@ -122,10 +117,6 @@ public class Weapons {
             Weapon.CustomMaterial.matching(ToolMaterials.DIAMOND, () -> Ingredient.ofItems(Items.DIAMOND)), 11F);
     public static final Weapon.Entry netherite_double_axe = axe("netherite_double_axe",
             Weapon.CustomMaterial.matching(ToolMaterials.NETHERITE, () -> Ingredient.ofItems(Items.NETHERITE_INGOT)), 13F);
-    public static final Weapon.Entry aeternium_double_axe = axe("aeternium_double_axe",
-            Weapon.CustomMaterial.matching(ToolMaterials.NETHERITE, () -> Ingredient.ofItems(Items.NETHERITE_INGOT)), 13F);
-    public static final Weapon.Entry ruby_double_axe = axe("ruby_double_axe",
-            Weapon.CustomMaterial.matching(ToolMaterials.NETHERITE, () -> Ingredient.ofItems(Items.NETHERITE_INGOT)), 13F);
 
     // MARK: Glaives
 
@@ -147,14 +138,26 @@ public class Weapons {
             Weapon.CustomMaterial.matching(ToolMaterials.DIAMOND, () -> Ingredient.ofItems(Items.DIAMOND)), 9.5F);
     public static final Weapon.Entry netherite_glaive = glaive("netherite_glaive",
             Weapon.CustomMaterial.matching(ToolMaterials.NETHERITE, () -> Ingredient.ofItems(Items.NETHERITE_INGOT)), 11F);
-    public static final Weapon.Entry aeternium_glaive = glaive("aeternium_glaive",
-            Weapon.CustomMaterial.matching(ToolMaterials.NETHERITE, () -> Ingredient.ofItems(Items.NETHERITE_INGOT)), 11F);
-    public static final Weapon.Entry ruby_glaive = glaive("ruby_glaive",
-            Weapon.CustomMaterial.matching(ToolMaterials.NETHERITE, () -> Ingredient.ofItems(Items.NETHERITE_INGOT)), 11F);
 
     // MARK: Register
 
     public static void register(Map<String, ItemConfig.Weapon> configs) {
+        if (RoguesMod.tweaksConfig.value.ignore_items_required_mods || FabricLoader.getInstance().isModLoaded(BETTER_END)) {
+            var repair = ingredient("betterend:aeternium_ingot", FabricLoader.getInstance().isModLoaded(BETTER_END), Items.NETHERITE_INGOT);
+            dagger("aeternium_dagger", Weapon.CustomMaterial.matching(ToolMaterials.NETHERITE, repair), 9F);
+            sickle("aeternium_sickle", Weapon.CustomMaterial.matching(ToolMaterials.NETHERITE, repair), 9F);
+            axe("aeternium_double_axe", Weapon.CustomMaterial.matching(ToolMaterials.NETHERITE, repair), 13F);
+            glaive("aeternium_glaive", Weapon.CustomMaterial.matching(ToolMaterials.NETHERITE, repair), 11F);
+        }
+
+        if (RoguesMod.tweaksConfig.value.ignore_items_required_mods || FabricLoader.getInstance().isModLoaded(BETTER_NETHER)) {
+            var repair = ingredient("betternether:nether_ruby", FabricLoader.getInstance().isModLoaded(BETTER_END), Items.NETHERITE_INGOT);
+            dagger("ruby_dagger", Weapon.CustomMaterial.matching(ToolMaterials.NETHERITE, repair), 9F);
+            sickle("ruby_sickle", Weapon.CustomMaterial.matching(ToolMaterials.NETHERITE, repair), 9F);
+            axe("ruby_double_axe", Weapon.CustomMaterial.matching(ToolMaterials.NETHERITE, repair), 13F);
+            glaive("ruby_glaive", Weapon.CustomMaterial.matching(ToolMaterials.NETHERITE, repair), 11F);
+        }
+
         Weapon.register(configs, entries, Group.KEY);
     }
 }
