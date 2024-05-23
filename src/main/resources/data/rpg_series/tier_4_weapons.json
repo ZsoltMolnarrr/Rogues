@@ -1,0 +1,37 @@
+{
+  "replace": false,
+  "values": [
+    {
+      "id": "rogues:aeternium_dagger",
+      "required": false
+    },
+    {
+      "id": "rogues:aeternium_sickle",
+      "required": false
+    },
+    {
+      "id": "rogues:aeternium_double_axe",
+      "required": false
+    },
+    {
+      "id": "rogues:aeternium_glaive",
+      "required": false
+    },
+    {
+      "id": "rogues:ruby_dagger",
+      "required": false
+    },
+    {
+      "id": "rogues:ruby_sickle",
+      "required": false
+    },
+    {
+      "id": "rogues:ruby_double_axe",
+      "required": false
+    },
+    {
+      "id": "rogues:ruby_glaive",
+      "required": false
+    }
+  ]
+}

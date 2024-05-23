@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "rogues:iron_dagger",
+    "rogues:iron_sickle",
+    "rogues:iron_double_axe",
+    "rogues:iron_glaive"
+  ]
+}

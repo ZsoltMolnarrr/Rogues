@@ -1,0 +1,12 @@
+{
+  "replace": false,
+  "values": [
+    "rogues:stone_double_axe",
+    "rogues:iron_double_axe",
+    "rogues:golden_double_axe",
+    "rogues:diamond_double_axe",
+    "rogues:netherite_double_axe",
+    "rogues:aeternium_double_axe",
+    "rogues:ruby_double_axe"
+  ]
+}

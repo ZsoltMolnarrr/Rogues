@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "rogues:netherite_dagger",
+    "rogues:netherite_sickle",
+    "rogues:netherite_double_axe",
+    "rogues:netherite_glaive"
+  ]
+}

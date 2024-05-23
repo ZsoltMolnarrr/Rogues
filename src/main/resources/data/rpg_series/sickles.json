@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "rogues:iron_sickle",
+    "rogues:golden_sickle",
+    "rogues:diamond_sickle",
+    "rogues:netherite_sickle",
+    "rogues:aeternium_sickle",
+    "rogues:ruby_sickle"
+  ]
+}

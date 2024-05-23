@@ -1,0 +1,12 @@
+{
+  "replace": false,
+  "values": [
+    "rogues:flint_dagger",
+    "rogues:iron_dagger",
+    "rogues:golden_dagger",
+    "rogues:diamond_dagger",
+    "rogues:netherite_dagger",
+    "rogues:aeternium_dagger",
+    "rogues:ruby_dagger"
+  ]
+}

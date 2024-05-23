@@ -1,0 +1,13 @@
+{
+  "replace": false,
+  "values": [
+    "rogues:rogue_armor_chest",
+    "rogues:rogue_armor_feet",
+    "rogues:rogue_armor_head",
+    "rogues:rogue_armor_legs",
+    "rogues:warrior_armor_chest",
+    "rogues:warrior_armor_feet",
+    "rogues:warrior_armor_head",
+    "rogues:warrior_armor_legs"
+  ]
+}
