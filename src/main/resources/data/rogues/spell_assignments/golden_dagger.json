@@ -1,3 +1,3 @@
 {
-  "parent": "bettercombat:dagger"
+  "is_proxy": true
 }
