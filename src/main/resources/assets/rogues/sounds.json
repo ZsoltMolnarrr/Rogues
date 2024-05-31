@@ -1,7 +1,12 @@
 {
-  "archers_workbench": {
+  "arms_workbench": {
     "sounds": [
       "rogues:arms_workbench"
+    ]
+  },
+  "slice_and_dice": {
+    "sounds": [
+      "rogues:slice_and_dice"
     ]
   }
 }

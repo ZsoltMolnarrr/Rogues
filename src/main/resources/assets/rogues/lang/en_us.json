@@ -55,5 +55,8 @@
   "entity.minecraft.villager.arms_merchant": "Arms Merchant",
   "entity.minecraft.villager.rogues:arms_merchant": "Arms Merchant",
   "block.rogues.arms_workbench": "Arms Station",
-  "block.rogues.arms_workbench.hint": "Workbench for Arms Merchant Villagers."
+  "block.rogues.arms_workbench.hint": "Workbench for Arms Merchant Villagers.",
+
+  "spell.rogues.slice_and_dice.name": "Slice and Dice",
+  "spell.rogues.slice_and_dice.description": "Enter a battle trance, during which your attacks will each grant extra power, stacking up to {effect_amplifier} times. Expires after {effect_duration} sec."
 }

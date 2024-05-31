@@ -10,7 +10,7 @@ import net.minecraft.registry.tag.ItemTags;
 import net.minecraft.util.Identifier;
 import net.rogues.RoguesMod;
 import net.spell_engine.api.item.ItemConfig;
-import net.spell_engine.api.item.weapon.SpellSwordItem;
+import net.spell_engine.api.item.weapon.MeleeWeaponItem;
 import net.spell_engine.api.item.weapon.SpellWeaponItem;
 import net.spell_engine.api.item.weapon.Weapon;
 
@@ -59,7 +59,7 @@ public class Weapons {
 
     private static Weapon.Entry dagger(String requiredMod, String name, Weapon.CustomMaterial material, float damage) {
         var settings = new Item.Settings();
-        var item = new SpellWeaponItem(material, settings);
+        var item = new MeleeWeaponItem(material, settings);
         return entry(requiredMod, name, material, item, new ItemConfig.Weapon(damage, -2.8F));
     }
 
@@ -80,7 +80,7 @@ public class Weapons {
 
     private static Weapon.Entry sickle(String requiredMod, String name, Weapon.CustomMaterial material, float damage) {
         var settings = new Item.Settings();
-        var item = new SpellWeaponItem(material, settings);
+        var item = new MeleeWeaponItem(material, settings);
         return entry(requiredMod, name, material, item, new ItemConfig.Weapon(damage, -2.8F));
     }
 
@@ -101,7 +101,7 @@ public class Weapons {
 
     private static Weapon.Entry axe(String requiredMod, String name, Weapon.CustomMaterial material, float damage) {
         var settings = new Item.Settings();
-        var item = new SpellWeaponItem(material, settings);
+        var item = new MeleeWeaponItem(material, settings);
         return entry(requiredMod, name, material, item, new ItemConfig.Weapon(damage, -3.2F));
     }
 
@@ -126,7 +126,7 @@ public class Weapons {
 
     private static Weapon.Entry glaive(String requiredMod, String name, Weapon.CustomMaterial material, float damage) {
         var settings = new Item.Settings();
-        var item = new SpellSwordItem(material, settings);
+        var item = new SpellWeaponItem(material, settings);
         return entry(requiredMod, name, material, item, new ItemConfig.Weapon(damage, -3F));
     }
 

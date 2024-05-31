@@ -1,0 +1,38 @@
+{
+  "school": "HEALING",
+  "range": 0,
+  "learn": {
+    "tier": 1
+  },
+  "cast": {
+    "duration": 0
+  },
+  "release": {
+    "target": {
+      "type": "SELF"
+    },
+    "animation": "spell_engine:one_handed_area_release",
+    "sound": {
+      "id": "rogues:slice_and_dice"
+    },
+    "particles": [ ]
+  },
+  "impact": [
+    {
+      "action": {
+        "type": "STATUS_EFFECT",
+        "status_effect": {
+          "effect_id": "rogues:slice_and_dice",
+          "duration": 10,
+          "apply_mode": "SET",
+          "amplifier": 0,
+          "show_particles": false
+        }
+      }
+    }
+  ],
+  "cost": {
+    "exhaust": 0.2,
+    "cooldown_duration": 30
+  }
+}
