@@ -5,9 +5,7 @@
     "tier": 2
   },
   "cast": {
-    "duration": 0,
-    "animation": "spell_engine:one_handed_area_charge",
-    "particles": [ ]
+    "duration": 0
   },
   "release": {
     "target": {
@@ -16,7 +14,7 @@
         "vertical_range_multiplier": 0.5
       }
     },
-    "animation": "spell_engine:one_handed_area_release",
+    "animation": "spell_engine:dual_handed_ground_release",
     "sound": {
       "id": "rogues:shock_powder_release"
     },

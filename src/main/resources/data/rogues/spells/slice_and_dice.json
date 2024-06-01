@@ -1,5 +1,5 @@
 {
-  "school": "HEALING",
+  "school": "PHYSICAL_MELEE",
   "range": 0,
   "learn": {
     "tier": 1
@@ -11,11 +11,22 @@
     "target": {
       "type": "SELF"
     },
-    "animation": "spell_engine:one_handed_area_release",
+    "animation": "spell_engine:dual_handed_weapon_charge",
     "sound": {
       "id": "rogues:slice_and_dice"
     },
-    "particles": [ ]
+    "particles": [
+      {
+        "particle_id": "spell_engine:white_spark_mini",
+        "shape": "SPHERE",
+        "origin": "LAUNCH_POINT",
+        "count": 15,
+        "min_speed": 0.2,
+        "max_speed": 0.3,
+        "pre_spawn_travel": 7,
+        "invert": true
+      }
+    ]
   },
   "impact": [
     {
@@ -33,6 +44,6 @@
   ],
   "cost": {
     "exhaust": 0.2,
-    "cooldown_duration": 30
+    "cooldown_duration": 1
   }
 }
