@@ -23,8 +23,13 @@ public class LivingEntitySliceAndDice {
         ) {
             var instance = entity.getActiveStatusEffects().get(Effects.sliceAndDice);
             var stack = instance.getAmplifier();
-            entity.addStatusEffect(new StatusEffectInstance(Effects.sliceAndDice, stack + 1, instance.getDuration() + 1, false, false), entity);
-            System.out.println("Slice and Dice! New Stack: " + (stack + 1));
+            if (stack < (Effects.sliceAndDiceMaxStacks - 1)) {
+                entity.addStatusEffect(new StatusEffectInstance(
+                                Effects.sliceAndDice, instance.getDuration(), stack + 1,
+                                false, false, true),
+                        entity);
+                System.out.println("Slice and Dice! New Stack: " + (stack + 1));
+            }
         }
     }
 }
