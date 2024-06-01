@@ -18,7 +18,9 @@ public class SoundHelper {
     public static List<String> soundKeys = List.of(
         "slice_and_dice",
         "shock_powder_release",
-        "shock_powder_impact"
+        "shock_powder_impact",
+        "shadow_step_arrive",
+        "shadow_step_depart"
     );
 
     public static Map<String, Float> soundDistances = Map.of(

@@ -65,5 +65,8 @@
   "spell.rogues.shock_powder.name": "Shock Powder",
   "spell.rogues.shock_powder.description": "Stuns nearby enemies for {effect_duration} sec.",
   "effect.rogues.shock": "Stunned",
-  "effect.rogues.shock.description": "Prevents movement and actions"
+  "effect.rogues.shock.description": "Prevents movement and actions",
+
+  "spell.rogues.shadow_step.name": "Shadowstep",
+  "spell.rogues.shadow_step.description": "Step through the shadows to appear behind your target."
 }

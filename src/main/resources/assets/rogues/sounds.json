@@ -18,5 +18,15 @@
     "sounds": [
       "rogues:shock_powder_impact"
     ]
+  },
+  "shadow_step_arrive": {
+    "sounds": [
+      "rogues:shadow_step_arrive"
+    ]
+  },
+  "shadow_step_depart": {
+      "sounds": [
+      "rogues:shadow_step_depart"
+      ]
   }
 }
