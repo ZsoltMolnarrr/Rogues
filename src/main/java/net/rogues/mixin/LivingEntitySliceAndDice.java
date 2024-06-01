@@ -18,14 +18,14 @@ public class LivingEntitySliceAndDice {
     private void onAttacking_TAIL_SliceAndDice(Entity target, CallbackInfo ci) {
         var entity = (LivingEntity) (Object) this;
 
-        if (entity.hasStatusEffect(Effects.sliceAndDice) // Check if the entity has the slice and dice effect
+        if (entity.hasStatusEffect(Effects.SLICE_AND_DICE) // Check if the entity has the slice and dice effect
                 && lastAttackedTime != entity.age // Only once within a single game tick
         ) {
-            var instance = entity.getActiveStatusEffects().get(Effects.sliceAndDice);
+            var instance = entity.getActiveStatusEffects().get(Effects.SLICE_AND_DICE);
             var stack = instance.getAmplifier();
             if (stack < (Effects.sliceAndDiceMaxStacks - 1)) {
                 entity.addStatusEffect(new StatusEffectInstance(
-                                Effects.sliceAndDice, instance.getDuration(), stack + 1,
+                                Effects.SLICE_AND_DICE, instance.getDuration(), stack + 1,
                                 false, false, true),
                         entity);
                 System.out.println("Slice and Dice! New Stack: " + (stack + 1));

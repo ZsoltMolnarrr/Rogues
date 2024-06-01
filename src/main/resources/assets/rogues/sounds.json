@@ -8,5 +8,15 @@
     "sounds": [
       "rogues:slice_and_dice"
     ]
+  },
+  "shock_powder_release": {
+    "sounds": [
+      "rogues:shock_powder_release"
+    ]
+  },
+  "shock_powder_impact": {
+    "sounds": [
+      "rogues:shock_powder_impact"
+    ]
   }
 }

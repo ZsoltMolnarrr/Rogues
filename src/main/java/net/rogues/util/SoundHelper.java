@@ -16,7 +16,9 @@ import java.util.Map;
 
 public class SoundHelper {
     public static List<String> soundKeys = List.of(
-        "slice_and_dice"
+        "slice_and_dice",
+        "shock_powder_release",
+        "shock_powder_impact"
     );
 
     public static Map<String, Float> soundDistances = Map.of(
