@@ -13,6 +13,7 @@ import net.spell_engine.api.effect.EntityActionsAllowed;
 import net.spell_engine.api.effect.Synchronized;
 
 public class Effects {
+    public static int sliceAndDiceMaxStacks = 10;
     public static final StatusEffect SLICE_AND_DICE = new CustomStatusEffect(StatusEffectCategory.BENEFICIAL, 0x993333)
             .addAttributeModifier(EntityAttributes.GENERIC_ATTACK_DAMAGE,
                     "112f3133-8a44-11ed-a1eb-0242ac120002",
@@ -23,8 +24,7 @@ public class Effects {
                     "112f3133-8a44-11ed-a1eb-0242ac120002",
                     -1F,
                     EntityAttributeModifier.Operation.MULTIPLY_BASE);
-    public static int sliceAndDiceMaxStacks = 10;
-    public static final StatusEffect STEALTH = new CustomStatusEffect(StatusEffectCategory.BENEFICIAL, 0xAAAAAA)
+    public static final StatusEffect STEALTH = new StealthEffect(StatusEffectCategory.BENEFICIAL, 0xAAAAAA)
             .addAttributeModifier(EntityAttributes.GENERIC_MOVEMENT_SPEED,
                     "112f3133-8a44-11ed-a1eb-0242ac120003",
                     -0.5F,
@@ -33,9 +33,10 @@ public class Effects {
     public static void register() {
         Synchronized.configure(SLICE_AND_DICE, true);
         Synchronized.configure(SHOCK, true);
+        Synchronized.configure(STEALTH, true);
         ActionImpairing.configure(SHOCK, EntityActionsAllowed.STUN);
 
-        int rawId = 753;
+        int rawId = 750;
         Registry.register(Registries.STATUS_EFFECT, rawId++, new Identifier(RoguesMod.NAMESPACE, "slice_and_dice").toString(), SLICE_AND_DICE);
         Registry.register(Registries.STATUS_EFFECT, rawId++, new Identifier(RoguesMod.NAMESPACE, "shock").toString(), SHOCK);
         Registry.register(Registries.STATUS_EFFECT, rawId++, new Identifier(RoguesMod.NAMESPACE, "stealth").toString(), STEALTH);

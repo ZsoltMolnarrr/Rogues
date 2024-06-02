@@ -28,5 +28,10 @@
       "sounds": [
       "rogues:shadow_step_depart"
       ]
+  },
+  "vanish_release": {
+    "sounds": [
+      "rogues:vanish_release"
+    ]
   }
 }

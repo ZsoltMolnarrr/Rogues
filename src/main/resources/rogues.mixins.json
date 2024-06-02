@@ -4,9 +4,11 @@
   "package": "net.rogues.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
-    "LivingEntitySliceAndDice"
+    "LivingEntitySliceAndDice",
+    "LivingEntityStealth"
   ],
   "client": [
+    "client.LivingEntityRenderStealth"
   ],
   "injectors": {
     "defaultRequire": 1
