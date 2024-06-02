@@ -11,7 +11,7 @@
     "target": {
       "type": "SELF"
     },
-    "animation": "spell_engine:one_handed_area_release",
+    "animation": "spell_engine:dual_handed_weapon_cross",
     "sound": {
       "id": "rogues:vanish_combined"
     },
