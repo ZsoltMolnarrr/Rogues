@@ -38,5 +38,10 @@
     "sounds": [
       "rogues:vanish_combined"
     ]
+  },
+  "stealth_leave": {
+    "sounds": [
+      "rogues:stealth_leave"
+    ]
   }
 }

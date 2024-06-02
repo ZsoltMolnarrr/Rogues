@@ -21,7 +21,6 @@ public class LivingEntitySliceAndDice {
 
         if (entity.hasStatusEffect(Effects.SLICE_AND_DICE) // Check if the entity has the slice and dice effect
                 && lastSliceAndDiceTime != entity.age // Only once within a single game tick
-                && target.isAlive()
                 && !target.isSpectator()
         ) {
             var instance = entity.getActiveStatusEffects().get(Effects.SLICE_AND_DICE);
