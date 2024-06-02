@@ -68,7 +68,7 @@
   "spell.rogues.shadow_step.name": "Shadowstep",
   "spell.rogues.shadow_step.description": "Step through the shadows to appear behind your target.",
   "spell.rogues.vanish.name": "Vanish",
-  "spell.rogues.vanish.description": "Vanish from sight, entering stealth for {effect_duration} sec. Attacking or taking damage will break the effect.",
+  "spell.rogues.vanish.description": "Vanish from sight, entering stealth for {effect_duration} sec. Performing any action or taking damage will break the effect.",
   "effect.rogues.stealth": "Stealth",
   "effect.rogues.stealth.description": "Invisible to enemies"
 }

@@ -10,7 +10,9 @@ import net.minecraft.util.Identifier;
 import net.rogues.RoguesMod;
 import net.spell_engine.api.effect.ActionImpairing;
 import net.spell_engine.api.effect.EntityActionsAllowed;
+import net.spell_engine.api.effect.RemoveOnHit;
 import net.spell_engine.api.effect.Synchronized;
+import net.spell_engine.api.event.CombatEvents;
 
 public class Effects {
     public static int sliceAndDiceMaxStacks = 10;
@@ -32,9 +34,31 @@ public class Effects {
 
     public static void register() {
         Synchronized.configure(SLICE_AND_DICE, true);
+
         Synchronized.configure(SHOCK, true);
-        Synchronized.configure(STEALTH, true);
         ActionImpairing.configure(SHOCK, EntityActionsAllowed.STUN);
+
+        Synchronized.configure(STEALTH, true);
+        RemoveOnHit.configure(STEALTH, true);
+        CombatEvents.ENTITY_ATTACK.register((args) -> {
+            var attacker = args.attacker();
+            if (attacker.hasStatusEffect(STEALTH)) {
+                attacker.removeStatusEffect(STEALTH);
+            }
+        });
+        var vanishId = new Identifier(RoguesMod.NAMESPACE, "vanish");
+        CombatEvents.SPELL_CAST.register((args) -> {
+            var caster = args.caster();
+            if (caster.hasStatusEffect(STEALTH) && !args.spell().id().equals(vanishId)) {
+                caster.removeStatusEffect(STEALTH);
+            }
+        });
+        CombatEvents.ITEM_USE.register((args) -> {
+            var user = args.user();
+            if (user.hasStatusEffect(STEALTH)) {
+                user.removeStatusEffect(STEALTH);
+            }
+        });
 
         int rawId = 750;
         Registry.register(Registries.STATUS_EFFECT, rawId++, new Identifier(RoguesMod.NAMESPACE, "slice_and_dice").toString(), SLICE_AND_DICE);
