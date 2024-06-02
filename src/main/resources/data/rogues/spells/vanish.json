@@ -13,7 +13,7 @@
     },
     "animation": "spell_engine:one_handed_area_release",
     "sound": {
-      "id": "rogues:vanish_release"
+      "id": "rogues:vanish_combined"
     },
     "particles": [
       {

@@ -21,7 +21,8 @@ public class SoundHelper {
         "shock_powder_impact",
         "shadow_step_arrive",
         "shadow_step_depart",
-        "vanish_release"
+        "vanish_release",
+        "vanish_combined"
     );
 
     public static Map<String, Float> soundDistances = Map.of(

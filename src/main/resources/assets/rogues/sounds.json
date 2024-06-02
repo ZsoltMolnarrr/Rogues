@@ -33,5 +33,10 @@
     "sounds": [
       "rogues:vanish_release"
     ]
+  },
+  "vanish_combined": {
+    "sounds": [
+      "rogues:vanish_combined"
+    ]
   }
 }

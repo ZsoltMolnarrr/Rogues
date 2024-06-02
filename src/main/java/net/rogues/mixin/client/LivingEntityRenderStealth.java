@@ -21,6 +21,7 @@ import net.minecraft.util.Identifier;
 import net.rogues.effect.Effects;
 import net.spell_engine.api.effect.Synchronized;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
@@ -31,10 +32,12 @@ public abstract class LivingEntityRenderStealth<T extends Entity> extends Entity
         super(ctx);
     }
 
+    @Unique
     private ClientPlayerEntity localPlayer() {
         return MinecraftClient.getInstance().player;
     }
 
+    @Unique
     private boolean hasStealthEffect(LivingEntity entity) {
         // Checking the regular way (hasStealthEffect(entity)) does not work
         // probably due to some threading or tick order related weirdness.
@@ -47,6 +50,7 @@ public abstract class LivingEntityRenderStealth<T extends Entity> extends Entity
         return false;
     }
 
+    @Unique
     private boolean visibleForLocalPlayer(LivingEntity entity) {
         return entity == localPlayer() || !entity.isInvisibleTo(localPlayer());
     }
