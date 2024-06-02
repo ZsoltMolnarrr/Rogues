@@ -1,0 +1,72 @@
+{
+  "school": "PHYSICAL_MELEE",
+  "range": 0,
+  "learn": {
+    "tier": 4
+  },
+  "cast": {
+    "duration": 0
+  },
+  "release": {
+    "target": {
+      "type": "SELF"
+    },
+    "animation": "spell_engine:one_handed_area_release",
+    "sound": {
+      "id": "rogues:shadow_step_depart"
+    },
+    "particles": [
+      {
+        "particle_id": "spell_engine:smoke_medium",
+        "shape": "SPHERE",
+        "origin": "CENTER",
+        "count": 20.0,
+        "min_speed": 0.12,
+        "max_speed": 0.15,
+        "pre_spawn_travel": 3
+      },
+      {
+        "particle_id": "spell_engine:smoke_medium",
+        "shape": "CIRCLE",
+        "origin": "FEET",
+        "count": 20.0,
+        "min_speed": 0.12,
+        "max_speed": 0.15,
+        "pre_spawn_travel": 4
+      },
+      {
+        "particle_id": "poof",
+        "shape": "SPHERE",
+        "origin": "CENTER",
+        "count": 10.0,
+        "min_speed": 0.01,
+        "max_speed": 0.1
+      },
+      {
+        "particle_id": "campfire_cosy_smoke",
+        "shape": "PIPE",
+        "origin": "FEET",
+        "count": 10.0,
+        "min_speed": 0.01,
+        "max_speed": 0.1
+      }
+    ]
+  },
+  "impact": [
+    {
+      "action": {
+        "type": "STATUS_EFFECT",
+        "status_effect": {
+          "effect_id": "rogues:stealth",
+          "duration": 8,
+          "apply_mode": "SET",
+          "show_particles": false
+        }
+      }
+    }
+  ],
+  "cost": {
+    "exhaust": 0.4,
+    "cooldown_duration": 3
+  }
+}
