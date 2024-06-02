@@ -5,6 +5,7 @@ import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffect;
+import net.rogues.RoguesMod;
 import net.rogues.effect.Effects;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -22,7 +23,7 @@ public class LivingEntityStealth {
     private void getAttackDistanceScalingFactor_RETURN_Stealth(Entity entity, CallbackInfoReturnable<Double> cir) {
         var thisEntity = (LivingEntity) (Object) this;
         if (thisEntity.hasStatusEffect(Effects.STEALTH)) {
-            cir.setReturnValue(cir.getReturnValue() * 0.1);
+            cir.setReturnValue(cir.getReturnValue() * RoguesMod.tweaksConfig.value.stealth_visibility_multiplier);
         }
     }
 }
