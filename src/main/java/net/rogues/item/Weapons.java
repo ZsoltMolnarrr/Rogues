@@ -102,21 +102,21 @@ public class Weapons {
     private static Weapon.Entry axe(String requiredMod, String name, Weapon.CustomMaterial material, float damage) {
         var settings = new Item.Settings();
         var item = new MeleeWeaponItem(material, settings);
-        return entry(requiredMod, name, material, item, new ItemConfig.Weapon(damage, -3.2F));
+        return entry(requiredMod, name, material, item, new ItemConfig.Weapon(damage, -2.8F));
     }
 
 //    public static final Weapon.Entry wooden_double_axe = axe("wooden_double_axe",
 //            Weapon.CustomMaterial.matching(ToolMaterials.WOOD, () -> Ingredient.fromTag(ItemTags.PLANKS)), 5F);
     public static final Weapon.Entry stone_double_axe = axe("stone_double_axe",
-            Weapon.CustomMaterial.matching(ToolMaterials.STONE, () -> Ingredient.fromTag(ItemTags.STONE_TOOL_MATERIALS)), 8F);
+            Weapon.CustomMaterial.matching(ToolMaterials.STONE, () -> Ingredient.fromTag(ItemTags.STONE_TOOL_MATERIALS)), 5.6F);
     public static final Weapon.Entry iron_double_axe = axe("iron_double_axe",
-            Weapon.CustomMaterial.matching(ToolMaterials.IRON, () -> Ingredient.ofItems(Items.IRON_INGOT)), 10F);
+            Weapon.CustomMaterial.matching(ToolMaterials.IRON, () -> Ingredient.ofItems(Items.IRON_INGOT)), 7F);
     public static final Weapon.Entry golden_double_axe = axe("golden_double_axe",
-            Weapon.CustomMaterial.matching(ToolMaterials.GOLD, () -> Ingredient.ofItems(Items.GOLD_INGOT)), 10F);
+            Weapon.CustomMaterial.matching(ToolMaterials.GOLD, () -> Ingredient.ofItems(Items.GOLD_INGOT)), 4.3F);
     public static final Weapon.Entry diamond_double_axe = axe("diamond_double_axe",
-            Weapon.CustomMaterial.matching(ToolMaterials.DIAMOND, () -> Ingredient.ofItems(Items.DIAMOND)), 11F);
+            Weapon.CustomMaterial.matching(ToolMaterials.DIAMOND, () -> Ingredient.ofItems(Items.DIAMOND)), 8.3F);
     public static final Weapon.Entry netherite_double_axe = axe("netherite_double_axe",
-            Weapon.CustomMaterial.matching(ToolMaterials.NETHERITE, () -> Ingredient.ofItems(Items.NETHERITE_INGOT)), 13F);
+            Weapon.CustomMaterial.matching(ToolMaterials.NETHERITE, () -> Ingredient.ofItems(Items.NETHERITE_INGOT)), 9.6F);
 
     // MARK: Glaives
 
@@ -127,37 +127,35 @@ public class Weapons {
     private static Weapon.Entry glaive(String requiredMod, String name, Weapon.CustomMaterial material, float damage) {
         var settings = new Item.Settings();
         var item = new SpellWeaponItem(material, settings);
-        return entry(requiredMod, name, material, item, new ItemConfig.Weapon(damage, -3F));
+        return entry(requiredMod, name, material, item, new ItemConfig.Weapon(damage, -2.6F));
     }
 
     public static final Weapon.Entry iron_glaive = glaive("iron_glaive",
-            Weapon.CustomMaterial.matching(ToolMaterials.IRON, () -> Ingredient.ofItems(Items.IRON_INGOT)), 8F);
+            Weapon.CustomMaterial.matching(ToolMaterials.IRON, () -> Ingredient.ofItems(Items.IRON_INGOT)), 5.8F);
     public static final Weapon.Entry golden_glaive = glaive("golden_glaive",
-            Weapon.CustomMaterial.matching(ToolMaterials.GOLD, () -> Ingredient.ofItems(Items.GOLD_INGOT)), 5F);
+            Weapon.CustomMaterial.matching(ToolMaterials.GOLD, () -> Ingredient.ofItems(Items.GOLD_INGOT)), 3.5F);
     public static final Weapon.Entry diamond_glaive = glaive("diamond_glaive",
-            Weapon.CustomMaterial.matching(ToolMaterials.DIAMOND, () -> Ingredient.ofItems(Items.DIAMOND)), 9.5F);
+            Weapon.CustomMaterial.matching(ToolMaterials.DIAMOND, () -> Ingredient.ofItems(Items.DIAMOND)), 7F);
     public static final Weapon.Entry netherite_glaive = glaive("netherite_glaive",
-            Weapon.CustomMaterial.matching(ToolMaterials.NETHERITE, () -> Ingredient.ofItems(Items.NETHERITE_INGOT)), 11F);
+            Weapon.CustomMaterial.matching(ToolMaterials.NETHERITE, () -> Ingredient.ofItems(Items.NETHERITE_INGOT)), 8.1F);
 
     // MARK: Register
 
     public static void register(Map<String, ItemConfig.Weapon> configs) {
+        if (RoguesMod.tweaksConfig.value.ignore_items_required_mods || FabricLoader.getInstance().isModLoaded(BETTER_NETHER)) {
+            var repair = ingredient("betternether:nether_ruby", FabricLoader.getInstance().isModLoaded(BETTER_NETHER), Items.NETHERITE_INGOT);
+            dagger("ruby_dagger", Weapon.CustomMaterial.matching(ToolMaterials.NETHERITE, repair), 5.5F);
+            sickle("ruby_sickle", Weapon.CustomMaterial.matching(ToolMaterials.NETHERITE, repair), 6.8F);
+            axe("ruby_double_axe", Weapon.CustomMaterial.matching(ToolMaterials.NETHERITE, repair), 11F);
+            glaive("ruby_glaive", Weapon.CustomMaterial.matching(ToolMaterials.NETHERITE, repair), 9.3F);
+        }
         if (RoguesMod.tweaksConfig.value.ignore_items_required_mods || FabricLoader.getInstance().isModLoaded(BETTER_END)) {
             var repair = ingredient("betterend:aeternium_ingot", FabricLoader.getInstance().isModLoaded(BETTER_END), Items.NETHERITE_INGOT);
             dagger("aeternium_dagger", Weapon.CustomMaterial.matching(ToolMaterials.NETHERITE, repair), 5.5F);
             sickle("aeternium_sickle", Weapon.CustomMaterial.matching(ToolMaterials.NETHERITE, repair), 6.8F);
-            axe("aeternium_double_axe", Weapon.CustomMaterial.matching(ToolMaterials.NETHERITE, repair), 13F);
-            glaive("aeternium_glaive", Weapon.CustomMaterial.matching(ToolMaterials.NETHERITE, repair), 11F);
+            axe("aeternium_double_axe", Weapon.CustomMaterial.matching(ToolMaterials.NETHERITE, repair), 11F);
+            glaive("aeternium_glaive", Weapon.CustomMaterial.matching(ToolMaterials.NETHERITE, repair), 9.3F);
         }
-
-        if (RoguesMod.tweaksConfig.value.ignore_items_required_mods || FabricLoader.getInstance().isModLoaded(BETTER_NETHER)) {
-            var repair = ingredient("betternether:nether_ruby", FabricLoader.getInstance().isModLoaded(BETTER_END), Items.NETHERITE_INGOT);
-            dagger("ruby_dagger", Weapon.CustomMaterial.matching(ToolMaterials.NETHERITE, repair), 5.5F);
-            sickle("ruby_sickle", Weapon.CustomMaterial.matching(ToolMaterials.NETHERITE, repair), 6.8F);
-            axe("ruby_double_axe", Weapon.CustomMaterial.matching(ToolMaterials.NETHERITE, repair), 13F);
-            glaive("ruby_glaive", Weapon.CustomMaterial.matching(ToolMaterials.NETHERITE, repair), 11F);
-        }
-
         Weapon.register(configs, entries, Group.KEY);
     }
 }
