@@ -43,5 +43,15 @@
     "sounds": [
       "rogues:stealth_leave"
     ]
+  },
+  "throw": {
+    "sounds": [
+      "rogues:throw"
+    ]
+  },
+  "throw_impact": {
+    "sounds": [
+      "rogues:throw_impact"
+    ]
   }
 }

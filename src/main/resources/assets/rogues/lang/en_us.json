@@ -70,5 +70,10 @@
   "spell.rogues.vanish.name": "Vanish",
   "spell.rogues.vanish.description": "Vanish from sight, entering stealth for {effect_duration} sec. Performing any action or taking damage will break the effect.",
   "effect.rogues.stealth": "Stealth",
-  "effect.rogues.stealth.description": "Invisible to enemies"
+  "effect.rogues.stealth.description": "Invisible to enemies",
+
+  "spell.rogues.throw.name": "Shattering Throw",
+  "spell.rogues.throw.description": "Throw your weapon at the target, dealing {damage} damage and reducing their armor by {armor_reduction} for {effect_duration} sec.",
+  "effect.rogues.armor_reduction": "Shattered Armor",
+  "effect.rogues.armor_reduction.description": "Reduces armor"
 }
