@@ -19,7 +19,7 @@ public class RoguesClient implements ClientModInitializer {
 
         SpellTooltip.addDescriptionMutator(new Identifier(RoguesMod.NAMESPACE, "slice_and_dice"), (args) -> {
             var description = args.description();
-            description = description.replace(SpellTooltip.placeholder("max_stack"), "" + Effects.sliceAndDiceMaxStacks);
+            description = description.replace(SpellTooltip.placeholder("max_stack"), "" + Effects.sliceAndDiceMaxStacks());
             return description;
         });
     }

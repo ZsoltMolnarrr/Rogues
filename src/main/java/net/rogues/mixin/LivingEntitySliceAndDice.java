@@ -25,7 +25,7 @@ public class LivingEntitySliceAndDice {
         ) {
             var instance = entity.getActiveStatusEffects().get(Effects.SLICE_AND_DICE);
             var stack = instance.getAmplifier();
-            if (stack < (Effects.sliceAndDiceMaxStacks - 1)) {
+            if (stack < (Effects.sliceAndDiceMaxStacks() - 1)) {
                 entity.addStatusEffect(new StatusEffectInstance(
                                 Effects.SLICE_AND_DICE, instance.getDuration(), stack + 1,
                                 false, false, true),
