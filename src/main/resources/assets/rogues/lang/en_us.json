@@ -75,5 +75,10 @@
   "spell.rogues.throw.name": "Shattering Throw",
   "spell.rogues.throw.description": "Throw your weapon at the target, dealing {damage} damage and reducing their armor by {armor_reduction} for {effect_duration} sec.",
   "effect.rogues.armor_reduction": "Shattered Armor",
-  "effect.rogues.armor_reduction.description": "Reduces armor"
+  "effect.rogues.armor_reduction.description": "Reduces armor",
+
+  "spell.rogues.shout.name": "Demoralizing Shout",
+  "spell.rogues.shout.description": "Shout at nearby enemies, reducing their attack damage by {damage_reduction} for {effect_duration} sec.",
+  "effect.rogues.demoralize": "Demoralized",
+  "effect.rogues.demoralize.description": "Reduces attack damage"
 }

@@ -26,7 +26,8 @@ public class Effects {
                     EntityAttributeModifier.Operation.MULTIPLY_BASE);
     public static final StatusEffect STEALTH = new StealthEffect(StatusEffectCategory.BENEFICIAL, 0xAAAAAA);
 
-    public static final StatusEffect SHATTER = new ChargeEffect(StatusEffectCategory.HARMFUL, 0x800000);
+    public static final StatusEffect SHATTER = new CustomStatusEffect(StatusEffectCategory.HARMFUL, 0x800000);
+    public static final StatusEffect DEMORALIZE = new CustomStatusEffect(StatusEffectCategory.HARMFUL, 0x800000);
     public static final StatusEffect CHARGE = new ChargeEffect(StatusEffectCategory.BENEFICIAL, 0xAAAAAA);
 
     public static void register() {
@@ -36,6 +37,7 @@ public class Effects {
         Synchronized.configure(STEALTH, true);
         RemoveOnHit.configure(STEALTH, true);
         Synchronized.configure(SHATTER, true);
+        Synchronized.configure(DEMORALIZE, true);
 
         var config = RoguesMod.tweaksConfig.value;
         SLICE_AND_DICE.addAttributeModifier(EntityAttributes.GENERIC_ATTACK_DAMAGE,
@@ -53,6 +55,10 @@ public class Effects {
         SHATTER.addAttributeModifier(EntityAttributes.GENERIC_ARMOR,
                 "112f3133-8a44-11ed-a1eb-0242ac520055",
                 config.shattered_armor_multiplier,
+                EntityAttributeModifier.Operation.MULTIPLY_BASE);
+        DEMORALIZE.addAttributeModifier(EntityAttributes.GENERIC_ATTACK_DAMAGE,
+                "112f3133-8a44-11ed-a1eb-0242ac620006",
+                config.shout_damage_multiplier,
                 EntityAttributeModifier.Operation.MULTIPLY_BASE);
 
         CombatEvents.ENTITY_ATTACK.register((args) -> {
@@ -80,6 +86,7 @@ public class Effects {
         Registry.register(Registries.STATUS_EFFECT, rawId++, new Identifier(RoguesMod.NAMESPACE, "shock").toString(), SHOCK);
         Registry.register(Registries.STATUS_EFFECT, rawId++, new Identifier(RoguesMod.NAMESPACE, "stealth").toString(), STEALTH);
         Registry.register(Registries.STATUS_EFFECT, rawId++, new Identifier(RoguesMod.NAMESPACE, "shatter").toString(), SHATTER);
+        Registry.register(Registries.STATUS_EFFECT, rawId++, new Identifier(RoguesMod.NAMESPACE, "demoralize").toString(), DEMORALIZE);
         Registry.register(Registries.STATUS_EFFECT, rawId++, new Identifier(RoguesMod.NAMESPACE, "charge").toString(), CHARGE);
     }
 }

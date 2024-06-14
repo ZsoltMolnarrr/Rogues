@@ -1,0 +1,48 @@
+{
+  "range": 12.0,
+  "school": "PHYSICAL_MELEE",
+  "learn": {
+    "tier": 2
+  },
+  "cast": {
+    "duration": 0
+  },
+  "release": {
+    "target": {
+      "type": "AREA",
+      "area": {
+        "vertical_range_multiplier": 0.5
+      }
+    },
+    "animation": "spell_engine:one_handed_shout_release",
+    "sound": {
+      "id": "rogues:shock_powder_release"
+    },
+    "particles": [
+    ]
+  },
+  "impact": [
+    {
+      "action": {
+        "type": "STATUS_EFFECT",
+        "status_effect": {
+          "effect_id": "rogues:demoralize",
+          "duration": 8,
+          "apply_mode": "ADD",
+          "apply_limit": {
+            "health_base": 50,
+            "spell_power_multiplier": 2
+          },
+          "show_particles": false
+        }
+      },
+      "sound": {
+        "id": "rogues:shock_powder_impact"
+      }
+    }
+  ],
+  "cost": {
+    "exhaust": 0.2,
+    "cooldown_duration": 1
+  }
+}

@@ -8,5 +8,6 @@ public class TweaksConfig { public TweaksConfig() {}
     public double stealth_follow_range = 1.0;
     public double stealth_visibility_multiplier = 0.1;
     public double shattered_armor_multiplier = -0.2;
+    public double shout_damage_multiplier = -0.2;
     public double charge_speed_multiplier = 1.0;
 }
