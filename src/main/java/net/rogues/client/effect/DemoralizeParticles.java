@@ -6,7 +6,6 @@ import net.spell_engine.api.spell.ParticleBatch;
 import net.spell_engine.particle.ParticleHelper;
 
 public class DemoralizeParticles implements CustomParticleStatusEffect.Spawner {
-
     private final ParticleBatch particles;
 
     public DemoralizeParticles(int particleCount) {

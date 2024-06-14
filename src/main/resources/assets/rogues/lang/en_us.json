@@ -80,5 +80,10 @@
   "spell.rogues.shout.name": "Demoralizing Shout",
   "spell.rogues.shout.description": "Shout at nearby enemies, reducing their attack damage by {damage_reduction} for {effect_duration} sec.",
   "effect.rogues.demoralize": "Demoralized",
-  "effect.rogues.demoralize.description": "Reduces attack damage"
+  "effect.rogues.demoralize.description": "Reduces attack damage",
+
+  "spell.rogues.charge.name": "Charge",
+  "spell.rogues.charge.description": "Increases movement speed and knockback resistance, frees you from movement impairing effects, lasts for {effect_duration} sec.",
+  "effect.rogues.charge": "Charge",
+  "effect.rogues.charge.description": "Increases movement speed"
 }

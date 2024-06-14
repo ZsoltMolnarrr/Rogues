@@ -9,5 +9,6 @@ public class TweaksConfig { public TweaksConfig() {}
     public double stealth_visibility_multiplier = 0.1;
     public double shattered_armor_multiplier = -0.2;
     public double shout_damage_multiplier = -0.2;
-    public double charge_speed_multiplier = 1.0;
+    public double charge_speed_multiplier = 0.5;
+    public double charge_knockback_resistance_bonus = 0.5F;
 }

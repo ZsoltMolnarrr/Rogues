@@ -36,8 +36,10 @@ public class Effects {
         ActionImpairing.configure(SHOCK, EntityActionsAllowed.STUN);
         Synchronized.configure(STEALTH, true);
         RemoveOnHit.configure(STEALTH, true);
+
         Synchronized.configure(SHATTER, true);
         Synchronized.configure(DEMORALIZE, true);
+        Synchronized.configure(CHARGE, true);
 
         var config = RoguesMod.tweaksConfig.value;
         SLICE_AND_DICE.addAttributeModifier(EntityAttributes.GENERIC_ATTACK_DAMAGE,
@@ -48,10 +50,6 @@ public class Effects {
                 "112f3133-8a44-11ed-a1eb-0242ac320003",
                 config.stealth_movement_speed_multiplier,
                 EntityAttributeModifier.Operation.MULTIPLY_BASE);
-        CHARGE.addAttributeModifier(EntityAttributes.GENERIC_MOVEMENT_SPEED,
-                "112f3133-8a44-11ed-a1eb-0242ac420004",
-                config.charge_speed_multiplier,
-                EntityAttributeModifier.Operation.MULTIPLY_BASE);
         SHATTER.addAttributeModifier(EntityAttributes.GENERIC_ARMOR,
                 "112f3133-8a44-11ed-a1eb-0242ac520055",
                 config.shattered_armor_multiplier,
@@ -59,6 +57,14 @@ public class Effects {
         DEMORALIZE.addAttributeModifier(EntityAttributes.GENERIC_ATTACK_DAMAGE,
                 "112f3133-8a44-11ed-a1eb-0242ac620006",
                 config.shout_damage_multiplier,
+                EntityAttributeModifier.Operation.MULTIPLY_BASE);
+        CHARGE.addAttributeModifier(EntityAttributes.GENERIC_MOVEMENT_SPEED,
+                "112f3133-8a44-11ed-a1eb-0242ac420004",
+                config.charge_speed_multiplier,
+                EntityAttributeModifier.Operation.MULTIPLY_BASE)
+            .addAttributeModifier(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE,
+                "112f3133-8a44-11ed-a1eb-0242ac420004",
+                config.charge_knockback_resistance_bonus,
                 EntityAttributeModifier.Operation.MULTIPLY_BASE);
 
         CombatEvents.ENTITY_ATTACK.register((args) -> {

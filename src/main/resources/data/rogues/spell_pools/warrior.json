@@ -1,6 +1,7 @@
 {
   "spell_ids": [
     "rogues:throw",
-    "rogues:shout"
+    "rogues:shout",
+    "rogues:charge"
   ]
 }

@@ -27,7 +27,8 @@ public class SoundHelper {
         "throw",
         "throw_impact",
         "shout_release",
-        "demoralize_impact"
+        "demoralize_impact",
+        "charge_activate"
     );
 
     public static Map<String, Float> soundDistances = Map.of(

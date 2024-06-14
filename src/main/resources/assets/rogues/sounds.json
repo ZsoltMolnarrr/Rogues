@@ -63,5 +63,10 @@
     "sounds": [
       "rogues:demoralize_impact"
     ]
+  },
+  "charge_activate": {
+    "sounds": [
+      "rogues:charge_activate"
+    ]
   }
 }

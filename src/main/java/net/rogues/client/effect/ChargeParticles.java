@@ -5,19 +5,20 @@ import net.spell_engine.api.effect.CustomParticleStatusEffect;
 import net.spell_engine.api.spell.ParticleBatch;
 import net.spell_engine.particle.ParticleHelper;
 
-public class ShatterParticles implements CustomParticleStatusEffect.Spawner {
+public class ChargeParticles  implements CustomParticleStatusEffect.Spawner {
     private final ParticleBatch particles;
 
-    public ShatterParticles(int particleCount) {
+    public ChargeParticles(int particleCount) {
         this.particles = new ParticleBatch(
-                "spell_engine:dripping_blood",
-                ParticleBatch.Shape.SPHERE,
-                ParticleBatch.Origin.CENTER,
+                "spell_engine:buff_rage",
+                ParticleBatch.Shape.PIPE,
+                ParticleBatch.Origin.FEET,
                 null,
                 particleCount,
-                0.1F,
-                0.3F,
-                0);
+                0.11F,
+                0.12F,
+                0,
+                -0.2F);
     }
 
     @Override
