@@ -16,7 +16,7 @@
     },
     "animation": "spell_engine:one_handed_shout_release",
     "sound": {
-      "id": "rogues:shock_powder_release"
+      "id": "rogues:shout_release"
     },
     "particles": [
     ]
@@ -36,8 +36,18 @@
           "show_particles": false
         }
       },
+      "particles": [
+        {
+          "particle_id": "spell_engine:weakness_smoke",
+          "shape": "SPHERE",
+          "origin": "CENTER",
+          "count": 25.0,
+          "min_speed": 0.2,
+          "max_speed": 0.2
+        }
+      ],
       "sound": {
-        "id": "rogues:shock_powder_impact"
+        "id": "rogues:demoralize_impact"
       }
     }
   ],

@@ -53,5 +53,15 @@
     "sounds": [
       "rogues:throw_impact"
     ]
+  },
+  "shout_release": {
+    "sounds": [
+      "rogues:shout_release"
+    ]
+  },
+  "demoralize_impact": {
+    "sounds": [
+      "rogues:demoralize_impact"
+    ]
   }
 }
