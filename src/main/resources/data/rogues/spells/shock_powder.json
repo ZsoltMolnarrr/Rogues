@@ -72,7 +72,7 @@
         "type": "STATUS_EFFECT",
         "status_effect": {
           "effect_id": "rogues:shock",
-          "duration": 4,
+          "duration": 3,
           "apply_mode": "ADD",
           "apply_limit": {
             "health_base": 50,
@@ -88,6 +88,6 @@
   ],
   "cost": {
     "exhaust": 0.2,
-    "cooldown_duration": 1
+    "cooldown_duration": 16
   }
 }
