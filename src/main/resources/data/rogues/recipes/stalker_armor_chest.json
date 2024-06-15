@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "S": {
+      "item": "minecraft:ink_sac"
+    },
+    "G": {
+      "item": "minecraft:gold_ingot"
+    },
+    "R": {
+      "item": "minecraft:rabbit_hide"
+    }
+  },
+  "pattern": [
+    "S S",
+    "RGR",
+    "RRR"
+  ],
+  "result": {
+    "item": "rogues:stalker_armor_chest"
+  }
+}

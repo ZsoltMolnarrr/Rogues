@@ -2,18 +2,19 @@
   "type": "minecraft:crafting_shaped",
   "category": "equipment",
   "key": {
-    "I": {
-      "item": "minecraft:iron_ingot"
+    "W": {
+      "tag": "minecraft:wool"
     },
     "L": {
       "item": "minecraft:leather"
     }
   },
   "pattern": [
-    "I I",
-    "L L"
+    "W W",
+    "LWL",
+    "LLL"
   ],
   "result": {
-    "item": "rogues:warrior_armor_feet"
+    "item": "rogues:rogue_armor_chest"
   }
 }
