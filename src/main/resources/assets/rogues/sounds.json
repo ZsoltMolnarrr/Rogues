@@ -68,5 +68,10 @@
     "sounds": [
       "rogues:charge_activate"
     ]
+  },
+  "whirlwind": {
+    "sounds": [
+      "rogues:whirlwind"
+    ]
   }
 }

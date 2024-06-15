@@ -49,6 +49,15 @@
       "sound": {
         "id": "rogues:demoralize_impact"
       }
+    },
+    {
+      "action": {
+        "type": "DAMAGE",
+        "damage": {
+          "spell_power_coefficient": 0.05,
+          "knockback": 0
+        }
+      }
     }
   ],
   "cost": {

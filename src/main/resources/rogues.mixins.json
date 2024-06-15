@@ -9,6 +9,7 @@
     "TrackTargetGoalStealth"
   ],
   "client": [
+    "client.LivingEntityRendererWhirlwind",
     "client.LivingEntityRenderStealth"
   ],
   "injectors": {

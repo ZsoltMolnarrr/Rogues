@@ -1,0 +1,67 @@
+{
+  "school": "PHYSICAL_MELEE",
+  "range": 4,
+  "learn": {
+    "tier": 4
+  },
+  "cast": {
+    "duration": 8,
+    "movement_speed": 1.1,
+    "animation": "spell_engine:two_handed_spin_static",
+    "channel_ticks": 15,
+    "sound": {
+      "id": "rogues:throw",
+      "randomness": 0
+    }
+  },
+  "release": {
+    "target": {
+      "type": "AREA",
+      "area": {
+        "vertical_range_multiplier": 0.5
+      }
+    },
+    "sound": {
+      "id": "rogues:throw"
+    },
+    "particles": [
+      {
+        "particle_id": "spell_engine:smoke_medium",
+        "shape": "CIRCLE",
+        "origin": "FEET",
+        "count": 25,
+        "min_speed": 0.15,
+        "max_speed": 0.15,
+        "pre_spawn_travel": 1
+      }
+    ]
+  },
+  "impact": [
+    {
+      "action": {
+        "type": "DAMAGE",
+        "damage": {
+          "spell_power_coefficient": 1,
+          "knockback": 0.5
+        }
+      },
+      "particles": [
+        {
+          "particle_id": "crit",
+          "shape": "SPHERE",
+          "origin": "CENTER",
+          "count": 30.0,
+          "min_speed": 0.2,
+          "max_speed": 0.7
+        }
+      ],
+      "sound": {
+        "id": "rogues:throw_impact"
+      }
+    }
+  ],
+  "cost": {
+    "exhaust": 0.3,
+    "cooldown_duration": 5
+  }
+}
