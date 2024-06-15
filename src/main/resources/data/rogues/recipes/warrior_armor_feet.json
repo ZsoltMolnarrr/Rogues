@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "I": {
+      "item": "minecraft:iron_ingot"
+    },
+    "L": {
+      "item": "minecraft:leather"
+    }
+  },
+  "pattern": [
+    "I I",
+    "L L"
+  ],
+  "result": {
+    "item": "rogues:warrior_armor_feet"
+  }
+}
