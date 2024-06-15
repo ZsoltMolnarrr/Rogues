@@ -88,5 +88,5 @@
   "effect.rogues.charge.description": "Increases movement speed",
 
   "spell.rogues.whirlwind.name": "Whirlwind",
-  "spell.rogues.whirlwind.description": "Hold to spin around, dealing {damage} damage to all nearby enemies."
+  "spell.rogues.whirlwind.description": "Hold to spin around, dealing full weapon damage to all nearby enemies."
 }

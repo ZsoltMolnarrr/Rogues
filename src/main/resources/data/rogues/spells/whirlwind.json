@@ -12,7 +12,25 @@
     "sound": {
       "id": "rogues:throw",
       "randomness": 0
-    }
+    },
+    "particles": [
+      {
+        "particle_id": "spell_engine:smoke_medium",
+        "shape": "PIPE",
+        "origin": "FEET",
+        "count": 1.0,
+        "min_speed": 0.1,
+        "max_speed": 0.2
+      },
+      {
+        "particle_id": "campfire_cosy_smoke",
+        "shape": "PIPE",
+        "origin": "FEET",
+        "count": 0.1,
+        "min_speed": 0.01,
+        "max_speed": 0.1
+      }
+    ]
   },
   "release": {
     "target": {
@@ -41,7 +59,7 @@
       "action": {
         "type": "DAMAGE",
         "damage": {
-          "spell_power_coefficient": 1,
+          "spell_power_coefficient": 1.34,
           "knockback": 0.5
         }
       },
