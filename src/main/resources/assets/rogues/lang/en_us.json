@@ -1,8 +1,8 @@
 {
   "itemGroup.rogues.general": "Rogues & Warriors",
 
-  "item.rogues.rogue_spell_book": "Rogue's Codex",
-  "item.rogues.warrior_spell_book": "Battle Tome",
+  "item.rogues.rogue_spell_book": "Rogue Guidebook",
+  "item.rogues.warrior_spell_book": "Warrior's Codex",
 
   "item.rogues.flint_dagger": "Flint Dagger",
   "item.rogues.golden_dagger": "Golden Dagger",
@@ -91,9 +91,9 @@
   "spell.rogues.whirlwind.description": "Hold to spin around, dealing full weapon damage to all nearby enemies.",
 
   "advancements.rpg_series.path_choose_rogue.title": "Path of Tricks",
-  "advancements.rpg_series.path_choose_rogue.description": "Create a Rogue's Codex",
+  "advancements.rpg_series.path_choose_rogue.description": "Create a Rogue Guidebook",
   "advancements.rpg_series.path_choose_warrior.title": "Path of Strength",
-  "advancements.rpg_series.path_choose_warrior.description": "Create a Tome of warrior",
+  "advancements.rpg_series.path_choose_warrior.description": "Create a Warrior's Codex",
 
   "advancements.rpg_series.spell_novice_rogue.title": "Sinister Intentions",
   "advancements.rpg_series.spell_novice_rogue.description": "Obtain your first Rogue skill",
