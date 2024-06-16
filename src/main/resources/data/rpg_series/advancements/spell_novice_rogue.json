@@ -1,0 +1,32 @@
+{
+  "display": {
+    "icon": {
+      "item": "rogues:iron_dagger"
+    },
+    "title": {
+      "translate": "advancements.rpg_series.spell_novice_rogue.title"
+    },
+    "description": {
+      "translate": "advancements.rpg_series.spell_novice_rogue.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "parent": "rpg_series:path_choose_rogue",
+  "criteria": {
+    "bind": {
+      "trigger": "spell_engine:spell_binding",
+      "conditions": {
+        "complete": false,
+        "spell_pool": "rogues:rogue"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "bind"
+    ]
+  ]
+}
