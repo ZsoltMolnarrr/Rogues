@@ -1,12 +1,17 @@
 {
   "replace": false,
   "values": [
-    "rogues:flint_glaive",
     "rogues:iron_glaive",
     "rogues:golden_glaive",
     "rogues:diamond_glaive",
     "rogues:netherite_glaive",
-    "rogues:aeternium_glaive",
-    "rogues:ruby_glaive"
+    {
+      "id": "rogues:aeternium_glaive",
+      "required": false
+    },
+    {
+      "id": "rogues:ruby_glaive",
+      "required": false
+    }
   ]
 }

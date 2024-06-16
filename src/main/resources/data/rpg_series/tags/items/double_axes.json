@@ -6,7 +6,13 @@
     "rogues:golden_double_axe",
     "rogues:diamond_double_axe",
     "rogues:netherite_double_axe",
-    "rogues:aeternium_double_axe",
-    "rogues:ruby_double_axe"
+    {
+      "id": "rogues:aeternium_double_axe",
+      "required": false
+    },
+    {
+      "id": "rogues:ruby_double_axe",
+      "required": false
+    }
   ]
 }

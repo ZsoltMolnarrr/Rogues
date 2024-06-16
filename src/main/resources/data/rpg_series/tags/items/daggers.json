@@ -6,7 +6,13 @@
     "rogues:golden_dagger",
     "rogues:diamond_dagger",
     "rogues:netherite_dagger",
-    "rogues:aeternium_dagger",
-    "rogues:ruby_dagger"
+    {
+      "id": "rogues:aeternium_dagger",
+      "required": false
+    },
+    {
+      "id": "rogues:ruby_dagger",
+      "required": false
+    }
   ]
 }

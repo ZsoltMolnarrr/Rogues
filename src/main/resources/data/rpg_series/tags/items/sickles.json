@@ -5,7 +5,13 @@
     "rogues:golden_sickle",
     "rogues:diamond_sickle",
     "rogues:netherite_sickle",
-    "rogues:aeternium_sickle",
-    "rogues:ruby_sickle"
+    {
+      "id": "rogues:aeternium_sickle",
+      "required": false
+    },
+    {
+      "id": "rogues:ruby_sickle",
+      "required": false
+    }
   ]
 }
