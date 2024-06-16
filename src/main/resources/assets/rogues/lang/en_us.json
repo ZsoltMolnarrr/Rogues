@@ -1,7 +1,7 @@
 {
   "itemGroup.rogues.general": "Rogues & Warriors",
 
-  "item.rogues.rogue_spell_book": "Rogue Guidebook",
+  "item.rogues.rogue_spell_book": "Rogue Handbook",
   "item.rogues.warrior_spell_book": "Warrior's Codex",
 
   "item.rogues.flint_dagger": "Flint Dagger",
@@ -91,7 +91,7 @@
   "spell.rogues.whirlwind.description": "Hold to spin around, dealing full weapon damage to all nearby enemies.",
 
   "advancements.rpg_series.path_choose_rogue.title": "Path of Tricks",
-  "advancements.rpg_series.path_choose_rogue.description": "Create a Rogue Guidebook",
+  "advancements.rpg_series.path_choose_rogue.description": "Create a Rogue Handbook",
   "advancements.rpg_series.path_choose_warrior.title": "Path of Strength",
   "advancements.rpg_series.path_choose_warrior.description": "Create a Warrior's Codex",
 
