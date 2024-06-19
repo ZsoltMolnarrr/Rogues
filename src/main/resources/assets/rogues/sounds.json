@@ -1,4 +1,14 @@
 {
+  "rogue_armor": {
+    "sounds": [
+      "rogues:rogue_armor"
+    ]
+  },
+  "warrior_armor": {
+    "sounds": [
+      "rogues:warrior_armor"
+    ]
+  },
   "arms_workbench": {
     "sounds": [
       "rogues:arms_workbench"

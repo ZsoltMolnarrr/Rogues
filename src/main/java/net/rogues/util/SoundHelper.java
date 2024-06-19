@@ -11,6 +11,8 @@ import net.minecraft.world.World;
 import net.rogues.RoguesMod;
 import net.rogues.block.MartialWorkbenchBlock;
 import net.rogues.effect.StealthEffect;
+import net.rogues.item.armor.RogueArmor;
+import net.rogues.item.armor.WarriorArmor;
 
 import java.util.List;
 import java.util.Map;
@@ -50,6 +52,8 @@ public class SoundHelper {
 
         Registry.register(Registries.SOUND_EVENT, MartialWorkbenchBlock.ID, WORKBENCH);
         Registry.register(Registries.SOUND_EVENT, StealthEffect.LEAVE_SOUND_ID, StealthEffect.LEAVE_SOUND);
+        Registry.register(Registries.SOUND_EVENT, RogueArmor.equipSoundId, RogueArmor.equipSound);
+        Registry.register(Registries.SOUND_EVENT, WarriorArmor.equipSoundId, WarriorArmor.equipSound);
     }
 
     public static void playSoundEvent(World world, Entity entity, SoundEvent soundEvent) {
