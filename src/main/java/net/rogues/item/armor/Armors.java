@@ -158,7 +158,7 @@ public class Armors {
                             25,
                             10,
                             WarriorArmor.equipSound,
-                            () -> { return Ingredient.ofItems(Items.GOAT_HORN); }
+                            () -> { return Ingredient.ofItems(Items.CHAIN); }
                     ),
                     ItemConfig.ArmorSet.with(
                             new ItemConfig.ArmorSet.Piece(2)
