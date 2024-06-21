@@ -5,8 +5,8 @@
     "tier": 1
   },
   "cast": {
-    "duration": 0,
-    "animation": "spell_engine:one_handed_projectile_charge",
+    "duration": 0.5,
+    "animation": "spell_engine:one_handed_throw_charge",
     "particles": [ ]
   },
   "release": {
@@ -38,7 +38,7 @@
         }
       }
     },
-    "animation": "spell_engine:one_handed_throw_release",
+    "animation": "spell_engine:one_handed_throw_release_instant",
     "sound": {
       "id": "rogues:throw"
     }
