@@ -50,7 +50,7 @@ public class RoguesMod implements ModInitializer {
         villagesConfig.refresh();
 
         Group.ROGUES = FabricItemGroup.builder()
-                .icon(() -> new ItemStack(Armors.RogueArmorSet_t1.head))
+                .icon(() -> new ItemStack(Armors.RogueArmorSet_t2.head))
                 .displayName(Text.translatable("itemGroup." + NAMESPACE + ".general"))
                 .build();
         CustomBlocks.register();
