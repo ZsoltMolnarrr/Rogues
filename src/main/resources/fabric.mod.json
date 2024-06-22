@@ -33,9 +33,9 @@
     "rogues.mixins.json"
   ],
   "depends": {
-    "fabricloader": ">=${fabric_loader_version}",
-    "fabric": "*",
     "minecraft": ">=${minecraft_version}",
+    "fabricloader": ">=${fabric_loader_version}",
+    "azurelibarmor": "*",
     "spell_engine": ">=${spell_engine_version}"
   },
   "custom": {
