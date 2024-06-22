@@ -24,7 +24,7 @@ public class Effects {
                     "112f3133-8a44-11ed-a1eb-0242ac120002",
                     -1F,
                     EntityAttributeModifier.Operation.MULTIPLY_BASE);
-    public static final StatusEffect SHADOW_STEP = new StealthEffect(StatusEffectCategory.BENEFICIAL, 0xAAAAAA);
+    public static final StatusEffect SHADOW_STEP = new CustomStatusEffect(StatusEffectCategory.BENEFICIAL, 0xAAAAAA);
     public static final StatusEffect STEALTH = new StealthEffect(StatusEffectCategory.BENEFICIAL, 0xAAAAAA);
 
     public static final StatusEffect SHATTER = new CustomStatusEffect(StatusEffectCategory.HARMFUL, 0x800000);
