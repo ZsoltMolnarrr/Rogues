@@ -8,9 +8,9 @@
     "duration": 8,
     "movement_speed": 1.1,
     "animation": "spell_engine:two_handed_spin_static",
-    "channel_ticks": 15,
+    "channel_ticks": 8,
     "sound": {
-      "id": "rogues:throw",
+      "id": "rogues:whirlwind",
       "randomness": 0
     },
     "particles": [
@@ -59,8 +59,8 @@
       "action": {
         "type": "DAMAGE",
         "damage": {
-          "spell_power_coefficient": 1.34,
-          "knockback": 0.5
+          "spell_power_coefficient": 1.2,
+          "knockback": 0.8
         }
       },
       "particles": [

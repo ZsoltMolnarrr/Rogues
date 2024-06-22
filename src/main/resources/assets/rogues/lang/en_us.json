@@ -88,7 +88,7 @@
   "effect.rogues.charge.description": "Increases movement speed",
 
   "spell.rogues.whirlwind.name": "Whirlwind",
-  "spell.rogues.whirlwind.description": "Hold to spin around, dealing full weapon damage to all nearby enemies.",
+  "spell.rogues.whirlwind.description": "Hold to spin around, dealing {damage} damage per second, to nearby enemies.",
 
   "advancements.rpg_series.path_choose_rogue.title": "Path of Tricks",
   "advancements.rpg_series.path_choose_rogue.description": "Create a Rogue Handbook",

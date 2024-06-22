@@ -23,7 +23,7 @@ public class LivingEntityRendererWhirlwind {
             if (process != null && process.id().equals(BLADESTORM_SPELL_ID)) {
                 var ticks = process.spellCastTicksSoFar(livingEntity.getWorld().getTime());
 
-                var turn = (-36F) / (process.spell().cast.channel_ticks / 20F);
+                var turn = (-18F) / (process.spell().cast.channel_ticks / 20F);
                 var degress = turn * ticks + delta * turn;
                 matrixStack.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(degress));
             }
