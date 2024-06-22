@@ -31,7 +31,8 @@ public class TrackTargetGoalStealth {
     @Inject(method = "getFollowRange", at = @At("HEAD"), cancellable = true)
     private void getFollowRange_HEAD(CallbackInfoReturnable<Double> cir) {
         var target = mob.getTarget();
-        if (target != null && target.hasStatusEffect(Effects.STEALTH)) {
+        if (target != null
+                && (target.hasStatusEffect(Effects.STEALTH) || target.hasStatusEffect(Effects.SHADOW_STEP))) {
             cir.setReturnValue(RoguesMod.tweaksConfig.value.stealth_follow_range);
             cir.cancel();
         }

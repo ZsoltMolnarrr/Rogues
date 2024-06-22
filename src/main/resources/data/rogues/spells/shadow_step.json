@@ -21,7 +21,7 @@
     {
       "action": {
         "type": "TELEPORT",
-        "teleport" : {
+        "teleport": {
           "mode": "BEHIND_TARGET",
           "intent": "HARMFUL",
           "behind_target": {
@@ -50,6 +50,18 @@
               "pre_spawn_travel": 2
             }
           ]
+        }
+      }
+    },
+    {
+      "action": {
+        "apply_to_caster": true,
+        "type": "STATUS_EFFECT",
+        "status_effect": {
+          "effect_id": "rogues:shadow_step",
+          "duration": 1.5,
+          "apply_mode": "SET",
+          "show_particles": false
         }
       }
     }

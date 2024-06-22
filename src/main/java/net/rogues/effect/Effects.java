@@ -24,6 +24,7 @@ public class Effects {
                     "112f3133-8a44-11ed-a1eb-0242ac120002",
                     -1F,
                     EntityAttributeModifier.Operation.MULTIPLY_BASE);
+    public static final StatusEffect SHADOW_STEP = new StealthEffect(StatusEffectCategory.BENEFICIAL, 0xAAAAAA);
     public static final StatusEffect STEALTH = new StealthEffect(StatusEffectCategory.BENEFICIAL, 0xAAAAAA);
 
     public static final StatusEffect SHATTER = new CustomStatusEffect(StatusEffectCategory.HARMFUL, 0x800000);
@@ -90,6 +91,7 @@ public class Effects {
         int rawId = 750;
         Registry.register(Registries.STATUS_EFFECT, rawId++, new Identifier(RoguesMod.NAMESPACE, "slice_and_dice").toString(), SLICE_AND_DICE);
         Registry.register(Registries.STATUS_EFFECT, rawId++, new Identifier(RoguesMod.NAMESPACE, "shock").toString(), SHOCK);
+        Registry.register(Registries.STATUS_EFFECT, rawId++, new Identifier(RoguesMod.NAMESPACE, "shadow_step").toString(), SHADOW_STEP);
         Registry.register(Registries.STATUS_EFFECT, rawId++, new Identifier(RoguesMod.NAMESPACE, "stealth").toString(), STEALTH);
         Registry.register(Registries.STATUS_EFFECT, rawId++, new Identifier(RoguesMod.NAMESPACE, "shatter").toString(), SHATTER);
         Registry.register(Registries.STATUS_EFFECT, rawId++, new Identifier(RoguesMod.NAMESPACE, "demoralize").toString(), DEMORALIZE);

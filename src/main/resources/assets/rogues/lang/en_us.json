@@ -61,12 +61,17 @@
   "spell.rogues.slice_and_dice.description": "Enter a battle trance, during which your attacks will each grant extra power, stacking up to {max_stack} times. Expires after {effect_duration} sec.",
   "effect.rogues.slice_and_dice": "Slice and Dice",
   "effect.rogues.slice_and_dice.description": "Increases attack damage",
+
   "spell.rogues.shock_powder.name": "Shock Powder",
   "spell.rogues.shock_powder.description": "Stuns nearby enemies for {effect_duration} sec.",
   "effect.rogues.shock": "Stunned",
   "effect.rogues.shock.description": "Prevents movement and actions",
+
   "spell.rogues.shadow_step.name": "Shadowstep",
   "spell.rogues.shadow_step.description": "Step through the shadows to appear behind your target.",
+  "effect.rogues.shadow_step": "Shadowstep",
+  "effect.rogues.shadow_step.description": "Untraceable",
+
   "spell.rogues.vanish.name": "Vanish",
   "spell.rogues.vanish.description": "Vanish from sight, entering stealth for {effect_duration} sec. Performing any action or taking damage will break the effect.",
   "effect.rogues.stealth": "Stealth",
