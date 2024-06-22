@@ -57,9 +57,9 @@
   "block.rogues.arms_workbench": "Arms Station",
   "block.rogues.arms_workbench.hint": "Workbench for Arms Merchant Villagers.",
 
-  "spell.rogues.slice_and_dice.name": "Slice and Dice",
+  "spell.rogues.slice_and_dice.name": "Slice & Dice",
   "spell.rogues.slice_and_dice.description": "Enter a battle trance, during which your attacks will each grant extra power, stacking up to {max_stack} times. Expires after {effect_duration} sec.",
-  "effect.rogues.slice_and_dice": "Slice and Dice",
+  "effect.rogues.slice_and_dice": "Slice & Dice",
   "effect.rogues.slice_and_dice.description": "Increases attack damage",
 
   "spell.rogues.shock_powder.name": "Shock Powder",
@@ -79,8 +79,8 @@
 
   "spell.rogues.throw.name": "Shattering Throw",
   "spell.rogues.throw.description": "Throw your weapon at the target, dealing {damage} damage and reducing their armor by {armor_reduction} for {effect_duration} sec.",
-  "effect.rogues.armor_reduction": "Shattered Armor",
-  "effect.rogues.armor_reduction.description": "Reduces armor",
+  "effect.rogues.shatter": "Shattered Armor",
+  "effect.rogues.shatter.description": "Reduces armor",
 
   "spell.rogues.shout.name": "Demoralizing Shout",
   "spell.rogues.shout.description": "Shout at nearby enemies, reducing their attack damage by {damage_reduction} for {effect_duration} sec, and dealing a small amount of damage.",
