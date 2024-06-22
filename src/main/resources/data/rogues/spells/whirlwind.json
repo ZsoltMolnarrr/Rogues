@@ -36,7 +36,7 @@
     "target": {
       "type": "AREA",
       "area": {
-        "vertical_range_multiplier": 0.5
+        "vertical_range_multiplier": 0.25
       }
     },
     "sound": {
