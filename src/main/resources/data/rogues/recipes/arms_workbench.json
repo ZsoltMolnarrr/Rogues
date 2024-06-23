@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "P": {
+      "item": "minecraft:paper"
+    },
+    "I": {
+      "item": "minecraft:iron_ingot"
+    },
+    "W": {
+      "tag": "minecraft:wool"
+    },
+    "#": {
+      "tag": "minecraft:planks"
+    }
+  },
+  "pattern": [
+    "PIW",
+    "###"
+  ],
+  "result": {
+    "item": "rogues:arms_workbench"
+  },
+  "show_notification": false
+}

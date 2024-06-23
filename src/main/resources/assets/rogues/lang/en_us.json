@@ -52,8 +52,8 @@
   "item.rogues.berserker_armor_legs": "Berserker Leggings",
   "item.rogues.berserker_armor_feet": "Berserker Boots",
 
-  "entity.minecraft.villager.arms_merchant": "Arms Merchant",
-  "entity.minecraft.villager.rogues:arms_merchant": "Arms Merchant",
+  "entity.minecraft.villager.arms_merchant": "Arms Dealer",
+  "entity.minecraft.villager.rogues:arms_merchant": "Arms Dealer",
   "block.rogues.arms_workbench": "Arms Station",
   "block.rogues.arms_workbench.hint": "Workbench for Arms Merchant Villagers.",
 
