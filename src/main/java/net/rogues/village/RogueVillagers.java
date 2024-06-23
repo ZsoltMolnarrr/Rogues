@@ -82,7 +82,7 @@ public class RogueVillagers {
 
         List<Offer> offers = List.of(
                 Offer.buy(1, new ItemStack(Items.LEATHER, 8), 5, 12, 4, 0.01f),
-                Offer.sell(1, Weapons.flint_dagger.item().getDefaultStack(), 6, 12, 4, 0.1f),
+                Offer.sell(1, Weapons.flint_dagger.item().getDefaultStack(), 6, 12, 3, 0.1f),
                 Offer.sell(1, Weapons.stone_double_axe.item().getDefaultStack(), 8, 12, 4, 0.1f),
 
                 Offer.buy(2, new ItemStack(Items.IRON_INGOT, 12), 8, 12, 5, 0.01f),
@@ -101,7 +101,7 @@ public class RogueVillagers {
 
                 Offer.sell(4, Armors.RogueArmorSet_t1.chest.getDefaultStack(), 15, 12, 13, 0.05f),
                 Offer.sell(4, Armors.WarriorArmorSet_t1.chest.getDefaultStack(), 15, 12, 13, 0.05f),
-                Offer.sell(4, new ItemStack(Items.GOAT_HORN, 3), 20, 12, 5, 0.01f)
+                Offer.sell(4, new ItemStack(Items.GOAT_HORN, 1), 15, 12, 5, 0.01f)
             );
 
         for(var offer: offers) {
