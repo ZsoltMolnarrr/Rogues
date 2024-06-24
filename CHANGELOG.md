@@ -1,3 +1,7 @@
+# 1.0.3
+
+- Fix warrior armor icons
+
 # 1.0.2
 
 Initial release:
