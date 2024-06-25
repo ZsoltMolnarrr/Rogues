@@ -1,10 +1,10 @@
 {
   "replace": false,
   "values": [
-    "rogues:stalker_armor_chest",
-    "rogues:stalker_armor_head",
-    "rogues:stalker_armor_feet",
-    "rogues:stalker_armor_legs",
+    "rogues:assassin_armor_chest",
+    "rogues:assassin_armor_head",
+    "rogues:assassin_armor_feet",
+    "rogues:assassin_armor_legs",
     "rogues:berserker_armor_chest",
     "rogues:berserker_armor_head",
     "rogues:berserker_armor_feet",

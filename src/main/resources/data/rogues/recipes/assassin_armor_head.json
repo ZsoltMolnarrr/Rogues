@@ -5,18 +5,18 @@
     "S": {
       "item": "minecraft:ink_sac"
     },
-    "R": {
-      "item": "minecraft:rabbit_hide"
-    },
     "G": {
       "item": "minecraft:gold_ingot"
+    },
+    "R": {
+      "item": "minecraft:rabbit_hide"
     }
   },
   "pattern": [
-    "GSG",
+    "SGS",
     "R R"
   ],
   "result": {
-    "item": "rogues:stalker_armor_feet"
+    "item": "rogues:assassin_armor_head"
   }
 }

@@ -90,7 +90,7 @@ public class Armors {
     public static final Armor.Set RogueArmorSet_t2 =
             create(
                     new Armor.CustomMaterial(
-                            "stalker_armor",
+                            "assassin_armor",
                             20,
                             10,
                             RogueArmor.equipSound,

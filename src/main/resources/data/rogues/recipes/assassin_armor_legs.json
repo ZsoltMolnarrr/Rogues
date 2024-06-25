@@ -13,11 +13,11 @@
     }
   },
   "pattern": [
-    "S S",
-    "RGR",
-    "RRR"
+    "SGS",
+    "R R",
+    "R R"
   ],
   "result": {
-    "item": "rogues:stalker_armor_chest"
+    "item": "rogues:assassin_armor_legs"
   }
 }

@@ -1,3 +1,7 @@
+# 1.0.4
+
+- Rename Stalker Armor to Assassin Armor
+
 # 1.0.3
 
 - Fix warrior armor icons
