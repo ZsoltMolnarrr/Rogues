@@ -1,3 +1,7 @@
+# 1.0.6
+
+- Update armor attribute defaults
+
 # 1.0.5
 
 - Add movement speed to the assassin armor set
