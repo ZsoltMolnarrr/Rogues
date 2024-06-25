@@ -22,9 +22,11 @@ public class Armors {
         return new Armor.Entry(material, null, defaults);
     }
 
+
     private static final Identifier ATTACK_DAMAGE_ID = new Identifier("generic.attack_damage");
     private static final Identifier ATTACK_SPEED_ID = new Identifier("generic.attack_speed");
     private static final Identifier KNOCKBACK_ID = new Identifier("generic.knockback_resistance");
+    private static final Identifier MOVEMENT_SPEED_ID = new Identifier("generic.movement_speed");
 
     private static ItemConfig.Attribute damageMultiplier(float value) {
         return new ItemConfig.Attribute(
@@ -47,10 +49,19 @@ public class Armors {
                 EntityAttributeModifier.Operation.MULTIPLY_BASE);
     }
 
+    private static ItemConfig.Attribute movementSpeed(float value) {
+        return new ItemConfig.Attribute(
+                MOVEMENT_SPEED_ID.toString(),
+                value,
+                EntityAttributeModifier.Operation.MULTIPLY_BASE);
+    }
+
     public static final float rogue_haste_T1 = 0.04F;
+    public static final float rogue_speed_T1 = 0.05F;
     public static final float rogue_damage_T1 = 0.05F;
     public static final float rogue_haste_T2 = 0.05F;
-    public static final float rogue_damage_T2 = 0.04F;
+    public static final float rogue_speed_T2 = 0.04F;
+    public static final float rogue_damage_T2 = 0.05F;
     public static final float warrior_damage_T1 = 0.04F;
     public static final float warrior_damage_T2 = 0.05F;
     public static final float knockback_T2 = 0.1F;
@@ -66,13 +77,17 @@ public class Armors {
                     ),
                     ItemConfig.ArmorSet.with(
                             new ItemConfig.ArmorSet.Piece(2)
-                                    .add(hasteMultiplier(rogue_haste_T1)),
+                                    .add(hasteMultiplier(rogue_haste_T1))
+                                    .add(movementSpeed(rogue_speed_T1)),
                             new ItemConfig.ArmorSet.Piece(3)
-                                    .add(hasteMultiplier(rogue_haste_T1)),
+                                    .add(hasteMultiplier(rogue_haste_T1))
+                                    .add(movementSpeed(rogue_speed_T1)),
                             new ItemConfig.ArmorSet.Piece(3)
-                                    .add(hasteMultiplier(rogue_haste_T1)),
+                                    .add(hasteMultiplier(rogue_haste_T1))
+                                    .add(movementSpeed(rogue_speed_T1)),
                             new ItemConfig.ArmorSet.Piece(2)
                                     .add(hasteMultiplier(rogue_haste_T1))
+                                    .add(movementSpeed(rogue_speed_T1))
                     )
                 )
                 .bundle(material -> new Armor.Set(RoguesMod.NAMESPACE,
@@ -99,16 +114,20 @@ public class Armors {
                     ItemConfig.ArmorSet.with(
                             new ItemConfig.ArmorSet.Piece(2)
                                     .add(damageMultiplier(rogue_damage_T2))
-                                    .add(hasteMultiplier(rogue_haste_T2)),
+                                    .add(hasteMultiplier(rogue_haste_T2))
+                                    .add(movementSpeed(rogue_speed_T2)),
                             new ItemConfig.ArmorSet.Piece(3)
                                     .add(damageMultiplier(rogue_damage_T2))
-                                    .add(hasteMultiplier(rogue_haste_T2)),
+                                    .add(hasteMultiplier(rogue_haste_T2))
+                                    .add(movementSpeed(rogue_speed_T2)),
                             new ItemConfig.ArmorSet.Piece(3)
                                     .add(damageMultiplier(rogue_damage_T2))
-                                    .add(hasteMultiplier(rogue_haste_T2)),
+                                    .add(hasteMultiplier(rogue_haste_T2))
+                                    .add(movementSpeed(rogue_speed_T2)),
                             new ItemConfig.ArmorSet.Piece(2)
                                     .add(damageMultiplier(rogue_damage_T2))
                                     .add(hasteMultiplier(rogue_haste_T2))
+                                    .add(movementSpeed(rogue_speed_T2))
                     )
             )
             .bundle(material -> new Armor.Set(RoguesMod.NAMESPACE,

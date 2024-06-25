@@ -1,3 +1,7 @@
+# 1.0.5
+
+- Add movement speed to the assassin armor set
+
 # 1.0.4
 
 - Rename Stalker Armor to Assassin Armor
