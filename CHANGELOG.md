@@ -1,3 +1,7 @@
+# 1.0.7
+
+- Rebalance rogue armor attribute defaults
+
 # 1.0.6
 
 - Update armor attribute defaults

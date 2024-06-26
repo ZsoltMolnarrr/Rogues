@@ -57,11 +57,11 @@ public class Armors {
     }
 
     public static final float rogue_haste_T1 = 0.04F;
+    public static final float rogue_damage_T1 = 0.02F;
     public static final float rogue_speed_T1 = 0.05F;
-    public static final float rogue_damage_T1 = 0.05F;
     public static final float rogue_haste_T2 = 0.05F;
-    public static final float rogue_speed_T2 = 0.04F;
-    public static final float rogue_damage_T2 = 0.05F;
+    public static final float rogue_damage_T2 = 0.02F;
+    public static final float rogue_speed_T2 = 0.05F;
     public static final float warrior_damage_T1 = 0.04F;
     public static final float warrior_damage_T2 = 0.05F;
     public static final float knockback_T2 = 0.1F;
