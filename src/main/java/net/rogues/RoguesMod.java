@@ -25,7 +25,7 @@ public class RoguesMod implements ModInitializer {
     public static final String NAMESPACE = "rogues";
 
     public static ConfigManager<ItemConfig> itemConfig = new ConfigManager<>
-            ("items", Default.itemConfig)
+            ("items_v2", Default.itemConfig)
             .builder()
             .setDirectory(NAMESPACE)
             .sanitize(true)
