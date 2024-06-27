@@ -1,0 +1,112 @@
+{
+  "itemGroup.rogues.general": "Rogues & Warriors",
+
+  "item.rogues.rogue_spell_book": "Manuale da assassino",
+  "item.rogues.warrior_spell_book": "Codice del guerriero",
+
+  "item.rogues.flint_dagger": "Pugnale di selce",
+  "item.rogues.golden_dagger": "Pugnale d'oro",
+  "item.rogues.iron_dagger": "Pugnale di ferro",
+  "item.rogues.diamond_dagger": "Pugnale di diamante",
+  "item.rogues.netherite_dagger": "Pugnale di netherite",
+  "item.rogues.aeternium_dagger": "Pugnale di aeternium",
+  "item.rogues.ruby_dagger": "Pugnale di rubino",
+
+  "item.rogues.iron_sickle": "Falcetto di ferro",
+  "item.rogues.golden_sickle": "Falcetto d'oro",
+  "item.rogues.diamond_sickle": "Falcetto di diamante",
+  "item.rogues.netherite_sickle": "Falcetto di netherite",
+  "item.rogues.aeternium_sickle": "Falcetto di aeternium",
+  "item.rogues.ruby_sickle": "Falcetto di rubino",
+
+  "item.rogues.stone_double_axe": "Ascia bipenne di pietra",
+  "item.rogues.iron_double_axe": "Ascia bipenne di ferro",
+  "item.rogues.golden_double_axe": "Ascia bipenne d'oro",
+  "item.rogues.diamond_double_axe": "Ascia bipenne di diamante",
+  "item.rogues.netherite_double_axe": "Ascia bipenne di netherite",
+  "item.rogues.aeternium_double_axe": "Ascia bipenne di aeternium",
+  "item.rogues.ruby_double_axe": "Ascia bipenne di rubino",
+
+  "item.rogues.iron_glaive": "Falcione di ferro",
+  "item.rogues.golden_glaive": "Falcione d'oro",
+  "item.rogues.diamond_glaive": "Falcione di diamante",
+  "item.rogues.netherite_glaive": "Falcione di netherite",
+  "item.rogues.aeternium_glaive": "Falcione di aeternium",
+  "item.rogues.ruby_glaive": "Falcione di rubino",
+
+  "item.rogues.rogue_armor_head": "Maschera da bandito",
+  "item.rogues.rogue_armor_chest": "Veste da bandito",
+  "item.rogues.rogue_armor_legs": "Pantaloni da bandito",
+  "item.rogues.rogue_armor_feet": "Stivali da bandito",
+  "item.rogues.assassin_armor_head": "Maschera da assassino",
+  "item.rogues.assassin_armor_chest": "Veste da assassino",
+  "item.rogues.assassin_armor_legs": "Pantaloni da assassino",
+  "item.rogues.assassin_armor_feet": "Stivali da assassino",
+
+  "item.rogues.warrior_armor_head": "Elmo da cavaliere",
+  "item.rogues.warrior_armor_chest": "Corazza da cavaliere",
+  "item.rogues.warrior_armor_legs": "Gambiere da cavaliere",
+  "item.rogues.warrior_armor_feet": "Stivali da cavaliere",
+  "item.rogues.berserker_armor_head": "Elmo da guerriero",
+  "item.rogues.berserker_armor_chest": "Corazza da guerriero",
+  "item.rogues.berserker_armor_legs": "Gambiere da guerriero",
+  "item.rogues.berserker_armor_feet": "Stivali da guerriero",
+
+  "entity.minecraft.villager.arms_merchant": "Mercante d'armi",
+  "entity.minecraft.villager.rogues:arms_merchant": "Mercante d'armi",
+  "block.rogues.arms_workbench": "Banco da armaiolo",
+  "block.rogues.arms_workbench.hint": "Banco da lavoro per villici mercanti d'armi.",
+
+  "spell.rogues.slice_and_dice.name": "Adrenalina",
+  "spell.rogues.slice_and_dice.description": "Entra in una trance di battaglia, durante la quale i tuoi attacchi ti garantiranno potenza extra, accumulandosi fino a {max_stack} volte. Scade dopo {effect_duration} sec.",
+  "effect.rogues.slice_and_dice": "Adrenalina",
+  "effect.rogues.slice_and_dice.description": "Aumenta il danno d'attacco",
+
+  "spell.rogues.shock_powder.name": "Stordimento",
+  "spell.rogues.shock_powder.description": "Stordisce i nemici vicini per {effect_duration} sec.",
+  "effect.rogues.shock": "Stordito",
+  "effect.rogues.shock.description": "Impedisce il movimento e le interazioni",
+
+  "spell.rogues.shadow_step.name": "Passo ombra",
+  "spell.rogues.shadow_step.description": "Permette di apparire dietro il tuo bersaglio.",
+  "effect.rogues.shadow_step": "Passo ombra",
+  "effect.rogues.shadow_step.description": "Ombra",
+
+  "spell.rogues.vanish.name": "Scomparsa",
+  "spell.rogues.vanish.description": "Scompari dalla vista, entrando in modalità furtiva per {effect_duration} sec. Eseguire qualsiasi azione o subire danni interromperà l'effetto.",
+  "effect.rogues.stealth": "Scomparsa",
+  "effect.rogues.stealth.description": "Invisibile ai nemici",
+
+  "spell.rogues.throw.name": "Lancio fracassante",
+  "spell.rogues.throw.description": "Scaglia la tua arma contro il bersaglio, infliggendo {damage} danni e riducendo la sua armatura di {armor_reduction} per {effect_duration} sec.",
+  "effect.rogues.shatter": "Armatura infranta",
+  "effect.rogues.shatter.description": "Riduce i punti armatura",
+
+  "spell.rogues.shout.name": "Urlo demoralizzante",
+  "spell.rogues.shout.description": "Urla ai nemici vicini, riducendo i loro danni da attacco di {damage_reduction} per {effect_duration} sec e infliggendo una piccola quantità di danni.",
+  "effect.rogues.demoralize": "Demoralizzato",
+  "effect.rogues.demoralize.description": "Riduce i danni d'attacco",
+
+  "spell.rogues.charge.name": "Carica",
+  "spell.rogues.charge.description": "Aumenta la velocità di movimento e la resistenza al rinculo, liberandoti dagli effetti che limitano il movimento, dura {effect_duration} sec.",
+  "effect.rogues.charge": "Carica",
+  "effect.rogues.charge.description": "Aumenta la velocità di movimento",
+
+  "spell.rogues.whirlwind.name": "Vortice",
+  "spell.rogues.whirlwind.description": "Tieni premuto per girare su te stesso, infliggendo {danni} danni al secondo ai nemici vicini.",
+
+  "advancements.rpg_series.path_choose_rogue.title": "Via dell'inganno",
+  "advancements.rpg_series.path_choose_rogue.description": "Crea un manuale da assassino",
+  "advancements.rpg_series.path_choose_warrior.title": "Via della forza",
+  "advancements.rpg_series.path_choose_warrior.description": "Crea un codice del guerriero",
+
+  "advancements.rpg_series.spell_novice_rogue.title": "Intenzioni sinistre",
+  "advancements.rpg_series.spell_novice_rogue.description": "Ottieni la tua prima abilità da assassino",
+  "advancements.rpg_series.spell_novice_warrior.title": "Gusto del sangue",
+  "advancements.rpg_series.spell_novice_warrior.description": "Ottieni la tua prima abilità da guerriero",
+
+  "advancements.rpg_series.spell_master_rogue.title": "Maestro dell'inganno",
+  "advancements.rpg_series.spell_master_rogue.description": "Ottieni tutte le abilità da assassino",
+  "advancements.rpg_series.spell_master_warrior.title": "Furia!",
+  "advancements.rpg_series.spell_master_warrior.description": "Ottieni tutte le abilità da guerriero"
+}
