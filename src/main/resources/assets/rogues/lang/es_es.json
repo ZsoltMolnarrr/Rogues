@@ -1,0 +1,112 @@
+{
+  "itemGroup.rogues.general": "Pícaros y Guerreros",
+
+  "item.rogues.rogue_spell_book": "Manual del Pícaro",
+  "item.rogues.warrior_spell_book": "Códice del Guerrero",
+
+  "item.rogues.flint_dagger": "Daga de Pedernal",
+  "item.rogues.golden_dagger": "Daga de Oro",
+  "item.rogues.iron_dagger": "Daga de Hierro",
+  "item.rogues.diamond_dagger": "Daga de Diamante",
+  "item.rogues.netherite_dagger": "Daga de Netherita",
+  "item.rogues.aeternium_dagger": "Daga de Aeternium",
+  "item.rogues.ruby_dagger": "Daga de Rubí",
+
+  "item.rogues.iron_sickle": "Hoz de Hierro",
+  "item.rogues.golden_sickle": "Hoz de Oro",
+  "item.rogues.diamond_sickle": "Hoz de Diamante",
+  "item.rogues.netherite_sickle": "Hoz de Netherita",
+  "item.rogues.aeternium_sickle": "Hoz de Aeternium",
+  "item.rogues.ruby_sickle": "Hoz de Rubí",
+
+  "item.rogues.stone_double_axe": "Hacha Doble de Piedra",
+  "item.rogues.iron_double_axe": "Hacha Doble de Hierro",
+  "item.rogues.golden_double_axe": "Hacha Doble Dorada",
+  "item.rogues.diamond_double_axe": "Hacha Doble de Diamante",
+  "item.rogues.netherite_double_axe": "Hacha Doble de Netherita",
+  "item.rogues.aeternium_double_axe": "Hacha Doble de Aeternium",
+  "item.rogues.ruby_double_axe": "Hacha Doble de Rubí",
+
+  "item.rogues.iron_glaive": "Alabarda de Hierro",
+  "item.rogues.golden_glaive": "Alabarda Dorado",
+  "item.rogues.diamond_glaive": "Alabarda de Diamante",
+  "item.rogues.netherite_glaive": "Alabarda de Netherita",
+  "item.rogues.aeternium_glaive": "Alabarda de Aeternium",
+  "item.rogues.ruby_glaive": "Alabarda de Rubí",
+
+  "item.rogues.rogue_armor_head": "Máscara de Pícaro",
+  "item.rogues.rogue_armor_chest": "Túnica de Pícaro",
+  "item.rogues.rogue_armor_legs": "Pantalones de Pícaro",
+  "item.rogues.rogue_armor_feet": "Botas de Pícaro",
+  "item.rogues.assassin_armor_head": "Máscara de Asesino",
+  "item.rogues.assassin_armor_chest": "Túnica de Asesino",
+  "item.rogues.assassin_armor_legs": "Pantalones de Asesino",
+  "item.rogues.assassin_armor_feet": "Botas de Asesino",
+
+  "item.rogues.warrior_armor_head": "Casco de Guerrero",
+  "item.rogues.warrior_armor_chest": "Coraza de Guerrero",
+  "item.rogues.warrior_armor_legs": "Grebas de Guerrero",
+  "item.rogues.warrior_armor_feet": "Botas de Guerrero",
+  "item.rogues.berserker_armor_head": "Casco de Berserker",
+  "item.rogues.berserker_armor_chest": "Coraza de Berserker",
+  "item.rogues.berserker_armor_legs": "Grebas de Berserker",
+  "item.rogues.berserker_armor_feet": "Botas de Berserker",
+
+  "entity.minecraft.villager.arms_merchant": "Vendedor de Armas",
+  "entity.minecraft.villager.rogues:arms_merchant": "Vendedor de Armas",
+  "block.rogues.arms_workbench": "Estación de Armas",
+  "block.rogues.arms_workbench.hint": "Banco de trabajo para aldeanos vendedores de armas.",
+
+  "spell.rogues.slice_and_dice.name": "Cortar & Picar",
+  "spell.rogues.slice_and_dice.description": "Entra en un trance de batalla, durante el cual tus ataques otorgarán poder extra, acumulándose hasta {max_stack} veces. Expira después de {effect_duration} seg.",
+  "effect.rogues.slice_and_dice": "Cortar & Picar",
+  "effect.rogues.slice_and_dice.description": "Aumenta el daño de ataque",
+
+  "spell.rogues.shock_powder.name": "Polvo de Choque",
+  "spell.rogues.shock_powder.description": "Aturde a los enemigos cercanos por {effect_duration} seg.",
+  "effect.rogues.shock": "Aturdido",
+  "effect.rogues.shock.description": "Impide el movimiento y las acciones",
+
+  "spell.rogues.shadow_step.name": "Paso de Sombra",
+  "spell.rogues.shadow_step.description": "Avanza a través de las sombras para aparecer detrás de tu objetivo.",
+  "effect.rogues.shadow_step": "Paso de Sombra",
+  "effect.rogues.shadow_step.description": "Inrastreable",
+
+  "spell.rogues.vanish.name": "Desvanecer",
+  "spell.rogues.vanish.description": "Desaparece de la vista, entrando en sigilo por {effect_duration} seg. Realizar cualquier acción o recibir daño romperá el efecto.",
+  "effect.rogues.stealth": "Sigilo",
+  "effect.rogues.stealth.description": "Invisible para los enemigos",
+
+  "spell.rogues.throw.name": "Lanzamiento Desgarrador",
+  "spell.rogues.throw.description": "Lanza tu arma al objetivo, infligiendo {damage} daño y reduciendo su armadura en {armor_reduction} por {effect_duration} seg.",
+  "effect.rogues.shatter": "Armadura Desgarrada",
+  "effect.rogues.shatter.description": "Reduce la armadura",
+
+  "spell.rogues.shout.name": "Grito Desmoralizador",
+  "spell.rogues.shout.description": "Grita a los enemigos cercanos, reduciendo su daño de ataque en {damage_reduction} por {effect_duration} seg, e infligiendo una pequeña cantidad de daño.",
+  "effect.rogues.demoralize": "Desmoralizado",
+  "effect.rogues.demoralize.description": "Reduce el daño de ataque",
+
+  "spell.rogues.charge.name": "Carga",
+  "spell.rogues.charge.description": "Aumenta la velocidad de movimiento y la resistencia al retroceso, te libera de los efectos que impiden el movimiento, dura {effect_duration} seg.",
+  "effect.rogues.charge": "Carga",
+  "effect.rogues.charge.description": "Aumenta la velocidad de movimiento",
+
+  "spell.rogues.whirlwind.name": "Remolino",
+  "spell.rogues.whirlwind.description": "Mantén para girar, infligiendo {damage} daño por segundo a los enemigos cercanos.",
+
+  "advancements.rpg_series.path_choose_rogue.title": "Camino de los Trucos",
+  "advancements.rpg_series.path_choose_rogue.description": "Crea un Manual del Pícaro",
+  "advancements.rpg_series.path_choose_warrior.title": "Camino de la Fuerza",
+  "advancements.rpg_series.path_choose_warrior.description": "Crea un Códice del Guerrero",
+
+  "advancements.rpg_series.spell_novice_rogue.title": "Intenciones Siniestas",
+  "advancements.rpg_series.spell_novice_rogue.description": "Obtén tu primera habilidad de Pícaro",
+  "advancements.rpg_series.spell_novice_warrior.title": "Gusto por la Sangre",
+  "advancements.rpg_series.spell_novice_warrior.description": "Obtén tu primera habilidad de Guerrero",
+
+  "advancements.rpg_series.spell_master_rogue.title": "Maestro del Engaño",
+  "advancements.rpg_series.spell_master_rogue.description": "Obtén todas las habilidades de Pícaro",
+  "advancements.rpg_series.spell_master_warrior.title": "¡Furia Desatada!",
+  "advancements.rpg_series.spell_master_warrior.description": "Obtén todas las habilidades de Guerrero"
+}
