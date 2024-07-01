@@ -1,0 +1,112 @@
+{
+  "itemGroup.rogues.general": "Розбійники та воїни",
+
+  "item.rogues.rogue_spell_book": "Книга розбійника",
+  "item.rogues.warrior_spell_book": "Кодекс воїна",
+
+  "item.rogues.flint_dagger": "Кременевий кинджал",
+  "item.rogues.golden_dagger": "Золотий кинджал",
+  "item.rogues.iron_dagger": "Залізний кинджал",
+  "item.rogues.diamond_dagger": "Діамантовий кинджал",
+  "item.rogues.netherite_dagger": "Незеритовий кинджал",
+  "item.rogues.aeternium_dagger": "Аетернієвий кинджал",
+  "item.rogues.ruby_dagger": "Рубіновий кинджал",
+
+  "item.rogues.iron_sickle": "Залізний серп",
+  "item.rogues.golden_sickle": "Золотий серп",
+  "item.rogues.diamond_sickle": "Діамантовий серп",
+  "item.rogues.netherite_sickle": "Незеритовий серп",
+  "item.rogues.aeternium_sickle": "Аетернієвий серп",
+  "item.rogues.ruby_sickle": "Рубіновий серп",
+
+  "item.rogues.stone_double_axe": "Кам'яна двуручна сокира",
+  "item.rogues.iron_double_axe": "Залізна двуручна сокира",
+  "item.rogues.golden_double_axe": "Золота двуручна сокира",
+  "item.rogues.diamond_double_axe": "Діамантова двуручна сокира",
+  "item.rogues.netherite_double_axe": "Незеритова двуручна сокира",
+  "item.rogues.aeternium_double_axe": "Аетернієва двуручна сокира",
+  "item.rogues.ruby_double_axe": "Рубінова двуручна сокира",
+
+  "item.rogues.iron_glaive": "Залізна глефа",
+  "item.rogues.golden_glaive": "Золота глефа",
+  "item.rogues.diamond_glaive": "Діамантова глефа",
+  "item.rogues.netherite_glaive": "Незеритова глефа",
+  "item.rogues.aeternium_glaive": "Аетернієва глефа",
+  "item.rogues.ruby_glaive": "Рубінова глефа",
+
+  "item.rogues.rogue_armor_head": "Маска розбійника",
+  "item.rogues.rogue_armor_chest": "Туніка розбійника",
+  "item.rogues.rogue_armor_legs": "Штани розбійника",
+  "item.rogues.rogue_armor_feet": "Чоботи розбійника",
+  "item.rogues.assassin_armor_head": "Маска асасина",
+  "item.rogues.assassin_armor_chest": "Туніка асасина",
+  "item.rogues.assassin_armor_legs": "Штани асасина",
+  "item.rogues.assassin_armor_feet": "Чоботи асасина",
+
+  "item.rogues.warrior_armor_head": "Шолом воїна",
+  "item.rogues.warrior_armor_chest": "Кіраса воїна",
+  "item.rogues.warrior_armor_legs": "Наголінники воїна",
+  "item.rogues.warrior_armor_feet": "Чоботи воїна",
+  "item.rogues.berserker_armor_head": "Шолом берсерка",
+  "item.rogues.berserker_armor_chest": "Кіраса берсерка",
+  "item.rogues.berserker_armor_legs": "Наголінники берсерка",
+  "item.rogues.berserker_armor_feet": "Чоботи берсерка",
+
+  "entity.minecraft.villager.arms_merchant": "Торговець зброєю",
+  "entity.minecraft.villager.rogues:arms_merchant": "Торговець зброєю",
+  "block.rogues.arms_workbench": "Станція зброяра",
+  "block.rogues.arms_workbench.hint": "Верстак торговця зброєю",
+
+  "spell.rogues.slice_and_dice.name": "М'ясорубка",
+  "spell.rogues.slice_and_dice.description": "Ввійдіть в бойовий транс, під час якого кожна ваша атака надасть додаткову силу, накопичуючись до {max_stack} разів. Закінчується через {effect_duration} сек.",
+  "effect.rogues.slice_and_dice": "М'ясорубка",
+  "effect.rogues.slice_and_dice.description": "Урон від атак збільшено",
+
+  "spell.rogues.shock_powder.name": "Шоковий порошок",
+  "spell.rogues.shock_powder.description": "Оглушає найближчих ворогів на {effect_duration} сек.",
+  "effect.rogues.shock": "Оглушення",
+  "effect.rogues.shock.description": "Переміщення і дії заблоковані",
+
+  "spell.rogues.shadow_step.name": "Крок крізь тінь",
+  "spell.rogues.shadow_step.description": "Пройдіть крізь тіні, щоб з'явитися позаду вашої цілі.",
+  "effect.rogues.shadow_step": "Крок крізь тінь",
+  "effect.rogues.shadow_step.description": "Непомітність",
+
+  "spell.rogues.vanish.name": "Зникнення",
+  "spell.rogues.vanish.description": "Зникніть з поля зору, ввійшовши в скритність на {effect_duration} сек. Будь-яка дія або отримання урону перервуть ефект.",
+  "effect.rogues.stealth": "Скритність",
+  "effect.rogues.stealth.description": "Невидимість для ворогів",
+
+  "spell.rogues.throw.name": "Руйнівний кидок",
+  "spell.rogues.throw.description": "Киньте свою зброю в ціль, наносячи {damage} урону і знижуючи її броню на {armor_reduction} на {effect_duration} сек.",
+  "effect.rogues.shatter": "Розбита броня",
+  "effect.rogues.shatter.description": "Показник броні знижено",
+
+  "spell.rogues.shout.name": "Деморалізуючий крик",
+  "spell.rogues.shout.description": "Крикніть на найближчих ворогів, знижуючи їх урон атаки на {damage_reduction} на {effect_duration} сек. і наносячи малу кількість урону.",
+  "effect.rogues.demoralize": "Деморалізований",
+  "effect.rogues.demoralize.description": "Урон від атак знижено",
+
+  "spell.rogues.charge.name": "Напад",
+  "spell.rogues.charge.description": "Збільшує швидкість пересування і стійкість до відштовхування, звільняє від уповільнюючих ефектів пересування, триває {effect_duration} сек.",
+  "effect.rogues.charge": "Напад",
+  "effect.rogues.charge.description": "Швидкість пересування збільшена",
+
+  "spell.rogues.whirlwind.name": "Вихор",
+  "spell.rogues.whirlwind.description": "Утримуйте, щоб почати обертатися, наносячи {damage} урону в секунду найближчим ворогам.",
+
+  "advancements.rpg_series.path_choose_rogue.title": "Шлях хитрості",
+  "advancements.rpg_series.path_choose_rogue.description": "Створіть книгу розбійника",
+  "advancements.rpg_series.path_choose_warrior.title": "Шлях сили",
+  "advancements.rpg_series.path_choose_warrior.description": "Створіть кодекс воїна",
+
+  "advancements.rpg_series.spell_novice_rogue.title": "Зловісні наміри",
+  "advancements.rpg_series.spell_novice_rogue.description": "Отримайте вашу першу навичку розбійника",
+  "advancements.rpg_series.spell_novice_warrior.title": "Жага крові",
+  "advancements.rpg_series.spell_novice_warrior.description": "Отримайте вашу першу навичку воїна",
+
+  "advancements.rpg_series.spell_master_rogue.title": "Майстер обману",
+  "advancements.rpg_series.spell_master_rogue.description": "Отримайте всі навички розбійника",
+  "advancements.rpg_series.spell_master_warrior.title": "Лють!",
+  "advancements.rpg_series.spell_master_warrior.description": "Отримайте всі навички воїна"
+}
