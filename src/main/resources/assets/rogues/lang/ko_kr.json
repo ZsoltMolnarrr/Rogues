@@ -35,11 +35,11 @@
   "item.rogues.ruby_glaive": "루비 글레이브",
 
   "item.rogues.rogue_armor_head": "도적 복면",
-  "item.rogues.rogue_armor_chest": "도적 튜닉",
+  "item.rogues.rogue_armor_chest": "도적 조끼",
   "item.rogues.rogue_armor_legs": "도적 바지",
   "item.rogues.rogue_armor_feet": "도적 부츠",
   "item.rogues.assassin_armor_head": "암살자 복면",
-  "item.rogues.assassin_armor_chest": "암살자 튜닉",
+  "item.rogues.assassin_armor_chest": "암살자 조끼",
   "item.rogues.assassin_armor_legs": "암살자 바지",
   "item.rogues.assassin_armor_feet": "암살자 부츠",
 
@@ -62,7 +62,7 @@
   "effect.rogues.slice_and_dice": "슬라이스 & 다이스",
   "effect.rogues.slice_and_dice.description": "공격 피해를 증가시킵니다.",
 
-  "spell.rogues.shock_powder.name": "충격 가루",
+  "spell.rogues.shock_powder.name": "기절 가루",
   "spell.rogues.shock_powder.description": "{effect_duration}초 동안 근처의 적을 기절시킵니다.",
   "effect.rogues.shock": "기절",
   "effect.rogues.shock.description": "움직임과 행동을 방해합니다.",
@@ -72,12 +72,12 @@
   "effect.rogues.shadow_step": "그림자 걷기",
   "effect.rogues.shadow_step.description": "추적할 수 없습니다.",
 
-  "spell.rogues.vanish.name": "소멸",
+  "spell.rogues.vanish.name": "은신",
   "spell.rogues.vanish.description": "시야에서 사라져 {effect_duration}초 동안 잠행 상태에 들어갑니다. 행동을 하거나 피해를 입으면 효과가 깨집니다.",
   "effect.rogues.stealth": "은신",
   "effect.rogues.stealth.description": "적에게 보이지 않습니다.",
 
-  "spell.rogues.throw.name": "파괴 던지기",
+  "spell.rogues.throw.name": "무기 던지기",
   "spell.rogues.throw.description": "무기를 목표물에 던져 {damage}의 피해를 주고 {effect_duration}초 동안 방어를 {armor_reduction} 감소시킵니다.",
   "effect.rogues.shatter": "방어 감소",
   "effect.rogues.shatter.description": "방어를 감소시킵니다.",
@@ -93,7 +93,7 @@
   "effect.rogues.charge.description": "이동 속도를 증가시킵니다.",
 
   "spell.rogues.whirlwind.name": "회오리 바람",
-  "spell.rogues.whirlwind.description": "잡고 있으면 회전하여 주변의 적에게 초당 {damage} 피해를 줍니다.",
+  "spell.rogues.whirlwind.description": "잡고 있으면 회전하여 주변의 적에게 초당 {damage}의 피해를 줍니다.",
 
   "advancements.rpg_series.path_choose_rogue.title": "속임수의 길",
   "advancements.rpg_series.path_choose_rogue.description": "도적 지침서를 만드세요",
