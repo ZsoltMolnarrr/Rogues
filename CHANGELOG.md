@@ -1,7 +1,9 @@
 # 1.0.8
 
 - Change effect rawIds to avoid conflicts (now configurable in `tweaks.json`)
-- Add South Korean and Spanish translations 
+- Add South Korean translations 
+- Add Spanish translations
+- Add Italian translations
 
 # 1.0.7
 
