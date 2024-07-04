@@ -88,7 +88,7 @@ public class Effects {
             }
         });
 
-        int rawId = 750;
+        int rawId = config.effects_raw_id_start;
         Registry.register(Registries.STATUS_EFFECT, rawId++, new Identifier(RoguesMod.NAMESPACE, "slice_and_dice").toString(), SLICE_AND_DICE);
         Registry.register(Registries.STATUS_EFFECT, rawId++, new Identifier(RoguesMod.NAMESPACE, "shock").toString(), SHOCK);
         Registry.register(Registries.STATUS_EFFECT, rawId++, new Identifier(RoguesMod.NAMESPACE, "shadow_step").toString(), SHADOW_STEP);
