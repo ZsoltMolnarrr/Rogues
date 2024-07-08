@@ -1,3 +1,7 @@
+# 1.0.9
+
+- Update golden textures
+
 # 1.0.8
 
 - Change effect rawIds to avoid conflicts (now configurable in `tweaks.json`)
