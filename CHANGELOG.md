@@ -1,3 +1,7 @@
+# 1.1.0
+
+- Add French translation, by valentin #8
+
 # 1.0.9
 
 - Update golden textures
