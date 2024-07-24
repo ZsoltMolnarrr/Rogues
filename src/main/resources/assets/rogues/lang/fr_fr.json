@@ -1,0 +1,112 @@
+{
+  "itemGroup.rogues.general": "Rôdeur & Guerriers",
+
+  "item.rogues.rogue_spell_book": "Manuel des Rôdeurs",
+  "item.rogues.warrior_spell_book": "Codex des Guerriers",
+
+  "item.rogues.flint_dagger": "Dague en Silex",
+  "item.rogues.golden_dagger": "Dague en Or",
+  "item.rogues.iron_dagger": "Dague en Fer",
+  "item.rogues.diamond_dagger": "Dague en Diamant",
+  "item.rogues.netherite_dagger": "Dague en Netherite",
+  "item.rogues.aeternium_dagger": "Dague en Aeternium",
+  "item.rogues.ruby_dagger": "Dague en Rubis",
+
+  "item.rogues.iron_sickle": "Faucille en Fer",
+  "item.rogues.golden_sickle": "Faucille en Or",
+  "item.rogues.diamond_sickle": "Faucille en Diamant",
+  "item.rogues.netherite_sickle": "Faucille en Netherite",
+  "item.rogues.aeternium_sickle": "Faucille en Aeternium",
+  "item.rogues.ruby_sickle": "Faucille en Rubis",
+
+  "item.rogues.stone_double_axe": "Double Hache en Pierre",
+  "item.rogues.iron_double_axe": "Double Hache en Fer",
+  "item.rogues.golden_double_axe": "Double Hache en Or",
+  "item.rogues.diamond_double_axe": "Double Hache en Diamant",
+  "item.rogues.netherite_double_axe": "Double Hache en Netherite",
+  "item.rogues.aeternium_double_axe": "Double Hache en Aeternium",
+  "item.rogues.ruby_double_axe": "Double Hache en Rubis",
+
+  "item.rogues.iron_glaive": "Glaive en Fer",
+  "item.rogues.golden_glaive": "Glaive en Or",
+  "item.rogues.diamond_glaive": "Glaive en Diamant",
+  "item.rogues.netherite_glaive": "Glaive en Netherite",
+  "item.rogues.aeternium_glaive": "Glaive en Aeternium",
+  "item.rogues.ruby_glaive": "Glaive en Rubis",
+
+  "item.rogues.rogue_armor_head": "Masque de Rôdeur",
+  "item.rogues.rogue_armor_chest": "Tunique de Rôdeur",
+  "item.rogues.rogue_armor_legs": "Pantalon de Rôdeur",
+  "item.rogues.rogue_armor_feet": "Bottes de Rôdeur",
+  "item.rogues.assassin_armor_head": "Masque d'Assassin",
+  "item.rogues.assassin_armor_chest": "Tunique d'Assassin",
+  "item.rogues.assassin_armor_legs": "Pantalon d'Assassin",
+  "item.rogues.assassin_armor_feet": "Bottes d'Assassin",
+
+  "item.rogues.warrior_armor_head": "Casque de Guerrier",
+  "item.rogues.warrior_armor_chest": "Plastron de Guerrier",
+  "item.rogues.warrior_armor_legs": "Jambières de Guerrier",
+  "item.rogues.warrior_armor_feet": "Bottes de Guerrier",
+  "item.rogues.berserker_armor_head": "Casque de Berserker",
+  "item.rogues.berserker_armor_chest": "Plastron de Berserker",
+  "item.rogues.berserker_armor_legs": "Jambières de Berserker",
+  "item.rogues.berserker_armor_feet": "Bottes de Berserker",
+
+  "entity.minecraft.villager.arms_merchant": "Marchand d'Armes",
+  "entity.minecraft.villager.rogues:arms_merchant": "Marchand d'Armes",
+  "block.rogues.arms_workbench": "Station d'Armes",
+  "block.rogues.arms_workbench.hint": "Établi pour les villageois Marchands d'Armes.",
+
+  "spell.rogues.slice_and_dice.name": "Tranche & Découpe",
+  "spell.rogues.slice_and_dice.description": "Entrez en transe de combat, pendant laquelle vos attaques donneront un pouvoir supplémentaire, se cumulant jusqu'à {max_stack} fois. Expire après {effect_duration} sec.",
+  "effect.rogues.slice_and_dice": "Tranche & Découpe",
+  "effect.rogues.slice_and_dice.description": "Augmente les dégâts d'attaque",
+
+  "spell.rogues.shock_powder.name": "Poudre de Choc",
+  "spell.rogues.shock_powder.description": "Étourdi les ennemis proches pendant {effect_duration} sec.",
+  "effect.rogues.shock": "Étourdi",
+  "effect.rogues.shock.description": "Empêche le mouvement et les actions",
+
+  "spell.rogues.shadow_step.name": "Pas de l'Ombre",
+  "spell.rogues.shadow_step.description": "Passez à travers les ombres pour apparaître derrière votre cible.",
+  "effect.rogues.shadow_step": "Pas de l'Ombre",
+  "effect.rogues.shadow_step.description": "Introuvable",
+
+  "spell.rogues.vanish.name": "Disparition",
+  "spell.rogues.vanish.description": "Disparaissez à la vue, entrant en furtivité pour {effect_duration} sec. Toute action ou subir des dégâts rompt l'effet.",
+  "effect.rogues.stealth": "Furtivité",
+  "effect.rogues.stealth.description": "Invisible pour les ennemis",
+
+  "spell.rogues.throw.name": "Lancer Fracassant",
+  "spell.rogues.throw.description": "Lancez votre arme sur la cible, infligeant {damage} dégâts et réduisant son armure de {armor_reduction} pendant {effect_duration} sec.",
+  "effect.rogues.shatter": "Armure Fracassée",
+  "effect.rogues.shatter.description": "Réduit l'armure",
+
+  "spell.rogues.shout.name": "Cri Démoralisant",
+  "spell.rogues.shout.description": "Criez sur les ennemis proches, réduisant leurs dégâts d'attaque de {damage_reduction} pendant {effect_duration} sec, et infligeant une petite quantité de dégâts.",
+  "effect.rogues.demoralize": "Démoralisé",
+  "effect.rogues.demoralize.description": "Réduit les dégâts d'attaque",
+
+  "spell.rogues.charge.name": "Charge",
+  "spell.rogues.charge.description": "Augmente la vitesse de déplacement et la résistance au recul, vous libère des effets entravant le mouvement, dure {effect_duration} sec.",
+  "effect.rogues.charge": "Charge",
+  "effect.rogues.charge.description": "Augmente la vitesse de déplacement",
+
+  "spell.rogues.whirlwind.name": "Tourbillon",
+  "spell.rogues.whirlwind.description": "Maintenez pour tourner en rond, infligeant {damage} dégâts par seconde aux ennemis proches.",
+
+  "advancements.rpg_series.path_choose_rogue.title": "Voie des Ruses",
+  "advancements.rpg_series.path_choose_rogue.description": "Créer un Manuel des Rôdeurs",
+  "advancements.rpg_series.path_choose_warrior.title": "Voie de la Force",
+  "advancements.rpg_series.path_choose_warrior.description": "Créer un Codex des Guerriers",
+
+  "advancements.rpg_series.spell_novice_rogue.title": "Intentions Sinistres",
+  "advancements.rpg_series.spell_novice_rogue.description": "Obtenir votre première compétence de Rôdeur",
+  "advancements.rpg_series.spell_novice_warrior.title": "Goût du Sang",
+  "advancements.rpg_series.spell_novice_warrior.description": "Obtenir votre première compétence de Guerrier",
+
+  "advancements.rpg_series.spell_master_rogue.title": "Maître de la Déception",
+  "advancements.rpg_series.spell_master_rogue.description": "Obtenir toutes les compétences de Rôdeur",
+  "advancements.rpg_series.spell_master_warrior.title": "Carnage!",
+  "advancements.rpg_series.spell_master_warrior.description": "Obtenir toutes les compétences de Guerrier"
+}
