@@ -21,7 +21,7 @@ import java.util.function.Supplier;
 
 public class RogueArmor extends CustomArmor implements GeoItem {
 
-    public static final Identifier equipSoundId = new Identifier(RoguesMod.NAMESPACE, "rogue_armor");
+    public static final Identifier equipSoundId = Identifier.of(RoguesMod.NAMESPACE, "rogue_armor");
     public static final SoundEvent equipSound = SoundEvent.of(equipSoundId);
 
     public RogueArmor(Armor.CustomMaterial material, Type type, Settings settings) {

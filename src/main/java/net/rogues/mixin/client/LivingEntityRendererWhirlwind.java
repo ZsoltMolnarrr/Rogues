@@ -15,7 +15,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(LivingEntityRenderer.class)
 public class LivingEntityRendererWhirlwind {
-    private static final Identifier BLADESTORM_SPELL_ID = new Identifier(RoguesMod.NAMESPACE, "whirlwind");
+    private static final Identifier BLADESTORM_SPELL_ID = Identifier.of(RoguesMod.NAMESPACE, "whirlwind");
     @Inject(method = "render(Lnet/minecraft/entity/LivingEntity;FFLnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;I)V", at = @At("HEAD"))
     private void render_HEAD_SpellEngine(LivingEntity livingEntity, float f, float delta, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int light, CallbackInfo ci) {
         if (livingEntity instanceof SpellCasterEntity caster) {

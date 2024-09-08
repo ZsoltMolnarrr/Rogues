@@ -23,10 +23,10 @@ public class Armors {
     }
 
 
-    private static final Identifier ATTACK_DAMAGE_ID = new Identifier("generic.attack_damage");
-    private static final Identifier ATTACK_SPEED_ID = new Identifier("generic.attack_speed");
-    private static final Identifier KNOCKBACK_ID = new Identifier("generic.knockback_resistance");
-    private static final Identifier MOVEMENT_SPEED_ID = new Identifier("generic.movement_speed");
+    private static final Identifier ATTACK_DAMAGE_ID = Identifier.of("generic.attack_damage");
+    private static final Identifier ATTACK_SPEED_ID = Identifier.of("generic.attack_speed");
+    private static final Identifier KNOCKBACK_ID = Identifier.of("generic.knockback_resistance");
+    private static final Identifier MOVEMENT_SPEED_ID = Identifier.of("generic.movement_speed");
 
     private static ItemConfig.Attribute damageMultiplier(float value) {
         return new ItemConfig.Attribute(

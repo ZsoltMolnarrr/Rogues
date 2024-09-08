@@ -1,0 +1,32 @@
+{
+  "display": {
+    "icon": {
+      "id": "rogues:diamond_sickle"
+    },
+    "title": {
+      "translate": "advancements.rpg_series.spell_master_rogue.title"
+    },
+    "description": {
+      "translate": "advancements.rpg_series.spell_master_rogue.description"
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "parent": "rpg_series:spell_novice_rogue",
+  "criteria": {
+    "bind": {
+      "trigger": "spell_engine:spell_binding",
+      "conditions": {
+        "complete": true,
+        "spell_pool": "rogues:rogue"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "bind"
+    ]
+  ]
+}

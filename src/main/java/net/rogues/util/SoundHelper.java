@@ -42,7 +42,7 @@ public class SoundHelper {
 
     public static void registerSounds() {
         for (var soundKey: soundKeys) {
-            var soundId = new Identifier(RoguesMod.NAMESPACE, soundKey);
+            var soundId = Identifier.of(RoguesMod.NAMESPACE, soundKey);
             var customTravelDistance = soundDistances.get(soundKey);
             var soundEvent = (customTravelDistance == null)
                     ? SoundEvent.of(soundId)

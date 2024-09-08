@@ -20,7 +20,7 @@ import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 public class WarriorArmor extends CustomArmor implements GeoItem {
-    public static final Identifier equipSoundId = new Identifier(RoguesMod.NAMESPACE, "warrior_armor");
+    public static final Identifier equipSoundId = Identifier.of(RoguesMod.NAMESPACE, "warrior_armor");
     public static final SoundEvent equipSound = SoundEvent.of(equipSoundId);
 
     public WarriorArmor(Armor.CustomMaterial material, Type type, Settings settings) {

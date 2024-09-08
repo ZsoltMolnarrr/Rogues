@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "W": {
+      "tag": "minecraft:wool"
+    },
+    "L": {
+      "item": "minecraft:leather"
+    }
+  },
+  "pattern": [
+    "WWW",
+    "L L",
+    "W W"
+  ],
+  "result": {
+    "id": "rogues:rogue_armor_legs"
+  }
+}

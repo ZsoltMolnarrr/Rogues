@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "G": {
+      "item": "minecraft:goat_horn"
+    },
+    "T": {
+      "item": "minecraft:netherite_scrap"
+    },
+    "I": {
+      "item": "minecraft:chain"
+    }
+  },
+  "pattern": [
+    "GTG",
+    "I I"
+  ],
+  "result": {
+    "id": "rogues:berserker_armor_head"
+  }
+}

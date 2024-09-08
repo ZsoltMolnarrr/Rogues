@@ -27,13 +27,13 @@ public class RogueVillagers {
     public static final String MERCHANT = "arms_merchant";
 
     public static PointOfInterestType registerPOI(String name, Block block) {
-        return PointOfInterestHelper.register(new Identifier(RoguesMod.NAMESPACE, name),
+        return PointOfInterestHelper.register(Identifier.of(RoguesMod.NAMESPACE, name),
                 1, 10, ImmutableSet.copyOf(block.getStateManager().getStates()));
     }
 
     public static VillagerProfession registerProfession(String name, RegistryKey<PointOfInterestType> workStation) {
-        var id = new Identifier(RoguesMod.NAMESPACE, name);
-        return Registry.register(Registries.VILLAGER_PROFESSION, new Identifier(RoguesMod.NAMESPACE, name), new VillagerProfession(
+        var id = Identifier.of(RoguesMod.NAMESPACE, name);
+        return Registry.register(Registries.VILLAGER_PROFESSION, Identifier.of(RoguesMod.NAMESPACE, name), new VillagerProfession(
                 id.toString(),
                 (entry) -> {
                     return entry.matchesKey(workStation);
@@ -78,7 +78,7 @@ public class RogueVillagers {
         var poi = registerPOI(MERCHANT, CustomBlocks.WORKBENCH.block());
         var profession = registerProfession(
                 MERCHANT,
-                RegistryKey.of(Registries.POINT_OF_INTEREST_TYPE.getKey(), new Identifier(RoguesMod.NAMESPACE, MERCHANT)));
+                RegistryKey.of(Registries.POINT_OF_INTEREST_TYPE.getKey(), Identifier.of(RoguesMod.NAMESPACE, MERCHANT)));
 
         List<Offer> offers = List.of(
                 Offer.buy(1, new ItemStack(Items.LEATHER, 8), 5, 12, 4, 0.01f),

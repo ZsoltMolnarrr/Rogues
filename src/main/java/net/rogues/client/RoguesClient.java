@@ -23,21 +23,21 @@ public class RoguesClient implements ClientModInitializer {
         CustomParticleStatusEffect.register(Effects.DEMORALIZE, new DemoralizeParticles(1));
         CustomParticleStatusEffect.register(Effects.CHARGE, new ChargeParticles(1));
 
-        SpellTooltip.addDescriptionMutator(new Identifier(RoguesMod.NAMESPACE, "slice_and_dice"), (args) -> {
+        SpellTooltip.addDescriptionMutator(Identifier.of(RoguesMod.NAMESPACE, "slice_and_dice"), (args) -> {
             var description = args.description();
             description = description.replace(SpellTooltip.placeholder("max_stack"), "" + Effects.sliceAndDiceMaxStacks());
             return description;
         });
 
         var armorReduction = ((int)(-1F * RoguesMod.tweaksConfig.value.shattered_armor_multiplier * 100)) + "%";
-        SpellTooltip.addDescriptionMutator(new Identifier(RoguesMod.NAMESPACE, "throw"), (args) -> {
+        SpellTooltip.addDescriptionMutator(Identifier.of(RoguesMod.NAMESPACE, "throw"), (args) -> {
             var description = args.description();
             description = description.replace(SpellTooltip.placeholder("armor_reduction"), armorReduction);
             return description;
         });
 
         var damageReduction = ((int)(-1F * RoguesMod.tweaksConfig.value.shout_damage_multiplier * 100)) + "%";
-        SpellTooltip.addDescriptionMutator(new Identifier(RoguesMod.NAMESPACE, "shout"), (args) -> {
+        SpellTooltip.addDescriptionMutator(Identifier.of(RoguesMod.NAMESPACE, "shout"), (args) -> {
             var description = args.description();
             description = description.replace(SpellTooltip.placeholder("damage_reduction"), damageReduction);
             return description;

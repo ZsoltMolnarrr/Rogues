@@ -19,7 +19,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 
 public class MartialWorkbenchBlock extends Block {
-    public static Identifier ID = new Identifier(RoguesMod.NAMESPACE, "arms_workbench");
+    public static Identifier ID = Identifier.of(RoguesMod.NAMESPACE, "arms_workbench");
     public MartialWorkbenchBlock(Settings settings) {
         super(settings);
     }

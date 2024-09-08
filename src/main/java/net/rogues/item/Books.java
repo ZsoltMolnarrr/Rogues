@@ -10,7 +10,7 @@ public class Books {
     public static void register() {
         var books = List.of("rogue", "warrior");
         for (var name: books) {
-            SpellBooks.createAndRegister(new Identifier(RoguesMod.NAMESPACE, name), Group.KEY);
+            SpellBooks.createAndRegister(Identifier.of(RoguesMod.NAMESPACE, name), Group.KEY);
         }
     }
 }

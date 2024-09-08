@@ -25,7 +25,7 @@ public class StealthEffect extends StatusEffect {
                     0.18F,
                     0.2F,
                     0);
-    public static final Identifier LEAVE_SOUND_ID = new Identifier(RoguesMod.NAMESPACE, "stealth_leave");
+    public static final Identifier LEAVE_SOUND_ID = Identifier.of(RoguesMod.NAMESPACE, "stealth_leave");
     public static final SoundEvent LEAVE_SOUND = SoundEvent.of(LEAVE_SOUND_ID);
 
     @Override

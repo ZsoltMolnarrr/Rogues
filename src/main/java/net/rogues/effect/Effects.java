@@ -74,7 +74,7 @@ public class Effects {
                 attacker.removeStatusEffect(STEALTH);
             }
         });
-        var vanishId = new Identifier(RoguesMod.NAMESPACE, "vanish");
+        var vanishId = Identifier.of(RoguesMod.NAMESPACE, "vanish");
         CombatEvents.SPELL_CAST.register((args) -> {
             var caster = args.caster();
             if (caster.hasStatusEffect(STEALTH) && !args.spell().id().equals(vanishId)) {
@@ -89,12 +89,12 @@ public class Effects {
         });
 
         int rawId = config.effects_raw_id_start;
-        Registry.register(Registries.STATUS_EFFECT, rawId++, new Identifier(RoguesMod.NAMESPACE, "slice_and_dice").toString(), SLICE_AND_DICE);
-        Registry.register(Registries.STATUS_EFFECT, rawId++, new Identifier(RoguesMod.NAMESPACE, "shock").toString(), SHOCK);
-        Registry.register(Registries.STATUS_EFFECT, rawId++, new Identifier(RoguesMod.NAMESPACE, "shadow_step").toString(), SHADOW_STEP);
-        Registry.register(Registries.STATUS_EFFECT, rawId++, new Identifier(RoguesMod.NAMESPACE, "stealth").toString(), STEALTH);
-        Registry.register(Registries.STATUS_EFFECT, rawId++, new Identifier(RoguesMod.NAMESPACE, "shatter").toString(), SHATTER);
-        Registry.register(Registries.STATUS_EFFECT, rawId++, new Identifier(RoguesMod.NAMESPACE, "demoralize").toString(), DEMORALIZE);
-        Registry.register(Registries.STATUS_EFFECT, rawId++, new Identifier(RoguesMod.NAMESPACE, "charge").toString(), CHARGE);
+        Registry.register(Registries.STATUS_EFFECT, rawId++, Identifier.of(RoguesMod.NAMESPACE, "slice_and_dice").toString(), SLICE_AND_DICE);
+        Registry.register(Registries.STATUS_EFFECT, rawId++, Identifier.of(RoguesMod.NAMESPACE, "shock").toString(), SHOCK);
+        Registry.register(Registries.STATUS_EFFECT, rawId++, Identifier.of(RoguesMod.NAMESPACE, "shadow_step").toString(), SHADOW_STEP);
+        Registry.register(Registries.STATUS_EFFECT, rawId++, Identifier.of(RoguesMod.NAMESPACE, "stealth").toString(), STEALTH);
+        Registry.register(Registries.STATUS_EFFECT, rawId++, Identifier.of(RoguesMod.NAMESPACE, "shatter").toString(), SHATTER);
+        Registry.register(Registries.STATUS_EFFECT, rawId++, Identifier.of(RoguesMod.NAMESPACE, "demoralize").toString(), DEMORALIZE);
+        Registry.register(Registries.STATUS_EFFECT, rawId++, Identifier.of(RoguesMod.NAMESPACE, "charge").toString(), CHARGE);
     }
 }

@@ -1,12 +1,12 @@
 package net.rogues.block;
 
-import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
-import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
+import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.MapColor;
-import net.minecraft.block.enums.Instrument;
+import net.minecraft.block.enums.NoteBlockInstrument;
 import net.minecraft.item.BlockItem;
+import net.minecraft.item.Item;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.sound.BlockSoundGroup;
@@ -20,7 +20,7 @@ public class CustomBlocks {
 
     public record Entry(String name, Block block, BlockItem item) {
         public Entry(String name, Block block) {
-            this(name, block, new BlockItem(block, new FabricItemSettings()));
+            this(name, block, new BlockItem(block, new Item.Settings()));
         }
     }
 
@@ -33,9 +33,9 @@ public class CustomBlocks {
     }
 
     public static final Entry WORKBENCH = entry(MartialWorkbenchBlock.ID.getPath(), new MartialWorkbenchBlock(
-            FabricBlockSettings.create()
+            AbstractBlock.Settings.create()
                     .mapColor(MapColor.OAK_TAN)
-                    .instrument(Instrument.BASS)
+                    .instrument(NoteBlockInstrument.BASS)
                     .strength(2.5F)
                     .sounds(BlockSoundGroup.WOOD)
                     .nonOpaque()
@@ -43,8 +43,8 @@ public class CustomBlocks {
 
     public static void register() {
         for (var entry : all) {
-            Registry.register(Registries.BLOCK, new Identifier(RoguesMod.NAMESPACE, entry.name), entry.block);
-            Registry.register(Registries.ITEM, new Identifier(RoguesMod.NAMESPACE, entry.name), entry.item());
+            Registry.register(Registries.BLOCK, Identifier.of(RoguesMod.NAMESPACE, entry.name), entry.block);
+            Registry.register(Registries.ITEM, Identifier.of(RoguesMod.NAMESPACE, entry.name), entry.item());
         }
         ItemGroupEvents.modifyEntriesEvent(Group.KEY).register((content) -> {
             for (var entry : all) {
