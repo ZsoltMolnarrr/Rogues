@@ -1,3 +1,7 @@
+# 2.0.0
+
+- Update to Minecraft 1.21.1
+
 # 1.1.0
 
 - Add French translation, by valentin #8
