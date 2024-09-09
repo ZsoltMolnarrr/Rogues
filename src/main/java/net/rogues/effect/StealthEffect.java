@@ -1,12 +1,11 @@
 package net.rogues.effect;
 
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.AttributeContainer;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectCategory;
-import net.minecraft.sound.SoundEvent;
-import net.minecraft.util.Identifier;
-import net.rogues.RoguesMod;
+import net.rogues.util.RogueSounds;
 import net.spell_engine.api.spell.ParticleBatch;
 import net.spell_engine.particle.ParticleHelper;
 import net.spell_engine.utils.SoundHelper;
@@ -21,20 +20,28 @@ public class StealthEffect extends StatusEffect {
             ParticleBatch.Shape.CIRCLE,
             ParticleBatch.Origin.FEET,
             null,
-                    20,
-                    0.18F,
-                    0.2F,
-                    0);
-    public static final Identifier LEAVE_SOUND_ID = Identifier.of(RoguesMod.NAMESPACE, "stealth_leave");
-    public static final SoundEvent LEAVE_SOUND = SoundEvent.of(LEAVE_SOUND_ID);
+            20,
+            0.18F,
+            0.2F,
+            0);
+//
+//    @Override
+//    public void onRemoved(LivingEntity entity, AttributeContainer attributes, int amplifier) {
+//        super.onRemoved(entity, attributes, amplifier);
+//        System.out.println();
+//        if (!entity.getWorld().isClient()) {
+//            SoundHelper.playSoundEvent(entity.getWorld(), entity, RogueSounds.STEALTH_LEAVE.sound());
+//            ParticleHelper.sendBatches(entity, new ParticleBatch[]{POP_PARTICLES});
+//        }
+//    }
 
     @Override
-    public void onRemoved(LivingEntity entity, AttributeContainer attributes, int amplifier) {
-        super.onRemoved(entity, attributes, amplifier);
+    public void onEntityRemoval(LivingEntity entity, int amplifier, Entity.RemovalReason reason) {
+        super.onEntityRemoval(entity, amplifier, reason);
         System.out.println();
         if (!entity.getWorld().isClient()) {
-            SoundHelper.playSoundEvent(entity.getWorld(), entity, LEAVE_SOUND);
-            ParticleHelper.sendBatches(entity, new ParticleBatch[]{ POP_PARTICLES });
+            SoundHelper.playSoundEvent(entity.getWorld(), entity, RogueSounds.STEALTH_LEAVE.sound());
+            ParticleHelper.sendBatches(entity, new ParticleBatch[]{POP_PARTICLES});
         }
     }
 }

@@ -3,18 +3,16 @@ package net.rogues.item.armor;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ArmorMaterial;
-import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.entry.RegistryEntry;
-import net.minecraft.registry.tag.ItemTags;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.Identifier;
 import net.rogues.RoguesMod;
 import net.rogues.item.Group;
-import net.rogues.util.SoundHelper;
+import net.rogues.util.RogueSounds;
 import net.spell_engine.api.item.ItemConfig;
 import net.spell_engine.api.item.armor.Armor;
 
@@ -46,25 +44,25 @@ public class Armors {
             "rogue_armor",
             1, 3, 3, 1,
             9,
-            SoundHelper.ROGUE_ARMOR_EQUIP.entry(), () -> { return Ingredient.ofItems(Items.LEATHER); });
+            RogueSounds.ROGUE_ARMOR_EQUIP.entry(), () -> { return Ingredient.ofItems(Items.LEATHER); });
 
     public static RegistryEntry<ArmorMaterial> material_rogue_t2 = material(
             "assassin_armor",
             2, 4, 4, 2,
             10,
-            SoundHelper.ROGUE_ARMOR_EQUIP.entry(), () -> { return Ingredient.ofItems(Items.RABBIT_HIDE); });
+            RogueSounds.ROGUE_ARMOR_EQUIP.entry(), () -> { return Ingredient.ofItems(Items.RABBIT_HIDE); });
 
     public static RegistryEntry<ArmorMaterial> material_warrior_t1 = material(
             "warrior_armor",
             2, 5, 4, 1,
             9,
-            SoundHelper.WARRIOR_ARMOR_EQUIP.entry(), () -> { return Ingredient.ofItems(Items.IRON_INGOT); });
+            RogueSounds.WARRIOR_ARMOR_EQUIP.entry(), () -> { return Ingredient.ofItems(Items.IRON_INGOT); });
 
     public static RegistryEntry<ArmorMaterial> material_warrior_t2 = material(
             "berserker_armor",
             3, 8, 6, 2,
             10,
-            SoundHelper.WARRIOR_ARMOR_EQUIP.entry(), () -> { return Ingredient.ofItems(Items.CHAIN); });
+            RogueSounds.WARRIOR_ARMOR_EQUIP.entry(), () -> { return Ingredient.ofItems(Items.CHAIN); });
 
 
     public static final ArrayList<Armor.Entry> entries = new ArrayList<>();

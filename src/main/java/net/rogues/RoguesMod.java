@@ -15,7 +15,7 @@ import net.rogues.item.Books;
 import net.rogues.item.Group;
 import net.rogues.item.Weapons;
 import net.rogues.item.armor.Armors;
-import net.rogues.util.SoundHelper;
+import net.rogues.util.RogueSounds;
 import net.rogues.village.RogueVillagers;
 import net.spell_engine.api.item.ItemConfig;
 import net.tinyconfig.ConfigManager;
@@ -62,7 +62,7 @@ public class RoguesMod implements ModInitializer {
 
         RogueVillagers.register();
         Effects.register();
-        SoundHelper.registerSounds();
+        RogueSounds.registerSounds();
     }
 }
 

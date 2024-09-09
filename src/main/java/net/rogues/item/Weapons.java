@@ -10,8 +10,7 @@ import net.minecraft.registry.tag.ItemTags;
 import net.minecraft.util.Identifier;
 import net.rogues.RoguesMod;
 import net.spell_engine.api.item.ItemConfig;
-import net.spell_engine.api.item.weapon.MeleeWeaponItem;
-import net.spell_engine.api.item.weapon.SpellWeaponItem;
+import net.spell_engine.api.item.weapon.SpellSwordItem;
 import net.spell_engine.api.item.weapon.Weapon;
 
 import java.util.ArrayList;
@@ -21,15 +20,9 @@ import java.util.function.Supplier;
 public class Weapons {
     public static final ArrayList<Weapon.Entry> entries = new ArrayList<>();
 
-    private static Weapon.Entry entry(String name, Weapon.CustomMaterial material, Item item, ItemConfig.Weapon defaults) {
-        return entry(null, name, material, item, defaults);
-    }
-
-    private static Weapon.Entry entry(String requiredMod, String name, Weapon.CustomMaterial material, Item item, ItemConfig.Weapon defaults) {
-        var entry = new Weapon.Entry(RoguesMod.NAMESPACE, name, material, item, defaults, null);
-        if (entry.isRequiredModInstalled()) {
-            entries.add(entry);
-        }
+    private static Weapon.Entry entry(String name, Weapon.CustomMaterial material, Weapon.Factory factory, ItemConfig.Weapon defaults) {
+        var entry = new Weapon.Entry(RoguesMod.NAMESPACE, name, material, factory, defaults, null);
+        entries.add(entry);
         return entry;
     }
 
@@ -54,13 +47,7 @@ public class Weapons {
     // MARK: Daggers
 
     private static Weapon.Entry dagger(String name, Weapon.CustomMaterial material, float damage) {
-        return dagger(null, name, material, damage);
-    }
-
-    private static Weapon.Entry dagger(String requiredMod, String name, Weapon.CustomMaterial material, float damage) {
-        var settings = new Item.Settings();
-        var item = new MeleeWeaponItem(material, settings);
-        return entry(requiredMod, name, material, item, new ItemConfig.Weapon(damage, -1.6F));
+        return entry(name, material, SpellSwordItem::new, new ItemConfig.Weapon(damage, -1.6F));
     }
 
     public static final Weapon.Entry flint_dagger = dagger("flint_dagger",
@@ -75,13 +62,7 @@ public class Weapons {
             Weapon.CustomMaterial.matching(ToolMaterials.NETHERITE, () -> Ingredient.ofItems(Items.NETHERITE_INGOT)), 4.7F);
 
     private static Weapon.Entry sickle(String name, Weapon.CustomMaterial material, float damage) {
-        return sickle(null, name, material, damage);
-    }
-
-    private static Weapon.Entry sickle(String requiredMod, String name, Weapon.CustomMaterial material, float damage) {
-        var settings = new Item.Settings();
-        var item = new MeleeWeaponItem(material, settings);
-        return entry(requiredMod, name, material, item, new ItemConfig.Weapon(damage, -2F));
+        return entry(name, material, SpellSwordItem::new, new ItemConfig.Weapon(damage, -2F));
     }
 
     public static final Weapon.Entry iron_sickle = sickle("iron_sickle",
@@ -96,13 +77,7 @@ public class Weapons {
     // MARK: Double Axe
 
     private static Weapon.Entry axe(String name, Weapon.CustomMaterial material, float damage) {
-        return axe(null, name, material, damage);
-    }
-
-    private static Weapon.Entry axe(String requiredMod, String name, Weapon.CustomMaterial material, float damage) {
-        var settings = new Item.Settings();
-        var item = new MeleeWeaponItem(material, settings);
-        return entry(requiredMod, name, material, item, new ItemConfig.Weapon(damage, -2.8F));
+        return entry(name, material, SpellSwordItem::new, new ItemConfig.Weapon(damage, -2.8F));
     }
 
 //    public static final Weapon.Entry wooden_double_axe = axe("wooden_double_axe",
@@ -121,13 +96,7 @@ public class Weapons {
     // MARK: Glaives
 
     private static Weapon.Entry glaive(String name, Weapon.CustomMaterial material, float damage) {
-        return glaive(null, name, material, damage);
-    }
-
-    private static Weapon.Entry glaive(String requiredMod, String name, Weapon.CustomMaterial material, float damage) {
-        var settings = new Item.Settings();
-        var item = new SpellWeaponItem(material, settings);
-        return entry(requiredMod, name, material, item, new ItemConfig.Weapon(damage, -2.6F));
+        return entry(name, material, SpellSwordItem::new, new ItemConfig.Weapon(damage, -2.6F));
     }
 
     public static final Weapon.Entry iron_glaive = glaive("iron_glaive",

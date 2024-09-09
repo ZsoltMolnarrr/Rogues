@@ -10,15 +10,11 @@ import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.Identifier;
 import net.minecraft.world.World;
 import net.rogues.RoguesMod;
-import net.rogues.block.MartialWorkbenchBlock;
-import net.rogues.effect.StealthEffect;
-import net.rogues.item.armor.RogueArmor;
-import net.rogues.item.armor.WarriorArmor;
 
 import java.util.List;
 import java.util.Map;
 
-public class SoundHelper {
+public class RogueSounds {
     public static List<String> soundKeys = List.of(
         "slice_and_dice",
         "shock_powder_release",

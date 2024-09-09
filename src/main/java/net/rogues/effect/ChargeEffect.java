@@ -19,56 +19,30 @@ public class ChargeEffect extends StatusEffect {
 
     private static final HashSet<StatusEffect> movementImpairingEffects = new HashSet<>();
 
-    private void updateMovementImpairingEffects() {
-        if (!movementImpairingEffects.isEmpty()) {
-            return;
-        }
-        for(var entry : Registries.STATUS_EFFECT.getIndexedEntries()) {
-            var effect = entry.value();
-            var attributeModifiers = effect.getAttributeModifiers();
-            for (var modifierEntry : attributeModifiers.entrySet()) {
-                var attribute = modifierEntry.getKey();
-                var modifier = modifierEntry.getValue();
-                if (attribute == EntityAttributes.GENERIC_MOVEMENT_SPEED) {
-                    double treshold = 0;
-                    switch (modifier.getOperation()) {
-                        case ADD_VALUE, ADD_MULTIPLIED_BASE -> {
-                            treshold = 0;
-                        }
-                        case ADD_MULTIPLIED_TOTAL -> {
-                            treshold = 1;
-                        }
-                    }
-                    if (modifier.getValue() < treshold) {
-                        movementImpairingEffects.add(effect);
-                    }
-                }
-            }
-        }
-    }
-
     private void removeMovementImpairingEffects(LivingEntity entity) {
-        updateMovementImpairingEffects();
         var effects = entity.getStatusEffects();
-        for (var effect : effects) {
-            var type = effect.getEffectType();
-            if (movementImpairingEffects.contains(type)) {
+        for (var instance : effects) {
+            var effect = instance.getEffectType().value();
+            if (((StatusEffectExtension)effect).isMovementImpairing()) {
                 // Removing the effect immediately would cause a ConcurrentModificationException
-                ((WorldScheduler)entity.getWorld()).schedule(1, () -> entity.removeStatusEffect(type));
+                ((WorldScheduler)entity.getWorld()).schedule(1, () -> entity.removeStatusEffect(instance.getEffectType()));
             }
         }
     }
 
-    public void applyUpdateEffect(LivingEntity entity, int amplifier) {
+    @Override
+    public boolean applyUpdateEffect(LivingEntity entity, int amplifier) {
         removeMovementImpairingEffects(entity);
+        return true;
     }
 
-    public void applyInstantEffect(@Nullable Entity source, @Nullable Entity attacker, LivingEntity target, int amplifier, double proximity) {
-        removeMovementImpairingEffects(target);
-    }
+//    public void applyInstantEffect(@Nullable Entity source, @Nullable Entity attacker, LivingEntity target, int amplifier, double proximity) {
+//        removeMovementImpairingEffects(target);
+//    }
 
-    public void onApplied(LivingEntity entity, AttributeContainer attributes, int amplifier) {
-        super.onApplied(entity, attributes, amplifier);
+    @Override
+    public void onApplied(LivingEntity entity, int amplifier) {
+        super.onApplied(entity, amplifier);
         removeMovementImpairingEffects(entity);
     }
 }

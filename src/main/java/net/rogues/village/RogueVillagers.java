@@ -19,8 +19,9 @@ import net.rogues.RoguesMod;
 import net.rogues.block.CustomBlocks;
 import net.rogues.item.Weapons;
 import net.rogues.item.armor.Armors;
-import net.rogues.util.SoundHelper;
+import net.rogues.util.RogueSounds;
 
+import java.util.LinkedHashMap;
 import java.util.List;
 
 public class RogueVillagers {
@@ -43,7 +44,7 @@ public class RogueVillagers {
                 },
                 ImmutableSet.of(),
                 ImmutableSet.of(),
-                SoundHelper.WORKBENCH.sound())
+                RogueSounds.WORKBENCH.sound())
         );
     }
 
@@ -104,15 +105,49 @@ public class RogueVillagers {
                 Offer.sell(4, new ItemStack(Items.GOAT_HORN, 1), 15, 12, 5, 0.01f)
             );
 
-        for(var offer: offers) {
-            TradeOfferHelper.registerVillagerOffers(profession, offer.level, factories -> {
-                factories.add(((entity, random) -> new TradeOffer(
-                        offer.input,
-                        offer.output,
-                        offer.maxUses, offer.experience, offer.priceMultiplier)
-                ));
+        LinkedHashMap<Integer, List<TradeOffers.Factory>> trades = new LinkedHashMap<>();
+        trades.put(1, List.of(
+                new TradeOffers.BuyItemFactory(Items.LEATHER, 8, 12, 4, 5),
+                new TradeOffers.SellItemFactory(Weapons.flint_dagger.item(), 6, 1, 12, 3),
+                new TradeOffers.SellItemFactory(Weapons.stone_double_axe.item(), 8, 1, 12, 4)
+        ));
+        trades.put(2, List.of(
+                new TradeOffers.BuyItemFactory(Items.IRON_INGOT, 12, 12, 5, 8),
+                new TradeOffers.SellItemFactory(Weapons.iron_sickle.item(), 12, 1, 12, 10),
+                new TradeOffers.SellItemFactory(Weapons.iron_glaive.item(), 18, 1, 12, 10),
+                new TradeOffers.SellItemFactory(Armors.RogueArmorSet_t1.head, 15, 1, 12, 13),
+                new TradeOffers.SellItemFactory(Armors.WarriorArmorSet_t1.head, 15, 1, 12, 13)
+        ));
+        trades.put(3, List.of(
+                new TradeOffers.SellItemFactory(Weapons.iron_dagger.item(), 14, 1, 12, 12),
+                new TradeOffers.SellItemFactory(Weapons.iron_double_axe.item(), 18, 1, 12, 12),
+                new TradeOffers.SellItemFactory(Armors.RogueArmorSet_t1.feet, 15, 1, 12, 13),
+                new TradeOffers.SellItemFactory(Armors.WarriorArmorSet_t1.feet, 15, 1, 12, 13),
+                new TradeOffers.SellItemFactory(Armors.RogueArmorSet_t1.legs, 15, 1, 12, 13),
+                new TradeOffers.SellItemFactory(Armors.WarriorArmorSet_t1.legs, 15, 1, 12, 13)
+        ));
+        trades.put(4, List.of(
+                new TradeOffers.SellItemFactory(Armors.RogueArmorSet_t1.chest, 15, 1, 12, 13),
+                new TradeOffers.SellItemFactory(Armors.WarriorArmorSet_t1.chest, 15, 1, 12, 13),
+                new TradeOffers.SellItemFactory(Items.GOAT_HORN, 1, 1, 12, 5)
+        ));
+
+        for (var entry: trades.entrySet()) {
+            TradeOfferHelper.registerVillagerOffers(profession, entry.getKey(), factories -> {
+                factories.addAll(entry.getValue());
             });
         }
+
+
+//        for(var offer: offers) {
+//            TradeOfferHelper.registerVillagerOffers(profession, offer.level, factories -> {
+//                factories.add(((entity, random) -> new TradeOffer(
+//                        offer.input,
+//                        offer.output,
+//                        offer.maxUses, offer.experience, offer.priceMultiplier)
+//                ));
+//            });
+//        }
         TradeOfferHelper.registerVillagerOffers(profession, 5, factories -> {
             factories.add(((entity, random) -> new TradeOffers.SellEnchantedToolFactory(
                     Weapons.diamond_dagger.item(),
