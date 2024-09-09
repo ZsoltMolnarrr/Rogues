@@ -1,6 +1,6 @@
 package net.rogues.client.armor;
 
-import mod.azure.azurelibarmor.model.GeoModel;
+import mod.azure.azurelibarmor.common.api.client.model.GeoModel;
 import net.minecraft.util.Identifier;
 import net.rogues.RoguesMod;
 import net.rogues.item.armor.RogueArmor;
@@ -13,8 +13,8 @@ public class RogueArmorModel extends GeoModel<RogueArmor> {
 
     @Override
     public Identifier getTextureResource(RogueArmor armor) {
-        var texture = armor.customMaterial.name();
-        return Identifier.of(RoguesMod.NAMESPACE, "textures/armor/" + texture + ".png");
+        var textureId = armor.getFirstLayerId();
+        return Identifier.of(textureId.getNamespace(), "textures/armor/" + textureId.getPath() + ".png");
     }
 
     @Override

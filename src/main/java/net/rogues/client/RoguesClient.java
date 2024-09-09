@@ -18,10 +18,10 @@ public class RoguesClient implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
         BlockRenderLayerMap.INSTANCE.putBlock(CustomBlocks.WORKBENCH.block(), RenderLayer.getCutout());
-        CustomParticleStatusEffect.register(Effects.SHOCK, new StunParticleSpawner());
-        CustomParticleStatusEffect.register(Effects.SHATTER, new ShatterParticles(1));
-        CustomParticleStatusEffect.register(Effects.DEMORALIZE, new DemoralizeParticles(1));
-        CustomParticleStatusEffect.register(Effects.CHARGE, new ChargeParticles(1));
+        CustomParticleStatusEffect.register(Effects.SHOCK.effect, new StunParticleSpawner());
+        CustomParticleStatusEffect.register(Effects.SHATTER.effect, new ShatterParticles(1));
+        CustomParticleStatusEffect.register(Effects.DEMORALIZE.effect, new DemoralizeParticles(1));
+        CustomParticleStatusEffect.register(Effects.CHARGE.effect, new ChargeParticles(1));
 
         SpellTooltip.addDescriptionMutator(Identifier.of(RoguesMod.NAMESPACE, "slice_and_dice"), (args) -> {
             var description = args.description();

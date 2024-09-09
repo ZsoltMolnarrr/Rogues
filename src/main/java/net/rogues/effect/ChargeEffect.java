@@ -32,10 +32,10 @@ public class ChargeEffect extends StatusEffect {
                 if (attribute == EntityAttributes.GENERIC_MOVEMENT_SPEED) {
                     double treshold = 0;
                     switch (modifier.getOperation()) {
-                        case ADDITION, MULTIPLY_BASE -> {
+                        case ADD_VALUE, ADD_MULTIPLIED_BASE -> {
                             treshold = 0;
                         }
-                        case MULTIPLY_TOTAL -> {
+                        case ADD_MULTIPLIED_TOTAL -> {
                             treshold = 1;
                         }
                     }
