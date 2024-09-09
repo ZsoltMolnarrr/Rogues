@@ -23,7 +23,7 @@ public class LivingEntitySliceAndDice {
                 && lastSliceAndDiceTime != entity.age // Only once within a single game tick
                 && !target.isSpectator()
         ) {
-            var instance = entity.getActiveStatusEffects().get(Effects.SLICE_AND_DICE);
+            var instance = entity.getActiveStatusEffects().get(Effects.SLICE_AND_DICE.registryEntry);
             var stack = instance.getAmplifier();
             if (stack < (Effects.sliceAndDiceMaxStacks() - 1)) {
                 entity.addStatusEffect(new StatusEffectInstance(

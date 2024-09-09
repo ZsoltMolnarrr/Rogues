@@ -1,23 +1,14 @@
 package net.rogues.effect;
 
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.attribute.AttributeContainer;
-import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectCategory;
-import net.minecraft.registry.Registries;
 import net.spell_engine.internals.WorldScheduler;
-import org.jetbrains.annotations.Nullable;
-
-import java.util.HashSet;
 
 public class ChargeEffect extends StatusEffect {
     protected ChargeEffect(StatusEffectCategory category, int color) {
         super(category, color);
     }
-
-    private static final HashSet<StatusEffect> movementImpairingEffects = new HashSet<>();
 
     private void removeMovementImpairingEffects(LivingEntity entity) {
         if (entity.getWorld().isClient()) {
