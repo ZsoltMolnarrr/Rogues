@@ -18,6 +18,7 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.ColorHelper;
 import net.rogues.effect.Effects;
 import net.spell_engine.api.effect.Synchronized;
 import org.spongepowered.asm.mixin.Mixin;
@@ -65,22 +66,27 @@ public abstract class LivingEntityRenderStealth<T extends Entity> extends Entity
         }
     }
 
-//    @WrapOperation(
-//            method = "render(Lnet/minecraft/entity/LivingEntity;FFLnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;I)V",
-//            at = @At(value = "INVOKE", target = "Lnet/minecraft/client/render/entity/model/EntityModel;render(Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumer;IIFFFF)V")
-//    )
-//    private void modelRender_WRAP_STEALTH(
-//            // Mixin parameters
-//            EntityModel instance, MatrixStack matrixStack, VertexConsumer vertexConsumer, int light, int overlayIndex, float red, float green, float blue, float alpha, Operation<Void> original,
-//            // Context parameters
-//            LivingEntity entity, float f, float g, MatrixStack contextMatrixStack, VertexConsumerProvider contextVertexConsumerProvider, int contextLight
-//    ) {
-//        if (hasStealthEffect(entity) && visibleForLocalPlayer(entity)) {
-//            original.call(instance, matrixStack, vertexConsumer, light, overlayIndex, red, green, blue, 0.15F);
-//        } else {
-//            original.call(instance, matrixStack, vertexConsumer, light, overlayIndex, red, green, blue, alpha);
-//        }
-//    }
+    @WrapOperation(
+            method = "render(Lnet/minecraft/entity/LivingEntity;FFLnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;I)V",
+            at = @At(value = "INVOKE", target = "Lnet/minecraft/client/render/entity/model/EntityModel;render(Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumer;III)V")
+    )
+    private void modelRender_WRAP_STEALTH(
+            // Mixin parameters
+            EntityModel instance, MatrixStack matrices, VertexConsumer vertices, int light, int overlay, int color, Operation<Void> original,
+            // Context parameters
+            LivingEntity entity, float f, float g, MatrixStack contextMatrixStack, VertexConsumerProvider contextVertexConsumerProvider, int contextLight
+    ) {
+        if (hasStealthEffect(entity) && visibleForLocalPlayer(entity)) {
+            var alpha = ColorHelper.Argb.getAlpha(color);
+            var red = ColorHelper.Argb.getRed(color);
+            var green = ColorHelper.Argb.getGreen(color);
+            var blue = ColorHelper.Argb.getBlue(color);
+            var newColor = ColorHelper.Argb.getArgb((int) (alpha * 0.15F), red, green, blue);
+            original.call(instance, matrices, vertices, light, overlay, newColor);
+        } else {
+            original.call(instance, matrices, vertices, light, overlay, color);
+        }
+    }
 
     @WrapWithCondition(
             method = "render(Lnet/minecraft/entity/LivingEntity;FFLnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;I)V",

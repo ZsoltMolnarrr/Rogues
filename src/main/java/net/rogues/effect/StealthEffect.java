@@ -6,7 +6,6 @@ import net.minecraft.entity.effect.StatusEffectCategory;
 import net.rogues.util.RogueSounds;
 import net.spell_engine.api.spell.ParticleBatch;
 import net.spell_engine.particle.ParticleHelper;
-import net.spell_engine.utils.SoundHelper;
 
 public class StealthEffect extends StatusEffect {
     protected StealthEffect(StatusEffectCategory category, int color) {
