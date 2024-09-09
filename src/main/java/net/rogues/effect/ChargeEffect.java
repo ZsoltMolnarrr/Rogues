@@ -20,6 +20,9 @@ public class ChargeEffect extends StatusEffect {
     private static final HashSet<StatusEffect> movementImpairingEffects = new HashSet<>();
 
     private void removeMovementImpairingEffects(LivingEntity entity) {
+        if (entity.getWorld().isClient()) {
+            return;
+        }
         var effects = entity.getStatusEffects();
         for (var instance : effects) {
             var effect = instance.getEffectType().value();
@@ -31,14 +34,15 @@ public class ChargeEffect extends StatusEffect {
     }
 
     @Override
+    public boolean canApplyUpdateEffect(int duration, int amplifier) {
+        return true;
+    }
+
+    @Override
     public boolean applyUpdateEffect(LivingEntity entity, int amplifier) {
         removeMovementImpairingEffects(entity);
         return true;
     }
-
-//    public void applyInstantEffect(@Nullable Entity source, @Nullable Entity attacker, LivingEntity target, int amplifier, double proximity) {
-//        removeMovementImpairingEffects(target);
-//    }
 
     @Override
     public void onApplied(LivingEntity entity, int amplifier) {
