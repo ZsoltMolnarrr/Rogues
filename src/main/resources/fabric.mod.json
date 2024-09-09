@@ -33,10 +33,11 @@
     "rogues.mixins.json"
   ],
   "depends": {
-    "minecraft": ">=${minecraft_version}",
+    "minecraft": ">=${minecraft_compat_version}",
     "fabricloader": ">=${fabric_loader_version}",
     "azurelibarmor": "*",
-    "spell_engine": ">=${spell_engine_version}"
+    "spell_engine": ">=${spell_engine_version}",
+    "structure_pool_api": "*"
   },
   "custom": {
     "modmenu": {
