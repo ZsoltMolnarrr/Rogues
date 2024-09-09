@@ -9,10 +9,7 @@ import net.minecraft.registry.Registry;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.util.Identifier;
 import net.rogues.RoguesMod;
-import net.spell_engine.api.effect.ActionImpairing;
-import net.spell_engine.api.effect.EntityActionsAllowed;
-import net.spell_engine.api.effect.RemoveOnHit;
-import net.spell_engine.api.effect.Synchronized;
+import net.spell_engine.api.effect.*;
 import net.spell_engine.api.event.CombatEvents;
 
 import java.util.ArrayList;
@@ -119,6 +116,9 @@ public class Effects {
             if (user.hasStatusEffect(STEALTH.registryEntry)) {
                 user.removeStatusEffect(STEALTH.registryEntry);
             }
+        });
+        OnRemoval.configure(STEALTH.effect, (context) -> {
+            StealthEffect.onRemove(context.entity());
         });
 
         for (var entry: entries) {

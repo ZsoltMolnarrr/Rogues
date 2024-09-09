@@ -1,8 +1,6 @@
 package net.rogues.effect;
 
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.attribute.AttributeContainer;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectCategory;
 import net.rogues.util.RogueSounds;
@@ -24,23 +22,10 @@ public class StealthEffect extends StatusEffect {
             0.18F,
             0.2F,
             0);
-//
-//    @Override
-//    public void onRemoved(LivingEntity entity, AttributeContainer attributes, int amplifier) {
-//        super.onRemoved(entity, attributes, amplifier);
-//        System.out.println();
-//        if (!entity.getWorld().isClient()) {
-//            SoundHelper.playSoundEvent(entity.getWorld(), entity, RogueSounds.STEALTH_LEAVE.sound());
-//            ParticleHelper.sendBatches(entity, new ParticleBatch[]{POP_PARTICLES});
-//        }
-//    }
 
-    @Override
-    public void onEntityRemoval(LivingEntity entity, int amplifier, Entity.RemovalReason reason) {
-        super.onEntityRemoval(entity, amplifier, reason);
-        System.out.println();
+    public static void onRemove(LivingEntity entity) {
         if (!entity.getWorld().isClient()) {
-            SoundHelper.playSoundEvent(entity.getWorld(), entity, RogueSounds.STEALTH_LEAVE.sound());
+            RogueSounds.playSoundEvent(entity.getWorld(), entity, RogueSounds.STEALTH_LEAVE.sound());
             ParticleHelper.sendBatches(entity, new ParticleBatch[]{POP_PARTICLES});
         }
     }
