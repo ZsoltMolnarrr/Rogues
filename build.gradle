@@ -33,16 +33,16 @@ dependencies {
     mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
 
     // Fabric
-    modImplementation "net.fabricmc:fabric-loader:${rootProject.fabric_loader_version}"
-    modImplementation "net.fabricmc.fabric-api:fabric-api:${rootProject.fabric_api_version}"
+    modImplementation "net.fabricmc:fabric-loader:${project.fabric_loader_version}"
+    modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
 
     // Dependencies
     include(implementation("com.github.ZsoltMolnarrr:TinyConfig:${project.tiny_config_version}"))
-    include(modImplementation("maven.modrinth:structure-pool-api:${project.structure_pool_api_version}"))
+    modImplementation("maven.modrinth:structure-pool-api:${project.structure_pool_api_version}")
     modImplementation("mod.azure.azurelibarmor:azurelibarmor-fabric-${project.azure_mc_version}:${project.azure_lib_version}")
 
-//    modImplementation("maven.modrinth:spell-engine:${project.spell_engine_version}")
-    modImplementation(files("run/mods/dev/spell_engine-${project.spell_engine_version}.jar"))
+    modImplementation("maven.modrinth:spell-engine:${project.spell_engine_version}")
+//    modImplementation(files("run/mods/dev/spell_engine-${project.spell_engine_version}.jar"))
     modImplementation("maven.modrinth:spell-power:${project.spell_power_version}")
     modImplementation("dev.emi:trinkets:${project.trinkets_version}")
     modImplementation("dev.kosmx.player-anim:player-animation-lib-fabric:${project.player_anim_version}")
