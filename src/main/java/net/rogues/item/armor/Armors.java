@@ -125,7 +125,7 @@ public class Armors {
     public static final Armor.Set RogueArmorSet_t1 = create(
             material_rogue_t1,
             Identifier.of(RoguesMod.NAMESPACE, "rogue_armor"),
-            10,
+            15,
             RogueArmor::new,
             ItemConfig.ArmorSet.with(
                     new ItemConfig.ArmorSet.Piece(1)
@@ -146,7 +146,7 @@ public class Armors {
     public static final Armor.Set RogueArmorSet_t2 = create(
             material_rogue_t2,
             Identifier.of(RoguesMod.NAMESPACE, "assassin_armor"),
-            20,
+            25,
             RogueArmor::new,
             ItemConfig.ArmorSet.with(
                     new ItemConfig.ArmorSet.Piece(2)

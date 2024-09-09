@@ -48,31 +48,31 @@ public class RogueVillagers {
         );
     }
 
-    private static class Offer {
-        int level;
-        ItemStack input;
-        ItemStack output;
-        int maxUses;
-        int experience;
-        float priceMultiplier;
-
-        public Offer(int level, ItemStack input, ItemStack output, int maxUses, int experience, float priceMultiplier) {
-            this.level = level;
-            this.input = input;
-            this.output = output;
-            this.maxUses = maxUses;
-            this.experience = experience;
-            this.priceMultiplier = priceMultiplier;
-        }
-
-        public static Offer buy(int level, ItemStack item, int price, int maxUses, int experience, float priceMultiplier) {
-            return new Offer(level, item, new ItemStack(Items.EMERALD, price), maxUses, experience, priceMultiplier);
-        }
-
-        public static Offer sell(int level, ItemStack item, int price, int maxUses, int experience, float priceMultiplier) {
-            return new Offer(level, new ItemStack(Items.EMERALD, price), item, maxUses, experience, priceMultiplier);
-        }
-    }
+//    private static class Offer {
+//        int level;
+//        ItemStack input;
+//        ItemStack output;
+//        int maxUses;
+//        int experience;
+//        float priceMultiplier;
+//
+//        public Offer(int level, ItemStack input, ItemStack output, int maxUses, int experience, float priceMultiplier) {
+//            this.level = level;
+//            this.input = input;
+//            this.output = output;
+//            this.maxUses = maxUses;
+//            this.experience = experience;
+//            this.priceMultiplier = priceMultiplier;
+//        }
+//
+//        public static Offer buy(int level, ItemStack item, int price, int maxUses, int experience, float priceMultiplier) {
+//            return new Offer(level, item, new ItemStack(Items.EMERALD, price), maxUses, experience, priceMultiplier);
+//        }
+//
+//        public static Offer sell(int level, ItemStack item, int price, int maxUses, int experience, float priceMultiplier) {
+//            return new Offer(level, new ItemStack(Items.EMERALD, price), item, maxUses, experience, priceMultiplier);
+//        }
+//    }
 
     public static void register() {
         StructurePoolAPI.injectAll(RoguesMod.villagesConfig.value);
@@ -81,29 +81,29 @@ public class RogueVillagers {
                 MERCHANT,
                 RegistryKey.of(Registries.POINT_OF_INTEREST_TYPE.getKey(), Identifier.of(RoguesMod.NAMESPACE, MERCHANT)));
 
-        List<Offer> offers = List.of(
-                Offer.buy(1, new ItemStack(Items.LEATHER, 8), 5, 12, 4, 0.01f),
-                Offer.sell(1, Weapons.flint_dagger.item().getDefaultStack(), 6, 12, 3, 0.1f),
-                Offer.sell(1, Weapons.stone_double_axe.item().getDefaultStack(), 8, 12, 4, 0.1f),
-
-                Offer.buy(2, new ItemStack(Items.IRON_INGOT, 12), 8, 12, 5, 0.01f),
-                Offer.sell(2, Weapons.iron_sickle.item().getDefaultStack(), 12, 12, 10, 0.1f),
-                Offer.sell(2, Weapons.iron_glaive.item().getDefaultStack(), 18, 12, 10, 0.1f),
-                Offer.sell(2, Armors.RogueArmorSet_t1.head.getDefaultStack(), 15, 12, 13, 0.05f),
-                Offer.sell(2, Armors.WarriorArmorSet_t1.head.getDefaultStack(), 15, 12, 13, 0.05f),
-
-                Offer.sell(3, Weapons.iron_dagger.item().getDefaultStack(), 14, 12, 12, 0.1f),
-                Offer.sell(3, Weapons.iron_double_axe.item().getDefaultStack(), 18, 12, 12, 0.1f),
-                Offer.sell(3, Armors.RogueArmorSet_t1.feet.getDefaultStack(), 15, 12, 13, 0.05f),
-                Offer.sell(3, Armors.WarriorArmorSet_t1.feet.getDefaultStack(), 15, 12, 13, 0.05f),
-
-                Offer.sell(3, Armors.RogueArmorSet_t1.legs.getDefaultStack(), 15, 12, 13, 0.05f),
-                Offer.sell(3, Armors.WarriorArmorSet_t1.legs.getDefaultStack(), 15, 12, 13, 0.05f),
-
-                Offer.sell(4, Armors.RogueArmorSet_t1.chest.getDefaultStack(), 15, 12, 13, 0.05f),
-                Offer.sell(4, Armors.WarriorArmorSet_t1.chest.getDefaultStack(), 15, 12, 13, 0.05f),
-                Offer.sell(4, new ItemStack(Items.GOAT_HORN, 1), 15, 12, 5, 0.01f)
-            );
+//        List<Offer> offers = List.of(
+//                Offer.buy(1, new ItemStack(Items.LEATHER, 8), 5, 12, 4, 0.01f),
+//                Offer.sell(1, Weapons.flint_dagger.item().getDefaultStack(), 6, 12, 3, 0.1f),
+//                Offer.sell(1, Weapons.stone_double_axe.item().getDefaultStack(), 8, 12, 4, 0.1f),
+//
+//                Offer.buy(2, new ItemStack(Items.IRON_INGOT, 12), 8, 12, 5, 0.01f),
+//                Offer.sell(2, Weapons.iron_sickle.item().getDefaultStack(), 12, 12, 10, 0.1f),
+//                Offer.sell(2, Weapons.iron_glaive.item().getDefaultStack(), 18, 12, 10, 0.1f),
+//                Offer.sell(2, Armors.RogueArmorSet_t1.head.getDefaultStack(), 15, 12, 13, 0.05f),
+//                Offer.sell(2, Armors.WarriorArmorSet_t1.head.getDefaultStack(), 15, 12, 13, 0.05f),
+//
+//                Offer.sell(3, Weapons.iron_dagger.item().getDefaultStack(), 14, 12, 12, 0.1f),
+//                Offer.sell(3, Weapons.iron_double_axe.item().getDefaultStack(), 18, 12, 12, 0.1f),
+//                Offer.sell(3, Armors.RogueArmorSet_t1.feet.getDefaultStack(), 15, 12, 13, 0.05f),
+//                Offer.sell(3, Armors.WarriorArmorSet_t1.feet.getDefaultStack(), 15, 12, 13, 0.05f),
+//
+//                Offer.sell(3, Armors.RogueArmorSet_t1.legs.getDefaultStack(), 15, 12, 13, 0.05f),
+//                Offer.sell(3, Armors.WarriorArmorSet_t1.legs.getDefaultStack(), 15, 12, 13, 0.05f),
+//
+//                Offer.sell(4, Armors.RogueArmorSet_t1.chest.getDefaultStack(), 15, 12, 13, 0.05f),
+//                Offer.sell(4, Armors.WarriorArmorSet_t1.chest.getDefaultStack(), 15, 12, 13, 0.05f),
+//                Offer.sell(4, new ItemStack(Items.GOAT_HORN, 1), 15, 12, 5, 0.01f)
+//            );
 
         LinkedHashMap<Integer, List<TradeOffers.Factory>> trades = new LinkedHashMap<>();
         trades.put(1, List.of(
@@ -119,17 +119,17 @@ public class RogueVillagers {
                 new TradeOffers.SellItemFactory(Armors.WarriorArmorSet_t1.head, 15, 1, 12, 13)
         ));
         trades.put(3, List.of(
-                new TradeOffers.SellItemFactory(Weapons.iron_dagger.item(), 14, 1, 12, 12),
-                new TradeOffers.SellItemFactory(Weapons.iron_double_axe.item(), 18, 1, 12, 12),
-                new TradeOffers.SellItemFactory(Armors.RogueArmorSet_t1.feet, 15, 1, 12, 13),
-                new TradeOffers.SellItemFactory(Armors.WarriorArmorSet_t1.feet, 15, 1, 12, 13),
-                new TradeOffers.SellItemFactory(Armors.RogueArmorSet_t1.legs, 15, 1, 12, 13),
-                new TradeOffers.SellItemFactory(Armors.WarriorArmorSet_t1.legs, 15, 1, 12, 13)
+                new TradeOffers.SellItemFactory(Weapons.iron_dagger.item(), 14, 1, 12, 15),
+                new TradeOffers.SellItemFactory(Weapons.iron_double_axe.item(), 18, 1, 12, 15),
+                new TradeOffers.SellItemFactory(Armors.RogueArmorSet_t1.feet, 15, 1, 12, 15),
+                new TradeOffers.SellItemFactory(Armors.WarriorArmorSet_t1.feet, 15, 1, 12, 15),
+                new TradeOffers.SellItemFactory(Armors.RogueArmorSet_t1.legs, 15, 1, 12, 15),
+                new TradeOffers.SellItemFactory(Armors.WarriorArmorSet_t1.legs, 15, 1, 12, 15)
         ));
         trades.put(4, List.of(
-                new TradeOffers.SellItemFactory(Armors.RogueArmorSet_t1.chest, 15, 1, 12, 13),
-                new TradeOffers.SellItemFactory(Armors.WarriorArmorSet_t1.chest, 15, 1, 12, 13),
-                new TradeOffers.SellItemFactory(Items.GOAT_HORN, 1, 1, 12, 5)
+                new TradeOffers.SellItemFactory(Armors.RogueArmorSet_t1.chest, 15, 1, 12, 15),
+                new TradeOffers.SellItemFactory(Armors.WarriorArmorSet_t1.chest, 15, 1, 12, 15),
+                new TradeOffers.SellItemFactory(Items.GOAT_HORN, 15, 1, 12, 5)
         ));
 
         for (var entry: trades.entrySet()) {
