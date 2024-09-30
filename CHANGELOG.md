@@ -1,3 +1,8 @@
+# 2.1.0
+
+- Add new armor set: Netherite Assassin Armor
+- Add new armor set: Netherite Berserker Armor
+
 # 2.0.1
 
 - Update declared dependencies

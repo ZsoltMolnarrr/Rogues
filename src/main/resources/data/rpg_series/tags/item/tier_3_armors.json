@@ -1,5 +1,13 @@
 {
   "replace": false,
   "values": [
+    "rogues:netherite_assassin_armor_chest",
+    "rogues:netherite_assassin_armor_head",
+    "rogues:netherite_assassin_armor_feet",
+    "rogues:netherite_assassin_armor_legs",
+    "rogues:netherite_berserker_armor_chest",
+    "rogues:netherite_berserker_armor_head",
+    "rogues:netherite_berserker_armor_feet",
+    "rogues:netherite_berserker_armor_legs"
   ]
 }

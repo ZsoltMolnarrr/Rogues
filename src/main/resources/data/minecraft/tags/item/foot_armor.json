@@ -2,7 +2,9 @@
   "values": [
     "rogues:rogue_armor_feet",
     "rogues:assassin_armor_feet",
+    "rogues:netherite_assassin_armor_feet",
     "rogues:warrior_armor_feet",
-    "rogues:berserker_armor_feet"
+    "rogues:berserker_armor_feet",
+    "rogues:netherite_berserker_armor_feet"
   ]
 }

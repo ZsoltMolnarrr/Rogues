@@ -2,7 +2,9 @@
   "values": [
     "rogues:rogue_armor_head",
     "rogues:assassin_armor_head",
+    "rogues:netherite_assassin_armor_head",
     "rogues:warrior_armor_head",
-    "rogues:berserker_armor_head"
+    "rogues:berserker_armor_head",
+    "rogues:netherite_berserker_armor_head"
   ]
 }
