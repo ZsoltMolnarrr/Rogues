@@ -12,6 +12,10 @@
     {
       "id": "rogues:ruby_sickle",
       "required": false
+    },
+    {
+      "id": "rogues:aether_sickle",
+      "required": false
     }
   ]
 }

@@ -41,6 +41,7 @@ public class Weapons {
         }
     }
 
+    private static final String AETHER = "aether";
     private static final String BETTER_END = "betterend";
     private static final String BETTER_NETHER = "betternether";
 
@@ -124,6 +125,13 @@ public class Weapons {
             sickle("aeternium_sickle", Weapon.CustomMaterial.matching(ToolMaterials.NETHERITE, repair), 6.8F);
             axe("aeternium_double_axe", Weapon.CustomMaterial.matching(ToolMaterials.NETHERITE, repair), 11F);
             glaive("aeternium_glaive", Weapon.CustomMaterial.matching(ToolMaterials.NETHERITE, repair), 9.3F);
+        }
+        if (RoguesMod.tweaksConfig.value.ignore_items_required_mods || FabricLoader.getInstance().isModLoaded(AETHER)) {
+            var repair = ingredient("aether:ambrosium_shard", FabricLoader.getInstance().isModLoaded(AETHER), Items.NETHERITE_INGOT);
+            dagger("aether_dagger", Weapon.CustomMaterial.matching(ToolMaterials.NETHERITE, repair), 5.5F);
+            sickle("aether_sickle", Weapon.CustomMaterial.matching(ToolMaterials.NETHERITE, repair), 6.8F);
+            axe("aether_double_axe", Weapon.CustomMaterial.matching(ToolMaterials.NETHERITE, repair), 11F);
+            glaive("aether_glaive", Weapon.CustomMaterial.matching(ToolMaterials.NETHERITE, repair), 9.3F);
         }
         Weapon.register(configs, entries, Group.KEY);
     }

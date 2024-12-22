@@ -1,16 +1,16 @@
 {
   "replace": false,
   "values": [
-    "rogues:iron_glaive",
-    "rogues:golden_glaive",
-    "rogues:diamond_glaive",
-    "rogues:netherite_glaive",
     {
-      "id": "rogues:aeternium_glaive",
+      "id": "rogues:aether_dagger",
       "required": false
     },
     {
-      "id": "rogues:ruby_glaive",
+      "id": "rogues:aether_sickle",
+      "required": false
+    },
+    {
+      "id": "rogues:aether_double_axe",
       "required": false
     },
     {

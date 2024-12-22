@@ -13,6 +13,10 @@
     {
       "id": "rogues:ruby_double_axe",
       "required": false
+    },
+    {
+      "id": "rogues:aether_double_axe",
+      "required": false
     }
   ]
 }

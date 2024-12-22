@@ -11,6 +11,7 @@
   "item.rogues.netherite_dagger": "Netherite Dagger",
   "item.rogues.aeternium_dagger": "Aeternium Dagger",
   "item.rogues.ruby_dagger": "Ruby Dagger",
+  "item.rogues.aether_dagger": "Valkyrie Shiv",
 
   "item.rogues.iron_sickle": "Iron Sickle",
   "item.rogues.golden_sickle": "Golden Sickle",
@@ -18,6 +19,7 @@
   "item.rogues.netherite_sickle": "Netherite Sickle",
   "item.rogues.aeternium_sickle": "Aeternium Sickle",
   "item.rogues.ruby_sickle": "Ruby Sickle",
+  "item.rogues.aether_sickle": "Heavenly Harvester",
 
   "item.rogues.stone_double_axe": "Stone Double Axe",
   "item.rogues.iron_double_axe": "Iron Double Axe",
@@ -26,6 +28,7 @@
   "item.rogues.netherite_double_axe": "Netherite Double Axe",
   "item.rogues.aeternium_double_axe": "Aeternium Double Axe",
   "item.rogues.ruby_double_axe": "Ruby Double Axe",
+  "item.rogues.aether_double_axe": "Holy Double Axe",
 
   "item.rogues.iron_glaive": "Iron Glaive",
   "item.rogues.golden_glaive": "Golden Glaive",
@@ -33,6 +36,7 @@
   "item.rogues.netherite_glaive": "Netherite Glaive",
   "item.rogues.aeternium_glaive": "Aeternium Glaive",
   "item.rogues.ruby_glaive": "Ruby Glaive",
+  "item.rogues.aether_glaive": "Gilded Battle Glaive",
 
   "item.rogues.rogue_armor_head": "Rogue Mask",
   "item.rogues.rogue_armor_chest": "Rogue Tunic",
