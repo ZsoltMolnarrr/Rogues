@@ -1,3 +1,7 @@
+# 2.2.1
+
+- Disable animation pitching for Whirlwind skill
+
 # 2.2.0
 
 - Add new weapons, obtainable only as loot from Aether dungeons

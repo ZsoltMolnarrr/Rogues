@@ -8,6 +8,7 @@
     "duration": 8,
     "movement_speed": 1.1,
     "animation": "spell_engine:two_handed_spin_static",
+    "animation_pitch": false,
     "channel_ticks": 8,
     "sound": {
       "id": "rogues:whirlwind",
