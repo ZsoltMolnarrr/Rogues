@@ -42,6 +42,10 @@
   "item.rogues.assassin_armor_chest": "Assassin Tunic",
   "item.rogues.assassin_armor_legs": "Assassin Pants",
   "item.rogues.assassin_armor_feet": "Assassin Boots",
+  "item.rogues.netherite_assassin_armor_head": "Netherite Assassin Mask",
+  "item.rogues.netherite_assassin_armor_chest": "Netherite Assassin Tunic",
+  "item.rogues.netherite_assassin_armor_legs": "Netherite Assassin Pants",
+  "item.rogues.netherite_assassin_armor_feet": "Netherite Assassin Boots",
 
   "item.rogues.warrior_armor_head": "Warrior Helmet",
   "item.rogues.warrior_armor_chest": "Warrior Chestplate",
@@ -51,6 +55,10 @@
   "item.rogues.berserker_armor_chest": "Berserker Chestplate",
   "item.rogues.berserker_armor_legs": "Berserker Leggings",
   "item.rogues.berserker_armor_feet": "Berserker Boots",
+  "item.rogues.netherite_berserker_armor_head": "Netherite Berserker Helmet",
+  "item.rogues.netherite_berserker_armor_chest": "Netherite Berserker Chestplate",
+  "item.rogues.netherite_berserker_armor_legs": "Netherite Berserker Leggings",
+  "item.rogues.netherite_berserker_armor_feet": "Netherite Berserker Boots",
 
   "entity.minecraft.villager.arms_merchant": "Arms Dealer",
   "entity.minecraft.villager.rogues:arms_merchant": "Arms Dealer",
