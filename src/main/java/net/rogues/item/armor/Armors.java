@@ -35,6 +35,13 @@ public class Armors {
                 EntityAttributeModifier.Operation.MULTIPLY_BASE);
     }
 
+	private static ItemConfig.Attribute toughnessAdd(float value) {
+        return new ItemConfig.Attribute(
+                "minecraft:generic.armor_toughness",
+                value,
+                EntityAttributeModifier.Operation.ADDITION);
+    }
+
     private static ItemConfig.Attribute hasteMultiplier(float value) {
         return new ItemConfig.Attribute(
                 ATTACK_SPEED_ID.toString(),
@@ -62,9 +69,15 @@ public class Armors {
     public static final float rogue_haste_T2 = 0.05F;
     public static final float rogue_damage_T2 = 0.02F;
     public static final float rogue_speed_T2 = 0.05F;
+    public static final float rogue_haste_T3 = 0.05F;
+    public static final float rogue_damage_T3 = 0.05F;
+    public static final float rogue_speed_T3 = 0.05F;
     public static final float warrior_damage_T1 = 0.04F;
     public static final float warrior_damage_T2 = 0.05F;
+    public static final float warrior_damage_T3 = 0.05F;
     public static final float knockback_T2 = 0.1F;
+    public static final float knockback_T3 = 0.1F;
+	public static final float toughness_T3 = 1F;
 
     public static final Armor.Set RogueArmorSet_t1 =
             create(
@@ -101,7 +114,7 @@ public class Armors {
                 .armorSet();
 
 
-    public static final Armor.Set RogueArmorSet_t2 =
+	public static final Armor.Set RogueArmorSet_t2 =
             create(
                     new Armor.CustomMaterial(
                             "assassin_armor",
@@ -127,6 +140,44 @@ public class Armors {
                                     .add(damageMultiplier(rogue_damage_T2))
                                     .add(hasteMultiplier(rogue_haste_T2))
                                     .add(movementSpeed(rogue_speed_T2))
+                    )
+            )
+            .bundle(material -> new Armor.Set(RoguesMod.NAMESPACE,
+                    new RogueArmor(material, ArmorItem.Type.HELMET, new Item.Settings()),
+                    new RogueArmor(material, ArmorItem.Type.CHESTPLATE, new Item.Settings()),
+                    new RogueArmor(material, ArmorItem.Type.LEGGINGS, new Item.Settings()),
+                    new RogueArmor(material, ArmorItem.Type.BOOTS, new Item.Settings())
+            ))
+            .put(entries)
+            .put(rogueEntries)
+            .armorSet();
+
+	public static final Armor.Set RogueArmorSet_t3 =
+            create(
+                    new Armor.CustomMaterial(
+                            "netherite_assassin_armor",
+                            25,
+                            15,
+                            RogueArmor.equipSound,
+                            () -> { return Ingredient.ofItems(Items.NETHERITE_INGOT); }
+                    ),
+                    ItemConfig.ArmorSet.with(
+                            new ItemConfig.ArmorSet.Piece(2)
+                                    .add(damageMultiplier(rogue_damage_T3))
+                                    .add(hasteMultiplier(rogue_haste_T3))
+                                    .add(movementSpeed(rogue_speed_T3)),
+                            new ItemConfig.ArmorSet.Piece(4)
+                                    .add(damageMultiplier(rogue_damage_T3))
+                                    .add(hasteMultiplier(rogue_haste_T3))
+                                    .add(movementSpeed(rogue_speed_T3)),
+                            new ItemConfig.ArmorSet.Piece(4)
+                                    .add(damageMultiplier(rogue_damage_T3))
+                                    .add(hasteMultiplier(rogue_haste_T3))
+                                    .add(movementSpeed(rogue_speed_T3)),
+                            new ItemConfig.ArmorSet.Piece(2)
+                                    .add(damageMultiplier(rogue_damage_T3))
+                                    .add(hasteMultiplier(rogue_haste_T3))
+                                    .add(movementSpeed(rogue_speed_T3))
                     )
             )
             .bundle(material -> new Armor.Set(RoguesMod.NAMESPACE,
@@ -191,6 +242,41 @@ public class Armors {
                             new ItemConfig.ArmorSet.Piece(3)
                                     .add(damageMultiplier(warrior_damage_T2))
                                     .add(knockbackMultiplier(knockback_T2))
+                    )
+            )
+            .bundle(material -> new Armor.Set(RoguesMod.NAMESPACE,
+                    new WarriorArmor(material, ArmorItem.Type.HELMET, new Item.Settings()),
+                    new WarriorArmor(material, ArmorItem.Type.CHESTPLATE, new Item.Settings()),
+                    new WarriorArmor(material, ArmorItem.Type.LEGGINGS, new Item.Settings()),
+                    new WarriorArmor(material, ArmorItem.Type.BOOTS, new Item.Settings())
+            ))
+            .put(entries)
+            .put(warriorEntries)
+            .armorSet();
+
+	public static final Armor.Set WarriorArmorSet_t3 =
+            create(
+                    new Armor.CustomMaterial(
+                            "netherite_berserker_armor",
+                            30,
+                            15,
+                            WarriorArmor.equipSound,
+                            () -> { return Ingredient.ofItems(Items.NETHERITE_INGOT); }
+                    ),
+                    ItemConfig.ArmorSet.with(
+                            new ItemConfig.ArmorSet.Piece(3)
+                                    .add(damageMultiplier(warrior_damage_T3))
+                                    .add(knockbackMultiplier(knockback_T3)),
+                            new ItemConfig.ArmorSet.Piece(8)
+                                    .add(damageMultiplier(warrior_damage_T3))
+                                    .add(knockbackMultiplier(knockback_T3)),
+                            new ItemConfig.ArmorSet.Piece(6)
+                                    .add(damageMultiplier(warrior_damage_T3))
+                                    .add(knockbackMultiplier(knockback_T3)),
+                            new ItemConfig.ArmorSet.Piece(3)
+                                    .add(damageMultiplier(warrior_damage_T3))
+                                    .add(knockbackMultiplier(knockback_T3))
+                                    .add(toughnessAdd(toughness_T3))
                     )
             )
             .bundle(material -> new Armor.Set(RoguesMod.NAMESPACE,

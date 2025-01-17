@@ -1,3 +1,8 @@
+# 1.2.0
+
+- Add Netherite Assassin Armor, by ElocinDev (@nvb-uy)
+- Add Netherite Berserker Armor, by ElocinDev (@nvb-uy)
+
 # 1.1.0
 
 - Add French translation, by valentin #8
