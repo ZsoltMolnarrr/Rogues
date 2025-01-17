@@ -7,7 +7,7 @@
     "item": "rogues:berserker_armor_legs"
   },
   "result": {
-    "id": "rogues:netherite_berserker_armor_legs"
+    "item": "rogues:netherite_berserker_armor_legs"
   },
   "template": {
     "item": "minecraft:netherite_upgrade_smithing_template"
