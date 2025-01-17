@@ -107,7 +107,8 @@ public class Effects {
         var vanishId = Identifier.of(RoguesMod.NAMESPACE, "vanish");
         CombatEvents.SPELL_CAST.register((args) -> {
             var caster = args.caster();
-            if (caster.hasStatusEffect(STEALTH.registryEntry) && !args.spell().id().equals(vanishId)) {
+            var spellId = args.spell().getKey().get().getValue();
+            if (caster.hasStatusEffect(STEALTH.registryEntry) && !spellId.equals(vanishId)) {
                 caster.removeStatusEffect(STEALTH.registryEntry);
             }
         });
