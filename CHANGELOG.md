@@ -1,6 +1,7 @@
 # 2.3.0
 
 - Support Spell Engine 1.4
+- Support AzureLib Armor 3.X
 - Whirlwind skill range now matching melee distance
 - Shock Powder will not work against any bosses
 
