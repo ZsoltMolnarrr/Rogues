@@ -1,6 +1,7 @@
 # 2.3.0
 
 - Support Spell Engine 1.4
+- Whirlwind skill range now matching melee distance
 
 # 2.2.4
 

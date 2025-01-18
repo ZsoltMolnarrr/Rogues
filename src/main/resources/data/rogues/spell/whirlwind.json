@@ -1,6 +1,7 @@
 {
   "school": "PHYSICAL_MELEE",
-  "range": 4,
+  "range": 0,
+  "range_melee": true,
   "learn": {
     "tier": 4
   },
