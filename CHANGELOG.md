@@ -2,6 +2,7 @@
 
 - Support Spell Engine 1.4
 - Whirlwind skill range now matching melee distance
+- Shock Powder will not work against any bosses
 
 # 2.2.4
 
