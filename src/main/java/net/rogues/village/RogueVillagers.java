@@ -45,7 +45,7 @@ public class RogueVillagers {
                 },
                 ImmutableSet.of(),
                 ImmutableSet.of(),
-                RogueSounds.WORKBENCH.sound())
+                RogueSounds.WORKBENCH.soundEvent())
         );
     }
 

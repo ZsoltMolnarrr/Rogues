@@ -24,7 +24,7 @@ public class StealthEffect extends StatusEffect {
 
     public static void onRemove(LivingEntity entity) {
         if (!entity.getWorld().isClient()) {
-            RogueSounds.playSoundEvent(entity.getWorld(), entity, RogueSounds.STEALTH_LEAVE.sound());
+            RogueSounds.playSoundEvent(entity.getWorld(), entity, RogueSounds.STEALTH_LEAVE.soundEvent());
             ParticleHelper.sendBatches(entity, new ParticleBatch[]{POP_PARTICLES});
         }
     }

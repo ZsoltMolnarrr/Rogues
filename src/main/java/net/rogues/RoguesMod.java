@@ -56,7 +56,7 @@ public class RoguesMod implements ModInitializer {
         itemConfig.refresh();
         effectsConfig.refresh();
         villagesConfig.refresh();
-
+        RogueSounds.register();
         Group.ROGUES = FabricItemGroup.builder()
                 .icon(() -> new ItemStack(Armors.RogueArmorSet_t2.head))
                 .displayName(Text.translatable("itemGroup." + NAMESPACE + ".general"))
@@ -71,7 +71,6 @@ public class RoguesMod implements ModInitializer {
         RogueVillagers.register();
         RogueEffects.register(effectsConfig.value);
         effectsConfig.save();
-        RogueSounds.registerSounds();
     }
 }
 
