@@ -3,7 +3,7 @@ package net.rogues.mixin;
 import net.minecraft.entity.ai.goal.TrackTargetGoal;
 import net.minecraft.entity.mob.MobEntity;
 import net.rogues.RoguesMod;
-import net.rogues.effect.Effects;
+import net.rogues.effect.RogueEffects;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -32,7 +32,7 @@ public class TrackTargetGoalStealth {
     private void getFollowRange_HEAD(CallbackInfoReturnable<Double> cir) {
         var target = mob.getTarget();
         if (target != null
-                && (target.hasStatusEffect(Effects.STEALTH.registryEntry) || target.hasStatusEffect(Effects.SHADOW_STEP.registryEntry))) {
+                && (target.hasStatusEffect(RogueEffects.STEALTH.entry) || target.hasStatusEffect(RogueEffects.SHADOW_STEP.entry))) {
             cir.setReturnValue(RoguesMod.tweaksConfig.value.stealth_follow_range);
             cir.cancel();
         }

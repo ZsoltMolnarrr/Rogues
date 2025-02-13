@@ -2,7 +2,7 @@ package net.rogues.item;
 
 import net.minecraft.util.Identifier;
 import net.rogues.RoguesMod;
-import net.spell_engine.api.item.trinket.SpellBooks;
+import net.spell_engine.api.item.SpellBooks;
 
 import java.util.List;
 

@@ -1,18 +1,18 @@
 package net.rogues.config;
 
 import net.fabric_extras.structure_pool.api.StructurePoolConfig;
-import net.spell_engine.api.item.ItemConfig;
+import net.spell_engine.api.config.ConfigFile;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public class Default {
-    public static final ItemConfig itemConfig;
+    public static final ConfigFile.Equipment itemConfig;
     public static final StructurePoolConfig villages;
 
     static {
-        itemConfig = new ItemConfig();
+        itemConfig = new ConfigFile.Equipment();
         villages = new StructurePoolConfig();
 
         var weight = 6;

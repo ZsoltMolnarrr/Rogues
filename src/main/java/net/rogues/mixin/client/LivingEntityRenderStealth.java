@@ -19,7 +19,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.ColorHelper;
-import net.rogues.effect.Effects;
+import net.rogues.effect.RogueEffects;
 import net.spell_engine.api.effect.Synchronized;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
@@ -44,7 +44,7 @@ public abstract class LivingEntityRenderStealth<T extends Entity> extends Entity
         // probably due to some threading or tick order related weirdness.
         var effects = ((Synchronized.Provider)entity).SpellEngine_syncedStatusEffects();
         for (var effect : effects) {
-            if (effect.effect() == Effects.STEALTH.effect) {
+            if (effect.effect() == RogueEffects.STEALTH.effect) {
                 return true;
             }
         }

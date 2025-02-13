@@ -9,7 +9,7 @@ import net.minecraft.registry.Registries;
 import net.minecraft.registry.tag.ItemTags;
 import net.minecraft.util.Identifier;
 import net.rogues.RoguesMod;
-import net.spell_engine.api.item.ItemConfig;
+import net.spell_engine.api.config.WeaponConfig;
 import net.spell_engine.api.item.weapon.SpellSwordItem;
 import net.spell_engine.api.item.weapon.Weapon;
 
@@ -20,7 +20,7 @@ import java.util.function.Supplier;
 public class Weapons {
     public static final ArrayList<Weapon.Entry> entries = new ArrayList<>();
 
-    private static Weapon.Entry entry(String name, Weapon.CustomMaterial material, Weapon.Factory factory, ItemConfig.Weapon defaults) {
+    private static Weapon.Entry entry(String name, Weapon.CustomMaterial material, Weapon.Factory factory, WeaponConfig defaults) {
         var entry = new Weapon.Entry(RoguesMod.NAMESPACE, name, material, factory, defaults, null);
         entries.add(entry);
         return entry;
@@ -48,7 +48,7 @@ public class Weapons {
     // MARK: Daggers
 
     private static Weapon.Entry dagger(String name, Weapon.CustomMaterial material, float damage) {
-        return entry(name, material, SpellSwordItem::new, new ItemConfig.Weapon(damage, -1.6F));
+        return entry(name, material, SpellSwordItem::new, new WeaponConfig(damage, -1.6F));
     }
 
     public static final Weapon.Entry flint_dagger = dagger("flint_dagger",
@@ -63,7 +63,7 @@ public class Weapons {
             Weapon.CustomMaterial.matching(ToolMaterials.NETHERITE, () -> Ingredient.ofItems(Items.NETHERITE_INGOT)), 4.7F);
 
     private static Weapon.Entry sickle(String name, Weapon.CustomMaterial material, float damage) {
-        return entry(name, material, SpellSwordItem::new, new ItemConfig.Weapon(damage, -2F));
+        return entry(name, material, SpellSwordItem::new, new WeaponConfig(damage, -2F));
     }
 
     public static final Weapon.Entry iron_sickle = sickle("iron_sickle",
@@ -78,7 +78,7 @@ public class Weapons {
     // MARK: Double Axe
 
     private static Weapon.Entry axe(String name, Weapon.CustomMaterial material, float damage) {
-        return entry(name, material, SpellSwordItem::new, new ItemConfig.Weapon(damage, -2.8F));
+        return entry(name, material, SpellSwordItem::new, new WeaponConfig(damage, -2.8F));
     }
 
 //    public static final Weapon.Entry wooden_double_axe = axe("wooden_double_axe",
@@ -97,7 +97,7 @@ public class Weapons {
     // MARK: Glaives
 
     private static Weapon.Entry glaive(String name, Weapon.CustomMaterial material, float damage) {
-        return entry(name, material, SpellSwordItem::new, new ItemConfig.Weapon(damage, -2.6F));
+        return entry(name, material, SpellSwordItem::new, new WeaponConfig(damage, -2.6F));
     }
 
     public static final Weapon.Entry iron_glaive = glaive("iron_glaive",
@@ -111,7 +111,7 @@ public class Weapons {
 
     // MARK: Register
 
-    public static void register(Map<String, ItemConfig.Weapon> configs) {
+    public static void register(Map<String, WeaponConfig> configs) {
         if (RoguesMod.tweaksConfig.value.ignore_items_required_mods || FabricLoader.getInstance().isModLoaded(BETTER_NETHER)) {
             var repair = ingredient("betternether:nether_ruby", FabricLoader.getInstance().isModLoaded(BETTER_NETHER), Items.NETHERITE_INGOT);
             dagger("ruby_dagger", Weapon.CustomMaterial.matching(ToolMaterials.NETHERITE, repair), 5.5F);

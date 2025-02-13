@@ -13,7 +13,7 @@ import net.rogues.client.armor.WarriorArmorRenderer;
 import net.rogues.client.effect.ChargeParticles;
 import net.rogues.client.effect.DemoralizeParticles;
 import net.rogues.client.effect.ShatterParticles;
-import net.rogues.effect.Effects;
+import net.rogues.effect.RogueEffects;
 import net.rogues.item.armor.Armors;
 import net.spell_engine.api.effect.CustomParticleStatusEffect;
 import net.spell_engine.api.item.armor.Armor;
@@ -26,28 +26,28 @@ public class RoguesClient implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
         BlockRenderLayerMap.INSTANCE.putBlock(CustomBlocks.WORKBENCH.block(), RenderLayer.getCutout());
-        CustomParticleStatusEffect.register(Effects.SHOCK.effect, new StunParticleSpawner());
-        CustomParticleStatusEffect.register(Effects.SHATTER.effect, new ShatterParticles(1));
-        CustomParticleStatusEffect.register(Effects.DEMORALIZE.effect, new DemoralizeParticles(1));
-        CustomParticleStatusEffect.register(Effects.CHARGE.effect, new ChargeParticles(1));
+        CustomParticleStatusEffect.register(RogueEffects.SHOCK.effect, new StunParticleSpawner());
+        CustomParticleStatusEffect.register(RogueEffects.SHATTER.effect, new ShatterParticles(1));
+        CustomParticleStatusEffect.register(RogueEffects.DEMORALIZE.effect, new DemoralizeParticles(1));
+        CustomParticleStatusEffect.register(RogueEffects.CHARGE.effect, new ChargeParticles(1));
 
         SpellTooltip.addDescriptionMutator(Identifier.of(RoguesMod.NAMESPACE, "slice_and_dice"), (args) -> {
             var description = args.description();
-            description = description.replace(SpellTooltip.placeholder("max_stack"), "" + Effects.sliceAndDiceMaxStacks());
+            description = description.replace(SpellTooltip.placeholder("max_stack"), "" + RogueEffects.sliceAndDiceMaxStacks());
             return description;
         });
 
-        var armorReduction = ((int)(-1F * RoguesMod.tweaksConfig.value.shattered_armor_multiplier * 100)) + "%";
         SpellTooltip.addDescriptionMutator(Identifier.of(RoguesMod.NAMESPACE, "throw"), (args) -> {
             var description = args.description();
-            description = description.replace(SpellTooltip.placeholder("armor_reduction"), armorReduction);
+            var percent = SpellTooltip.percent(-1F * RogueEffects.SHATTER.config().firstModifier().value);
+            description = description.replace(SpellTooltip.placeholder("armor_reduction"), percent);
             return description;
         });
 
-        var damageReduction = ((int)(-1F * RoguesMod.tweaksConfig.value.shout_damage_multiplier * 100)) + "%";
         SpellTooltip.addDescriptionMutator(Identifier.of(RoguesMod.NAMESPACE, "shout"), (args) -> {
             var description = args.description();
-            description = description.replace(SpellTooltip.placeholder("damage_reduction"), damageReduction);
+            var percent = SpellTooltip.percent(-1F * RogueEffects.DEMORALIZE.config().firstModifier().value);
+            description = description.replace(SpellTooltip.placeholder("damage_reduction"), percent);
             return description;
         });
 

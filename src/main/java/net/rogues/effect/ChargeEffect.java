@@ -3,7 +3,8 @@ package net.rogues.effect;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectCategory;
-import net.spell_engine.internals.WorldScheduler;
+import net.spell_engine.api.effect.StatusEffectClassification;
+import net.spell_engine.utils.WorldScheduler;
 
 public class ChargeEffect extends StatusEffect {
     protected ChargeEffect(StatusEffectCategory category, int color) {
@@ -16,8 +17,8 @@ public class ChargeEffect extends StatusEffect {
         }
         var effects = entity.getStatusEffects();
         for (var instance : effects) {
-            var effect = instance.getEffectType().value();
-            if (((StatusEffectExtension)effect).isMovementImpairing()) {
+            var effect = instance.getEffectType();
+            if (StatusEffectClassification.isMovementImpairing(effect)) {
                 // Removing the effect immediately would cause a ConcurrentModificationException
                 ((WorldScheduler)entity.getWorld()).schedule(1, () -> entity.removeStatusEffect(instance.getEffectType()));
             }

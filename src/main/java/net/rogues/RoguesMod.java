@@ -10,26 +10,33 @@ import net.minecraft.text.Text;
 import net.rogues.block.CustomBlocks;
 import net.rogues.config.Default;
 import net.rogues.config.TweaksConfig;
-import net.rogues.effect.Effects;
+import net.rogues.effect.RogueEffects;
 import net.rogues.item.Books;
 import net.rogues.item.Group;
 import net.rogues.item.Weapons;
 import net.rogues.item.armor.Armors;
 import net.rogues.util.RogueSounds;
 import net.rogues.village.RogueVillagers;
-import net.spell_engine.api.item.ItemConfig;
+import net.spell_engine.api.config.ConfigFile;
 import net.tinyconfig.ConfigManager;
 
 public class RoguesMod implements ModInitializer {
 
     public static final String NAMESPACE = "rogues";
 
-    public static ConfigManager<ItemConfig> itemConfig = new ConfigManager<>
-            ("items_v4", Default.itemConfig)
+    public static ConfigManager<ConfigFile.Equipment> itemConfig = new ConfigManager<>
+            ("equipment", Default.itemConfig)
             .builder()
             .setDirectory(NAMESPACE)
             .sanitize(true)
             .build();
+    public static ConfigManager<ConfigFile.Effects> effectsConfig = new ConfigManager<>
+            ("effects", new ConfigFile.Effects())
+            .builder()
+            .setDirectory(NAMESPACE)
+            .sanitize(true)
+            .build();
+
     public static ConfigManager<StructurePoolConfig> villagesConfig = new ConfigManager<>
             ("villages", Default.villages)
             .builder()
@@ -47,6 +54,7 @@ public class RoguesMod implements ModInitializer {
     public void onInitialize() {
         tweaksConfig.refresh();
         itemConfig.refresh();
+        effectsConfig.refresh();
         villagesConfig.refresh();
 
         Group.ROGUES = FabricItemGroup.builder()
@@ -61,7 +69,8 @@ public class RoguesMod implements ModInitializer {
         itemConfig.save();
 
         RogueVillagers.register();
-        Effects.register();
+        RogueEffects.register(effectsConfig.value);
+        effectsConfig.save();
         RogueSounds.registerSounds();
     }
 }
