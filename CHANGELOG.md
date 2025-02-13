@@ -1,3 +1,7 @@
+# 2.4.0
+
+- Support Spell Engine 1.5
+
 # 2.3.0
 
 - Support Spell Engine 1.4
