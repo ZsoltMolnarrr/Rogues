@@ -31,12 +31,6 @@ public class RoguesClient implements ClientModInitializer {
         CustomParticleStatusEffect.register(RogueEffects.DEMORALIZE.effect, new DemoralizeParticles(1));
         CustomParticleStatusEffect.register(RogueEffects.CHARGE.effect, new ChargeParticles(1));
 
-        SpellTooltip.addDescriptionMutator(Identifier.of(RoguesMod.NAMESPACE, "slice_and_dice"), (args) -> {
-            var description = args.description();
-            description = description.replace(SpellTooltip.placeholder("max_stack"), "" + RogueEffects.sliceAndDiceMaxStacks());
-            return description;
-        });
-
         SpellTooltip.addDescriptionMutator(Identifier.of(RoguesMod.NAMESPACE, "throw"), (args) -> {
             var description = args.description();
             var percent = SpellTooltip.percent(-1F * RogueEffects.SHATTER.config().firstModifier().value);

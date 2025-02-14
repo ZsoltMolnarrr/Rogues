@@ -22,10 +22,6 @@ public class RogueEffects {
         return entry;
     }
 
-    public static int sliceAndDiceMaxStacks() {
-        return RoguesMod.tweaksConfig.value.slice_and_dice_max_stacks;
-    }
-
     public static Effects.Entry SLICE_AND_DICE = add(new Effects.Entry(
             Identifier.of(RoguesMod.NAMESPACE, "slice_and_dice"),
             "Slice and Dice",
