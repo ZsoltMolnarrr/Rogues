@@ -4,21 +4,24 @@ import net.minecraft.entity.LivingEntity;
 import net.spell_engine.api.effect.CustomParticleStatusEffect;
 import net.spell_engine.api.spell.fx.ParticleBatch;
 import net.spell_engine.fx.ParticleHelper;
+import net.spell_engine.fx.SpellEngineParticles;
 
 public class ChargeParticles  implements CustomParticleStatusEffect.Spawner {
     private final ParticleBatch particles;
 
     public ChargeParticles(int particleCount) {
         this.particles = new ParticleBatch(
-                "spell_engine:buff_rage",
-                ParticleBatch.Shape.PIPE,
+                SpellEngineParticles.getMagicParticleVariant(
+                        SpellEngineParticles.RAGE,
+                        SpellEngineParticles.MagicParticleFamily.Shape.STRIPE,
+                        SpellEngineParticles.MagicParticleFamily.Motion.ASCEND).id().toString(),
+                ParticleBatch.Shape.WIDE_PIPE,
                 ParticleBatch.Origin.FEET,
                 null,
                 particleCount,
                 0.11F,
                 0.12F,
-                0,
-                -0.2F);
+                0);
     }
 
     @Override

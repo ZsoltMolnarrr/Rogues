@@ -1,46 +1,41 @@
 {
+  "school": "spell_power:physical_melee",
   "range": 12.0,
-  "school": "PHYSICAL_MELEE",
-  "learn": {
-    "tier": 2
-  },
-  "cast": {
-    "duration": 0
+  "tier": 2,
+  "learn": {},
+  "active": {
+    "scroll": {}
   },
   "release": {
-    "target": {
-      "type": "AREA",
-      "area": {
-        "vertical_range_multiplier": 0.5
-      }
-    },
     "animation": "spell_engine:one_handed_shout_release",
     "sound": {
       "id": "rogues:shout_release"
-    },
-    "particles": [
-    ]
+    }
   },
-  "impact": [
+  "target": {
+    "type": "AREA",
+    "area": {
+      "vertical_range_multiplier": 0.5
+    }
+  },
+  "impacts": [
     {
       "action": {
         "type": "STATUS_EFFECT",
         "status_effect": {
           "effect_id": "rogues:demoralize",
-          "duration": 8,
+          "duration": 8.0,
           "apply_mode": "ADD",
           "apply_limit": {
-            "health_base": 50,
-            "spell_power_multiplier": 2
-          },
-          "show_particles": false
+            "health_base": 50.0,
+            "spell_power_multiplier": 2.0
+          }
         }
       },
       "particles": [
         {
           "particle_id": "spell_engine:weakness_smoke",
           "shape": "SPHERE",
-          "origin": "CENTER",
           "count": 25.0,
           "min_speed": 0.2,
           "max_speed": 0.2
@@ -55,13 +50,15 @@
         "type": "DAMAGE",
         "damage": {
           "spell_power_coefficient": 0.05,
-          "knockback": 0
+          "knockback": 0.0
         }
       }
     }
   ],
   "cost": {
     "exhaust": 0.3,
-    "cooldown_duration": 12
+    "cooldown": {
+      "duration": 12.0
+    }
   }
 }

@@ -1,14 +1,13 @@
 {
-  "school": "PHYSICAL_MELEE",
-  "range": 24,
-  "learn": {
-    "tier": 1
-  },
+  "school": "spell_power:physical_melee",
+  "range": 24.0,
+  "tier": 1,
+  "learn": {},
   "active": {
+    "scroll": {},
     "cast": {
       "duration": 0.5,
-      "animation": "spell_engine:one_handed_throw_charge",
-      "particles": [ ]
+      "animation": "spell_engine:one_handed_throw_charge"
     }
   },
   "release": {
@@ -19,7 +18,7 @@
   },
   "target": {
     "type": "AIM",
-    "aim": { }
+    "aim": {}
   },
   "deliver": {
     "type": "PROJECTILE",
@@ -29,33 +28,29 @@
       },
       "projectile": {
         "homing_angle": 2.0,
+        "travel_sound_interval": 8,
+        "travel_sound": {
+          "id": "rogues:throw"
+        },
         "perks": {
           "bounce": 1
         },
         "client_data": {
-          "travel_particles": [ ],
           "model": {
             "use_held_item": true,
             "light_emission": "NONE",
             "rotate_degrees_per_tick": -36.0,
-            "scale": 1,
             "orientation": "ALONG_MOTION"
           }
-        },
-        "travel_sound_interval": 8,
-        "travel_sound": {
-          "id": "rogues:throw"
         }
       }
     }
   },
-  "impact": [
+  "impacts": [
     {
       "action": {
         "type": "DAMAGE",
-        "damage": {
-          "spell_power_coefficient": 1
-        }
+        "damage": {}
       },
       "sound": {
         "id": "rogues:throw_impact"
@@ -66,20 +61,17 @@
         "type": "STATUS_EFFECT",
         "status_effect": {
           "effect_id": "rogues:shatter",
-          "duration": 8,
-          "amplifier": 0,
+          "duration": 8.0,
           "apply_limit": {
-            "health_base": 100,
-            "spell_power_multiplier": 2
-          },
-          "show_particles": false
+            "health_base": 100.0,
+            "spell_power_multiplier": 2.0
+          }
         }
       },
       "particles": [
         {
           "particle_id": "spell_engine:dripping_blood",
           "shape": "SPHERE",
-          "origin": "CENTER",
           "count": 10.0,
           "min_speed": 0.05,
           "max_speed": 0.3
@@ -89,6 +81,8 @@
   ],
   "cost": {
     "exhaust": 0.3,
-    "cooldown_duration": 8
+    "cooldown": {
+      "duration": 8.0
+    }
   }
 }

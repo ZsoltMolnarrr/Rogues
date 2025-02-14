@@ -1,6 +1,7 @@
 {
   "school": "spell_power:physical_melee",
   "range": 0.0,
+  "tier": 1,
   "learn": {},
   "active": {
     "scroll": {}
