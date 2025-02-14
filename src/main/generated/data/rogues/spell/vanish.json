@@ -11,6 +11,7 @@
     "particles": [
       {
         "particle_id": "spell_engine:smoke_medium",
+        "origin": "CENTER",
         "shape": "SPHERE",
         "count": 20.0,
         "min_speed": 0.12,
@@ -28,6 +29,7 @@
       },
       {
         "particle_id": "poof",
+        "origin": "CENTER",
         "shape": "SPHERE",
         "count": 10.0,
         "min_speed": 0.01,

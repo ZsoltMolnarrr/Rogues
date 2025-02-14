@@ -35,6 +35,7 @@
       "particles": [
         {
           "particle_id": "spell_engine:weakness_smoke",
+          "origin": "CENTER",
           "shape": "SPHERE",
           "count": 25.0,
           "min_speed": 0.2,
