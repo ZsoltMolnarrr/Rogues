@@ -16,18 +16,48 @@ import java.util.List;
 import java.util.Map;
 
 public class RogueSounds {
-    public record Entry(Identifier id, SoundEvent soundEvent, RegistryEntry<SoundEvent> entry) {
+    public static final class Entry {
+        private final Identifier id;
+        private final SoundEvent soundEvent;
+        private RegistryEntry<SoundEvent> entry;
+        private int variants = 1;
+
+        public Entry(Identifier id, SoundEvent soundEvent) {
+            this.id = id;
+            this.soundEvent = soundEvent;
+        }
+
         public Entry(String name) {
             this(Identifier.of(RoguesMod.NAMESPACE, name));
         }
+
         public Entry(Identifier id) {
             this(id, SoundEvent.of(id));
         }
+
         public Entry travelDistance(float distance) {
             return new Entry(id, SoundEvent.of(id, distance));
         }
-        public Entry(Identifier id, SoundEvent soundEvent) {
-            this(id, soundEvent, Registry.registerReference(Registries.SOUND_EVENT, id, soundEvent));
+
+        public Entry variants(int variants) {
+            this.variants = variants;
+            return this;
+        }
+
+        public Identifier id() {
+            return id;
+        }
+
+        public SoundEvent soundEvent() {
+            return soundEvent;
+        }
+
+        public RegistryEntry<SoundEvent> entry() {
+            return entry;
+        }
+
+        public int variants() {
+            return variants;
         }
     }
     public static final List<Entry> entries = new ArrayList<>();
@@ -56,7 +86,7 @@ public class RogueSounds {
 
     public static void register() {
         for (var entry: entries) {
-            Registry.register(Registries.SOUND_EVENT, entry.id(), entry.soundEvent());
+            entry.entry = Registry.registerReference(Registries.SOUND_EVENT, entry.id(), entry.soundEvent());
         }
     }
 
