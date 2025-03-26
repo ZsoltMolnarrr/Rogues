@@ -1,0 +1,12 @@
+{
+  "values": [
+    {
+      "id": "rogues:flint_dagger",
+      "required": false
+    },
+    {
+      "id": "rogues:stone_double_axe",
+      "required": false
+    }
+  ]
+}

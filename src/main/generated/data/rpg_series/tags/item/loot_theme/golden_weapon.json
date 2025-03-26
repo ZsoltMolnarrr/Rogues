@@ -1,0 +1,20 @@
+{
+  "values": [
+    {
+      "id": "rogues:golden_dagger",
+      "required": false
+    },
+    {
+      "id": "rogues:golden_sickle",
+      "required": false
+    },
+    {
+      "id": "rogues:golden_double_axe",
+      "required": false
+    },
+    {
+      "id": "rogues:golden_glaive",
+      "required": false
+    }
+  ]
+}

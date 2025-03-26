@@ -1,0 +1,36 @@
+{
+  "values": [
+    {
+      "id": "rogues:stone_double_axe",
+      "required": false
+    },
+    {
+      "id": "rogues:iron_double_axe",
+      "required": false
+    },
+    {
+      "id": "rogues:golden_double_axe",
+      "required": false
+    },
+    {
+      "id": "rogues:diamond_double_axe",
+      "required": false
+    },
+    {
+      "id": "rogues:netherite_double_axe",
+      "required": false
+    },
+    {
+      "id": "rogues:ruby_double_axe",
+      "required": false
+    },
+    {
+      "id": "rogues:aeternium_double_axe",
+      "required": false
+    },
+    {
+      "id": "rogues:aether_double_axe",
+      "required": false
+    }
+  ]
+}

@@ -15,6 +15,7 @@ import net.rogues.item.Group;
 import net.rogues.util.RogueSounds;
 import net.spell_engine.api.config.ArmorSetConfig;
 import net.spell_engine.api.config.AttributeModifier;
+import net.spell_engine.api.item.Equipment;
 import net.spell_engine.api.item.armor.Armor;
 
 import java.util.ArrayList;
@@ -80,13 +81,15 @@ public class Armors {
 
     public static final ArrayList<Armor.Entry> entries = new ArrayList<>();
     private static Armor.Entry create(RegistryEntry<ArmorMaterial> material, Identifier id, int durability,
-                                      Armor.Set.ItemFactory factory, ArmorSetConfig defaults) {
+                                      Armor.Set.ItemFactory factory, ArmorSetConfig defaults, int tier) {
         var entry = Armor.Entry.create(
                 material,
                 id,
                 durability,
                 factory,
-                defaults);
+                defaults,
+                Equipment.LootProperties.of(tier)
+        );
         entries.add(entry);
         return entry;
     }
@@ -172,7 +175,7 @@ public class Armors {
                     new ArmorSetConfig.Piece(1)
                             .add(movementSpeed(rogue_t1_speed))
                             .add(hasteMultiplier(rogue_t1_haste))
-            ))
+            ),1)
             .armorSet();
 
     public static final Armor.Set RogueArmorSet_t2 = create(
@@ -197,7 +200,7 @@ public class Armors {
                             .add(movementSpeed(rogue_t2_speed))
                             .add(hasteMultiplier(rogue_t2_haste))
                             .add(damageMultiplier(rogue_t2_damage))
-            ))
+            ), 2)
             .armorSet();
 
     public static final Armor.Set RogueArmorSet_t3 = create(
@@ -222,7 +225,7 @@ public class Armors {
                             .add(movementSpeed(rogue_t3_speed))
                             .add(hasteMultiplier(rogue_t3_haste))
                             .add(damageMultiplier(rogue_t3_damage))
-            ))
+            ), 3)
             .armorSet();
 
     public static final Armor.Set WarriorArmorSet_t1 = create(
@@ -239,7 +242,7 @@ public class Armors {
                             .add(damageMultiplier(warrior_t1_damage)),
                     new ArmorSetConfig.Piece(1)
                             .add(damageMultiplier(warrior_t1_damage))
-            ))
+            ), 1)
             .armorSet();
 
     public static final Armor.Set WarriorArmorSet_t2 = create(
@@ -260,7 +263,7 @@ public class Armors {
                     new ArmorSetConfig.Piece(3)
                             .add(damageMultiplier(warrior_t2_damage))
                             .add(knockbackBonus(warrior_t2_knockback))
-            ))
+            ), 2)
             .armorSet();
 
     public static final Armor.Set WarriorArmorSet_t3 = create(
@@ -285,7 +288,7 @@ public class Armors {
                             .add(damageMultiplier(warrior_t3_damage))
                             .add(toughnessBonus(warrior_t3_toughness))
                             .add(knockbackBonus(warrior_t3_knockback))
-            ))
+            ), 3)
             .armorSet();
 
     public static void register(Map<String, ArmorSetConfig> configs) {

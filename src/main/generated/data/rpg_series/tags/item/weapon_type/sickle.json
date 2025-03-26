@@ -1,0 +1,32 @@
+{
+  "values": [
+    {
+      "id": "rogues:iron_sickle",
+      "required": false
+    },
+    {
+      "id": "rogues:golden_sickle",
+      "required": false
+    },
+    {
+      "id": "rogues:diamond_sickle",
+      "required": false
+    },
+    {
+      "id": "rogues:netherite_sickle",
+      "required": false
+    },
+    {
+      "id": "rogues:ruby_sickle",
+      "required": false
+    },
+    {
+      "id": "rogues:aeternium_sickle",
+      "required": false
+    },
+    {
+      "id": "rogues:aether_sickle",
+      "required": false
+    }
+  ]
+}

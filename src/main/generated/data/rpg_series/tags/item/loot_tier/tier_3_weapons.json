@@ -1,0 +1,20 @@
+{
+  "values": [
+    {
+      "id": "rogues:netherite_dagger",
+      "required": false
+    },
+    {
+      "id": "rogues:netherite_sickle",
+      "required": false
+    },
+    {
+      "id": "rogues:netherite_double_axe",
+      "required": false
+    },
+    {
+      "id": "rogues:netherite_glaive",
+      "required": false
+    }
+  ]
+}

@@ -34,12 +34,13 @@
       },
       "particles": [
         {
-          "particle_id": "spell_engine:weakness_smoke",
+          "particle_id": "spell_engine:smoke_medium",
           "origin": "CENTER",
           "shape": "SPHERE",
           "count": 25.0,
           "min_speed": 0.2,
-          "max_speed": 0.2
+          "max_speed": 0.2,
+          "color_rgba": 3208659199
         }
       ],
       "sound": {

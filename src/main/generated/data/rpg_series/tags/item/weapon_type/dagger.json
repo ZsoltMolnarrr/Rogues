@@ -1,0 +1,36 @@
+{
+  "values": [
+    {
+      "id": "rogues:flint_dagger",
+      "required": false
+    },
+    {
+      "id": "rogues:iron_dagger",
+      "required": false
+    },
+    {
+      "id": "rogues:golden_dagger",
+      "required": false
+    },
+    {
+      "id": "rogues:diamond_dagger",
+      "required": false
+    },
+    {
+      "id": "rogues:netherite_dagger",
+      "required": false
+    },
+    {
+      "id": "rogues:ruby_dagger",
+      "required": false
+    },
+    {
+      "id": "rogues:aeternium_dagger",
+      "required": false
+    },
+    {
+      "id": "rogues:aether_dagger",
+      "required": false
+    }
+  ]
+}

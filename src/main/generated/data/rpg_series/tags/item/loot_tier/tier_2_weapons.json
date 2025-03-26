@@ -1,0 +1,20 @@
+{
+  "values": [
+    {
+      "id": "rogues:diamond_dagger",
+      "required": false
+    },
+    {
+      "id": "rogues:diamond_sickle",
+      "required": false
+    },
+    {
+      "id": "rogues:diamond_double_axe",
+      "required": false
+    },
+    {
+      "id": "rogues:diamond_glaive",
+      "required": false
+    }
+  ]
+}

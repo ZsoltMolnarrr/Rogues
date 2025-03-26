@@ -1,0 +1,32 @@
+{
+  "values": [
+    {
+      "id": "rogues:iron_glaive",
+      "required": false
+    },
+    {
+      "id": "rogues:golden_glaive",
+      "required": false
+    },
+    {
+      "id": "rogues:diamond_glaive",
+      "required": false
+    },
+    {
+      "id": "rogues:netherite_glaive",
+      "required": false
+    },
+    {
+      "id": "rogues:ruby_glaive",
+      "required": false
+    },
+    {
+      "id": "rogues:aeternium_glaive",
+      "required": false
+    },
+    {
+      "id": "rogues:aether_glaive",
+      "required": false
+    }
+  ]
+}

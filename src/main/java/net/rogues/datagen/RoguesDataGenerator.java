@@ -5,10 +5,13 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.minecraft.registry.RegistryWrapper;
 import net.rogues.RoguesMod;
+import net.rogues.item.Weapons;
+import net.rogues.item.armor.Armors;
 import net.rogues.util.RogueSounds;
 import net.rogues.util.RogueSpells;
 import net.spell_engine.api.datagen.SimpleSoundGeneratorV2;
 import net.spell_engine.api.datagen.SpellGenerator;
+import net.spell_engine.rpg_series.datagen.RPGSeriesDataGen;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -18,6 +21,19 @@ public class RoguesDataGenerator implements DataGeneratorEntrypoint {
         FabricDataGenerator.Pack pack = fabricDataGenerator.createPack();
         pack.addProvider(SoundGen::new);
         pack.addProvider(SpellGen::new);
+        pack.addProvider(ItemTagGenerator::new);
+    }
+
+    public static class ItemTagGenerator extends RPGSeriesDataGen.ItemTagGenerator {
+        public ItemTagGenerator(FabricDataOutput dataOutput, CompletableFuture<RegistryWrapper.WrapperLookup> registryLookup) {
+            super(dataOutput, registryLookup);
+        }
+
+        @Override
+        protected void configure(RegistryWrapper.WrapperLookup wrapperLookup) {
+            generateWeaponTags(Weapons.entries);
+            generateArmorTags(Armors.entries);
+        }
     }
 
     public static class SpellGen extends SpellGenerator {

@@ -3,6 +3,7 @@ package net.rogues;
 import net.fabric_extras.structure_pool.api.StructurePoolConfig;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.item.ItemStack;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
@@ -53,6 +54,9 @@ public class RoguesMod implements ModInitializer {
     @Override
     public void onInitialize() {
         tweaksConfig.refresh();
+        if (FabricLoader.getInstance().isDevelopmentEnvironment()) {
+            tweaksConfig.value.ignore_items_required_mods = true;
+        }
         itemConfig.refresh();
         effectsConfig.refresh();
         villagesConfig.refresh();

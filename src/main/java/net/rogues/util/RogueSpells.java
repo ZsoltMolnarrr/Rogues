@@ -9,6 +9,7 @@ import net.spell_engine.api.spell.Spell;
 import net.spell_engine.api.spell.fx.ParticleBatch;
 import net.spell_engine.api.spell.fx.Sound;
 import net.spell_engine.client.gui.SpellTooltip;
+import net.spell_engine.client.util.Color;
 import net.spell_engine.entity.SpellProjectile;
 import net.spell_engine.fx.SpellEngineParticles;
 import net.spell_engine.internals.target.SpellTarget;
@@ -328,9 +329,10 @@ public class RogueSpells {
         debuff.action.status_effect.apply_limit.health_base = 50;
         debuff.action.status_effect.apply_limit.spell_power_multiplier = 2F;
         debuff.particles = new ParticleBatch[]{
-                new ParticleBatch(SpellEngineParticles.weakness_smoke.id().toString(),
+                new ParticleBatch(SpellEngineParticles.smoke_medium.id().toString(),
                         ParticleBatch.Shape.SPHERE, ParticleBatch.Origin.CENTER,
                         25, 0.2F, 0.2F)
+                        .color(Color.RAGE.toRGBA())
         };
         debuff.sound = new Sound(RogueSounds.DEMORALIZE_IMPACT.id());
 
@@ -362,10 +364,12 @@ public class RogueSpells {
         spell.release.animation = "spell_engine:one_handed_area_release";
         spell.release.sound = new Sound(RogueSounds.CHARGE_ACTIVATE.id());
         spell.release.particles = new ParticleBatch[]{
-                new ParticleBatch(SpellEngineParticles.sign_charge.id().toString(),
-                        ParticleBatch.Shape.PIPE, ParticleBatch.Origin.CENTER,
-                        1, 0.55F, 0.55F)
-                        .extent(-0.5F),
+                new ParticleBatch(SpellEngineParticles.sign_speed.id().toString(),
+                        ParticleBatch.Shape.LINE_VERTICAL, ParticleBatch.Origin.CENTER,
+                        1, 0.75F, 0.75F)
+                        .scale(0.8F)
+                        .color(Color.RAGE.toRGBA())
+                        .followEntity(true),
                 new ParticleBatch(
                         SpellEngineParticles.getMagicParticleVariant(
                                 SpellEngineParticles.RAGE,

@@ -10,13 +10,15 @@
     "animation": "spell_engine:one_handed_area_release",
     "particles": [
       {
-        "particle_id": "spell_engine:sign_charge",
+        "particle_id": "spell_engine:sign_speed",
         "origin": "CENTER",
-        "shape": "PIPE",
+        "shape": "LINE_VERTICAL",
         "count": 1.0,
-        "min_speed": 0.55,
-        "max_speed": 0.55,
-        "extent": -0.5
+        "min_speed": 0.75,
+        "max_speed": 0.75,
+        "color_rgba": 3208659199,
+        "scale": 0.8,
+        "follow_entity": true
       },
       {
         "particle_id": "spell_engine:magic_rage_stripe_float",
