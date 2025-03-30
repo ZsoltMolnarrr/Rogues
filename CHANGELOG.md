@@ -1,3 +1,7 @@
+# 2.4.3
+
+- Fix villager profession
+
 # 2.4.2
 
 - Update to Spell Engine 1.6
