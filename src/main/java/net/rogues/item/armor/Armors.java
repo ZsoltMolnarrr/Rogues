@@ -70,7 +70,7 @@ public class Armors {
             "berserker_armor",
             3, 8, 6, 2,
             10,
-            RogueSounds.WARRIOR_ARMOR_EQUIP.entry(), () -> { return Ingredient.ofItems(Items.CHAIN); });
+            RogueSounds.WARRIOR_ARMOR_EQUIP.entry(), () -> { return Ingredient.ofItems(Items.IRON_INGOT); });
 
     public static RegistryEntry<ArmorMaterial> material_warrior_t3 = material(
             "netherite_berserker_armor",

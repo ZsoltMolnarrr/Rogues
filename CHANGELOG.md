@@ -1,3 +1,10 @@
+# 2.4.4
+
+- Add Arms dealer trade advancement
+- Barracks chests now may contain Lapis Lazuli
+- Change some repair material for armor pieces
+- Add smelting recipes for disassembling archer weapons and armor pieces
+
 # 2.4.3
 
 - Fix villager profession
