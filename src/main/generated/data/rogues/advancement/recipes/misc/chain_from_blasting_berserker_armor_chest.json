@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_berserker_armor_chest": {
+      "conditions": {
+        "items": [
+          {
+            "items": "rogues:berserker_armor_chest"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:chain_from_blasting_berserker_armor_chest"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_berserker_armor_chest"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:chain_from_blasting_berserker_armor_chest"
+    ]
+  }
+}
