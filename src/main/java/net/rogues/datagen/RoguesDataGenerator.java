@@ -99,12 +99,12 @@ public class RoguesDataGenerator implements DataGeneratorEntrypoint {
                     Weapons.entries.stream()
                             .filter(entry -> entry.id().getPath().contains("gold"))
                             .map(entry -> (ItemConvertible) entry.item()).toList(),
-                    Items.IRON_NUGGET);
+                    Items.GOLD_NUGGET);
             disassemble(exporter,
                     Weapons.entries.stream()
                             .filter(entry -> entry.id().getPath().contains("iron"))
                             .map(entry -> (ItemConvertible) entry.item()).toList(),
-                    Items.GOLD_NUGGET);
+                    Items.IRON_NUGGET);
 //            disassemble(exporter,
 //                    Weapons.entries.stream()
 //                            .filter(entry -> entry.id().getPath().contains("diamond"))

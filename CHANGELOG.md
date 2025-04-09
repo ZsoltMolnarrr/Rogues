@@ -1,3 +1,7 @@
+# 2.4.5
+
+- Fix some disassembly smelting recipes
+
 # 2.4.4
 
 - Add Arms dealer trade advancement
