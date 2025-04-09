@@ -1,3 +1,8 @@
+# 2.4.6
+
+- Fix trade advancement
+- Add spell casting advancements
+
 # 2.4.5
 
 - Fix some disassembly smelting recipes
