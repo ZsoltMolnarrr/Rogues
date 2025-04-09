@@ -124,6 +124,11 @@
   "advancements.rpg_series.spell_master_warrior.title": "Rampage!",
   "advancements.rpg_series.spell_master_warrior.description": "Obtain all Warrior skills",
 
-  "advancements.rpg_series.trade_with_arms_dealer.title": "Arms Deal!",
+  "advancements.rpg_series.spell_cast_warrior_book.title": "Warrior Training",
+  "advancements.rpg_series.spell_cast_warrior_book.description": "Use a skill from the Warrior's Codex",
+  "advancements.rpg_series.spell_cast_rogue_book.title": "Rogue Training",
+  "advancements.rpg_series.spell_cast_rogue_book.description": "Use a skill from the Rogue Handbook",
+
+  "advancements.rpg_series.trade_with_arms_dealer.title": "Arms Deal",
   "advancements.rpg_series.trade_with_arms_dealer.description": "Trade with an Arms Dealer villager"
 }
