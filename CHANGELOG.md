@@ -1,3 +1,7 @@
+# 2.4.8
+
+- AzureLib Armor fabric version requirement set
+
 # 2.4.7
 
 - Add spell scroll textures
