@@ -1,3 +1,8 @@
+# 2.4.9
+
+- Add armor meta type tags
+- Update translations
+
 # 2.4.8
 
 - AzureLib Armor fabric version requirement set

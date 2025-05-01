@@ -1,0 +1,100 @@
+{
+  "values": [
+    {
+      "id": "rogues:rogue_armor_head",
+      "required": false
+    },
+    {
+      "id": "rogues:rogue_armor_chest",
+      "required": false
+    },
+    {
+      "id": "rogues:rogue_armor_legs",
+      "required": false
+    },
+    {
+      "id": "rogues:rogue_armor_feet",
+      "required": false
+    },
+    {
+      "id": "rogues:assassin_armor_head",
+      "required": false
+    },
+    {
+      "id": "rogues:assassin_armor_chest",
+      "required": false
+    },
+    {
+      "id": "rogues:assassin_armor_legs",
+      "required": false
+    },
+    {
+      "id": "rogues:assassin_armor_feet",
+      "required": false
+    },
+    {
+      "id": "rogues:netherite_assassin_armor_head",
+      "required": false
+    },
+    {
+      "id": "rogues:netherite_assassin_armor_chest",
+      "required": false
+    },
+    {
+      "id": "rogues:netherite_assassin_armor_legs",
+      "required": false
+    },
+    {
+      "id": "rogues:netherite_assassin_armor_feet",
+      "required": false
+    },
+    {
+      "id": "rogues:warrior_armor_head",
+      "required": false
+    },
+    {
+      "id": "rogues:warrior_armor_chest",
+      "required": false
+    },
+    {
+      "id": "rogues:warrior_armor_legs",
+      "required": false
+    },
+    {
+      "id": "rogues:warrior_armor_feet",
+      "required": false
+    },
+    {
+      "id": "rogues:berserker_armor_head",
+      "required": false
+    },
+    {
+      "id": "rogues:berserker_armor_chest",
+      "required": false
+    },
+    {
+      "id": "rogues:berserker_armor_legs",
+      "required": false
+    },
+    {
+      "id": "rogues:berserker_armor_feet",
+      "required": false
+    },
+    {
+      "id": "rogues:netherite_berserker_armor_head",
+      "required": false
+    },
+    {
+      "id": "rogues:netherite_berserker_armor_chest",
+      "required": false
+    },
+    {
+      "id": "rogues:netherite_berserker_armor_legs",
+      "required": false
+    },
+    {
+      "id": "rogues:netherite_berserker_armor_feet",
+      "required": false
+    }
+  ]
+}
