@@ -1,6 +1,7 @@
 # 2.4.10
 
 - Update to latest Spell Engine
+- Update translations
 
 # 2.4.9
 
