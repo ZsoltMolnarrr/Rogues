@@ -10,7 +10,6 @@ import net.spell_engine.api.spell.fx.ParticleBatch;
 import net.spell_engine.api.spell.fx.Sound;
 import net.spell_engine.client.gui.SpellTooltip;
 import net.spell_engine.client.util.Color;
-import net.spell_engine.entity.SpellProjectile;
 import net.spell_engine.fx.SpellEngineParticles;
 import net.spell_engine.internals.target.SpellTarget;
 import org.jetbrains.annotations.Nullable;
@@ -92,7 +91,8 @@ public class RogueSpells {
 
         var buff = createEffectImpact(effect.id, 10);
         buff.action.status_effect.apply_mode = Spell.Impact.Action.StatusEffect.ApplyMode.ADD;
-        buff.action.status_effect.amplifier = 9;
+        buff.action.status_effect.amplifier = 1;
+        buff.action.status_effect.amplifier_cap = 9;
         buff.action.status_effect.refresh_duration = false;
         spell.impacts = List.of(buff);
 
@@ -325,6 +325,8 @@ public class RogueSpells {
 
         var debuff = createEffectImpact(effect.id, 8);
         debuff.action.status_effect.apply_mode = Spell.Impact.Action.StatusEffect.ApplyMode.ADD;
+        debuff.action.status_effect.amplifier = 1;
+        debuff.action.status_effect.amplifier_cap = 5;
         debuff.action.status_effect.apply_limit = new Spell.Impact.Action.StatusEffect.ApplyLimit();
         debuff.action.status_effect.apply_limit.health_base = 50;
         debuff.action.status_effect.apply_limit.spell_power_multiplier = 2F;

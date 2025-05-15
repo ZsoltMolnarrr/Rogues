@@ -43,7 +43,8 @@
         "type": "STATUS_EFFECT",
         "status_effect": {
           "effect_id": "rogues:slice_and_dice",
-          "amplifier": 9,
+          "amplifier": 1,
+          "amplifier_cap": 9,
           "refresh_duration": false,
           "apply_mode": "ADD"
         }

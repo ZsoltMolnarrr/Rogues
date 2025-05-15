@@ -72,7 +72,7 @@
   "block.rogues.arms_workbench.hint": "Workbench for Arms Merchant Villagers.",
 
   "spell.rogues.slice_and_dice.name": "Slice & Dice",
-  "spell.rogues.slice_and_dice.description": "Enter a battle trance, during which your attacks will each grant extra power, stacking up to {effect_amplifier} times. Expires after {effect_duration} sec.",
+  "spell.rogues.slice_and_dice.description": "Enter a battle trance, during which your attacks will each grant extra power, stacking up to {effect_amplifier_cap} times. Expires after {effect_duration} sec.",
   "effect.rogues.slice_and_dice": "Slice & Dice",
   "effect.rogues.slice_and_dice.description": "Increases attack damage",
 
