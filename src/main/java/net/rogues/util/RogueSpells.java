@@ -142,7 +142,6 @@ public class RogueSpells {
         spell.target.area.vertical_range_multiplier = 0.5F;
 
         var buff = createEffectImpact(effect.id, 3);
-        buff.action.status_effect.apply_mode = Spell.Impact.Action.StatusEffect.ApplyMode.ADD;
         buff.action.status_effect.apply_limit = new Spell.Impact.Action.StatusEffect.ApplyLimit();
         buff.action.status_effect.apply_limit.health_base = 50;
         buff.action.status_effect.apply_limit.spell_power_multiplier = 2F;

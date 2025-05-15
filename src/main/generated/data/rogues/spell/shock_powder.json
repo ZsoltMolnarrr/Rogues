@@ -72,7 +72,6 @@
         "status_effect": {
           "effect_id": "rogues:shock",
           "duration": 3.0,
-          "apply_mode": "ADD",
           "apply_limit": {
             "health_base": 50.0,
             "spell_power_multiplier": 2.0
