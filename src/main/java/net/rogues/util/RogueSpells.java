@@ -394,7 +394,7 @@ public class RogueSpells {
         };
 
 
-        var buff = createEffectImpact(effect.id, 2.5F);
+        var buff = createEffectImpact(effect.id, 2F);
         spell.impacts = List.of(buff);
 
         configureCooldown(spell, 12);

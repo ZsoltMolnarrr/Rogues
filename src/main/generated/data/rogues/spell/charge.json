@@ -58,7 +58,7 @@
         "type": "STATUS_EFFECT",
         "status_effect": {
           "effect_id": "rogues:charge",
-          "duration": 2.5
+          "duration": 2.0
         }
       }
     }
