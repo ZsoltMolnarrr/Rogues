@@ -75,6 +75,19 @@ public class RogueEffects {
                     )
             ))
     ));
+    public static Effects.Entry STEALTH_SPEED = add(new Effects.Entry(
+            Identifier.of(RoguesMod.NAMESPACE, "stealth_speed"),
+            "Stealth Speed",
+            "Faster movement in stealth",
+            new StealthEffect(StatusEffectCategory.BENEFICIAL, 0xAAAAAA),
+            new EffectConfig(List.of(
+                    new AttributeModifier(
+                            EntityAttributes.GENERIC_MOVEMENT_SPEED.getIdAsString(),
+                            0.5F,
+                            EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE
+                    )
+            ))
+    ));
 
     public static Effects.Entry SHATTER = add(new Effects.Entry(
             Identifier.of(RoguesMod.NAMESPACE, "shatter"),
@@ -157,6 +170,9 @@ public class RogueEffects {
         });
         OnRemoval.configure(STEALTH.effect, (context) -> {
             StealthEffect.onRemove(context.entity());
+            if (context.entity().hasStatusEffect(STEALTH_SPEED.entry)) {
+                context.entity().removeStatusEffect(STEALTH_SPEED.entry);
+            }
         });
 
         Effects.register(entries, config.effects);

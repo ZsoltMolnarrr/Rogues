@@ -1,3 +1,8 @@
+# 2.5.0
+
+- Add stealth speed effect (technical)
+- Reduce duration of Charge effect by 0.5 sec
+
 # 2.4.10
 
 - Update to latest Spell Engine
