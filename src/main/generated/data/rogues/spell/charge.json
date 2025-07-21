@@ -3,9 +3,7 @@
   "range": 0.0,
   "tier": 3,
   "learn": {},
-  "active": {
-    "scroll": {}
-  },
+  "active": {},
   "release": {
     "animation": "spell_engine:one_handed_area_release",
     "particles": [
@@ -21,22 +19,24 @@
         "follow_entity": true
       },
       {
-        "particle_id": "spell_engine:magic_rage_stripe_float",
+        "particle_id": "spell_engine:magic_stripe_float",
         "origin": "FEET",
         "shape": "WIDE_PIPE",
         "count": 25.0,
         "min_speed": 0.2,
         "max_speed": 0.25,
-        "extent": -0.2
+        "extent": -0.2,
+        "color_rgba": 3208659199
       },
       {
-        "particle_id": "spell_engine:magic_rage_spark_decelerate",
+        "particle_id": "spell_engine:magic_spark_decelerate",
         "origin": "CENTER",
         "shape": "SPHERE",
         "count": 25.0,
         "min_speed": 0.1,
         "max_speed": 0.1,
-        "extent": 0.2
+        "extent": 0.2,
+        "color_rgba": 3208659199
       },
       {
         "particle_id": "spell_engine:smoke_medium",

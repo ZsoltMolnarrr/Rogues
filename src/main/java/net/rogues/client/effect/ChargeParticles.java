@@ -3,6 +3,7 @@ package net.rogues.client.effect;
 import net.minecraft.entity.LivingEntity;
 import net.spell_engine.api.effect.CustomParticleStatusEffect;
 import net.spell_engine.api.spell.fx.ParticleBatch;
+import net.spell_engine.client.util.Color;
 import net.spell_engine.fx.ParticleHelper;
 import net.spell_engine.fx.SpellEngineParticles;
 
@@ -11,17 +12,17 @@ public class ChargeParticles  implements CustomParticleStatusEffect.Spawner {
 
     public ChargeParticles(int particleCount) {
         this.particles = new ParticleBatch(
-                SpellEngineParticles.getMagicParticleVariant(
-                        SpellEngineParticles.RAGE,
-                        SpellEngineParticles.MagicParticleFamily.Shape.STRIPE,
-                        SpellEngineParticles.MagicParticleFamily.Motion.ASCEND).id().toString(),
+                SpellEngineParticles.MagicParticles.get(
+                        SpellEngineParticles.MagicParticles.Shape.STRIPE,
+                        SpellEngineParticles.MagicParticles.Motion.ASCEND).id().toString(),
                 ParticleBatch.Shape.WIDE_PIPE,
                 ParticleBatch.Origin.FEET,
                 null,
                 particleCount,
                 0.11F,
                 0.12F,
-                0);
+                0)
+                .color(Color.RAGE.toRGBA());
     }
 
     @Override

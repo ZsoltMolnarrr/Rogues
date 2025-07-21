@@ -3,9 +3,7 @@
   "range": 5.0,
   "tier": 2,
   "learn": {},
-  "active": {
-    "scroll": {}
-  },
+  "active": {},
   "release": {
     "animation": "spell_engine:dual_handed_ground_release",
     "particles": [

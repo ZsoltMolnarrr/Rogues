@@ -3,9 +3,7 @@
   "range": 0.0,
   "tier": 4,
   "learn": {},
-  "active": {
-    "scroll": {}
-  },
+  "active": {},
   "release": {
     "animation": "spell_engine:dual_handed_weapon_cross",
     "particles": [

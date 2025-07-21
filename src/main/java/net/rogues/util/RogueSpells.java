@@ -34,7 +34,6 @@ public class RogueSpells {
         spell.active.cast = new Spell.Active.Cast();
 
         spell.learn = new Spell.Learn();
-        spell.active.scroll = new Spell.Active.Scroll();
 
         return spell;
     }
@@ -70,14 +69,14 @@ public class RogueSpells {
         spell.release.animation = "spell_engine:dual_handed_weapon_charge";
         spell.release.sound = new Sound(RogueSounds.SLICE_AND_DICE.id());
         spell.release.particles = new ParticleBatch[]{
-                new ParticleBatch(SpellEngineParticles.getMagicParticleVariant(
-                        SpellEngineParticles.WHITE,
-                        SpellEngineParticles.MagicParticleFamily.Shape.SPARK,
-                        SpellEngineParticles.MagicParticleFamily.Motion.FLOAT).id().toString(),
+                new ParticleBatch(SpellEngineParticles.MagicParticles.get(
+                        SpellEngineParticles.MagicParticles.Shape.SPARK,
+                        SpellEngineParticles.MagicParticles.Motion.FLOAT).id().toString(),
                         ParticleBatch.Shape.SPHERE, ParticleBatch.Origin.LAUNCH_POINT,
-                        15, 0.2F, 0.3F)
+                        15, 0.15F, 0.2F)
                         .preSpawnTravel(7)
                         .invert()
+                        .color(Color.WHITE.toRGBA())
         };
 
         spell.deliver.type = Spell.Delivery.Type.STASH_EFFECT;
@@ -372,21 +371,21 @@ public class RogueSpells {
                         .color(Color.RAGE.toRGBA())
                         .followEntity(true),
                 new ParticleBatch(
-                        SpellEngineParticles.getMagicParticleVariant(
-                                SpellEngineParticles.RAGE,
-                                SpellEngineParticles.MagicParticleFamily.Shape.STRIPE,
-                                SpellEngineParticles.MagicParticleFamily.Motion.FLOAT).id().toString(),
+                        SpellEngineParticles.MagicParticles.get(
+                                SpellEngineParticles.MagicParticles.Shape.STRIPE,
+                                SpellEngineParticles.MagicParticles.Motion.FLOAT).id().toString(),
                         ParticleBatch.Shape.WIDE_PIPE, ParticleBatch.Origin.FEET,
                         25, 0.2F, 0.25F)
-                        .extent(-0.2F),
+                        .extent(-0.2F)
+                        .color(Color.RAGE.toRGBA()),
                 new ParticleBatch(
-                        SpellEngineParticles.getMagicParticleVariant(
-                                SpellEngineParticles.RAGE,
-                                SpellEngineParticles.MagicParticleFamily.Shape.SPARK,
-                                SpellEngineParticles.MagicParticleFamily.Motion.DECELERATE).id().toString(),
+                        SpellEngineParticles.MagicParticles.get(
+                                SpellEngineParticles.MagicParticles.Shape.SPARK,
+                                SpellEngineParticles.MagicParticles.Motion.DECELERATE).id().toString(),
                         ParticleBatch.Shape.SPHERE, ParticleBatch.Origin.CENTER,
                         25, 0.1F, 0.1F)
-                        .extent(0.2F),
+                        .extent(0.2F)
+                        .color(Color.RAGE.toRGBA()),
                 new ParticleBatch(SpellEngineParticles.smoke_medium.id().toString(),
                         ParticleBatch.Shape.CIRCLE, ParticleBatch.Origin.FEET,
                         50, 0.15F, 0.15F)
