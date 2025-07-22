@@ -90,6 +90,8 @@
   "spell.rogues.vanish.description": "Desaparece de la vista, entrando en sigilo durante {effect_duration} seg. Realizar cualquier acción o recibir daño romperá el efecto.",
   "effect.rogues.stealth": "Sigilo",
   "effect.rogues.stealth.description": "Invisible para los enemigos",
+  "effect.rogues.stealth_speed": "Velocidad sigilosa",
+  "effect.rogues.stealth_speed.description": "Te movés más rápido mientras estás en sigilo",
 
   "spell.rogues.throw.name": "Lanzamiento Destructor",
   "spell.rogues.throw.description": "Lanza tu arma al objetivo, causando {damage} de daño y reduciendo su armadura en {armor_reduction} durante {effect_duration} seg.",
