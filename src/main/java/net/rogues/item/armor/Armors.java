@@ -15,6 +15,7 @@ import net.rogues.item.Group;
 import net.rogues.util.RogueSounds;
 import net.spell_engine.api.config.ArmorSetConfig;
 import net.spell_engine.api.config.AttributeModifier;
+import net.spell_engine.api.entity.SpellEngineAttributes;
 import net.spell_engine.api.item.Equipment;
 import net.spell_engine.api.item.armor.Armor;
 
@@ -129,6 +130,13 @@ public class Armors {
                 EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE);
     }
 
+    private static AttributeModifier evasionBonus(float value) {
+        return new AttributeModifier(
+                SpellEngineAttributes.EVASION_CHANCE.id.toString(),
+                value,
+                EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE);
+    }
+
     private static AttributeModifier toughnessBonus(float value) {
         return new AttributeModifier(
                 ARMOR_TOUGHNESS_ID.toString(),
@@ -136,15 +144,15 @@ public class Armors {
                 EntityAttributeModifier.Operation.ADD_VALUE);
     }
 
-    public static final float rogue_t1_speed = 0.05F;
+    public static final float rogue_t1_evasion = 0.03F;
     public static final float rogue_t1_haste = 0.04F;
     // public static final float rogue_t1_damage = 0.02F;
 
-    public static final float rogue_t2_speed = 0.05F;
+    public static final float rogue_t2_evasion = 0.04F;
     public static final float rogue_t2_haste = 0.05F;
     public static final float rogue_t2_damage = 0.02F;
 
-    public static final float rogue_t3_speed = 0.05F;
+    public static final float rogue_t3_evasion = 0.05F;
     public static final float rogue_t3_haste = 0.05F;
     public static final float rogue_t3_damage = 0.05F;
 
@@ -164,16 +172,16 @@ public class Armors {
             RogueArmor::new,
             ArmorSetConfig.with(
                     new ArmorSetConfig.Piece(1)
-                            .add(movementSpeed(rogue_t1_speed))
+                            .add(movementSpeed(rogue_t1_evasion))
                             .add(hasteMultiplier(rogue_t1_haste)),
                     new ArmorSetConfig.Piece(3)
-                            .add(movementSpeed(rogue_t1_speed))
+                            .add(movementSpeed(rogue_t1_evasion))
                             .add(hasteMultiplier(rogue_t1_haste)),
                     new ArmorSetConfig.Piece(3)
-                            .add(movementSpeed(rogue_t1_speed))
+                            .add(movementSpeed(rogue_t1_evasion))
                             .add(hasteMultiplier(rogue_t1_haste)),
                     new ArmorSetConfig.Piece(1)
-                            .add(movementSpeed(rogue_t1_speed))
+                            .add(movementSpeed(rogue_t1_evasion))
                             .add(hasteMultiplier(rogue_t1_haste))
             ),1)
             .armorSet();
@@ -185,19 +193,19 @@ public class Armors {
             RogueArmor::new,
             ArmorSetConfig.with(
                     new ArmorSetConfig.Piece(2)
-                            .add(movementSpeed(rogue_t2_speed))
+                            .add(evasionBonus(rogue_t2_evasion))
                             .add(hasteMultiplier(rogue_t2_haste))
                             .add(damageMultiplier(rogue_t2_damage)),
                     new ArmorSetConfig.Piece(4)
-                            .add(movementSpeed(rogue_t2_speed))
+                            .add(evasionBonus(rogue_t2_evasion))
                             .add(hasteMultiplier(rogue_t2_haste))
                             .add(damageMultiplier(rogue_t2_damage)),
                     new ArmorSetConfig.Piece(4)
-                            .add(movementSpeed(rogue_t2_speed))
+                            .add(evasionBonus(rogue_t2_evasion))
                             .add(hasteMultiplier(rogue_t2_haste))
                             .add(damageMultiplier(rogue_t2_damage)),
                     new ArmorSetConfig.Piece(2)
-                            .add(movementSpeed(rogue_t2_speed))
+                            .add(evasionBonus(rogue_t2_evasion))
                             .add(hasteMultiplier(rogue_t2_haste))
                             .add(damageMultiplier(rogue_t2_damage))
             ), 2)
@@ -210,19 +218,19 @@ public class Armors {
             RogueArmor::new,
             ArmorSetConfig.with(
                     new ArmorSetConfig.Piece(2)
-                            .add(movementSpeed(rogue_t3_speed))
+                            .add(evasionBonus(rogue_t3_evasion))
                             .add(hasteMultiplier(rogue_t3_haste))
                             .add(damageMultiplier(rogue_t3_damage)),
                     new ArmorSetConfig.Piece(4)
-                            .add(movementSpeed(rogue_t3_speed))
+                            .add(evasionBonus(rogue_t3_evasion))
                             .add(hasteMultiplier(rogue_t3_haste))
                             .add(damageMultiplier(rogue_t3_damage)),
                     new ArmorSetConfig.Piece(4)
-                            .add(movementSpeed(rogue_t3_speed))
+                            .add(evasionBonus(rogue_t3_evasion))
                             .add(hasteMultiplier(rogue_t3_haste))
                             .add(damageMultiplier(rogue_t3_damage)),
                     new ArmorSetConfig.Piece(2)
-                            .add(movementSpeed(rogue_t3_speed))
+                            .add(evasionBonus(rogue_t3_evasion))
                             .add(hasteMultiplier(rogue_t3_haste))
                             .add(damageMultiplier(rogue_t3_damage))
             ), 3)

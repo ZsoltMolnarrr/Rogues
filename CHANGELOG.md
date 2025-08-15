@@ -1,3 +1,7 @@
+# 2.5.1
+
+- Rogue armor pieces now provide Evade Chance instead of Movement Speed bonus
+
 # 2.5.0
 
 - Add stealth speed effect (technical)
