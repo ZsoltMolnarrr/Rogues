@@ -1,3 +1,7 @@
+# 2.5.2
+
+- Fix tier 1 armor set attributes
+
 # 2.5.1
 
 - Rogue armor pieces now provide Evade Chance instead of Movement Speed bonus

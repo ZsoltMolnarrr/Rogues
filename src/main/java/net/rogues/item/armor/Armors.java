@@ -172,16 +172,16 @@ public class Armors {
             RogueArmor::new,
             ArmorSetConfig.with(
                     new ArmorSetConfig.Piece(1)
-                            .add(movementSpeed(rogue_t1_evasion))
+                            .add(evasionBonus(rogue_t1_evasion))
                             .add(hasteMultiplier(rogue_t1_haste)),
                     new ArmorSetConfig.Piece(3)
-                            .add(movementSpeed(rogue_t1_evasion))
+                            .add(evasionBonus(rogue_t1_evasion))
                             .add(hasteMultiplier(rogue_t1_haste)),
                     new ArmorSetConfig.Piece(3)
-                            .add(movementSpeed(rogue_t1_evasion))
+                            .add(evasionBonus(rogue_t1_evasion))
                             .add(hasteMultiplier(rogue_t1_haste)),
                     new ArmorSetConfig.Piece(1)
-                            .add(movementSpeed(rogue_t1_evasion))
+                            .add(evasionBonus(rogue_t1_evasion))
                             .add(hasteMultiplier(rogue_t1_haste))
             ),1)
             .armorSet();
