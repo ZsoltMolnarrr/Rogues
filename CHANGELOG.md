@@ -1,3 +1,7 @@
+# 2.5.3
+
+- Fix snowy village structure infestation
+
 # 2.5.2
 
 - Fix tier 1 armor set attributes
