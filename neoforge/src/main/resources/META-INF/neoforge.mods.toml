@@ -1,17 +1,17 @@
 modLoader = "javafml"
 loaderVersion = "[4,)"
-#issueTrackerURL = ""
-license = "Insert License Here"
+issueTrackerURL = "https://github.com/ZsoltMolnarrr/Rogues/issues"
+license = "All-Rights-Reserved"
 
 [[mods]]
 modId = "rogues"
 version = "${version}"
-displayName = "Rogues"
-authors = "Me!"
+displayName = "Rogues & Warriors (RPG Series)"
+authors = "Daedelus"
 description = '''
-This is an example description! Tell everyone what your mod is about!
+Silent Blades, Mighty Blows - Dominate with martial skills!
 '''
-#logoFile = ""
+logoFile = "icon.png"
 
 [[dependencies.rogues]]
 modId = "neoforge"
@@ -23,7 +23,28 @@ side = "BOTH"
 [[dependencies.rogues]]
 modId = "minecraft"
 type = "required"
-versionRange = "[1.21.1,)"
+versionRange = "[${minecraft_compat_version},)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.rogues]]
+modId = "azurelibarmor"
+type = "required"
+versionRange = "[${azure_lib_version},)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.rogues]]
+modId = "spell_engine"
+type = "required"
+versionRange = "[${spell_engine_version},)"
+ordering = "BEFORE"
+side = "BOTH"
+
+[[dependencies.rogues]]
+modId = "structure_pool_api"
+type = "required"
+versionRange = "*"
 ordering = "NONE"
 side = "BOTH"
 
