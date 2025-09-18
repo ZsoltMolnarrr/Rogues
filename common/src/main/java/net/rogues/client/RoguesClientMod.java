@@ -21,7 +21,7 @@ import net.spell_engine.client.gui.SpellTooltip;
 
 import java.util.function.Supplier;
 
-public class RoguesClient {
+public class RoguesClientMod {
     public static void init() {
         BlockRenderLayerMap.INSTANCE.putBlock(CustomBlocks.WORKBENCH.block(), RenderLayer.getCutout());
         CustomParticleStatusEffect.register(RogueEffects.SHOCK.effect, new StunParticleSpawner());

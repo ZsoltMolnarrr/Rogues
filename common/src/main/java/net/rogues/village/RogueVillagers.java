@@ -27,10 +27,11 @@ import java.util.List;
 
 public class RogueVillagers {
     public static final String MERCHANT = "arms_merchant";
+    public static final Identifier POI_ID = Identifier.of(RoguesMod.NAMESPACE, MERCHANT);
 
-    public static PointOfInterestType registerPOI(String name, Block block) {
-        return PointOfInterestHelper.register(Identifier.of(RoguesMod.NAMESPACE, name),
-                1, 10, ImmutableSet.copyOf(block.getStateManager().getStates()));
+    public static void registerPOI() {
+        var blockStates = ImmutableSet.copyOf(CustomBlocks.WORKBENCH.block().getStateManager().getStates());
+        PointOfInterestHelper.register(POI_ID, 1, 10, blockStates);
     }
 
     public static VillagerProfession registerProfession(String name, RegistryKey<PointOfInterestType> workStation) {
@@ -75,15 +76,14 @@ public class RogueVillagers {
 //        }
 //    }
 
-    public static void register() {
+    public static void registerVillagers() {
         if (!FabricLoader.getInstance().isModLoaded("lithostitched")) {
             // Only inject the village if the Lithostitched is not present
             StructurePoolAPI.injectAll(RoguesMod.villagesConfig.value);
         }
-        var poi = registerPOI(MERCHANT, CustomBlocks.WORKBENCH.block());
         var profession = registerProfession(
                 MERCHANT,
-                RegistryKey.of(Registries.POINT_OF_INTEREST_TYPE.getKey(), Identifier.of(RoguesMod.NAMESPACE, MERCHANT)));
+                RegistryKey.of(Registries.POINT_OF_INTEREST_TYPE.getKey(), POI_ID));
 
 //        List<Offer> offers = List.of(
 //                Offer.buy(1, new ItemStack(Items.LEATHER, 8), 5, 12, 4, 0.01f),

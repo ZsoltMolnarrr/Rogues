@@ -59,7 +59,14 @@ public class RoguesMod {
         itemConfig.refresh();
         effectsConfig.refresh();
         villagesConfig.refresh();
+    }
+
+    public static void registerSounds() {
         RogueSounds.register();
+    }
+
+    public static void registerItems() {
+        tweaksConfig.refresh();
         Group.ROGUES = FabricItemGroup.builder()
                 .icon(() -> new ItemStack(Armors.RogueArmorSet_t2.head))
                 .displayName(Text.translatable("itemGroup." + NAMESPACE + ".general"))
@@ -70,10 +77,19 @@ public class RoguesMod {
         Weapons.register(itemConfig.value.weapons);
         Armors.register(itemConfig.value.armor_sets);
         itemConfig.save();
+    }
 
-        RogueVillagers.register();
+    public static void registerEffects() {
         RogueEffects.register(effectsConfig.value);
         effectsConfig.save();
+    }
+
+    public static void registerPOI() {
+        RogueVillagers.registerPOI();
+    }
+
+    public static void registerVillagers() {
+        RogueVillagers.registerVillagers();
     }
 }
 

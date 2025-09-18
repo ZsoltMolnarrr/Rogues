@@ -67,6 +67,7 @@
   "item.rogues.netherite_berserker_armor_feet": "Netherite Berserker Boots",
 
   "entity.minecraft.villager.arms_merchant": "Arms Dealer",
+  "entity.minecraft.villager.rogues.arms_merchant": "Arms Dealer",
   "entity.minecraft.villager.rogues:arms_merchant": "Arms Dealer",
   "block.rogues.arms_workbench": "Arms Station",
   "block.rogues.arms_workbench.hint": "Workbench for Arms Merchant Villagers.",
