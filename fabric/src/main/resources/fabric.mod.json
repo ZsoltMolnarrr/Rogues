@@ -16,17 +16,17 @@
     "issues": "https://github.com/ZsoltMolnarrr/Rogues/issues"
   },
   "license": "All-Rights-Reserved",
-  "icon": "assets/rogues/icon.png",
+  "icon": "icon.png",
   "environment": "*",
   "entrypoints": {
     "client": [
-      "net.rogues.client.RoguesClient"
+      "net.rogues.fabric.client.FabricClientMod"
     ],
     "main": [
-      "net.rogues.RoguesMod"
+      "net.rogues.fabric.FabricMod"
     ],
     "modmenu": [
-      "net.spell_engine.client.compatibility.ModMenuCompatibility"
+      "net.spell_engine.fabric.client.compat.ModMenuCompatibility"
     ],
     "fabric-datagen": [
       "net.rogues.datagen.RoguesDataGenerator"

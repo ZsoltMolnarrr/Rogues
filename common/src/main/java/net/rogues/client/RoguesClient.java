@@ -2,7 +2,6 @@ package net.rogues.client;
 
 import mod.azure.azurelibarmor.rewrite.render.armor.AzArmorRenderer;
 import mod.azure.azurelibarmor.rewrite.render.armor.AzArmorRendererRegistry;
-import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.util.Identifier;
@@ -22,9 +21,8 @@ import net.spell_engine.client.gui.SpellTooltip;
 
 import java.util.function.Supplier;
 
-public class RoguesClient implements ClientModInitializer {
-    @Override
-    public void onInitializeClient() {
+public class RoguesClient {
+    public static void init() {
         BlockRenderLayerMap.INSTANCE.putBlock(CustomBlocks.WORKBENCH.block(), RenderLayer.getCutout());
         CustomParticleStatusEffect.register(RogueEffects.SHOCK.effect, new StunParticleSpawner());
         CustomParticleStatusEffect.register(RogueEffects.SHATTER.effect, new ShatterParticles(1));

@@ -1,7 +1,6 @@
 package net.rogues;
 
 import net.fabric_extras.structure_pool.api.StructurePoolConfig;
-import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.item.ItemStack;
@@ -19,11 +18,12 @@ import net.rogues.item.armor.Armors;
 import net.rogues.util.RogueSounds;
 import net.rogues.village.RogueVillagers;
 import net.spell_engine.api.config.ConfigFile;
-import net.tinyconfig.ConfigManager;
+import net.tiny_config.ConfigManager;
 
-public class RoguesMod implements ModInitializer {
+public class RoguesMod {
 
     public static final String NAMESPACE = "rogues";
+    public static final String ID = NAMESPACE;
 
     public static ConfigManager<ConfigFile.Equipment> itemConfig = new ConfigManager<>
             ("equipment_v2", Default.itemConfig)
@@ -51,8 +51,7 @@ public class RoguesMod implements ModInitializer {
             .sanitize(true)
             .build();
 
-    @Override
-    public void onInitialize() {
+    public static void init() {
         tweaksConfig.refresh();
         if (FabricLoader.getInstance().isDevelopmentEnvironment()) {
             tweaksConfig.value.ignore_items_required_mods = true;

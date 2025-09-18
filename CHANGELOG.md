@@ -1,3 +1,7 @@
+# 2.6.0
+
+- Migrate to Architectury
+
 # 2.5.3
 
 - Fix snowy village structure infestation
