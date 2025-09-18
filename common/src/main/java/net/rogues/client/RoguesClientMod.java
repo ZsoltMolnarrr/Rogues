@@ -2,8 +2,6 @@ package net.rogues.client;
 
 import mod.azure.azurelibarmor.rewrite.render.armor.AzArmorRenderer;
 import mod.azure.azurelibarmor.rewrite.render.armor.AzArmorRendererRegistry;
-import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
-import net.minecraft.client.render.RenderLayer;
 import net.minecraft.util.Identifier;
 import net.rogues.RoguesMod;
 import net.rogues.block.CustomBlocks;
@@ -23,7 +21,6 @@ import java.util.function.Supplier;
 
 public class RoguesClientMod {
     public static void init() {
-        BlockRenderLayerMap.INSTANCE.putBlock(CustomBlocks.WORKBENCH.block(), RenderLayer.getCutout());
         CustomParticleStatusEffect.register(RogueEffects.SHOCK.effect, new StunParticleSpawner());
         CustomParticleStatusEffect.register(RogueEffects.SHATTER.effect, new ShatterParticles(1));
         CustomParticleStatusEffect.register(RogueEffects.DEMORALIZE.effect, new DemoralizeParticles(1));
