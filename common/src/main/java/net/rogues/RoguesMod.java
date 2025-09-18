@@ -66,7 +66,6 @@ public class RoguesMod {
     }
 
     public static void registerItems() {
-        tweaksConfig.refresh();
         Group.ROGUES = FabricItemGroup.builder()
                 .icon(() -> new ItemStack(Armors.RogueArmorSet_t2.head))
                 .displayName(Text.translatable("itemGroup." + NAMESPACE + ".general"))
