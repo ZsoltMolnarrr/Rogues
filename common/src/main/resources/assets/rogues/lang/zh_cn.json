@@ -67,6 +67,7 @@
   "item.rogues.netherite_berserker_armor_feet": "下界合金狂战士靴子",
 
   "entity.minecraft.villager.arms_merchant": "武具商人",
+  "entity.minecraft.villager.rogues.arms_merchant": "武具商人",
   "entity.minecraft.villager.rogues:arms_merchant": "武具商人",
   "block.rogues.arms_workbench": "武具工作台",
   "block.rogues.arms_workbench.hint": "武具商人村民的工作台。",

@@ -53,6 +53,7 @@
   "item.rogues.berserker_armor_feet": "Чоботи берсерка",
 
   "entity.minecraft.villager.arms_merchant": "Торговець зброєю",
+  "entity.minecraft.villager.rogues.arms_merchant": "Торговець зброєю",
   "entity.minecraft.villager.rogues:arms_merchant": "Торговець зброєю",
   "block.rogues.arms_workbench": "Станція зброяра",
   "block.rogues.arms_workbench.hint": "Верстак торговця зброєю",

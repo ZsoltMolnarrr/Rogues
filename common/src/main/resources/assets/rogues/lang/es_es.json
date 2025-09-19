@@ -53,6 +53,7 @@
   "item.rogues.berserker_armor_feet": "Botas de Berserker",
 
   "entity.minecraft.villager.arms_merchant": "Vendedor de Armas",
+  "entity.minecraft.villager.rogues.arms_merchant": "Vendedor de Armas",
   "entity.minecraft.villager.rogues:arms_merchant": "Vendedor de Armas",
   "block.rogues.arms_workbench": "Estación de Armas",
   "block.rogues.arms_workbench.hint": "Banco de trabajo para aldeanos vendedores de armas.",

@@ -53,6 +53,7 @@
   "item.rogues.berserker_armor_feet": "Stivali da guerriero",
 
   "entity.minecraft.villager.arms_merchant": "Mercante d'armi",
+  "entity.minecraft.villager.rogues.arms_merchant": "Mercante d'armi",
   "entity.minecraft.villager.rogues:arms_merchant": "Mercante d'armi",
   "block.rogues.arms_workbench": "Banco da armaiolo",
   "block.rogues.arms_workbench.hint": "Banco da lavoro per villici mercanti d'armi.",

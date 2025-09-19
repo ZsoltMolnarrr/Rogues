@@ -61,6 +61,7 @@
 "item.rogues.netherite_berserker_armor_feet": "Незеритовые ботинки берсерка",
 
 "entity.minecraft.villager.arms_merchant": "Торговец оружием",
+"entity.minecraft.villager.rogues.arms_merchant": "Торговец оружием",
 "entity.minecraft.villager.rogues:arms_merchant": "Торговец оружием",
 "block.rogues.arms_workbench": "Оружейная станция",
 "block.rogues.arms_workbench.hint": "Верстак для Крестьян-Торговцев оружием.",

@@ -67,6 +67,7 @@
   "item.rogues.netherite_berserker_armor_feet": "Botas de Berserker de Netherite",
 
   "entity.minecraft.villager.arms_merchant": "Comerciante de Armas",
+  "entity.minecraft.villager.rogues.arms_merchant": "Comerciante de Armas",
   "entity.minecraft.villager.rogues:arms_merchant": "Comerciante de Armas",
   "block.rogues.arms_workbench": "Estación de Armas",
   "block.rogues.arms_workbench.hint": "Banco de trabajo para los aldeanos comerciantes de armas.",

@@ -53,6 +53,7 @@
   "item.rogues.berserker_armor_feet": "Bottes de Berserker",
 
   "entity.minecraft.villager.arms_merchant": "Marchand d'Armes",
+  "entity.minecraft.villager.rogues.arms_merchant": "Marchand d'Armes",
   "entity.minecraft.villager.rogues:arms_merchant": "Marchand d'Armes",
   "block.rogues.arms_workbench": "Station d'Armes",
   "block.rogues.arms_workbench.hint": "Établi pour les villageois Marchands d'Armes.",

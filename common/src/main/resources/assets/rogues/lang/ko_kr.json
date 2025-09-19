@@ -53,6 +53,7 @@
   "item.rogues.berserker_armor_feet": "광전사 부츠",
 
   "entity.minecraft.villager.arms_merchant": "무기 상인",
+  "entity.minecraft.villager.rogues.arms_merchant": "무기 상인",
   "entity.minecraft.villager.rogues:arms_merchant": "무기 상인",
   "block.rogues.arms_workbench": "무기 작업대",
   "block.rogues.arms_workbench.hint": "무기 상인 주민을 위한 작업대입니다.",
