@@ -79,7 +79,7 @@ dependencies {
 //    modImplementation("net.foundation:structure_pool_api-${platform}:${project.structure_pool_api_version}")
     modImplementation("maven.modrinth:spell-power:${project.spell_power_version}-${platform}")
 //    modImplementation("net.spell_power:spell_power-${platform}:${project.spell_power_version}")
-    modImplementation("maven.modrinth:spell_engine:${project.spell_engine_version}-${platform}")
+    modImplementation("maven.modrinth:spell-engine:${project.spell_engine_version}-${platform}")
 //    modImplementation("net.spell_engine:spell_engine-${platform}:${project.spell_engine_version}")
 }
 
