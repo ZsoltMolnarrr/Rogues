@@ -32,13 +32,13 @@
   "item.rogues.ruby_double_axe": "红宝石双刃斧",
   "item.rogues.aether_double_axe": "神圣双刃斧",
 
-  "item.rogues.iron_glaive": "铁战戟",
-  "item.rogues.golden_glaive": "金战戟",
-  "item.rogues.diamond_glaive": "钻石战戟",
-  "item.rogues.netherite_glaive": "下界合金战戟",
-  "item.rogues.aeternium_glaive": "太古合金战戟",
-  "item.rogues.ruby_glaive": "红宝石战戟",
-  "item.rogues.aether_glaive": "镀金战戟",
+  "item.rogues.iron_glaive": "铁长柄刀",
+  "item.rogues.golden_glaive": "金长柄刀",
+  "item.rogues.diamond_glaive": "钻石长柄刀",
+  "item.rogues.netherite_glaive": "下界合金长柄刀",
+  "item.rogues.aeternium_glaive": "太古合金长柄刀",
+  "item.rogues.ruby_glaive": "红宝石长柄刀",
+  "item.rogues.aether_glaive": "镀金长柄刀",
 
   "item.rogues.rogue_armor_head": "盗贼面罩",
   "item.rogues.rogue_armor_chest": "盗贼外套",
@@ -73,7 +73,7 @@
   "block.rogues.arms_workbench.hint": "武具商人村民的工作台。",
 
   "spell.rogues.slice_and_dice.name": "切割",
-  "spell.rogues.slice_and_dice.description": "进入战斗姿态，期间每次攻击给予伤害加成，可堆叠{max_stack}层。持续{effect_duration}秒。",
+  "spell.rogues.slice_and_dice.description": "进入战斗姿态，期间每次攻击给予伤害加成，可堆叠{effect_amplifier_cap}层。持续{effect_duration}秒。",
   "effect.rogues.slice_and_dice": "切割",
   "effect.rogues.slice_and_dice.description": "攻击伤害提高",
 
@@ -91,6 +91,8 @@
   "spell.rogues.vanish.description": "进入潜行状态{effect_duration}秒，攻击或受到伤害时效果消失。",
   "effect.rogues.stealth": "潜行",
   "effect.rogues.stealth.description": "对敌人隐形",
+  "effect.rogues.stealth_speed": "迅捷潜行",
+  "effect.rogues.stealth_speed.description": "拥有更高移速的潜行状态",
 
   "spell.rogues.throw.name": "碎裂投掷",
   "spell.rogues.throw.description": "投掷武器攻击目标，造成{damage}点伤害，并降低其{armor_reduction}点护甲，持续{effect_duration}秒。",
@@ -98,7 +100,7 @@
   "effect.rogues.shatter.description": "护甲值降低",
 
   "spell.rogues.shout.name": "挫志怒吼",
-  "spell.rogues.shout.description": "向附近敌人发出怒吼，降低其{damage_reduction}%攻击伤害，持续{effect_duration}秒，并造成少量伤害。",
+  "spell.rogues.shout.description": "向附近敌人发出怒吼，降低其{damage_reduction}攻击伤害，持续{effect_duration}秒，并造成少量伤害。",
   "effect.rogues.demoralize": "挫志",
   "effect.rogues.demoralize.description": "攻击伤害降低",
 
@@ -123,5 +125,13 @@
   "advancements.rpg_series.spell_master_rogue.title": "欺诈大师",
   "advancements.rpg_series.spell_master_rogue.description": "习得所有盗贼技能",
   "advancements.rpg_series.spell_master_warrior.title": "狂暴肆虐！",
-  "advancements.rpg_series.spell_master_warrior.description": "习得所有战士技能"
+  "advancements.rpg_series.spell_master_warrior.description": "习得所有战士技能",
+
+  "advancements.rpg_series.spell_cast_warrior_book.title": "战士的训练",
+  "advancements.rpg_series.spell_cast_warrior_book.description": "使用战士秘籍的一个技能",
+  "advancements.rpg_series.spell_cast_rogue_book.title": "盗贼的训练",
+  "advancements.rpg_series.spell_cast_rogue_book.description": "使用盗贼手册的一个技能",
+
+  "advancements.rpg_series.trade_with_arms_dealer.title": "武具交易",
+  "advancements.rpg_series.trade_with_arms_dealer.description": "与武具商人村民完成一次交易"
 }
