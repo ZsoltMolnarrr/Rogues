@@ -24,7 +24,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Supplier;
 
-public class Armors {
+public class RogueArmors {
 
     public static RegistryEntry<ArmorMaterial> material(
             String name, int protectionHead, int protectionChest, int protectionLegs, int protectionFeet,

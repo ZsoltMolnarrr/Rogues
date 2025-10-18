@@ -4,14 +4,13 @@ import mod.azure.azurelibarmor.rewrite.render.armor.AzArmorRenderer;
 import mod.azure.azurelibarmor.rewrite.render.armor.AzArmorRendererRegistry;
 import net.minecraft.util.Identifier;
 import net.rogues.RoguesMod;
-import net.rogues.block.CustomBlocks;
 import net.rogues.client.armor.RogueArmorRenderer;
 import net.rogues.client.armor.WarriorArmorRenderer;
 import net.rogues.client.effect.ChargeParticles;
 import net.rogues.client.effect.DemoralizeParticles;
 import net.rogues.client.effect.ShatterParticles;
 import net.rogues.effect.RogueEffects;
-import net.rogues.item.armor.Armors;
+import net.rogues.item.armor.RogueArmors;
 import net.spell_engine.api.effect.CustomParticleStatusEffect;
 import net.spell_engine.api.item.armor.Armor;
 import net.spell_engine.api.render.StunParticleSpawner;
@@ -40,12 +39,12 @@ public class RoguesClientMod {
             return description;
         });
 
-        registerArmorRenderer(Armors.RogueArmorSet_t1, RogueArmorRenderer::rogue);
-        registerArmorRenderer(Armors.RogueArmorSet_t2, RogueArmorRenderer::assassin);
-        registerArmorRenderer(Armors.RogueArmorSet_t3, RogueArmorRenderer::netheriteAssassin);
-        registerArmorRenderer(Armors.WarriorArmorSet_t1, WarriorArmorRenderer::warrior);
-        registerArmorRenderer(Armors.WarriorArmorSet_t2, WarriorArmorRenderer::berserker);
-        registerArmorRenderer(Armors.WarriorArmorSet_t3, WarriorArmorRenderer::netheriteBerserker);
+        registerArmorRenderer(RogueArmors.RogueArmorSet_t1, RogueArmorRenderer::rogue);
+        registerArmorRenderer(RogueArmors.RogueArmorSet_t2, RogueArmorRenderer::assassin);
+        registerArmorRenderer(RogueArmors.RogueArmorSet_t3, RogueArmorRenderer::netheriteAssassin);
+        registerArmorRenderer(RogueArmors.WarriorArmorSet_t1, WarriorArmorRenderer::warrior);
+        registerArmorRenderer(RogueArmors.WarriorArmorSet_t2, WarriorArmorRenderer::berserker);
+        registerArmorRenderer(RogueArmors.WarriorArmorSet_t3, WarriorArmorRenderer::netheriteBerserker);
     }
 
     private static void registerArmorRenderer(Armor.Set set, Supplier<AzArmorRenderer> armorRendererSupplier) {

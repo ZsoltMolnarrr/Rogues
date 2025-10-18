@@ -11,8 +11,8 @@ import net.minecraft.item.Items;
 import net.minecraft.recipe.book.RecipeCategory;
 import net.minecraft.registry.RegistryWrapper;
 import net.rogues.RoguesMod;
-import net.rogues.item.Weapons;
-import net.rogues.item.armor.Armors;
+import net.rogues.item.RogueWeapons;
+import net.rogues.item.armor.RogueArmors;
 import net.rogues.util.RogueSounds;
 import net.rogues.util.RogueSpells;
 import net.spell_engine.api.datagen.SimpleSoundGeneratorV2;
@@ -41,8 +41,8 @@ public class RoguesDataGenerator implements DataGeneratorEntrypoint {
 
         @Override
         protected void configure(RegistryWrapper.WrapperLookup wrapperLookup) {
-            generateWeaponTags(Weapons.entries);
-            generateArmorTags(Armors.entries, RPGSeriesItemTags.ArmorMetaType.MELEE);
+            generateWeaponTags(RogueWeapons.entries);
+            generateArmorTags(RogueArmors.entries, RPGSeriesItemTags.ArmorMetaType.MELEE);
         }
     }
 
@@ -84,25 +84,25 @@ public class RoguesDataGenerator implements DataGeneratorEntrypoint {
 
         @Override
         public void generate(RecipeExporter exporter) {
-            disassembleArmor(exporter, Armors.RogueArmorSet_t1, Items.LEATHER);
-            disassembleArmor(exporter, Armors.RogueArmorSet_t2, Items.RABBIT_HIDE);
-            disassembleArmor(exporter, Armors.RogueArmorSet_t3, Items.NETHERITE_SCRAP);
-            disassembleArmor(exporter, Armors.WarriorArmorSet_t1, Items.IRON_NUGGET);
-            disassembleArmor(exporter, Armors.WarriorArmorSet_t2, Items.CHAIN);
-            disassembleArmor(exporter, Armors.WarriorArmorSet_t3, Items.NETHERITE_SCRAP);
+            disassembleArmor(exporter, RogueArmors.RogueArmorSet_t1, Items.LEATHER);
+            disassembleArmor(exporter, RogueArmors.RogueArmorSet_t2, Items.RABBIT_HIDE);
+            disassembleArmor(exporter, RogueArmors.RogueArmorSet_t3, Items.NETHERITE_SCRAP);
+            disassembleArmor(exporter, RogueArmors.WarriorArmorSet_t1, Items.IRON_NUGGET);
+            disassembleArmor(exporter, RogueArmors.WarriorArmorSet_t2, Items.CHAIN);
+            disassembleArmor(exporter, RogueArmors.WarriorArmorSet_t3, Items.NETHERITE_SCRAP);
 
             disassemble(exporter,
-                    Weapons.entries.stream()
+                    RogueWeapons.entries.stream()
                             .filter(entry -> entry.id().getPath().contains("flint"))
                             .map(entry -> (ItemConvertible) entry.item()).toList(),
                     Items.FLINT);
             disassemble(exporter,
-                    Weapons.entries.stream()
+                    RogueWeapons.entries.stream()
                             .filter(entry -> entry.id().getPath().contains("gold"))
                             .map(entry -> (ItemConvertible) entry.item()).toList(),
                     Items.GOLD_NUGGET);
             disassemble(exporter,
-                    Weapons.entries.stream()
+                    RogueWeapons.entries.stream()
                             .filter(entry -> entry.id().getPath().contains("iron"))
                             .map(entry -> (ItemConvertible) entry.item()).toList(),
                     Items.IRON_NUGGET);
@@ -112,7 +112,7 @@ public class RoguesDataGenerator implements DataGeneratorEntrypoint {
 //                            .map(entry -> (ItemConvertible) entry.item()).toList(),
 //                    Items.DIAM);
             disassemble(exporter,
-                    Weapons.entries.stream()
+                    RogueWeapons.entries.stream()
                             .filter(entry -> entry.id().getPath().contains("netherite"))
                             .map(entry -> (ItemConvertible) entry.item()).toList(),
                     Items.NETHERITE_SCRAP);

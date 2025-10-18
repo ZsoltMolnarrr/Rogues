@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.function.Supplier;
 
-public class Weapons {
+public class RogueWeapons {
     public static final ArrayList<Weapon.Entry> entries = new ArrayList<>();
 
     private static Weapon.Entry entry(String name, Weapon.CustomMaterial material, Weapon.Factory factory, WeaponConfig defaults, Equipment.WeaponType type) {
