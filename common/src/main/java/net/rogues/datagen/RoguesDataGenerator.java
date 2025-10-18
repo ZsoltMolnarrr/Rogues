@@ -31,6 +31,7 @@ public class RoguesDataGenerator implements DataGeneratorEntrypoint {
         pack.addProvider(SoundGen::new);
         pack.addProvider(SpellGen::new);
         pack.addProvider(ItemTagGenerator::new);
+        pack.addProvider(RogueRecipes::new);
         pack.addProvider(UnsmeltGenerator::new);
     }
 

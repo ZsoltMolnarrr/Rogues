@@ -1,3 +1,7 @@
+# 2.6.1
+
+- Add vanilla recipe book support (fully datagen recipes)
+
 # 2.6.0
 
 - Migrate to Architectury

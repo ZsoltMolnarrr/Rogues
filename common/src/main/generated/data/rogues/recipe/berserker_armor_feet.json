@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "I": {
+      "item": "minecraft:chain"
+    },
+    "T": {
+      "item": "minecraft:netherite_scrap"
+    }
+  },
+  "pattern": [
+    "T T",
+    "I I"
+  ],
+  "result": {
+    "count": 1,
+    "id": "rogues:berserker_armor_feet"
+  }
+}
