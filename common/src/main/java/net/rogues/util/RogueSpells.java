@@ -3,6 +3,7 @@ package net.rogues.util;
 import net.minecraft.util.Identifier;
 import net.rogues.RoguesMod;
 import net.rogues.effect.RogueEffects;
+import net.spell_engine.api.datagen.SpellBuilder;
 import net.spell_engine.api.render.LightEmission;
 import net.spell_engine.api.spell.ExternalSpellSchools;
 import net.spell_engine.api.spell.Spell;
@@ -310,11 +311,17 @@ public class RogueSpells {
         var description = "";
         var effect = RogueEffects.DEMORALIZE;
         var spell = activeSpellBase();
-        spell.range = 12;
+        var radius = 12F;
+        spell.range = radius;
         spell.tier = 2;
 
         spell.release.animation = "spell_engine:one_handed_shout_release";
         spell.release.sound = new Sound(RogueSounds.SHOUT_RELEASE.id());
+        spell.release.particles = new ParticleBatch[]{
+                SpellBuilder.Particles.area(SpellEngineParticles.area_effect_609.id())
+                        .scale(radius * 0.25F)
+                        .color(Color.RAGE.alpha(0.5F).toRGBA()),
+        };
 
         // Area target
         spell.target.type = Spell.Target.Type.AREA;

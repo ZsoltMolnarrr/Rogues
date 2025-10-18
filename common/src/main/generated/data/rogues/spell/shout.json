@@ -6,6 +6,17 @@
   "active": {},
   "release": {
     "animation": "spell_engine:one_handed_shout_release",
+    "particles": [
+      {
+        "particle_id": "spell_engine:area_effect_609",
+        "origin": "GROUND",
+        "shape": "SPHERE",
+        "count": 1.0,
+        "max_speed": 0.0,
+        "color_rgba": 3208659071,
+        "scale": 3.0
+      }
+    ],
     "sound": {
       "id": "rogues:shout_release"
     }
