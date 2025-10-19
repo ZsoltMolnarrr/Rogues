@@ -6,7 +6,10 @@
       "textures": [
         "rogues:armor/trim/rogue_armor_generic",
         "rogues:armor/trim/assassin_armor_generic",
-        "rogues:armor/trim/netherite_assassin_armor_generic"
+        "rogues:armor/trim/netherite_assassin_armor_generic",
+        "rogues:armor/trim/warrior_armor_generic",
+        "rogues:armor/trim/berserker_armor_generic",
+        "rogues:armor/trim/netherite_berserker_armor_generic"
       ],
       "palette_key": "trims/color_palettes/trim_palette",
       "permutations": {

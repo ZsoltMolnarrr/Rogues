@@ -1,5 +1,6 @@
 # 2.6.1
 
+- Add basic armor trims support for all armor sets
 - Add vanilla recipe book support (fully datagen recipes)
 - Add spellbook descriptions
 - Update translations
