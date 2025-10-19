@@ -2,6 +2,7 @@ package net.rogues.client.armor;
 
 import mod.azure.azurelibarmor.rewrite.render.armor.AzArmorRenderer;
 import mod.azure.azurelibarmor.rewrite.render.armor.AzArmorRendererConfig;
+import mod.azure.azurelibarmor.rewrite.render.layer.AzArmorTrimLayer;
 import net.minecraft.util.Identifier;
 import net.rogues.RoguesMod;
 
@@ -19,7 +20,9 @@ public class RogueArmorRenderer extends AzArmorRenderer {
     public RogueArmorRenderer(String modelName, String textureName) {
         super(AzArmorRendererConfig.builder(
                 Identifier.of(RoguesMod.NAMESPACE, "geo/" + modelName + ".geo.json"),
-                Identifier.of(RoguesMod.NAMESPACE, "textures/armor/" + textureName + ".png")
-        ).build());
+                Identifier.of(RoguesMod.NAMESPACE, "textures/armor/" + textureName + ".png"))
+                .addRenderLayer(new AzArmorTrimLayer(Identifier.of(RoguesMod.NAMESPACE, "armor/trim/" + textureName + "_generic"), false))
+                .build()
+        );
     }
 }
