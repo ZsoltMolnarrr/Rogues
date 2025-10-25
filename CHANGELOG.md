@@ -1,3 +1,7 @@
+# 2.6.2
+
+- Rebalanced vanilla Strength potion effect, now provides % attack damage bonus instead of flat bonus (configurable)
+
 # 2.6.1
 
 - Add basic armor trims support for all armor sets

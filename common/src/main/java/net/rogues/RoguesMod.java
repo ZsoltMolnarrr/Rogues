@@ -3,10 +3,16 @@ package net.rogues;
 import net.fabric_extras.structure_pool.api.StructurePoolConfig;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.fabricmc.loader.api.FabricLoader;
+import net.minecraft.entity.attribute.EntityAttribute;
+import net.minecraft.entity.attribute.EntityAttributeModifier;
+import net.minecraft.entity.attribute.EntityAttributes;
+import net.minecraft.entity.effect.StatusEffect;
+import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.item.ItemStack;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.text.Text;
+import net.minecraft.util.Identifier;
 import net.rogues.block.CustomBlocks;
 import net.rogues.config.Default;
 import net.rogues.config.TweaksConfig;
@@ -59,6 +65,15 @@ public class RoguesMod {
         itemConfig.refresh();
         effectsConfig.refresh();
         villagesConfig.refresh();
+
+        if (tweaksConfig.value.rebalance_strength_attack_damage_multiplier > 0) {
+            StatusEffects.STRENGTH.value().addAttributeModifier(
+                    EntityAttributes.GENERIC_ATTACK_DAMAGE,
+                    Identifier.ofVanilla("strength"),
+                    tweaksConfig.value.rebalance_strength_attack_damage_multiplier,
+                    EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE
+            );
+        }
     }
 
     public static void registerSounds() {
