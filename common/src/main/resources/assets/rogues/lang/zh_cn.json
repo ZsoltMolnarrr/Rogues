@@ -5,6 +5,8 @@
   "item.rogues.warrior_spell_book": "战士秘籍",
   "item.rogues.rogue.spell_scroll": "盗贼技能卷轴",
   "item.rogues.warrior.spell_scroll": "战士技能卷轴",
+  "item.rogues.rogue_spell_book.spell_binding.description": "盗贼的法术书，利用轻便的武器和技能从暗处突袭敌人\n- 优势：高机动性和近战攻击伤害\n- 劣势：防御能力一般，远程攻击能力有限\n- 职业套装：中等盔甲值",
+  "item.rogues.warrior_spell_book.spell_binding.description": "战士的法术书，利用重型武器和技能在近战中占据优势\n- 优势：强力近战攻击与高机动性佳\n- 劣势：有限的远程攻击和辅助技能\n- 职业套装：高盔甲值",
 
   "item.rogues.flint_dagger": "燧石匕首",
   "item.rogues.golden_dagger": "金匕首",
