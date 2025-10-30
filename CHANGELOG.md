@@ -1,3 +1,7 @@
+# 2.6.3
+
+- Update AzureLib Armor
+
 # 2.6.2
 
 - Rebalanced vanilla Strength potion effect, now provides % attack damage bonus instead of flat bonus (configurable)
