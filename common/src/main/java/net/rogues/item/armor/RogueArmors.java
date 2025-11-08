@@ -147,14 +147,14 @@ public class RogueArmors {
                 EntityAttributeModifier.Operation.ADD_VALUE);
     }
 
-    private static AttributeModifier critChanceMultiplier(float value) {
+    private static AttributeModifier critChance(float value) {
         return new AttributeModifier(
                 CRIT_CHANCE_ID.toString(),
                 value,
                 EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE);
     }
 
-    private static AttributeModifier critDamageMultiplier(float value) {
+    private static AttributeModifier critDamage(float value) {
         return new AttributeModifier(
                 CRIT_DAMAGE_ID.toString(),
                 value,
@@ -220,7 +220,7 @@ public class RogueArmors {
                             .addConditional(CRIT_MOD_ID, List.of(
                                     evasionBonus(rogue_t2_evasion),
                                     hasteMultiplier(rogue_t2_haste),
-                                    critChanceMultiplier(rogue_t2_crit_chance)
+                                    critChance(rogue_t2_crit_chance)
                             )),
                     new ArmorSetConfig.Piece(4)
                             .add(evasionBonus(rogue_t2_evasion))
@@ -229,7 +229,7 @@ public class RogueArmors {
                             .addConditional(CRIT_MOD_ID, List.of(
                                     evasionBonus(rogue_t2_evasion),
                                     hasteMultiplier(rogue_t2_haste),
-                                    critChanceMultiplier(rogue_t2_crit_chance)
+                                    critChance(rogue_t2_crit_chance)
                             )),
                     new ArmorSetConfig.Piece(4)
                             .add(evasionBonus(rogue_t2_evasion))
@@ -238,7 +238,7 @@ public class RogueArmors {
                             .addConditional(CRIT_MOD_ID, List.of(
                                     evasionBonus(rogue_t2_evasion),
                                     hasteMultiplier(rogue_t2_haste),
-                                    critChanceMultiplier(rogue_t2_crit_chance)
+                                    critChance(rogue_t2_crit_chance)
                             )),
                     new ArmorSetConfig.Piece(2)
                             .add(evasionBonus(rogue_t2_evasion))
@@ -247,7 +247,7 @@ public class RogueArmors {
                             .addConditional(CRIT_MOD_ID, List.of(
                                     evasionBonus(rogue_t2_evasion),
                                     hasteMultiplier(rogue_t2_haste),
-                                    critChanceMultiplier(rogue_t2_crit_chance)
+                                    critChance(rogue_t2_crit_chance)
                             ))
             ), 2)
             .armorSet();
@@ -265,7 +265,7 @@ public class RogueArmors {
                             .addConditional(CRIT_MOD_ID, List.of(
                                     evasionBonus(rogue_t3_evasion),
                                     hasteMultiplier(rogue_t3_haste),
-                                    critChanceMultiplier(rogue_t3_crit_chance)
+                                    critChance(rogue_t3_crit_chance)
                             )),
                     new ArmorSetConfig.Piece(4)
                             .add(evasionBonus(rogue_t3_evasion))
@@ -274,7 +274,7 @@ public class RogueArmors {
                             .addConditional(CRIT_MOD_ID, List.of(
                                     evasionBonus(rogue_t3_evasion),
                                     hasteMultiplier(rogue_t3_haste),
-                                    critChanceMultiplier(rogue_t3_crit_chance)
+                                    critChance(rogue_t3_crit_chance)
                             )),
                     new ArmorSetConfig.Piece(4)
                             .add(evasionBonus(rogue_t3_evasion))
@@ -283,7 +283,7 @@ public class RogueArmors {
                             .addConditional(CRIT_MOD_ID, List.of(
                                     evasionBonus(rogue_t3_evasion),
                                     hasteMultiplier(rogue_t3_haste),
-                                    critChanceMultiplier(rogue_t3_crit_chance)
+                                    critChance(rogue_t3_crit_chance)
                             )),
                     new ArmorSetConfig.Piece(2)
                             .add(evasionBonus(rogue_t3_evasion))
@@ -292,7 +292,7 @@ public class RogueArmors {
                             .addConditional(CRIT_MOD_ID, List.of(
                                     evasionBonus(rogue_t3_evasion),
                                     hasteMultiplier(rogue_t3_haste),
-                                    critChanceMultiplier(rogue_t3_crit_chance)
+                                    critChance(rogue_t3_crit_chance)
                             ))
             ), 3)
             .armorSet();
@@ -325,28 +325,28 @@ public class RogueArmors {
                             .add(knockbackBonus(warrior_t2_knockback))
                             .addConditional(CRIT_MOD_ID, List.of(
                                     damageMultiplier(warrior_t2_damage),
-                                    critDamageMultiplier(warrior_t2_crit_damage)
+                                    critDamage(warrior_t2_crit_damage)
                             )),
                     new ArmorSetConfig.Piece(8)
                             .add(damageMultiplier(warrior_t2_damage))
                             .add(knockbackBonus(warrior_t2_knockback))
                             .addConditional(CRIT_MOD_ID, List.of(
                                     damageMultiplier(warrior_t2_damage),
-                                    critDamageMultiplier(warrior_t2_crit_damage)
+                                    critDamage(warrior_t2_crit_damage)
                             )),
                     new ArmorSetConfig.Piece(6)
                             .add(damageMultiplier(warrior_t2_damage))
                             .add(knockbackBonus(warrior_t2_knockback))
                             .addConditional(CRIT_MOD_ID, List.of(
                                     damageMultiplier(warrior_t2_damage),
-                                    critDamageMultiplier(warrior_t2_crit_damage)
+                                    critDamage(warrior_t2_crit_damage)
                             )),
                     new ArmorSetConfig.Piece(3)
                             .add(damageMultiplier(warrior_t2_damage))
                             .add(knockbackBonus(warrior_t2_knockback))
                             .addConditional(CRIT_MOD_ID, List.of(
                                     damageMultiplier(warrior_t2_damage),
-                                    critDamageMultiplier(warrior_t2_crit_damage)
+                                    critDamage(warrior_t2_crit_damage)
                             ))
             ), 2)
             .armorSet();
@@ -364,7 +364,7 @@ public class RogueArmors {
                             .addConditional(CRIT_MOD_ID, List.of(
                                     damageMultiplier(warrior_t3_damage),
                                     toughnessBonus(warrior_t3_toughness),
-                                    critDamageMultiplier(warrior_t3_crit_damage)
+                                    critDamage(warrior_t3_crit_damage)
                             )),
                     new ArmorSetConfig.Piece(8)
                             .add(damageMultiplier(warrior_t3_damage))
@@ -373,7 +373,7 @@ public class RogueArmors {
                             .addConditional(CRIT_MOD_ID, List.of(
                                     damageMultiplier(warrior_t3_damage),
                                     toughnessBonus(warrior_t3_toughness),
-                                    critDamageMultiplier(warrior_t3_crit_damage)
+                                    critDamage(warrior_t3_crit_damage)
                             )),
                     new ArmorSetConfig.Piece(6)
                             .add(damageMultiplier(warrior_t3_damage))
@@ -382,7 +382,7 @@ public class RogueArmors {
                             .addConditional(CRIT_MOD_ID, List.of(
                                     damageMultiplier(warrior_t3_damage),
                                     toughnessBonus(warrior_t3_toughness),
-                                    critDamageMultiplier(warrior_t3_crit_damage)
+                                    critDamage(warrior_t3_crit_damage)
                             )),
                     new ArmorSetConfig.Piece(3)
                             .add(damageMultiplier(warrior_t3_damage))
@@ -390,7 +390,7 @@ public class RogueArmors {
                             .addConditional(CRIT_MOD_ID, List.of(
                                     damageMultiplier(warrior_t3_damage),
                                     toughnessBonus(warrior_t3_toughness),
-                                    critDamageMultiplier(warrior_t3_crit_damage)
+                                    critDamage(warrior_t3_crit_damage)
                             ))
             ), 3)
             .armorSet();
