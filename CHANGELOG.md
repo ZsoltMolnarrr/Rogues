@@ -1,3 +1,7 @@
+# 2.6.4
+
+- Rogue and Warrior armor sets now come with Critical Strike bonuses by default (when Critical Strike mod is installed)
+
 # 2.6.3
 
 - Update AzureLib Armor

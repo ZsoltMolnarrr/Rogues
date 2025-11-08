@@ -32,7 +32,7 @@ public class RoguesMod {
     public static final String ID = NAMESPACE;
 
     public static ConfigManager<ConfigFile.Equipment> itemConfig = new ConfigManager<>
-            ("equipment_v2", Default.itemConfig)
+            ("equipment_v3", Default.itemConfig)
             .builder()
             .setDirectory(NAMESPACE)
             .sanitize(true)
