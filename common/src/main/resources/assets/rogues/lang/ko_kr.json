@@ -109,5 +109,32 @@
   "advancements.rpg_series.spell_master_rogue.title": "기만의 대가",
   "advancements.rpg_series.spell_master_rogue.description": "모든 도적 기술을 습득하세요",
   "advancements.rpg_series.spell_master_warrior.title": "광란!",
-  "advancements.rpg_series.spell_master_warrior.description": "모든 전사 기술을 습득하세요"
+  "advancements.rpg_series.spell_master_warrior.description": "모든 전사 기술을 습득하세요",
+
+  "effect.rogues.stealth_speed": "은신 이동 속도",
+  "effect.rogues.stealth_speed.description": "은신 상태에서 더 빠르게 이동합니다",
+  "advancements.rpg_series.spell_cast_warrior_book.title": "전사 훈련",
+  "advancements.rpg_series.spell_cast_warrior_book.description": "전사의 책에서 기술 사용하기",
+  "advancements.rpg_series.spell_cast_rogue_book.title": "도적 훈련",
+  "advancements.rpg_series.spell_cast_rogue_book.description": "도적 지침서에서 기술 사용하기",
+  "advancements.rpg_series.trade_with_arms_dealer.title": "무기 거래",
+  "advancements.rpg_series.trade_with_arms_dealer.description": "무기 상인 주민과 거래하기",
+
+  "item.rogues.aether_double_axe": "신성한 쌍두 도끼",
+  "item.rogues.aether_glaive": "금박 전투 글레이브",
+  "item.rogues.netherite_assassin_armor_head": "네더라이트 암살자 가면",
+  "item.rogues.netherite_assassin_armor_chest": "네더라이트 암살자 튜닉",
+  "item.rogues.netherite_assassin_armor_legs": "네더라이트 암살자 바지",
+  "item.rogues.netherite_assassin_armor_feet": "네더라이트 암살자 부츠",
+  "item.rogues.netherite_berserker_armor_head": "네더라이트 버서커 투구",
+  "item.rogues.netherite_berserker_armor_chest": "네더라이트 버서커 흉갑",
+  "item.rogues.netherite_berserker_armor_legs": "네더라이트 버서커 각반",
+  "item.rogues.netherite_berserker_armor_feet": "네더라이트 버서커 부츠",
+
+  "item.rogues.rogue.spell_scroll": "도적 기술 스크롤",
+  "item.rogues.warrior.spell_scroll": "전사 기술 스크롤",
+  "item.rogues.rogue_spell_book.spell_binding.description": "도적의 주문서, 빠른 무기와 기술로 그림자 속에서 적을 공격합니다\n- 장점: 높은 이동성과 근접 공격 피해\n- 약점: 보통 수준의 방어력과 제한된 원거리 공격\n- 장비: 중간 정도의 방어구",
+  "item.rogues.warrior_spell_book.spell_binding.description": "전사의 주문서, 무거운 무기와 기술로 근접 전투를 지배합니다\n- 장점: 우수한 이동성을 갖춘 강력한 근접 공격\n- 약점: 제한된 원거리 공격과 보조 기술\n- 장비: 무거운 방어구",
+  "item.rogues.aether_dagger": "발키리 시브",
+  "item.rogues.aether_sickle": "천상의 수확자"
 }
