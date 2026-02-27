@@ -1,3 +1,9 @@
+# 2.7.0
+
+DISCLAIMER: All spell books and spell scrolls will be reset, due to major API changes. Some (looted) weapons with custom spell containers become non-functional, and need to be re-obtained. Apologies for the inconvenience.
+
+- Update to use Spell Engine 1.9.0
+
 # 2.6.4
 
 - Rogue and Warrior armor sets now come with Critical Strike bonuses by default (when Critical Strike mod is installed)
