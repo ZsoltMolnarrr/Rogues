@@ -1,0 +1,12 @@
+{
+  "values": [
+    {
+      "id": "#rogues:spell_scroll/rogue",
+      "required": false
+    },
+    {
+      "id": "#rogues:spell_scroll/warrior",
+      "required": false
+    }
+  ]
+}

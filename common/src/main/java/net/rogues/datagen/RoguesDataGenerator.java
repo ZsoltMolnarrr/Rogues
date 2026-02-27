@@ -25,6 +25,7 @@ import net.spell_engine.rpg_series.datagen.RPGSeriesDataGen;
 import net.spell_engine.rpg_series.item.Armor;
 import net.spell_engine.rpg_series.tags.RPGSeriesItemTags;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
@@ -48,12 +49,17 @@ public class RoguesDataGenerator implements DataGeneratorEntrypoint {
         @Override
         protected void configure(RegistryWrapper.WrapperLookup wrapperLookup) {
             var namespace = RoguesMod.NAMESPACE;
+            var treasureTagBuilder = getOrCreateTagBuilder(SpellTags.TREASURE);
+            var processedBooks = new HashSet<RogueSpells.Book>();
             RogueSpells.entries.forEach(entry -> {
                 if (entry.book() != null) {
                     var bookTagKey = SpellTags.spellBook(namespace, entry.book().toString().toLowerCase());
                     getOrCreateTagBuilder(bookTagKey).addOptional(entry.id());
                     var scrollTagKey = SpellTags.spellScroll(namespace, entry.book().toString().toLowerCase());
                     getOrCreateTagBuilder(scrollTagKey).addOptional(entry.id());
+                    if (processedBooks.add(entry.book())) {
+                        treasureTagBuilder.addOptionalTag(scrollTagKey);
+                    }
                 }
             });
         }

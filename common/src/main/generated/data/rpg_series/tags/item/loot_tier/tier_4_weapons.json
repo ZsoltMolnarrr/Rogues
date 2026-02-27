@@ -31,22 +31,6 @@
     {
       "id": "rogues:aeternium_glaive",
       "required": false
-    },
-    {
-      "id": "rogues:aether_dagger",
-      "required": false
-    },
-    {
-      "id": "rogues:aether_sickle",
-      "required": false
-    },
-    {
-      "id": "rogues:aether_double_axe",
-      "required": false
-    },
-    {
-      "id": "rogues:aether_glaive",
-      "required": false
     }
   ]
 }

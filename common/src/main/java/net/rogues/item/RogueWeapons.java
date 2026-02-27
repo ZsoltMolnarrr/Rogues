@@ -93,10 +93,14 @@ public class RogueWeapons {
         }
         if (RoguesMod.tweaksConfig.value.ignore_items_required_mods || FabricLoader.getInstance().isModLoaded(AETHER)) {
             var repair = ingredient("aether:ambrosium_shard", FabricLoader.getInstance().isModLoaded(AETHER), Items.NETHERITE_INGOT);
-            add(Weapons.daggerWithSkill(RoguesMod.NAMESPACE, "aether_dagger", Equipment.Tier.TIER_4, repair).lootTheme(AETHER));
-            add(Weapons.sickleWithSkill(RoguesMod.NAMESPACE, "aether_sickle", Equipment.Tier.TIER_4, repair).lootTheme(AETHER));
-            add(Weapons.doubleAxeWithSkill(RoguesMod.NAMESPACE, "aether_double_axe", Equipment.Tier.TIER_4, repair).lootTheme(AETHER));
-            add(Weapons.glaiveWithSkill(RoguesMod.NAMESPACE, "aether_glaive", Equipment.Tier.TIER_4, repair).lootTheme(AETHER));
+            add(Weapons.daggerWithSkill(RoguesMod.NAMESPACE, "aether_dagger", Equipment.Tier.TIER_4, repair)
+                    .loot(Equipment.LootProperties.of("aether")));
+            add(Weapons.sickleWithSkill(RoguesMod.NAMESPACE, "aether_sickle", Equipment.Tier.TIER_4, repair)
+                    .loot(Equipment.LootProperties.of("aether")));
+            add(Weapons.doubleAxeWithSkill(RoguesMod.NAMESPACE, "aether_double_axe", Equipment.Tier.TIER_4, repair)
+                    .loot(Equipment.LootProperties.of("aether")));
+            add(Weapons.glaiveWithSkill(RoguesMod.NAMESPACE, "aether_glaive", Equipment.Tier.TIER_4, repair)
+                    .loot(Equipment.LootProperties.of("aether")));
         }
         Weapon.register(configs, entries, Group.KEY);
     }

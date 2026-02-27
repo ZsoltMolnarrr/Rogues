@@ -74,7 +74,7 @@ public class RogueSpells {
         var effect = RogueEffects.SLICE_AND_DICE;
         var spell = activeSpellBase();
         spell.range = 0;
-        spell.tier = 1;
+        spell.tier = 2;
 
         spell.release.animation = PlayerAnimation.of("spell_engine:dual_handed_weapon_charge");
         spell.release.sound = new Sound(RogueSounds.SLICE_AND_DICE.id());
@@ -260,7 +260,7 @@ public class RogueSpells {
         var effect = RogueEffects.SHATTER;
         var spell = activeSpellBase();
         spell.range = 24;
-        spell.tier = 1;
+        spell.tier = 2;
 
         spell.active.cast.duration = 0.5F;
         spell.active.cast.animation = PlayerAnimation.of("spell_engine:one_handed_throw_charge");
@@ -322,7 +322,7 @@ public class RogueSpells {
         var spell = activeSpellBase();
         var radius = 12F;
         spell.range = radius;
-        spell.tier = 2;
+        spell.tier = 3;
 
         spell.release.animation = PlayerAnimation.of("spell_engine:one_handed_shout_release");
         spell.release.sound = new Sound(RogueSounds.SHOUT_RELEASE.id());
@@ -375,7 +375,7 @@ public class RogueSpells {
         var effect = RogueEffects.CHARGE;
         var spell = activeSpellBase();
         spell.range = 0;
-        spell.tier = 3;
+        spell.tier = 4;
 
         spell.release.animation = PlayerAnimation.of("spell_engine:one_handed_area_release");
         spell.release.sound = new Sound(RogueSounds.CHARGE_ACTIVATE.id());

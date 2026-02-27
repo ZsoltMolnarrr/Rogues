@@ -1,7 +1,7 @@
 {
   "school": "spell_power:physical_melee",
   "range": 12.0,
-  "tier": 2,
+  "tier": 3,
   "learn": {},
   "active": {},
   "release": {
