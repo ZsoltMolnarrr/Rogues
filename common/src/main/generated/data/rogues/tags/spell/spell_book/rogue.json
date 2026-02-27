@@ -1,0 +1,20 @@
+{
+  "values": [
+    {
+      "id": "rogues:slice_and_dice",
+      "required": false
+    },
+    {
+      "id": "rogues:shock_powder",
+      "required": false
+    },
+    {
+      "id": "rogues:shadow_step",
+      "required": false
+    },
+    {
+      "id": "rogues:vanish",
+      "required": false
+    }
+  ]
+}

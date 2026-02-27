@@ -8,6 +8,7 @@ import net.spell_engine.api.render.LightEmission;
 import net.spell_engine.api.spell.ExternalSpellSchools;
 import net.spell_engine.api.spell.Spell;
 import net.spell_engine.api.spell.fx.ParticleBatch;
+import net.spell_engine.api.spell.fx.PlayerAnimation;
 import net.spell_engine.api.spell.fx.Sound;
 import net.spell_engine.client.gui.SpellTooltip;
 import net.spell_engine.client.util.Color;
@@ -19,8 +20,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RogueSpells {
+    public enum Book { ROGUE, WARRIOR }
     public record Entry(Identifier id, Spell spell, String title, String description,
-                        @Nullable SpellTooltip.DescriptionMutator mutator) { }
+                        @Nullable SpellTooltip.DescriptionMutator mutator,
+                        @Nullable List<Object> weaponGroups,
+                        @Nullable Book book) {
+        public Entry(Identifier id, Spell spell, String title, String description) {
+            this(id, spell, title, description, null, List.of(), null);
+        }
+        public Entry book(Book book) { return new Entry(id, spell, title, description, mutator, weaponGroups, book); }
+    }
     public static final List<Entry> entries = new ArrayList<>();
     private static Entry add(Entry entry) {
         entries.add(entry);
@@ -57,7 +66,7 @@ public class RogueSpells {
         spell.cost.cooldown.duration = duration;
     }
 
-    public static final Entry SLICE_AND_DICE = add(slice_and_dice());
+    public static final Entry SLICE_AND_DICE = add(slice_and_dice().book(Book.ROGUE));
     private static Entry slice_and_dice() {
         var id = Identifier.of(RoguesMod.NAMESPACE, "slice_and_dice");
         var title = "Slice and Dice";
@@ -67,7 +76,7 @@ public class RogueSpells {
         spell.range = 0;
         spell.tier = 1;
 
-        spell.release.animation = "spell_engine:dual_handed_weapon_charge";
+        spell.release.animation = PlayerAnimation.of("spell_engine:dual_handed_weapon_charge");
         spell.release.sound = new Sound(RogueSounds.SLICE_AND_DICE.id());
         spell.release.particles = new ParticleBatch[]{
                 new ParticleBatch(SpellEngineParticles.MagicParticles.get(
@@ -99,10 +108,10 @@ public class RogueSpells {
         configureCooldown(spell, 15);
         spell.cost.exhaust = 0.2F;
 
-        return new Entry(id, spell, title, description, null);
+        return new Entry(id, spell, title, description);
     }
 
-    public static final Entry SHOCK_POWDER = add(shock_powder());
+    public static final Entry SHOCK_POWDER = add(shock_powder().book(Book.ROGUE));
     private static Entry shock_powder() {
         var id = Identifier.of(RoguesMod.NAMESPACE, "shock_powder");
         var title = "Shock Powder";
@@ -112,7 +121,7 @@ public class RogueSpells {
         spell.range = 5;
         spell.tier = 2;
 
-        spell.release.animation = "spell_engine:dual_handed_ground_release";
+        spell.release.animation = PlayerAnimation.of("spell_engine:dual_handed_ground_release");
         spell.release.sound = new Sound(RogueSounds.SHOCK_POWDER_RELEASE.id());
         spell.release.particles = new ParticleBatch[]{
                 new ParticleBatch(SpellEngineParticles.smoke_medium.id().toString(),
@@ -151,10 +160,10 @@ public class RogueSpells {
         configureCooldown(spell, 16);
         spell.cost.exhaust = 0.3F;
 
-        return new Entry(id, spell, title, description, null);
+        return new Entry(id, spell, title, description);
     }
 
-    public static final Entry SHADOW_STEP = add(shadow_step());
+    public static final Entry SHADOW_STEP = add(shadow_step().book(Book.ROGUE));
     private static Entry shadow_step() {
         var id = Identifier.of(RoguesMod.NAMESPACE, "shadow_step");
         var title = "Shadowstep";
@@ -164,7 +173,7 @@ public class RogueSpells {
         spell.range = 15;
         spell.tier = 3;
 
-        spell.release.animation = "spell_engine:one_handed_area_release";
+        spell.release.animation = PlayerAnimation.of("spell_engine:one_handed_area_release");
         spell.release.sound = new Sound(RogueSounds.SHADOW_STEP_DEPART.id());
 
         spell.target.type = Spell.Target.Type.AIM;
@@ -202,10 +211,10 @@ public class RogueSpells {
         configureCooldown(spell, 12);
         spell.cost.exhaust = 0.4F;
 
-        return new Entry(id, spell, title, description, null);
+        return new Entry(id, spell, title, description);
     }
 
-    public static final Entry VANISH = add(vanish());
+    public static final Entry VANISH = add(vanish().book(Book.ROGUE));
     private static Entry vanish() {
         var id = Identifier.of(RoguesMod.NAMESPACE, "vanish");
         var title = "Vanish";
@@ -215,7 +224,7 @@ public class RogueSpells {
         spell.range = 0;
         spell.tier = 4;
 
-        spell.release.animation = "spell_engine:dual_handed_weapon_cross";
+        spell.release.animation = PlayerAnimation.of("spell_engine:dual_handed_weapon_cross");
         spell.release.sound = new Sound(RogueSounds.VANISH_COMBINED.id());
         spell.release.particles = new ParticleBatch[]{
                 new ParticleBatch(SpellEngineParticles.smoke_medium.id().toString(),
@@ -240,10 +249,10 @@ public class RogueSpells {
         configureCooldown(spell, 30);
         spell.cost.exhaust = 0.4F;
 
-        return new Entry(id, spell, title, description, null);
+        return new Entry(id, spell, title, description);
     }
 
-    public static final Entry WARRIOR_THROW = add(warrior_throw());
+    public static final Entry WARRIOR_THROW = add(warrior_throw().book(Book.WARRIOR));
     private static Entry warrior_throw() {
         var id = Identifier.of(RoguesMod.NAMESPACE, "throw");
         var title = "Shattering Throw";
@@ -254,9 +263,9 @@ public class RogueSpells {
         spell.tier = 1;
 
         spell.active.cast.duration = 0.5F;
-        spell.active.cast.animation = "spell_engine:one_handed_throw_charge";
+        spell.active.cast.animation = PlayerAnimation.of("spell_engine:one_handed_throw_charge");
 
-        spell.release.animation = "spell_engine:one_handed_throw_release_instant";
+        spell.release.animation = PlayerAnimation.of("spell_engine:one_handed_throw_release_instant");
         spell.release.sound = new Sound(RogueSounds.THROW.id());
 
         spell.target.type = Spell.Target.Type.AIM;
@@ -301,10 +310,10 @@ public class RogueSpells {
         configureCooldown(spell, 8);
         spell.cost.exhaust = 0.3F;
 
-        return new Entry(id, spell, title, description, null);
+        return new Entry(id, spell, title, description);
     }
 
-    public static final Entry SHOUT = add(shout());
+    public static final Entry SHOUT = add(shout().book(Book.WARRIOR));
     private static Entry shout() {
         var id = Identifier.of(RoguesMod.NAMESPACE, "shout");
         var title = "Shout";
@@ -315,7 +324,7 @@ public class RogueSpells {
         spell.range = radius;
         spell.tier = 2;
 
-        spell.release.animation = "spell_engine:one_handed_shout_release";
+        spell.release.animation = PlayerAnimation.of("spell_engine:one_handed_shout_release");
         spell.release.sound = new Sound(RogueSounds.SHOUT_RELEASE.id());
         spell.release.particles = new ParticleBatch[]{
                 SpellBuilder.Particles.area(SpellEngineParticles.area_effect_609.id())
@@ -355,10 +364,10 @@ public class RogueSpells {
         configureCooldown(spell, 12);
         spell.cost.exhaust = 0.3F;
 
-        return new Entry(id, spell, title, description, null);
+        return new Entry(id, spell, title, description);
     }
 
-    public static final Entry CHARGE = add(charge());
+    public static final Entry CHARGE = add(charge().book(Book.WARRIOR));
     private static Entry charge() {
         var id = Identifier.of(RoguesMod.NAMESPACE, "charge");
         var title = "Charge";
@@ -368,7 +377,7 @@ public class RogueSpells {
         spell.range = 0;
         spell.tier = 3;
 
-        spell.release.animation = "spell_engine:one_handed_area_release";
+        spell.release.animation = PlayerAnimation.of("spell_engine:one_handed_area_release");
         spell.release.sound = new Sound(RogueSounds.CHARGE_ACTIVATE.id());
         spell.release.particles = new ParticleBatch[]{
                 new ParticleBatch(SpellEngineParticles.sign_speed.id().toString(),
@@ -406,6 +415,6 @@ public class RogueSpells {
         configureCooldown(spell, 12);
         spell.cost.exhaust = 0.4F;
 
-        return new Entry(id, spell, title, description, null);
+        return new Entry(id, spell, title, description);
     }
 }

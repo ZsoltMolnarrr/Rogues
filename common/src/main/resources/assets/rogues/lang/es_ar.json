@@ -1,12 +1,12 @@
 {
   "itemGroup.rogues.general": "Rogues & Warriors",
 
-  "item.rogues.rogue_spell_book": "Manual del Ladrón",
-  "item.rogues.warrior_spell_book": "Códice del Guerrero",
-  "item.rogues.rogue.spell_scroll": "Pergamino de Habilidad de Ladrón",
-  "item.rogues.warrior.spell_scroll": "Pergamino de Habilidad de Guerrero",
-"item.rogues.rogue_spell_book.spell_binding.description": "Libro de Hechizos de Pícaros, usando armas rápidas y habilidades para atacar enemigos desde las sombras\n- Fortalezas: Alta movilidad y daño en ataques cuerpo a cuerpo\n- Debilidades: Defensa mediocre y ataques a distancia limitados\n- Equipo: Moderadamente acorazado",
-"item.rogues.warrior_spell_book.spell_binding.description": "Libro de Hechizos de Guerreros, usando armas pesadas y habilidades para dominar el combate cercano\n- Fortalezas: Ataques cuerpo a cuerpo fuertes con buena movilidad\n- Debilidades: Ataques a distancia y habilidades de apoyo limitados\n- Equipo: Fuertemente acorazado",
+  "item.rogues.spell_book/rogue": "Manual del Ladrón",
+  "item.rogues.spell_book/warrior": "Códice del Guerrero",
+  "item.rogues.spell_scroll/rogue": "Pergamino de Habilidad de Ladrón",
+  "item.rogues.spell_scroll/warrior": "Pergamino de Habilidad de Guerrero",
+"item.rogues.spell_book/rogue.spell_binding.description": "Libro de Hechizos de Pícaros, usando armas rápidas y habilidades para atacar enemigos desde las sombras\n- Fortalezas: Alta movilidad y daño en ataques cuerpo a cuerpo\n- Debilidades: Defensa mediocre y ataques a distancia limitados\n- Equipo: Moderadamente acorazado",
+"item.rogues.spell_book/warrior.spell_binding.description": "Libro de Hechizos de Guerreros, usando armas pesadas y habilidades para dominar el combate cercano\n- Fortalezas: Ataques cuerpo a cuerpo fuertes con buena movilidad\n- Debilidades: Ataques a distancia y habilidades de apoyo limitados\n- Equipo: Fuertemente acorazado",
 
   
   "item.rogues.flint_dagger": "Daga de Pedernal",

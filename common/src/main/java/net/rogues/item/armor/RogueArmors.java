@@ -16,8 +16,8 @@ import net.rogues.util.RogueSounds;
 import net.spell_engine.api.config.ArmorSetConfig;
 import net.spell_engine.api.config.AttributeModifier;
 import net.spell_engine.api.entity.SpellEngineAttributes;
-import net.spell_engine.api.item.Equipment;
-import net.spell_engine.api.item.armor.Armor;
+import net.spell_engine.rpg_series.item.Armor;
+import net.spell_engine.rpg_series.item.Equipment;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -5,7 +5,9 @@
   "learn": {},
   "active": {},
   "release": {
-    "animation": "spell_engine:one_handed_shout_release",
+    "animation": {
+      "id": "spell_engine:one_handed_shout_release"
+    },
     "particles": [
       {
         "particle_id": "spell_engine:area_effect_609",

@@ -12,9 +12,9 @@ import net.rogues.client.effect.ShatterParticles;
 import net.rogues.effect.RogueEffects;
 import net.rogues.item.armor.RogueArmors;
 import net.spell_engine.api.effect.CustomParticleStatusEffect;
-import net.spell_engine.api.item.armor.Armor;
 import net.spell_engine.api.render.StunParticleSpawner;
 import net.spell_engine.client.gui.SpellTooltip;
+import net.spell_engine.rpg_series.item.Armor;
 
 import java.util.function.Supplier;
 

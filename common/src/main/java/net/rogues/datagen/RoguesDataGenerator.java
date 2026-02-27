@@ -4,6 +4,7 @@ import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
+import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
 import net.minecraft.data.server.recipe.RecipeExporter;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemConvertible;
@@ -17,8 +18,11 @@ import net.rogues.util.RogueSounds;
 import net.rogues.util.RogueSpells;
 import net.spell_engine.api.datagen.SimpleSoundGeneratorV2;
 import net.spell_engine.api.datagen.SpellGenerator;
-import net.spell_engine.api.item.armor.Armor;
+import net.spell_engine.api.spell.Spell;
+import net.spell_engine.api.spell.registry.SpellRegistry;
+import net.spell_engine.api.tags.SpellTags;
 import net.spell_engine.rpg_series.datagen.RPGSeriesDataGen;
+import net.spell_engine.rpg_series.item.Armor;
 import net.spell_engine.rpg_series.tags.RPGSeriesItemTags;
 
 import java.util.List;
@@ -30,9 +34,29 @@ public class RoguesDataGenerator implements DataGeneratorEntrypoint {
         FabricDataGenerator.Pack pack = fabricDataGenerator.createPack();
         pack.addProvider(SoundGen::new);
         pack.addProvider(SpellGen::new);
+        pack.addProvider(SpellTagGenerator::new);
         pack.addProvider(ItemTagGenerator::new);
         pack.addProvider(RogueRecipes::new);
         pack.addProvider(UnsmeltGenerator::new);
+    }
+
+    public static class SpellTagGenerator extends FabricTagProvider<Spell> {
+        public SpellTagGenerator(FabricDataOutput output, CompletableFuture<RegistryWrapper.WrapperLookup> registriesFuture) {
+            super(output, SpellRegistry.KEY, registriesFuture);
+        }
+
+        @Override
+        protected void configure(RegistryWrapper.WrapperLookup wrapperLookup) {
+            var namespace = RoguesMod.NAMESPACE;
+            RogueSpells.entries.forEach(entry -> {
+                if (entry.book() != null) {
+                    var bookTagKey = SpellTags.spellBook(namespace, entry.book().toString().toLowerCase());
+                    getOrCreateTagBuilder(bookTagKey).addOptional(entry.id());
+                    var scrollTagKey = SpellTags.spellScroll(namespace, entry.book().toString().toLowerCase());
+                    getOrCreateTagBuilder(scrollTagKey).addOptional(entry.id());
+                }
+            });
+        }
     }
 
     public static class ItemTagGenerator extends RPGSeriesDataGen.ItemTagGenerator {

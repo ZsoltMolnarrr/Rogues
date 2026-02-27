@@ -17,7 +17,6 @@ import net.rogues.block.CustomBlocks;
 import net.rogues.config.Default;
 import net.rogues.config.TweaksConfig;
 import net.rogues.effect.RogueEffects;
-import net.rogues.item.Books;
 import net.rogues.item.Group;
 import net.rogues.item.RogueWeapons;
 import net.rogues.item.armor.RogueArmors;
@@ -86,7 +85,6 @@ public class RoguesMod {
                 .displayName(Text.translatable("itemGroup." + NAMESPACE + ".general"))
                 .build();
         CustomBlocks.register();
-        Books.register();
         Registry.register(Registries.ITEM_GROUP, Group.KEY, Group.ROGUES);
         RogueWeapons.register(itemConfig.value.weapons);
         RogueArmors.register(itemConfig.value.armor_sets);

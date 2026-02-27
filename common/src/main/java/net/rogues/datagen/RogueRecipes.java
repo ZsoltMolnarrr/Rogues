@@ -12,7 +12,8 @@ import net.minecraft.registry.tag.ItemTags;
 import net.rogues.block.CustomBlocks;
 import net.rogues.item.RogueWeapons;
 import net.rogues.item.armor.RogueArmors;
-import net.spell_engine.api.item.armor.Armor;
+import net.spell_engine.rpg_series.item.Armor;
+import net.spell_engine.rpg_series.item.Weapon;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -51,7 +52,7 @@ public class RogueRecipes extends FabricRecipeProvider {
     /**
      * Generate dagger recipe with standard pattern: " M" / "S "
      */
-    private void dagger(RecipeExporter exporter, net.spell_engine.api.item.weapon.Weapon.Entry daggerEntry, Item material) {
+    private void dagger(RecipeExporter exporter, Weapon.Entry daggerEntry, Item material) {
         ShapedRecipeJsonBuilder.create(RecipeCategory.COMBAT, daggerEntry.item())
                 .pattern(" M")
                 .pattern("S ")
@@ -74,7 +75,7 @@ public class RogueRecipes extends FabricRecipeProvider {
     /**
      * Generate sickle recipe with standard pattern: "MM" / "S "
      */
-    private void sickle(RecipeExporter exporter, net.spell_engine.api.item.weapon.Weapon.Entry sickleEntry, Item material) {
+    private void sickle(RecipeExporter exporter, Weapon.Entry sickleEntry, Item material) {
         ShapedRecipeJsonBuilder.create(RecipeCategory.COMBAT, sickleEntry.item())
                 .pattern("MM")
                 .pattern("S ")
@@ -107,7 +108,7 @@ public class RogueRecipes extends FabricRecipeProvider {
     /**
      * Generate double axe recipe with standard pattern: "MSM" / "MSM" / " S "
      */
-    private void doubleAxe(RecipeExporter exporter, net.spell_engine.api.item.weapon.Weapon.Entry axeEntry, Item material) {
+    private void doubleAxe(RecipeExporter exporter, Weapon.Entry axeEntry, Item material) {
         ShapedRecipeJsonBuilder.create(RecipeCategory.COMBAT, axeEntry.item())
                 .pattern("MSM")
                 .pattern("MSM")
@@ -131,7 +132,7 @@ public class RogueRecipes extends FabricRecipeProvider {
     /**
      * Generate glaive recipe with standard pattern: " MM" / "MS " / "S  "
      */
-    private void glaive(RecipeExporter exporter, net.spell_engine.api.item.weapon.Weapon.Entry glaiveEntry, Item material) {
+    private void glaive(RecipeExporter exporter, Weapon.Entry glaiveEntry, Item material) {
         ShapedRecipeJsonBuilder.create(RecipeCategory.COMBAT, glaiveEntry.item())
                 .pattern(" MM")
                 .pattern("MS ")

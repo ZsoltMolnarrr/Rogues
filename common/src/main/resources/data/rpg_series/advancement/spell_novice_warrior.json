@@ -20,7 +20,7 @@
       "trigger": "spell_engine:spell_binding",
       "conditions": {
         "complete": false,
-        "spell_pool": "rogues:warrior"
+        "spell_pool": "rogues:spell_book/warrior"
       }
     }
   },

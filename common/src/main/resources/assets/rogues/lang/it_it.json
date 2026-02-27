@@ -1,8 +1,8 @@
 {
   "itemGroup.rogues.general": "Rogues & Warriors",
 
-  "item.rogues.rogue_spell_book": "Manuale da assassino",
-  "item.rogues.warrior_spell_book": "Codice del guerriero",
+  "item.rogues.spell_book/rogue": "Manuale da assassino",
+  "item.rogues.spell_book/warrior": "Codice del guerriero",
 
   "item.rogues.flint_dagger": "Pugnale di selce",
   "item.rogues.golden_dagger": "Pugnale d'oro",

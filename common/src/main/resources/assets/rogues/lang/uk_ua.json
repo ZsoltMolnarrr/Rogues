@@ -1,8 +1,8 @@
 {
   "itemGroup.rogues.general": "Розбійники та воїни",
 
-  "item.rogues.rogue_spell_book": "Книга розбійника",
-  "item.rogues.warrior_spell_book": "Кодекс воїна",
+  "item.rogues.spell_book/rogue": "Книга розбійника",
+  "item.rogues.spell_book/warrior": "Кодекс воїна",
 
   "item.rogues.flint_dagger": "Кременевий кинджал",
   "item.rogues.golden_dagger": "Золотий кинджал",

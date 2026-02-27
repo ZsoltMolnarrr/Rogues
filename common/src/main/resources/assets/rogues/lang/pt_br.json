@@ -1,8 +1,8 @@
 {
   "itemGroup.rogues.general": "Ladrões & Guerreiros",
 
-  "item.rogues.rogue_spell_book": "Manual do ladrão",
-  "item.rogues.warrior_spell_book": "Códex dos guerreiros",
+  "item.rogues.spell_book/rogue": "Manual do ladrão",
+  "item.rogues.spell_book/warrior": "Códex dos guerreiros",
 
   "item.rogues.flint_dagger": "Adaga de sílex",
   "item.rogues.golden_dagger": "Adaga de ouro",

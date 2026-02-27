@@ -1,8 +1,8 @@
 {
   "itemGroup.rogues.general": "Rogues & Warriors",
 
-  "item.rogues.rogue_spell_book": "Manuel des Rôdeurs",
-  "item.rogues.warrior_spell_book": "Codex des Guerriers",
+  "item.rogues.spell_book/rogue": "Manuel des Rôdeurs",
+  "item.rogues.spell_book/warrior": "Codex des Guerriers",
 
   "item.rogues.flint_dagger": "Dague en Silex",
   "item.rogues.golden_dagger": "Dague en Or",
