@@ -18,6 +18,7 @@ import net.rogues.util.RogueSounds;
 import net.rogues.util.RogueSpells;
 import net.spell_engine.api.datagen.SimpleSoundGeneratorV2;
 import net.spell_engine.api.datagen.SpellGenerator;
+import net.spell_engine.api.datagen.WeaponAttributeGenerator;
 import net.spell_engine.api.spell.Spell;
 import net.spell_engine.api.spell.registry.SpellRegistry;
 import net.spell_engine.api.tags.SpellTags;
@@ -39,6 +40,7 @@ public class RoguesDataGenerator implements DataGeneratorEntrypoint {
         pack.addProvider(ItemTagGenerator::new);
         pack.addProvider(RogueRecipes::new);
         pack.addProvider(UnsmeltGenerator::new);
+        pack.addProvider(WeaponGen::new);
     }
 
     public static class SpellTagGenerator extends FabricTagProvider<Spell> {
@@ -185,6 +187,21 @@ public class RoguesDataGenerator implements DataGeneratorEntrypoint {
                     UNSMELT_TIME / 2,
                     "disassemble"
             );
+        }
+    }
+
+    public static class WeaponGen extends WeaponAttributeGenerator {
+        public WeaponGen(FabricDataOutput dataOutput, CompletableFuture<RegistryWrapper.WrapperLookup> registryLookup) {
+            super(dataOutput, registryLookup);
+        }
+
+        @Override
+        public void generateWeaponAttributes(Builder builder) {
+            RogueWeapons.entries.forEach(entry -> {
+                if (entry.weaponAttributesPreset != null && !entry.weaponAttributesPreset.isEmpty()) {
+                    builder.entries.add(new Entry(entry.id(), entry.weaponAttributesPreset));
+                }
+            });
         }
     }
 }
