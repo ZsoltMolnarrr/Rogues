@@ -3,6 +3,9 @@
 DISCLAIMER: All spell books and spell scrolls will be reset, due to major API changes. Some (looted) weapons with custom spell containers become non-functional, and need to be re-obtained. Apologies for the inconvenience.
 
 - Update to use Spell Engine 1.9.0
+- Rogue and warrior spell books now offer 3 spells only, to match other classes
+- Slice and Dice spell is now a spell book choice
+- Melee weapons now come with new melee skills
 
 # 2.6.4
 
