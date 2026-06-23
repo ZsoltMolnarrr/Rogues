@@ -46,33 +46,33 @@ public class RogueWeapons {
 
     // MARK: Daggers
 
-    public static final Weapon.Entry flint_dagger = add(Weapons.daggerWithSkill(RoguesMod.NAMESPACE, "flint_dagger", Equipment.Tier.TIER_0, () -> Ingredient.ofItems(Items.FLINT)));
-    public static final Weapon.Entry iron_dagger = add(Weapons.daggerWithSkill(RoguesMod.NAMESPACE, "iron_dagger", Equipment.Tier.TIER_1, () -> Ingredient.ofItems(Items.IRON_INGOT)));
-    public static final Weapon.Entry golden_dagger = add(Weapons.daggerWithSkill(RoguesMod.NAMESPACE, "golden_dagger", Equipment.Tier.GOLDEN, () -> Ingredient.ofItems(Items.GOLD_INGOT)));
-    public static final Weapon.Entry diamond_dagger = add(Weapons.daggerWithSkill(RoguesMod.NAMESPACE, "diamond_dagger", Equipment.Tier.TIER_2, () -> Ingredient.ofItems(Items.DIAMOND)));
-    public static final Weapon.Entry netherite_dagger = add(Weapons.daggerWithSkill(RoguesMod.NAMESPACE, "netherite_dagger", Equipment.Tier.TIER_3, () -> Ingredient.ofItems(Items.NETHERITE_INGOT)));
+    public static final Weapon.Entry flint_dagger = add(Weapons.daggerWithSkill(RoguesMod.NAMESPACE, "flint_dagger", Equipment.Tier.TIER_0, () -> Ingredient.ofItems(Items.FLINT)).translatedName("Flint Dagger"));
+    public static final Weapon.Entry iron_dagger = add(Weapons.daggerWithSkill(RoguesMod.NAMESPACE, "iron_dagger", Equipment.Tier.TIER_1, () -> Ingredient.ofItems(Items.IRON_INGOT)).translatedName("Iron Dagger"));
+    public static final Weapon.Entry golden_dagger = add(Weapons.daggerWithSkill(RoguesMod.NAMESPACE, "golden_dagger", Equipment.Tier.GOLDEN, () -> Ingredient.ofItems(Items.GOLD_INGOT)).translatedName("Golden Dagger"));
+    public static final Weapon.Entry diamond_dagger = add(Weapons.daggerWithSkill(RoguesMod.NAMESPACE, "diamond_dagger", Equipment.Tier.TIER_2, () -> Ingredient.ofItems(Items.DIAMOND)).translatedName("Diamond Dagger"));
+    public static final Weapon.Entry netherite_dagger = add(Weapons.daggerWithSkill(RoguesMod.NAMESPACE, "netherite_dagger", Equipment.Tier.TIER_3, () -> Ingredient.ofItems(Items.NETHERITE_INGOT)).translatedName("Netherite Dagger"));
 
     // MARK: Sickles
 
-    public static final Weapon.Entry iron_sickle = add(Weapons.sickleWithSkill(RoguesMod.NAMESPACE, "iron_sickle", Equipment.Tier.TIER_1, () -> Ingredient.ofItems(Items.IRON_INGOT)));
-    public static final Weapon.Entry golden_sickle = add(Weapons.sickleWithSkill(RoguesMod.NAMESPACE, "golden_sickle", Equipment.Tier.GOLDEN, () -> Ingredient.ofItems(Items.GOLD_INGOT)));
-    public static final Weapon.Entry diamond_sickle = add(Weapons.sickleWithSkill(RoguesMod.NAMESPACE, "diamond_sickle", Equipment.Tier.TIER_2, () -> Ingredient.ofItems(Items.DIAMOND)));
-    public static final Weapon.Entry netherite_sickle = add(Weapons.sickleWithSkill(RoguesMod.NAMESPACE, "netherite_sickle", Equipment.Tier.TIER_3, () -> Ingredient.ofItems(Items.NETHERITE_INGOT)));
+    public static final Weapon.Entry iron_sickle = add(Weapons.sickleWithSkill(RoguesMod.NAMESPACE, "iron_sickle", Equipment.Tier.TIER_1, () -> Ingredient.ofItems(Items.IRON_INGOT)).translatedName("Iron Sickle"));
+    public static final Weapon.Entry golden_sickle = add(Weapons.sickleWithSkill(RoguesMod.NAMESPACE, "golden_sickle", Equipment.Tier.GOLDEN, () -> Ingredient.ofItems(Items.GOLD_INGOT)).translatedName("Golden Sickle"));
+    public static final Weapon.Entry diamond_sickle = add(Weapons.sickleWithSkill(RoguesMod.NAMESPACE, "diamond_sickle", Equipment.Tier.TIER_2, () -> Ingredient.ofItems(Items.DIAMOND)).translatedName("Diamond Sickle"));
+    public static final Weapon.Entry netherite_sickle = add(Weapons.sickleWithSkill(RoguesMod.NAMESPACE, "netherite_sickle", Equipment.Tier.TIER_3, () -> Ingredient.ofItems(Items.NETHERITE_INGOT)).translatedName("Netherite Sickle"));
 
     // MARK: Double Axe
 
-    public static final Weapon.Entry stone_double_axe = add(Weapons.doubleAxeWithSkill(RoguesMod.NAMESPACE, "stone_double_axe", Equipment.Tier.TIER_0, () -> Ingredient.fromTag(ItemTags.STONE_TOOL_MATERIALS)));
-    public static final Weapon.Entry iron_double_axe = add(Weapons.doubleAxeWithSkill(RoguesMod.NAMESPACE, "iron_double_axe", Equipment.Tier.TIER_1, () -> Ingredient.ofItems(Items.IRON_INGOT)));
-    public static final Weapon.Entry golden_double_axe = add(Weapons.doubleAxeWithSkill(RoguesMod.NAMESPACE, "golden_double_axe", Equipment.Tier.GOLDEN, () -> Ingredient.ofItems(Items.GOLD_INGOT)));
-    public static final Weapon.Entry diamond_double_axe = add(Weapons.doubleAxeWithSkill(RoguesMod.NAMESPACE, "diamond_double_axe", Equipment.Tier.TIER_2, () -> Ingredient.ofItems(Items.DIAMOND)));
-    public static final Weapon.Entry netherite_double_axe = add(Weapons.doubleAxeWithSkill(RoguesMod.NAMESPACE, "netherite_double_axe", Equipment.Tier.TIER_3, () -> Ingredient.ofItems(Items.NETHERITE_INGOT)));
+    public static final Weapon.Entry stone_double_axe = add(Weapons.doubleAxeWithSkill(RoguesMod.NAMESPACE, "stone_double_axe", Equipment.Tier.TIER_0, () -> Ingredient.fromTag(ItemTags.STONE_TOOL_MATERIALS)).translatedName("Stone Double Axe"));
+    public static final Weapon.Entry iron_double_axe = add(Weapons.doubleAxeWithSkill(RoguesMod.NAMESPACE, "iron_double_axe", Equipment.Tier.TIER_1, () -> Ingredient.ofItems(Items.IRON_INGOT)).translatedName("Iron Double Axe"));
+    public static final Weapon.Entry golden_double_axe = add(Weapons.doubleAxeWithSkill(RoguesMod.NAMESPACE, "golden_double_axe", Equipment.Tier.GOLDEN, () -> Ingredient.ofItems(Items.GOLD_INGOT)).translatedName("Golden Double Axe"));
+    public static final Weapon.Entry diamond_double_axe = add(Weapons.doubleAxeWithSkill(RoguesMod.NAMESPACE, "diamond_double_axe", Equipment.Tier.TIER_2, () -> Ingredient.ofItems(Items.DIAMOND)).translatedName("Diamond Double Axe"));
+    public static final Weapon.Entry netherite_double_axe = add(Weapons.doubleAxeWithSkill(RoguesMod.NAMESPACE, "netherite_double_axe", Equipment.Tier.TIER_3, () -> Ingredient.ofItems(Items.NETHERITE_INGOT)).translatedName("Netherite Double Axe"));
 
     // MARK: Glaives
 
-    public static final Weapon.Entry iron_glaive = add(Weapons.glaiveWithSkill(RoguesMod.NAMESPACE, "iron_glaive", Equipment.Tier.TIER_1, () -> Ingredient.ofItems(Items.IRON_INGOT)));
-    public static final Weapon.Entry golden_glaive = add(Weapons.glaiveWithSkill(RoguesMod.NAMESPACE, "golden_glaive", Equipment.Tier.GOLDEN, () -> Ingredient.ofItems(Items.GOLD_INGOT)));
-    public static final Weapon.Entry diamond_glaive = add(Weapons.glaiveWithSkill(RoguesMod.NAMESPACE, "diamond_glaive", Equipment.Tier.TIER_2, () -> Ingredient.ofItems(Items.DIAMOND)));
-    public static final Weapon.Entry netherite_glaive = add(Weapons.glaiveWithSkill(RoguesMod.NAMESPACE, "netherite_glaive", Equipment.Tier.TIER_3, () -> Ingredient.ofItems(Items.NETHERITE_INGOT)));
+    public static final Weapon.Entry iron_glaive = add(Weapons.glaiveWithSkill(RoguesMod.NAMESPACE, "iron_glaive", Equipment.Tier.TIER_1, () -> Ingredient.ofItems(Items.IRON_INGOT)).translatedName("Iron Glaive"));
+    public static final Weapon.Entry golden_glaive = add(Weapons.glaiveWithSkill(RoguesMod.NAMESPACE, "golden_glaive", Equipment.Tier.GOLDEN, () -> Ingredient.ofItems(Items.GOLD_INGOT)).translatedName("Golden Glaive"));
+    public static final Weapon.Entry diamond_glaive = add(Weapons.glaiveWithSkill(RoguesMod.NAMESPACE, "diamond_glaive", Equipment.Tier.TIER_2, () -> Ingredient.ofItems(Items.DIAMOND)).translatedName("Diamond Glaive"));
+    public static final Weapon.Entry netherite_glaive = add(Weapons.glaiveWithSkill(RoguesMod.NAMESPACE, "netherite_glaive", Equipment.Tier.TIER_3, () -> Ingredient.ofItems(Items.NETHERITE_INGOT)).translatedName("Netherite Glaive"));
 
     // MARK: Register
 

@@ -3,6 +3,7 @@ package net.rogues.datagen;
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
+import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
 import net.minecraft.data.server.recipe.RecipeExporter;
@@ -11,11 +12,14 @@ import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.Items;
 import net.minecraft.recipe.book.RecipeCategory;
 import net.minecraft.registry.RegistryWrapper;
+import net.minecraft.util.Identifier;
 import net.rogues.RoguesMod;
+import net.rogues.effect.RogueEffects;
 import net.rogues.item.RogueWeapons;
 import net.rogues.item.armor.RogueArmors;
 import net.rogues.util.RogueSounds;
 import net.rogues.util.RogueSpells;
+import net.spell_engine.api.datagen.NamespacedLangGenerator;
 import net.spell_engine.api.datagen.SimpleSoundGeneratorV2;
 import net.spell_engine.api.datagen.SpellGenerator;
 import net.spell_engine.api.datagen.WeaponAttributeGenerator;
@@ -41,6 +45,8 @@ public class RoguesDataGenerator implements DataGeneratorEntrypoint {
         pack.addProvider(RogueRecipes::new);
         pack.addProvider(UnsmeltGenerator::new);
         pack.addProvider(WeaponGen::new);
+        pack.addProvider(RoguesAdvancements::new);
+        pack.addProvider(LangGen::new);
     }
 
     public static class SpellTagGenerator extends FabricTagProvider<Spell> {
@@ -202,6 +208,96 @@ public class RoguesDataGenerator implements DataGeneratorEntrypoint {
                     builder.entries.add(new Entry(entry.id(), entry.weaponAttributesPreset));
                 }
             });
+        }
+    }
+
+    /**
+     * Generates the {@code en_us.json} language file from the in-code content definitions
+     * (spells, status effects, weapons, armor, spell books) plus the advancement tree and a few ad-hoc
+     * strings (creative tab, villager, workbench) that have no dedicated content entry.
+     */
+    public static class LangGen extends NamespacedLangGenerator {
+        public LangGen(FabricDataOutput dataOutput, CompletableFuture<RegistryWrapper.WrapperLookup> registryLookup) {
+            super(dataOutput, registryLookup, RoguesMod.NAMESPACE);
+        }
+
+        @Override
+        public void generateTranslations(RegistryWrapper.WrapperLookup registryLookup, FabricLanguageProvider.TranslationBuilder builder) {
+            var namespace = RoguesMod.NAMESPACE;
+
+            // Creative tab
+            builder.add("itemGroup." + namespace + ".general", "Rogues & Warriors");
+
+            // Spell books & scrolls (one generated item per book)
+            for (var book : RogueSpells.Book.values()) {
+                var key = book.name().toLowerCase();
+                builder.add("item." + namespace + ".spell_book/" + key, book.bookName);
+                builder.add("item." + namespace + ".spell_scroll/" + key, book.scrollName);
+                builder.add("item." + namespace + ".spell_book/" + key + ".spell_binding.description", book.bindingDescription);
+            }
+
+            // Spells (only those given a display name in code)
+            for (var entry : RogueSpells.entries) {
+                if (entry.title() == null || entry.title().isEmpty()) {
+                    continue;
+                }
+                var path = entry.id().getPath();
+                builder.add("spell." + namespace + "." + path + ".name", entry.title());
+                builder.add("spell." + namespace + "." + path + ".description", entry.description());
+            }
+
+            // Status effects
+            for (var entry : RogueEffects.entries) {
+                var path = entry.id.getPath();
+                builder.add("effect." + namespace + "." + path, entry.title);
+                builder.add("effect." + namespace + "." + path + ".description", entry.description);
+            }
+
+            // Weapons — code-sourced display names
+            RogueWeapons.entries.forEach(entry -> addItemName(builder, entry.id(), entry.translatedName()));
+            // Conditional weapons are only registered when their host mod is present, so they are absent
+            // from the weapon list at data-gen time. Their names are provided directly.
+            builder.add("item." + namespace + ".ruby_dagger", "Ruby Dagger");
+            builder.add("item." + namespace + ".aeternium_dagger", "Aeternium Dagger");
+            builder.add("item." + namespace + ".aether_dagger", "Valkyrie Shiv");
+            builder.add("item." + namespace + ".ruby_sickle", "Ruby Sickle");
+            builder.add("item." + namespace + ".aeternium_sickle", "Aeternium Sickle");
+            builder.add("item." + namespace + ".aether_sickle", "Heavenly Harvester");
+            builder.add("item." + namespace + ".ruby_double_axe", "Ruby Double Axe");
+            builder.add("item." + namespace + ".aeternium_double_axe", "Aeternium Double Axe");
+            builder.add("item." + namespace + ".aether_double_axe", "Holy Double Axe");
+            builder.add("item." + namespace + ".ruby_glaive", "Ruby Glaive");
+            builder.add("item." + namespace + ".aeternium_glaive", "Aeternium Glaive");
+            builder.add("item." + namespace + ".aether_glaive", "Gilded Battle Glaive");
+
+            // Armor sets (per piece)
+            for (var entry : RogueArmors.entries) {
+                var set = entry.armorSet();
+                addItemName(builder, set.idOf(set.head), set.headTranslation);
+                addItemName(builder, set.idOf(set.chest), set.chestTranslation);
+                addItemName(builder, set.idOf(set.legs), set.legsTranslation);
+                addItemName(builder, set.idOf(set.feet), set.feetTranslation);
+            }
+
+            // Arms Dealer villager (several key formats are referenced across versions) + workbench
+            builder.add("entity.minecraft.villager.arms_merchant", "Arms Dealer");
+            builder.add("entity.minecraft.villager." + namespace + ".arms_merchant", "Arms Dealer");
+            builder.add("entity.minecraft.villager." + namespace + ":arms_merchant", "Arms Dealer");
+            builder.add("block." + namespace + ".arms_workbench", "Arms Station");
+            builder.add("block." + namespace + ".arms_workbench.hint", "Workbench for Arms Merchant Villagers.");
+
+            // Advancements (generated alongside the rpg_series advancement JSONs)
+            for (var advancement : RoguesAdvancements.entries()) {
+                builder.add(advancement.titleKey(), advancement.title());
+                builder.add(advancement.descriptionKey(), advancement.description());
+            }
+        }
+
+        private static void addItemName(FabricLanguageProvider.TranslationBuilder builder, Identifier id, String name) {
+            if (name == null || name.isEmpty()) {
+                return;
+            }
+            builder.add("item." + id.getNamespace() + "." + id.getPath(), name);
         }
     }
 }

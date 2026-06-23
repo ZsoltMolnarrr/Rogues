@@ -24,7 +24,7 @@ public class RogueEffects {
 
     public static Effects.Entry SLICE_AND_DICE = add(new Effects.Entry(
             Identifier.of(RoguesMod.NAMESPACE, "slice_and_dice"),
-            "Slice and Dice",
+            "Slice & Dice",
             "Increases attack damage",
             new CustomStatusEffect(StatusEffectCategory.BENEFICIAL, 0x993333),
             new EffectConfig(List.of(
@@ -57,7 +57,7 @@ public class RogueEffects {
 
     public static Effects.Entry SHADOW_STEP = add(new Effects.Entry(
             Identifier.of(RoguesMod.NAMESPACE, "shadow_step"),
-            "Shadow Step",
+            "Shadowstep",
             "Untraceable",
             new CustomStatusEffect(StatusEffectCategory.BENEFICIAL, 0xAAAAAA)
     ));
@@ -120,7 +120,7 @@ public class RogueEffects {
     public static final Effects.Entry CHARGE = add(new Effects.Entry(
             Identifier.of(RoguesMod.NAMESPACE, "charge"),
             "Charge",
-            "Increased movement",
+            "Increases movement speed",
             new ChargeEffect(StatusEffectCategory.BENEFICIAL, 0xAAAAAA),
             new EffectConfig(List.of(
                     new AttributeModifier(

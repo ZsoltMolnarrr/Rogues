@@ -1,0 +1,29 @@
+{
+  "parent": "rpg_series:path_choose_rogue",
+  "criteria": {
+    "bind": {
+      "conditions": {
+        "complete": false,
+        "spell_pool": "rogues:spell_book/rogue"
+      },
+      "trigger": "spell_engine:spell_binding"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.rpg_series.spell_novice_rogue.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "rogues:iron_dagger"
+    },
+    "title": {
+      "translate": "advancements.rpg_series.spell_novice_rogue.title"
+    }
+  },
+  "requirements": [
+    [
+      "bind"
+    ]
+  ]
+}

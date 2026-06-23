@@ -1,0 +1,33 @@
+{
+  "parent": "rpg_series:spell_novice_rogue",
+  "criteria": {
+    "cast": {
+      "conditions": {
+        "spell": "#rogues:spell_book/rogue"
+      },
+      "trigger": "spell_engine:spell_cast"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "translate": "advancements.rpg_series.spell_cast_rogue_book.description"
+    },
+    "icon": {
+      "components": {
+        "spell_engine:item_model": "rogues:item/spell_book/rogue"
+      },
+      "count": 1,
+      "id": "spell_engine:spell_book"
+    },
+    "show_toast": false,
+    "title": {
+      "translate": "advancements.rpg_series.spell_cast_rogue_book.title"
+    }
+  },
+  "requirements": [
+    [
+      "cast"
+    ]
+  ]
+}

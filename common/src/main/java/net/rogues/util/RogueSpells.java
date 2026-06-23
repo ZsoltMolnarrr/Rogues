@@ -20,7 +20,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RogueSpells {
-    public enum Book { ROGUE, WARRIOR }
+    public enum Book {
+        ROGUE("Rogue Handbook", "Rogue Skill Scroll",
+                "Spell Book of Rogues, using quick weapons and skills to strike enemies from the shadows\n- Strengths: High mobility and melee attack damage\n- Weaknesses: Mediocre defense and limited ranged attacks\n- Equipment: Moderately armored"),
+        WARRIOR("Warriors' Codex", "Warriors Skill Scroll",
+                "Spell Book of Warriors, using heavy weapons and skills to dominate close combat\n- Strengths: Strong melee attacks with good mobility\n- Weaknesses: Limited ranged attacks and supportive skills\n- Equipment: Heavily armored");
+
+        public final String bookName;
+        public final String scrollName;
+        public final String bindingDescription;
+        Book(String bookName, String scrollName, String bindingDescription) {
+            this.bookName = bookName;
+            this.scrollName = scrollName;
+            this.bindingDescription = bindingDescription;
+        }
+    }
     public record Entry(Identifier id, Spell spell, String title, String description,
                         @Nullable SpellTooltip.DescriptionMutator mutator,
                         @Nullable List<Object> weaponGroups,
@@ -69,8 +83,8 @@ public class RogueSpells {
     public static final Entry SLICE_AND_DICE = add(slice_and_dice().book(Book.ROGUE));
     private static Entry slice_and_dice() {
         var id = Identifier.of(RoguesMod.NAMESPACE, "slice_and_dice");
-        var title = "Slice and Dice";
-        var description = "";
+        var title = "Slice & Dice";
+        var description = "Enter a battle trance, during which your attacks will each grant extra power, stacking up to {effect_amplifier_cap} times. Expires after {effect_duration} sec.";
         var effect = RogueEffects.SLICE_AND_DICE;
         var spell = activeSpellBase();
         spell.range = 0;
@@ -115,7 +129,7 @@ public class RogueSpells {
     private static Entry shock_powder() {
         var id = Identifier.of(RoguesMod.NAMESPACE, "shock_powder");
         var title = "Shock Powder";
-        var description = "";
+        var description = "Stuns nearby enemies for {effect_duration} sec.";
         var effect = RogueEffects.SHOCK;
         var spell = activeSpellBase();
         spell.range = 5;
@@ -167,7 +181,7 @@ public class RogueSpells {
     private static Entry shadow_step() {
         var id = Identifier.of(RoguesMod.NAMESPACE, "shadow_step");
         var title = "Shadowstep";
-        var description = "";
+        var description = "Step through the shadows to appear behind your target.";
         var effect = RogueEffects.SHADOW_STEP;
         var spell = activeSpellBase();
         spell.range = 15;
@@ -218,7 +232,7 @@ public class RogueSpells {
     private static Entry vanish() {
         var id = Identifier.of(RoguesMod.NAMESPACE, "vanish");
         var title = "Vanish";
-        var description = "";
+        var description = "Vanish from sight, entering stealth for {effect_duration} sec. Performing any action or taking damage will break the effect.";
         var effect = RogueEffects.STEALTH;
         var spell = activeSpellBase();
         spell.range = 0;
@@ -256,7 +270,7 @@ public class RogueSpells {
     private static Entry warrior_throw() {
         var id = Identifier.of(RoguesMod.NAMESPACE, "throw");
         var title = "Shattering Throw";
-        var description = "";
+        var description = "Throw your weapon at the target, dealing {damage} damage and reducing their armor by {armor_reduction} for {effect_duration} sec.";
         var effect = RogueEffects.SHATTER;
         var spell = activeSpellBase();
         spell.range = 24;
@@ -316,8 +330,8 @@ public class RogueSpells {
     public static final Entry SHOUT = add(shout().book(Book.WARRIOR));
     private static Entry shout() {
         var id = Identifier.of(RoguesMod.NAMESPACE, "shout");
-        var title = "Shout";
-        var description = "";
+        var title = "Demoralizing Shout";
+        var description = "Shout at nearby enemies, reducing their attack damage by {damage_reduction} for {effect_duration} sec, and dealing a small amount of damage.";
         var effect = RogueEffects.DEMORALIZE;
         var spell = activeSpellBase();
         var radius = 12F;
@@ -371,7 +385,7 @@ public class RogueSpells {
     private static Entry charge() {
         var id = Identifier.of(RoguesMod.NAMESPACE, "charge");
         var title = "Charge";
-        var description = "";
+        var description = "Increases movement speed and knockback resistance, frees you from movement impairing effects, lasts for {effect_duration} sec.";
         var effect = RogueEffects.CHARGE;
         var spell = activeSpellBase();
         spell.range = 0;

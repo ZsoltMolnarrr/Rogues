@@ -1,0 +1,31 @@
+{
+  "parent": "rpg_series:classes",
+  "criteria": {
+    "book": {
+      "conditions": {
+        "spell_pool": "rogues:spell_book/warrior"
+      },
+      "trigger": "spell_engine:spell_book_creation"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.rpg_series.path_choose_warrior.description"
+    },
+    "icon": {
+      "components": {
+        "spell_engine:item_model": "rogues:item/spell_book/warrior"
+      },
+      "count": 1,
+      "id": "spell_engine:spell_book"
+    },
+    "title": {
+      "translate": "advancements.rpg_series.path_choose_warrior.title"
+    }
+  },
+  "requirements": [
+    [
+      "book"
+    ]
+  ]
+}

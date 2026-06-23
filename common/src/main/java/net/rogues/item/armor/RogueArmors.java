@@ -205,6 +205,7 @@ public class RogueArmors {
                             .add(evasionBonus(rogue_t1_evasion))
                             .add(hasteMultiplier(rogue_t1_haste))
             ),1)
+            .translatedName("Rogue Mask", "Rogue Tunic", "Rogue Pants", "Rogue Boots")
             .armorSet();
 
     public static final Armor.Set RogueArmorSet_t2 = create(
@@ -250,6 +251,7 @@ public class RogueArmors {
                                     critChance(rogue_t2_crit_chance)
                             ))
             ), 2)
+            .translatedName("Assassin Mask", "Assassin Tunic", "Assassin Pants", "Assassin Boots")
             .armorSet();
 
     public static final Armor.Set RogueArmorSet_t3 = create(
@@ -295,6 +297,7 @@ public class RogueArmors {
                                     critChance(rogue_t3_crit_chance)
                             ))
             ), 3)
+            .translatedName("Netherite Assassin Mask", "Netherite Assassin Tunic", "Netherite Assassin Pants", "Netherite Assassin Boots")
             .armorSet();
 
     public static final Armor.Set WarriorArmorSet_t1 = create(
@@ -312,6 +315,7 @@ public class RogueArmors {
                     new ArmorSetConfig.Piece(1)
                             .add(damageMultiplier(warrior_t1_damage))
             ), 1)
+            .translatedName("Warrior Helmet", "Warrior Chestplate", "Warrior Leggings", "Warrior Boots")
             .armorSet();
 
     public static final Armor.Set WarriorArmorSet_t2 = create(
@@ -349,6 +353,7 @@ public class RogueArmors {
                                     critDamage(warrior_t2_crit_damage)
                             ))
             ), 2)
+            .translatedName("Berserker Helmet", "Berserker Chestplate", "Berserker Leggings", "Berserker Boots")
             .armorSet();
 
     public static final Armor.Set WarriorArmorSet_t3 = create(
@@ -393,6 +398,7 @@ public class RogueArmors {
                                     critDamage(warrior_t3_crit_damage)
                             ))
             ), 3)
+            .translatedName("Netherite Berserker Helmet", "Netherite Berserker Chestplate", "Netherite Berserker Leggings", "Netherite Berserker Boots")
             .armorSet();
 
     public static void register(Map<String, ArmorSetConfig> configs) {
