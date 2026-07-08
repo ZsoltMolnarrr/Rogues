@@ -16,6 +16,9 @@
       },
       "animation": {
         "id": "spell_engine:one_handed_throw_charge"
+      },
+      "sound": {
+        "id": "rogues:net_casting"
       }
     }
   },
@@ -62,9 +65,6 @@
           "spell_power_coefficient": 0.1,
           "knockback": 0.1
         }
-      },
-      "sound": {
-        "id": "rogues:throw_impact"
       }
     },
     {
@@ -78,6 +78,9 @@
             "spell_power_multiplier": 2.0
           }
         }
+      },
+      "sound": {
+        "id": "rogues:net_impact"
       }
     }
   ],

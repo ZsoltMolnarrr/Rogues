@@ -412,6 +412,7 @@ public class RogueSpells {
         charge.bonus.range_add = 12F; // 16 -> 28 blocks at full charge
 
         spell.active.cast.animation = PlayerAnimation.of("spell_engine:one_handed_throw_charge");
+        spell.active.cast.sound = Sound.of(RogueSounds.NET_CASTING.id());
 
         spell.release.animation = PlayerAnimation.of("spell_engine:one_handed_throw_release_instant");
         spell.release.sound = Sound.of(RogueSounds.THROW.id());
@@ -439,13 +440,13 @@ public class RogueSpells {
         damage.action.damage = new Spell.Impact.Action.Damage();
         damage.action.damage.spell_power_coefficient = 0.1F; // full-charge value
         damage.action.damage.knockback = 0.1F; // a net tangles, it doesn't shove
-        damage.sound = Sound.of(RogueSounds.THROW_IMPACT.id());
 
         // Rooted, not stunned — the netted target can still fight back. Gated so it can't pin a boss.
         var root = createEffectImpact(effect.id, 4);
         root.action.status_effect.apply_limit = new Spell.Impact.Action.StatusEffect.ApplyLimit();
         root.action.status_effect.apply_limit.health_base = 100;
         root.action.status_effect.apply_limit.spell_power_multiplier = 2F;
+        root.sound = Sound.of(RogueSounds.NET_IMPACT.id());
 
         spell.impacts = List.of(damage, root);
 

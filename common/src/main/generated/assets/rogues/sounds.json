@@ -38,6 +38,16 @@
       "rogues:demoralize_impact"
     ]
   },
+  "net_casting": {
+    "sounds": [
+      "rogues:net_casting"
+    ]
+  },
+  "net_impact": {
+    "sounds": [
+      "rogues:net_impact"
+    ]
+  },
   "rogue_armor": {
     "sounds": [
       "rogues:rogue_armor"

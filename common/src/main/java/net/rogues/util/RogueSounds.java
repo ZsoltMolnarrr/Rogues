@@ -74,6 +74,8 @@ public class RogueSounds {
     public static final Entry VANISH_RELEASE = add(new Entry("vanish_release"));
     public static final Entry VANISH_COMBINED = add(new Entry("vanish_combined"));
     public static final Entry THROW = add(new Entry("throw"));
+    public static final Entry NET_CASTING = add(new Entry("net_casting"));
+    public static final Entry NET_IMPACT = add(new Entry("net_impact"));
     public static final Entry THROW_IMPACT = add(new Entry("throw_impact"));
     public static final Entry SHOUT_RELEASE = add(new Entry("shout_release"));
     public static final Entry DEMORALIZE_IMPACT = add(new Entry("demoralize_impact"));
