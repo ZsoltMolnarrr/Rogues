@@ -38,8 +38,9 @@
     "type": "PROJECTILE",
     "projectile": {
       "projectile": {
+        "travel_sound_interval": 8,
         "travel_sound": {
-          "id": "rogues:throw"
+          "id": "rogues:net_travel"
         },
         "client_data": {
           "composite_model": {

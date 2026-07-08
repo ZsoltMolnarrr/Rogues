@@ -431,7 +431,8 @@ public class RogueSpells {
                 1F, LightEmission.NONE);
         model.rotate_degrees_per_tick = 12; // a thrown net tumbles slowly
         projectile.client_data.composite_model = SpellBuilder.ProjectileModels.composite(model);
-        projectile.travel_sound = Sound.of(RogueSounds.THROW.id());
+        projectile.travel_sound = Sound.of(RogueSounds.NET_TRAVEL.id());
+        projectile.travel_sound_interval = 8;
         spell.deliver.projectile.projectile = projectile;
 
         var damage = new Spell.Impact();

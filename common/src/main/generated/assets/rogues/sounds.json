@@ -48,6 +48,11 @@
       "rogues:net_impact"
     ]
   },
+  "net_travel": {
+    "sounds": [
+      "rogues:net_travel"
+    ]
+  },
   "rogue_armor": {
     "sounds": [
       "rogues:rogue_armor"
