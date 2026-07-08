@@ -17,6 +17,7 @@ import net.rogues.block.CustomBlocks;
 import net.rogues.config.Default;
 import net.rogues.config.TweaksConfig;
 import net.rogues.effect.RogueEffects;
+import net.rogues.entity.RogueEntities;
 import net.rogues.item.Group;
 import net.rogues.item.RogueWeapons;
 import net.rogues.item.armor.RogueArmors;
@@ -94,6 +95,10 @@ public class RoguesMod {
     public static void registerEffects() {
         RogueEffects.register(effectsConfig.value);
         effectsConfig.save();
+    }
+
+    public static void registerEntities() {
+        RogueEntities.register();
     }
 
     public static void registerPOI() {

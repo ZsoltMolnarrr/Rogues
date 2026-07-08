@@ -3,6 +3,7 @@ package net.rogues.util;
 import net.minecraft.util.Identifier;
 import net.rogues.RoguesMod;
 import net.rogues.effect.RogueEffects;
+import net.rogues.entity.RogueEntities;
 import net.spell_engine.api.datagen.SpellBuilder;
 import net.spell_engine.api.render.LightEmission;
 import net.spell_engine.api.spell.ExternalSpellSchools;
@@ -266,6 +267,72 @@ public class RogueSpells {
         return new Entry(id, spell, title, description);
     }
 
+    public static final Entry BEAR_TRAP = add(bear_trap().book(Book.ROGUE));
+    private static Entry bear_trap() {
+        var id = Identifier.of(RoguesMod.NAMESPACE, "bear_trap");
+        var title = "Bear Trap";
+        var description = "Set 3 bear traps around you, lasting {cloud_duration} sec. The first enemy to step into a trap springs it shut, taking {damage} damage and being held in place for {effect_duration} sec.";
+        var effect = RogueEffects.BEAR_TRAP;
+        var spell = activeSpellBase();
+        spell.range = 0;
+        spell.tier = 3;
+        spell.order = 2;
+
+        spell.release.animation = PlayerAnimation.of("spell_engine:dual_handed_ground_release");
+        spell.release.sound = Sound.of(RogueSounds.BEAR_TRAP_RELEASE.id());
+
+        spell.deliver.type = Spell.Delivery.Type.CLOUD;
+        var cloud = new Spell.Delivery.Cloud();
+        cloud.entity_type_id = RogueEntities.BEAR_TRAP_ID.toString();
+        cloud.volume.radius = 0.6F;
+        cloud.volume.area.vertical_range_multiplier = 1F;
+        cloud.impact_tick_interval = 2;
+        cloud.impact_cap = 1; // Trap: springs once, then winds down over BearTrapEntity.ATTACK_TICKS
+        cloud.time_to_live_seconds = 20;
+        cloud.spawn_ticks = 20;
+        cloud.despawn_ticks = 15;
+        cloud.spawn.sound = Sound.of(RogueSounds.BEAR_TRAP_SPAWN.id());
+        cloud.impact_particles = new ParticleBatch[]{
+                new ParticleBatch(SpellEngineParticles.MagicParticles.get(
+                        SpellEngineParticles.MagicParticles.Shape.SPARK,
+                        SpellEngineParticles.MagicParticles.Motion.DECELERATE).id().toString(),
+                        ParticleBatch.Shape.SPHERE, ParticleBatch.Origin.FEET,
+                        100, 0.5F, 0.9F)
+                        .preSpawnTravel(1)
+                        .color(Color.WHITE.toRGBA())
+        };
+
+        var placements = SpellBuilder.Placements.delayCascade(SpellBuilder.Placements.ring(3, 2F), 3);
+        placements.forEach(p -> p.apply_yaw = true);
+        cloud.placement = placements.get(0);
+        cloud.additional_placements = placements.subList(1, placements.size());
+
+        spell.deliver.clouds = List.of(cloud);
+
+        var damage = new Spell.Impact();
+        damage.action = new Spell.Impact.Action();
+        damage.action.type = Spell.Impact.Action.Type.DAMAGE;
+        damage.action.damage = new Spell.Impact.Action.Damage();
+        damage.action.damage.spell_power_coefficient = 1F;
+        damage.action.damage.knockback = 0F; // A trap clamps down, it doesn't fling
+        damage.sound = Sound.of(RogueSounds.BEAR_TRAP_IMPACT.id());
+        // Slice & Dice's converging spark shell, thinned out and dropped to the ankles — `invert()`
+        // plus `preSpawnTravel` makes the sparks rush inward, reading as the jaws snapping closed.
+
+        // Rooted, not stunned — the victim can still fight back. Gated so it can't pin a boss.
+        var root = createEffectImpact(effect.id, 3);
+        root.action.status_effect.apply_limit = new Spell.Impact.Action.StatusEffect.ApplyLimit();
+        root.action.status_effect.apply_limit.health_base = 100;
+        root.action.status_effect.apply_limit.spell_power_multiplier = 2F;
+
+        spell.impacts = List.of(damage, root);
+
+        configureCooldown(spell, 15);
+        spell.cost.exhaust = 0.3F;
+
+        return new Entry(id, spell, title, description);
+    }
+
     public static final Entry WARRIOR_THROW = add(warrior_throw().book(Book.WARRIOR));
     private static Entry warrior_throw() {
         var id = Identifier.of(RoguesMod.NAMESPACE, "throw");
@@ -292,13 +359,11 @@ public class RogueSpells {
         projectile.homing_angle = 2F;
         projectile.perks.bounce = 1;
         projectile.client_data = new Spell.ProjectileData.Client();
-        var model = new Spell.ProjectileModel();
-        model.use_held_item = true;
-        model.light_emission = LightEmission.NONE;
+        var model = SpellBuilder.ProjectileModels.heldItem();
+        model.fx.light_emission = LightEmission.NONE;
         model.rotate_degrees_per_tick = -36;
-        model.scale = 1F;
-        model.orientation = Spell.ProjectileModel.Orientation.ALONG_MOTION;
-        projectile.client_data.model = model;
+        model.orientation = Spell.ProjectileModelComposite.Orientation.ALONG_MOTION;
+        projectile.client_data.composite_model = SpellBuilder.ProjectileModels.composite(model);
         projectile.travel_sound_interval = 8;
         projectile.travel_sound = new Sound(RogueSounds.THROW.id());
         spell.deliver.projectile.projectile = projectile;

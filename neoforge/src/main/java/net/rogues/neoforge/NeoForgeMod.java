@@ -24,6 +24,9 @@ public final class NeoForgeMod {
         event.register(RegistryKeys.STATUS_EFFECT, reg -> {
             RoguesMod.registerEffects();
         });
+        event.register(RegistryKeys.ENTITY_TYPE, reg -> {
+            RoguesMod.registerEntities();
+        });
         event.register(RegistryKeys.POINT_OF_INTEREST_TYPE, reg -> {
             // Not sure why errors are thrown, but this seems to fix it.
             try {

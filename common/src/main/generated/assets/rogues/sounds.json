@@ -4,6 +4,30 @@
       "rogues:arms_workbench"
     ]
   },
+  "bear_trap_despawn": {
+    "sounds": [
+      "rogues:bear_trap_despawn_1",
+      "rogues:bear_trap_despawn_2",
+      "rogues:bear_trap_despawn_3"
+    ]
+  },
+  "bear_trap_impact": {
+    "sounds": [
+      "rogues:bear_trap_impact"
+    ]
+  },
+  "bear_trap_release": {
+    "sounds": [
+      "rogues:bear_trap_release"
+    ]
+  },
+  "bear_trap_spawn": {
+    "sounds": [
+      "rogues:bear_trap_spawn_1",
+      "rogues:bear_trap_spawn_2",
+      "rogues:bear_trap_spawn_3"
+    ]
+  },
   "charge_activate": {
     "sounds": [
       "rogues:charge_activate"

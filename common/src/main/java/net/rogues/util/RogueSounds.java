@@ -84,6 +84,11 @@ public class RogueSounds {
     public static final Entry WORKBENCH = add(new Entry("arms_workbench"));
     public static final Entry STEALTH_LEAVE = add(new Entry("stealth_leave"));
 
+    public static final Entry BEAR_TRAP_RELEASE = add(new Entry("bear_trap_release"));
+    public static final Entry BEAR_TRAP_SPAWN = add(new Entry("bear_trap_spawn").variants(3));
+    public static final Entry BEAR_TRAP_DESPAWN = add(new Entry("bear_trap_despawn").variants(3));
+    public static final Entry BEAR_TRAP_IMPACT = add(new Entry("bear_trap_impact"));
+
     public static void register() {
         for (var entry: entries) {
             entry.entry = Registry.registerReference(Registries.SOUND_EVENT, entry.id(), entry.soundEvent());

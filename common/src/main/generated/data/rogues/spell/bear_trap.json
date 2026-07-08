@@ -1,0 +1,99 @@
+{
+  "school": "spell_power:physical_melee",
+  "range": 0.0,
+  "tier": 3,
+  "order": 2,
+  "learn": {},
+  "active": {},
+  "release": {
+    "animation": {
+      "id": "spell_engine:dual_handed_ground_release"
+    },
+    "sound": {
+      "id": "rogues:bear_trap_release"
+    }
+  },
+  "deliver": {
+    "type": "CLOUD",
+    "clouds": [
+      {
+        "entity_type_id": "rogues:bear_trap",
+        "spawn_ticks": 20,
+        "despawn_ticks": 15,
+        "volume": {
+          "radius": 0.6
+        },
+        "time_to_live_seconds": 20.0,
+        "impact_tick_interval": 2,
+        "impact_cap": 1,
+        "impact_particles": [
+          {
+            "particle_id": "spell_engine:magic_spark_decelerate",
+            "origin": "FEET",
+            "shape": "SPHERE",
+            "count": 100.0,
+            "min_speed": 0.5,
+            "max_speed": 0.9,
+            "pre_spawn_travel": 1.0,
+            "color_rgba": 4294967295
+          }
+        ],
+        "placement": {
+          "location_offset_by_look": 2.0,
+          "apply_yaw": true
+        },
+        "additional_placements": [
+          {
+            "delay_ticks": 3,
+            "location_offset_by_look": 2.0,
+            "location_yaw_offset": 120.0,
+            "apply_yaw": true
+          },
+          {
+            "delay_ticks": 6,
+            "location_offset_by_look": 2.0,
+            "location_yaw_offset": 240.0,
+            "apply_yaw": true
+          }
+        ],
+        "spawn": {
+          "sound": {
+            "id": "rogues:bear_trap_spawn"
+          }
+        }
+      }
+    ]
+  },
+  "impacts": [
+    {
+      "action": {
+        "type": "DAMAGE",
+        "damage": {
+          "knockback": 0.0
+        }
+      },
+      "sound": {
+        "id": "rogues:bear_trap_impact"
+      }
+    },
+    {
+      "action": {
+        "type": "STATUS_EFFECT",
+        "status_effect": {
+          "effect_id": "rogues:bear_trap",
+          "duration": 3.0,
+          "apply_limit": {
+            "health_base": 100.0,
+            "spell_power_multiplier": 2.0
+          }
+        }
+      }
+    }
+  ],
+  "cost": {
+    "exhaust": 0.3,
+    "cooldown": {
+      "duration": 15.0
+    }
+  }
+}

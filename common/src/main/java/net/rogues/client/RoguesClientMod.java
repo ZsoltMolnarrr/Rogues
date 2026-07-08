@@ -2,6 +2,8 @@ package net.rogues.client;
 
 import mod.azure.azurelibarmor.common.render.armor.AzArmorRenderer;
 import mod.azure.azurelibarmor.common.render.armor.AzArmorRendererRegistry;
+import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
+import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.minecraft.util.Identifier;
 import net.rogues.RoguesMod;
 import net.rogues.client.armor.RogueArmorRenderer;
@@ -9,7 +11,10 @@ import net.rogues.client.armor.WarriorArmorRenderer;
 import net.rogues.client.effect.ChargeParticles;
 import net.rogues.client.effect.DemoralizeParticles;
 import net.rogues.client.effect.ShatterParticles;
+import net.rogues.client.entity.BearTrapEntityModel;
+import net.rogues.client.entity.BearTrapEntityRenderer;
 import net.rogues.effect.RogueEffects;
+import net.rogues.entity.BearTrapEntity;
 import net.rogues.item.armor.RogueArmors;
 import net.spell_engine.api.effect.CustomParticleStatusEffect;
 import net.spell_engine.api.render.StunParticleSpawner;
@@ -20,6 +25,9 @@ import java.util.function.Supplier;
 
 public class RoguesClientMod {
     public static void init() {
+        EntityModelLayerRegistry.registerModelLayer(BearTrapEntityModel.LAYER, BearTrapEntityModel::getTexturedModelData);
+        EntityRendererRegistry.register(BearTrapEntity.ENTITY_TYPE, BearTrapEntityRenderer::new);
+
         CustomParticleStatusEffect.register(RogueEffects.SHOCK.effect, new StunParticleSpawner());
         CustomParticleStatusEffect.register(RogueEffects.SHATTER.effect, new ShatterParticles(1));
         CustomParticleStatusEffect.register(RogueEffects.DEMORALIZE.effect, new DemoralizeParticles(1));

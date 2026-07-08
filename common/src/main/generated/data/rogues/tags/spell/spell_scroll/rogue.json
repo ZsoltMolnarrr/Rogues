@@ -15,6 +15,10 @@
     {
       "id": "rogues:vanish",
       "required": false
+    },
+    {
+      "id": "rogues:bear_trap",
+      "required": false
     }
   ]
 }

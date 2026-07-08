@@ -117,6 +117,25 @@ public class RogueEffects {
             ))
     ));
 
+    public static final Effects.Entry BEAR_TRAP = add(new Effects.Entry(
+            Identifier.of(RoguesMod.NAMESPACE, "bear_trap"),
+            "Trapped",
+            "Prevents movement and jumping",
+            new CustomStatusEffect(StatusEffectCategory.HARMFUL, 0x6E6E6E),
+            new EffectConfig(List.of(
+                    new AttributeModifier(
+                            EntityAttributes.GENERIC_MOVEMENT_SPEED.getIdAsString(),
+                            -2F,
+                            EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE
+                    ),
+                    new AttributeModifier(
+                            EntityAttributes.GENERIC_JUMP_STRENGTH.getIdAsString(),
+                            -2F,
+                            EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE
+                    )
+            ))
+    ));
+
     public static final Effects.Entry CHARGE = add(new Effects.Entry(
             Identifier.of(RoguesMod.NAMESPACE, "charge"),
             "Charge",
@@ -137,10 +156,28 @@ public class RogueEffects {
     ));
 
 
+    /// A root: pins the target in place without silencing them. `canMove = false` makes
+    /// `LivingEntity.isImmobile()` report true, which zeroes movement input for mobs and players
+    /// alike, and `canJump = false` cancels `jump()`. Everything else stays allowed — a leg in a bear
+    /// trap doesn't stop you swinging. SpellEngine ships no preset for this (`STUN` also blocks
+    /// attacking, item use and casting), hence the literal.
+    ///
+    /// `SemanticType.NONE` because no *action* is blocked, so there is no HUD message to raise; it is
+    /// also the lowest ordinal, so it never overrides a real stun's reason when both are applied.
+    private static final EntityActionsAllowed ROOT = new EntityActionsAllowed(
+            false, false,
+            new EntityActionsAllowed.PlayersAllowed(true, true, true),
+            new EntityActionsAllowed.MobsAllowed(true),
+            EntityActionsAllowed.SemanticType.NONE);
+
     public static void register(ConfigFile.Effects config) {
         Synchronized.configure(SLICE_AND_DICE.effect, true);
         Synchronized.configure(SHOCK.effect, true);
         ActionImpairing.configure(SHOCK.effect, EntityActionsAllowed.STUN);
+        // Synchronized so the client player's own input is blocked (ClientPlayerActionImpairing),
+        // not just the server-side movement.
+        Synchronized.configure(BEAR_TRAP.effect, true);
+        ActionImpairing.configure(BEAR_TRAP.effect, ROOT);
         Synchronized.configure(STEALTH.effect, true);
         RemoveOnHit.configure(STEALTH.effect, true);
 

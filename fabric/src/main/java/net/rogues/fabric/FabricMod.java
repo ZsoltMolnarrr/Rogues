@@ -12,6 +12,7 @@ public final class FabricMod implements ModInitializer {
         RoguesMod.registerSounds();
         RoguesMod.registerItems();
         RoguesMod.registerEffects();
+        RoguesMod.registerEntities();
         RoguesMod.registerPOI();
         RoguesMod.registerVillagers();
     }
