@@ -285,7 +285,7 @@ public class RogueSpells {
         var cloud = new Spell.Delivery.Cloud();
         cloud.entity_type_id = RogueEntities.BEAR_TRAP_ID.toString();
         cloud.volume.radius = 0.6F;
-        cloud.volume.area.vertical_range_multiplier = 1F;
+        cloud.volume.area.vertical_range_multiplier = 0.5F;
         cloud.impact_tick_interval = 2;
         cloud.impact_cap = 1; // Trap: springs once, then winds down over BearTrapEntity.ATTACK_TICKS
         cloud.time_to_live_seconds = 20;
@@ -296,8 +296,8 @@ public class RogueSpells {
                 new ParticleBatch(SpellEngineParticles.MagicParticles.get(
                         SpellEngineParticles.MagicParticles.Shape.SPARK,
                         SpellEngineParticles.MagicParticles.Motion.DECELERATE).id().toString(),
-                        ParticleBatch.Shape.SPHERE, ParticleBatch.Origin.FEET,
-                        100, 0.5F, 0.9F)
+                        ParticleBatch.Shape.SPHERE, ParticleBatch.Origin.CENTER,
+                        10, 0.2F, 0.3F)
                         .preSpawnTravel(1)
                         .color(Color.WHITE.toRGBA())
         };
@@ -306,6 +306,7 @@ public class RogueSpells {
         placements.forEach(p -> p.apply_yaw = true);
         cloud.placement = placements.get(0);
         cloud.additional_placements = placements.subList(1, placements.size());
+
 
         spell.deliver.clouds = List.of(cloud);
 
