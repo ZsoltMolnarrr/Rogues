@@ -1,0 +1,90 @@
+{
+  "school": "spell_power:physical_melee",
+  "range": 16.0,
+  "tier": 2,
+  "order": 2,
+  "learn": {},
+  "active": {
+    "cast": {
+      "duration": 0.45,
+      "type": "CHARGE",
+      "charge": {
+        "output_scaling": 0.5,
+        "bonus": {
+          "range_add": 12.0
+        }
+      },
+      "animation": {
+        "id": "spell_engine:one_handed_throw_charge"
+      }
+    }
+  },
+  "release": {
+    "animation": {
+      "id": "spell_engine:one_handed_throw_release_instant"
+    },
+    "sound": {
+      "id": "rogues:throw"
+    }
+  },
+  "target": {
+    "type": "AIM",
+    "aim": {}
+  },
+  "deliver": {
+    "type": "PROJECTILE",
+    "projectile": {
+      "projectile": {
+        "travel_sound": {
+          "id": "rogues:throw"
+        },
+        "client_data": {
+          "composite_model": {
+            "models": [
+              {
+                "rotate_degrees_per_tick": 12.0,
+                "fx": {
+                  "model_id": "rogues:spell_projectile/throw_net",
+                  "light_emission": "NONE"
+                }
+              }
+            ]
+          }
+        }
+      }
+    }
+  },
+  "impacts": [
+    {
+      "action": {
+        "type": "DAMAGE",
+        "damage": {
+          "spell_power_coefficient": 0.1,
+          "knockback": 0.1
+        }
+      },
+      "sound": {
+        "id": "rogues:throw_impact"
+      }
+    },
+    {
+      "action": {
+        "type": "STATUS_EFFECT",
+        "status_effect": {
+          "effect_id": "rogues:net_trap",
+          "duration": 4.0,
+          "apply_limit": {
+            "health_base": 100.0,
+            "spell_power_multiplier": 2.0
+          }
+        }
+      }
+    }
+  ],
+  "cost": {
+    "exhaust": 0.3,
+    "cooldown": {
+      "duration": 12.0
+    }
+  }
+}

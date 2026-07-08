@@ -5,6 +5,10 @@
       "required": false
     },
     {
+      "id": "rogues:throw_net",
+      "required": false
+    },
+    {
       "id": "rogues:shout",
       "required": false
     },

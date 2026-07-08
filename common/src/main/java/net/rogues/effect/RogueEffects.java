@@ -136,6 +136,30 @@ public class RogueEffects {
             ))
     ));
 
+    public static final Effects.Entry NET_TRAP = add(new Effects.Entry(
+            Identifier.of(RoguesMod.NAMESPACE, "net_trap"),
+            "Netted",
+            "Prevents movement and jumping",
+            new CustomStatusEffect(StatusEffectCategory.HARMFUL, 0x8B7355),
+            new EffectConfig(List.of(
+                    new AttributeModifier(
+                            EntityAttributes.GENERIC_MOVEMENT_SPEED.getIdAsString(),
+                            -2F,
+                            EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE
+                    ),
+                    new AttributeModifier(
+                            EntityAttributes.GENERIC_JUMP_STRENGTH.getIdAsString(),
+                            -2F,
+                            EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE
+                    ),
+                    new AttributeModifier(
+                            EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE.getIdAsString(),
+                            100F,
+                            EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE
+                    )
+            ))
+    ));
+
     public static final Effects.Entry CHARGE = add(new Effects.Entry(
             Identifier.of(RoguesMod.NAMESPACE, "charge"),
             "Charge",
@@ -159,8 +183,8 @@ public class RogueEffects {
     /// A root: pins the target in place without silencing them. `canMove = false` makes
     /// `LivingEntity.isImmobile()` report true, which zeroes movement input for mobs and players
     /// alike, and `canJump = false` cancels `jump()`. Everything else stays allowed — a leg in a bear
-    /// trap doesn't stop you swinging. SpellEngine ships no preset for this (`STUN` also blocks
-    /// attacking, item use and casting), hence the literal.
+    /// trap doesn't stop you swinging, nor does a net over your head. SpellEngine ships no preset for
+    /// this (`STUN` also blocks attacking, item use and casting), hence the literal.
     ///
     /// `SemanticType.NONE` because no *action* is blocked, so there is no HUD message to raise; it is
     /// also the lowest ordinal, so it never overrides a real stun's reason when both are applied.
@@ -178,6 +202,8 @@ public class RogueEffects {
         // not just the server-side movement.
         Synchronized.configure(BEAR_TRAP.effect, true);
         ActionImpairing.configure(BEAR_TRAP.effect, ROOT);
+        Synchronized.configure(NET_TRAP.effect, true);
+        ActionImpairing.configure(NET_TRAP.effect, ROOT);
         Synchronized.configure(STEALTH.effect, true);
         RemoveOnHit.configure(STEALTH.effect, true);
 

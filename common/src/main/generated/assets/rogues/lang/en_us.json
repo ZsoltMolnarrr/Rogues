@@ -25,6 +25,8 @@
   "effect.rogues.charge.description": "Increases movement speed",
   "effect.rogues.demoralize": "Demoralized",
   "effect.rogues.demoralize.description": "Reduces attack damage",
+  "effect.rogues.net_trap": "Netted",
+  "effect.rogues.net_trap.description": "Prevents movement and jumping",
   "effect.rogues.shadow_step": "Shadowstep",
   "effect.rogues.shadow_step.description": "Untraceable",
   "effect.rogues.shatter": "Shattered Armor",
@@ -115,6 +117,8 @@
   "spell.rogues.slice_and_dice.name": "Slice & Dice",
   "spell.rogues.throw.description": "Throw your weapon at the target, dealing {damage} damage and reducing their armor by {armor_reduction} for {effect_duration} sec.",
   "spell.rogues.throw.name": "Shattering Throw",
+  "spell.rogues.throw_net.description": "Hurl a weighted net, dealing {damage} damage and pinning the target in place for {effect_duration} sec. The longer the cast is held, the harder it lands and the further it flies.",
+  "spell.rogues.throw_net.name": "Throw Net",
   "spell.rogues.vanish.description": "Vanish from sight, entering stealth for {effect_duration} sec. Performing any action or taking damage will break the effect.",
   "spell.rogues.vanish.name": "Vanish"
 }

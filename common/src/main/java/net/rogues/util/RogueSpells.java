@@ -393,6 +393,68 @@ public class RogueSpells {
         return new Entry(id, spell, title, description);
     }
 
+    public static final Entry THROW_NET = add(throw_net().book(Book.WARRIOR));
+    private static Entry throw_net() {
+        var id = Identifier.of(RoguesMod.NAMESPACE, "throw_net");
+        var title = "Throw Net";
+        var description = "Hurl a weighted net, dealing {damage} damage and pinning the target in place for {effect_duration} sec. The longer the cast is held, the harder it lands and the further it flies.";
+        var effect = RogueEffects.NET_TRAP;
+        var spell = activeSpellBase();
+        spell.range = 16;
+        spell.tier = 2;
+        spell.order = 2;
+
+        // Short charge: holding it scales the innate output (base impact values are the FULL-charge
+        // values, scaled down toward `1 - output_scaling` as the ratio drops) and the throw distance.
+        var charge = SpellBuilder.Casting.charge(spell, 0.45F);
+        charge.min_release_ratio = 0.2F;
+        charge.output_scaling = 0.5F; // a snap throw still lands at half damage
+        charge.bonus.range_add = 12F; // 16 -> 28 blocks at full charge
+
+        spell.active.cast.animation = PlayerAnimation.of("spell_engine:one_handed_throw_charge");
+
+        spell.release.animation = PlayerAnimation.of("spell_engine:one_handed_throw_release_instant");
+        spell.release.sound = Sound.of(RogueSounds.THROW.id());
+
+        spell.target.type = Spell.Target.Type.AIM;
+        spell.target.aim = new Spell.Target.Aim();
+
+        spell.deliver.type = Spell.Delivery.Type.PROJECTILE;
+        spell.deliver.projectile = new Spell.Delivery.ShootProjectile();
+        spell.deliver.projectile.launch_properties.velocity = 1.0F;
+        var projectile = new Spell.ProjectileData();
+        projectile.homing_angle = 1F;
+        projectile.client_data = new Spell.ProjectileData.Client();
+        var model = SpellBuilder.ProjectileModels.model(
+                Identifier.of(RoguesMod.NAMESPACE, "spell_projectile/throw_net").toString(),
+                1F, LightEmission.NONE);
+        model.rotate_degrees_per_tick = 12; // a thrown net tumbles slowly
+        projectile.client_data.composite_model = SpellBuilder.ProjectileModels.composite(model);
+        projectile.travel_sound = Sound.of(RogueSounds.THROW.id());
+        spell.deliver.projectile.projectile = projectile;
+
+        var damage = new Spell.Impact();
+        damage.action = new Spell.Impact.Action();
+        damage.action.type = Spell.Impact.Action.Type.DAMAGE;
+        damage.action.damage = new Spell.Impact.Action.Damage();
+        damage.action.damage.spell_power_coefficient = 0.1F; // full-charge value
+        damage.action.damage.knockback = 0.1F; // a net tangles, it doesn't shove
+        damage.sound = Sound.of(RogueSounds.THROW_IMPACT.id());
+
+        // Rooted, not stunned — the netted target can still fight back. Gated so it can't pin a boss.
+        var root = createEffectImpact(effect.id, 4);
+        root.action.status_effect.apply_limit = new Spell.Impact.Action.StatusEffect.ApplyLimit();
+        root.action.status_effect.apply_limit.health_base = 100;
+        root.action.status_effect.apply_limit.spell_power_multiplier = 2F;
+
+        spell.impacts = List.of(damage, root);
+
+        configureCooldown(spell, 12);
+        spell.cost.exhaust = 0.3F;
+
+        return new Entry(id, spell, title, description);
+    }
+
     public static final Entry SHOUT = add(shout().book(Book.WARRIOR));
     private static Entry shout() {
         var id = Identifier.of(RoguesMod.NAMESPACE, "shout");
