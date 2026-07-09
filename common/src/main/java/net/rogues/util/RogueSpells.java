@@ -51,34 +51,29 @@ public class RogueSpells {
         return entry;
     }
 
+    /// Class spells are melee-school but not weapon skills: they carry their own cooldowns and are
+    /// learned from a book, so this deliberately does not go through `createMeleeSpell`.
     private static Spell activeSpellBase() {
-        var spell = new Spell();
-        spell.type = Spell.Type.ACTIVE;
+        var spell = SpellBuilder.createSpellActive();
         spell.school = ExternalSpellSchools.PHYSICAL_MELEE;
-        spell.active = new Spell.Active();
-        spell.active.cast = new Spell.Active.Cast();
-
-        spell.learn = new Spell.Learn();
-
         return spell;
     }
 
-    private static Spell.Impact createEffectImpact(Identifier effectId, float duration) {
-        var buff = new Spell.Impact();
-        buff.action = new Spell.Impact.Action();
-        buff.action.type = Spell.Impact.Action.Type.STATUS_EFFECT;
-        buff.action.status_effect = new Spell.Impact.Action.StatusEffect();
-        buff.action.status_effect.effect_id = effectId.toString();
-        buff.action.status_effect.duration = duration;
-        return buff;
+    /// Caps which targets a control effect can land on, so a root or stun can't pin a boss.
+    private static Spell.Impact limitByHealth(Spell.Impact impact, float healthBase, float spellPowerMultiplier) {
+        var limit = new Spell.Impact.Action.StatusEffect.ApplyLimit();
+        limit.health_base = healthBase;
+        limit.spell_power_multiplier = spellPowerMultiplier;
+        impact.action.status_effect.apply_limit = limit;
+        return impact;
     }
 
-    private static void configureCooldown(Spell spell, float duration) {
-        if (spell.cost == null) {
-            spell.cost = new Spell.Cost();
-        }
-        spell.cost.cooldown = new Spell.Cost.Cooldown();
-        spell.cost.cooldown.duration = duration;
+    /// Area target centered on the caster. `vertical_range_multiplier` keeps ground-level spells from
+    /// reaching targets far above or below.
+    private static void areaTarget(Spell spell, float verticalRangeMultiplier) {
+        spell.target.type = Spell.Target.Type.AREA;
+        spell.target.area = new Spell.Target.Area();
+        spell.target.area.vertical_range_multiplier = verticalRangeMultiplier;
     }
 
     public static final Entry SLICE_AND_DICE = add(slice_and_dice().book(Book.ROGUE));
@@ -91,37 +86,33 @@ public class RogueSpells {
         spell.range = 0;
         spell.tier = 2;
 
-        spell.release.animation = PlayerAnimation.of("spell_engine:dual_handed_weapon_charge");
-        spell.release.sound = new Sound(RogueSounds.SLICE_AND_DICE.id());
-        spell.release.particles = new ParticleBatch[]{
-                new ParticleBatch(SpellEngineParticles.MagicParticles.get(
-                        SpellEngineParticles.MagicParticles.Shape.SPARK,
-                        SpellEngineParticles.MagicParticles.Motion.FLOAT).id().toString(),
-                        ParticleBatch.Shape.SPHERE, ParticleBatch.Origin.LAUNCH_POINT,
-                        15, 0.15F, 0.2F)
-                        .preSpawnTravel(7)
-                        .invert()
-                        .color(Color.WHITE.toRGBA())
-        };
+        SpellBuilder.Casting.instant(spell);
+        SpellBuilder.Release.visuals(spell,
+                "spell_engine:dual_handed_weapon_charge",
+                new ParticleBatch[]{
+                        new ParticleBatch(SpellEngineParticles.MagicParticles.get(
+                                SpellEngineParticles.MagicParticles.Shape.SPARK,
+                                SpellEngineParticles.MagicParticles.Motion.FLOAT).id().toString(),
+                                ParticleBatch.Shape.SPHERE, ParticleBatch.Origin.LAUNCH_POINT,
+                                15, 0.15F, 0.2F)
+                                .preSpawnTravel(7)
+                                .invert()
+                                .color(Color.WHITE.toRGBA())
+                },
+                Sound.of(RogueSounds.SLICE_AND_DICE.id()));
 
-        spell.deliver.type = Spell.Delivery.Type.STASH_EFFECT;
-        spell.deliver.stash_effect = new Spell.Delivery.StashEffect();
-        spell.deliver.stash_effect.id = effect.id.toString();
-        spell.deliver.stash_effect.consume = 0;
-        var stashMeleeTrigger = new Spell.Trigger();
-        stashMeleeTrigger.type = Spell.Trigger.Type.MELEE_IMPACT;
+        // Each melee impact re-triggers the stash onto the caster, adding a stack.
+        var stashMeleeTrigger = SpellBuilder.Triggers.meleeAttackImpact();
         stashMeleeTrigger.target_override = Spell.Trigger.TargetSelector.CASTER;
-        spell.deliver.stash_effect.triggers = List.of(stashMeleeTrigger);
+        SpellBuilder.Deliver.stash(spell, effect.id.toString(), 10, stashMeleeTrigger);
+        spell.deliver.stash_effect.consume = 0; // Stacks build up; nothing spends them
 
-        var buff = createEffectImpact(effect.id, 10);
-        buff.action.status_effect.apply_mode = Spell.Impact.Action.StatusEffect.ApplyMode.ADD;
-        buff.action.status_effect.amplifier = 1;
-        buff.action.status_effect.amplifier_cap = 9;
-        buff.action.status_effect.refresh_duration = false;
+        var buff = SpellBuilder.Impacts.effectAdd(effect.id.toString(), 10, 1, 9);
+        buff.action.status_effect.refresh_duration = false; // The trance has a hard expiry
         spell.impacts = List.of(buff);
 
-        configureCooldown(spell, 15);
-        spell.cost.exhaust = 0.2F;
+        SpellBuilder.Cost.cooldown(spell, 15);
+        SpellBuilder.Cost.exhaust(spell, 0.2F);
 
         return new Entry(id, spell, title, description);
     }
@@ -136,44 +127,41 @@ public class RogueSpells {
         spell.range = 5;
         spell.tier = 2;
 
-        spell.release.animation = PlayerAnimation.of("spell_engine:dual_handed_ground_release");
-        spell.release.sound = new Sound(RogueSounds.SHOCK_POWDER_RELEASE.id());
-        spell.release.particles = new ParticleBatch[]{
-                new ParticleBatch(SpellEngineParticles.smoke_medium.id().toString(),
-                        ParticleBatch.Shape.CIRCLE, ParticleBatch.Origin.CENTER,
-                        50, 0.2F, 0.3F)
-                        .preSpawnTravel(6),
-                new ParticleBatch(SpellEngineParticles.smoke_medium.id().toString(),
-                        ParticleBatch.Shape.CIRCLE, ParticleBatch.Origin.CENTER,
-                        60, 0.2F, 0.3F)
-                        .preSpawnTravel(8),
-                new ParticleBatch(SpellEngineParticles.smoke_medium.id().toString(),
-                        ParticleBatch.Shape.SPHERE, ParticleBatch.Origin.CENTER,
-                        50, 0.25F, 0.25F)
-                        .preSpawnTravel(4),
-                new ParticleBatch(SpellEngineParticles.electric_arc_A.id().toString(),
-                        ParticleBatch.Shape.PILLAR, ParticleBatch.Origin.FEET,
-                        6, 0.01F, 0.05F)
-                        .extent(3),
-                new ParticleBatch(SpellEngineParticles.electric_arc_B.id().toString(),
-                        ParticleBatch.Shape.PILLAR, ParticleBatch.Origin.FEET,
-                        8, 0.01F, 0.05F)
-                        .extent(5)
-        };
+        SpellBuilder.Casting.instant(spell);
+        SpellBuilder.Release.visuals(spell,
+                "spell_engine:dual_handed_ground_release",
+                new ParticleBatch[]{
+                        new ParticleBatch(SpellEngineParticles.smoke_medium.id().toString(),
+                                ParticleBatch.Shape.CIRCLE, ParticleBatch.Origin.CENTER,
+                                50, 0.2F, 0.3F)
+                                .preSpawnTravel(6),
+                        new ParticleBatch(SpellEngineParticles.smoke_medium.id().toString(),
+                                ParticleBatch.Shape.CIRCLE, ParticleBatch.Origin.CENTER,
+                                60, 0.2F, 0.3F)
+                                .preSpawnTravel(8),
+                        new ParticleBatch(SpellEngineParticles.smoke_medium.id().toString(),
+                                ParticleBatch.Shape.SPHERE, ParticleBatch.Origin.CENTER,
+                                50, 0.25F, 0.25F)
+                                .preSpawnTravel(4),
+                        new ParticleBatch(SpellEngineParticles.electric_arc_A.id().toString(),
+                                ParticleBatch.Shape.PILLAR, ParticleBatch.Origin.FEET,
+                                6, 0.01F, 0.05F)
+                                .extent(3),
+                        new ParticleBatch(SpellEngineParticles.electric_arc_B.id().toString(),
+                                ParticleBatch.Shape.PILLAR, ParticleBatch.Origin.FEET,
+                                8, 0.01F, 0.05F)
+                                .extent(5)
+                },
+                Sound.of(RogueSounds.SHOCK_POWDER_RELEASE.id()));
 
-        spell.target.type = Spell.Target.Type.AREA;
-        spell.target.area = new Spell.Target.Area();
-        spell.target.area.vertical_range_multiplier = 0.5F;
+        areaTarget(spell, 0.5F);
 
-        var buff = createEffectImpact(effect.id, 3);
-        buff.action.status_effect.apply_limit = new Spell.Impact.Action.StatusEffect.ApplyLimit();
-        buff.action.status_effect.apply_limit.health_base = 50;
-        buff.action.status_effect.apply_limit.spell_power_multiplier = 2F;
-        buff.sound = new Sound(RogueSounds.SHOCK_POWDER_IMPACT.id());
-        spell.impacts = List.of(buff);
+        var stun = limitByHealth(SpellBuilder.Impacts.effectSet(effect.id.toString(), 3, 0), 50, 2F);
+        stun.sound = Sound.of(RogueSounds.SHOCK_POWDER_IMPACT.id());
+        spell.impacts = List.of(stun);
 
-        configureCooldown(spell, 16);
-        spell.cost.exhaust = 0.3F;
+        SpellBuilder.Cost.cooldown(spell, 16);
+        SpellBuilder.Cost.exhaust(spell, 0.3F);
 
         return new Entry(id, spell, title, description);
     }
@@ -188,11 +176,13 @@ public class RogueSpells {
         spell.range = 15;
         spell.tier = 3;
 
-        spell.release.animation = PlayerAnimation.of("spell_engine:one_handed_area_release");
-        spell.release.sound = new Sound(RogueSounds.SHADOW_STEP_DEPART.id());
+        SpellBuilder.Casting.instant(spell);
+        SpellBuilder.Release.visuals(spell,
+                "spell_engine:one_handed_area_release",
+                null,
+                Sound.of(RogueSounds.SHADOW_STEP_DEPART.id()));
 
-        spell.target.type = Spell.Target.Type.AIM;
-        spell.target.aim = new Spell.Target.Aim();
+        SpellBuilder.Target.aim(spell);
         spell.target.aim.required = true;
 
         var impact = new Spell.Impact();
@@ -218,13 +208,12 @@ public class RogueSpells {
         };
         impact.action.teleport = teleport;
 
-        var buff = createEffectImpact(effect.id, 1.5F);
-        buff.action.status_effect.apply_mode = Spell.Impact.Action.StatusEffect.ApplyMode.SET;
+        var buff = SpellBuilder.Impacts.effectSet(effect.id.toString(), 1.5F, 0);
 
         spell.impacts = List.of(impact, buff);
 
-        configureCooldown(spell, 12);
-        spell.cost.exhaust = 0.4F;
+        SpellBuilder.Cost.cooldown(spell, 12);
+        SpellBuilder.Cost.exhaust(spell, 0.4F);
 
         return new Entry(id, spell, title, description);
     }
@@ -239,30 +228,32 @@ public class RogueSpells {
         spell.range = 0;
         spell.tier = 4;
 
-        spell.release.animation = PlayerAnimation.of("spell_engine:dual_handed_weapon_cross");
-        spell.release.sound = new Sound(RogueSounds.VANISH_COMBINED.id());
-        spell.release.particles = new ParticleBatch[]{
-                new ParticleBatch(SpellEngineParticles.smoke_medium.id().toString(),
-                        ParticleBatch.Shape.SPHERE, ParticleBatch.Origin.CENTER,
-                        20, 0.12F, 0.15F)
-                        .preSpawnTravel(3),
-                new ParticleBatch(SpellEngineParticles.smoke_medium.id().toString(),
-                        ParticleBatch.Shape.CIRCLE, ParticleBatch.Origin.FEET,
-                        20, 0.12F, 0.15F)
-                        .preSpawnTravel(4),
-                new ParticleBatch("poof",
-                        ParticleBatch.Shape.SPHERE, ParticleBatch.Origin.CENTER,
-                        10, 0.01F, 0.1F),
-                new ParticleBatch("campfire_cosy_smoke",
-                        ParticleBatch.Shape.WIDE_PIPE, ParticleBatch.Origin.FEET,
-                        10, 0.01F, 0.1F)
-        };
+        SpellBuilder.Casting.instant(spell);
+        SpellBuilder.Release.visuals(spell,
+                "spell_engine:dual_handed_weapon_cross",
+                new ParticleBatch[]{
+                        new ParticleBatch(SpellEngineParticles.smoke_medium.id().toString(),
+                                ParticleBatch.Shape.SPHERE, ParticleBatch.Origin.CENTER,
+                                20, 0.12F, 0.15F)
+                                .preSpawnTravel(3),
+                        new ParticleBatch(SpellEngineParticles.smoke_medium.id().toString(),
+                                ParticleBatch.Shape.CIRCLE, ParticleBatch.Origin.FEET,
+                                20, 0.12F, 0.15F)
+                                .preSpawnTravel(4),
+                        new ParticleBatch("poof",
+                                ParticleBatch.Shape.SPHERE, ParticleBatch.Origin.CENTER,
+                                10, 0.01F, 0.1F),
+                        new ParticleBatch("campfire_cosy_smoke",
+                                ParticleBatch.Shape.WIDE_PIPE, ParticleBatch.Origin.FEET,
+                                10, 0.01F, 0.1F)
+                },
+                Sound.of(RogueSounds.VANISH_COMBINED.id()));
 
-        var buff = createEffectImpact(effect.id, 8);
+        var buff = SpellBuilder.Impacts.effectSet(effect.id.toString(), 8, 0);
         spell.impacts = List.of(buff);
 
-        configureCooldown(spell, 30);
-        spell.cost.exhaust = 0.4F;
+        SpellBuilder.Cost.cooldown(spell, 30);
+        SpellBuilder.Cost.exhaust(spell, 0.4F);
 
         return new Entry(id, spell, title, description);
     }
@@ -278,9 +269,15 @@ public class RogueSpells {
         spell.tier = 3;
         spell.order = 2;
 
-        spell.release.animation = PlayerAnimation.of("spell_engine:dual_handed_ground_release");
-        spell.release.sound = Sound.of(RogueSounds.BEAR_TRAP_RELEASE.id());
+        SpellBuilder.Casting.instant(spell);
+        SpellBuilder.Release.visuals(spell,
+                "spell_engine:dual_handed_ground_release",
+                null,
+                Sound.of(RogueSounds.BEAR_TRAP_RELEASE.id()));
 
+        // Built by hand rather than via `Deliver.cloud`: that helper assumes an ambient volume with
+        // presence particles and a light level, whereas a trap is a one-shot entity with spawn/despawn
+        // windows and no ambient presence.
         spell.deliver.type = Spell.Delivery.Type.CLOUD;
         var cloud = new Spell.Delivery.Cloud();
         cloud.entity_type_id = RogueEntities.BEAR_TRAP_ID.toString();
@@ -292,6 +289,8 @@ public class RogueSpells {
         cloud.spawn_ticks = 20;
         cloud.despawn_ticks = 15;
         cloud.spawn.sound = Sound.of(RogueSounds.BEAR_TRAP_SPAWN.id());
+        // Slice & Dice's converging spark shell, thinned out and dropped to the ankles — `invert()`
+        // plus `preSpawnTravel` makes the sparks rush inward, reading as the jaws snapping closed.
         cloud.impact_particles = new ParticleBatch[]{
                 new ParticleBatch(SpellEngineParticles.MagicParticles.get(
                         SpellEngineParticles.MagicParticles.Shape.SPARK,
@@ -307,29 +306,18 @@ public class RogueSpells {
         cloud.placement = placements.get(0);
         cloud.additional_placements = placements.subList(1, placements.size());
 
-
         spell.deliver.clouds = List.of(cloud);
 
-        var damage = new Spell.Impact();
-        damage.action = new Spell.Impact.Action();
-        damage.action.type = Spell.Impact.Action.Type.DAMAGE;
-        damage.action.damage = new Spell.Impact.Action.Damage();
-        damage.action.damage.spell_power_coefficient = 1F;
-        damage.action.damage.knockback = 0F; // A trap clamps down, it doesn't fling
+        var damage = SpellBuilder.Impacts.damage(1F, 0F); // A trap clamps down, it doesn't fling
         damage.sound = Sound.of(RogueSounds.BEAR_TRAP_IMPACT.id());
-        // Slice & Dice's converging spark shell, thinned out and dropped to the ankles — `invert()`
-        // plus `preSpawnTravel` makes the sparks rush inward, reading as the jaws snapping closed.
 
-        // Rooted, not stunned — the victim can still fight back. Gated so it can't pin a boss.
-        var root = createEffectImpact(effect.id, 3);
-        root.action.status_effect.apply_limit = new Spell.Impact.Action.StatusEffect.ApplyLimit();
-        root.action.status_effect.apply_limit.health_base = 100;
-        root.action.status_effect.apply_limit.spell_power_multiplier = 2F;
+        // Rooted, not stunned — the victim can still fight back.
+        var root = limitByHealth(SpellBuilder.Impacts.effectSet(effect.id.toString(), 3, 0), 100, 2F);
 
         spell.impacts = List.of(damage, root);
 
-        configureCooldown(spell, 15);
-        spell.cost.exhaust = 0.3F;
+        SpellBuilder.Cost.cooldown(spell, 15);
+        SpellBuilder.Cost.exhaust(spell, 0.3F);
 
         return new Entry(id, spell, title, description);
     }
@@ -344,14 +332,13 @@ public class RogueSpells {
         spell.range = 24;
         spell.tier = 2;
 
-        spell.active.cast.duration = 0.5F;
-        spell.active.cast.animation = PlayerAnimation.of("spell_engine:one_handed_throw_charge");
+        SpellBuilder.Casting.cast(spell, 0.5F, "spell_engine:one_handed_throw_charge");
+        SpellBuilder.Release.visuals(spell,
+                "spell_engine:one_handed_throw_release_instant",
+                null,
+                Sound.of(RogueSounds.THROW.id()));
 
-        spell.release.animation = PlayerAnimation.of("spell_engine:one_handed_throw_release_instant");
-        spell.release.sound = new Sound(RogueSounds.THROW.id());
-
-        spell.target.type = Spell.Target.Type.AIM;
-        spell.target.aim = new Spell.Target.Aim();
+        SpellBuilder.Target.aim(spell);
 
         spell.deliver.type = Spell.Delivery.Type.PROJECTILE;
         spell.deliver.projectile = new Spell.Delivery.ShootProjectile();
@@ -366,20 +353,13 @@ public class RogueSpells {
         model.orientation = Spell.ProjectileModelComposite.Orientation.ALONG_MOTION;
         projectile.client_data.composite_model = SpellBuilder.ProjectileModels.composite(model);
         projectile.travel_sound_interval = 8;
-        projectile.travel_sound = new Sound(RogueSounds.THROW.id());
+        projectile.travel_sound = Sound.of(RogueSounds.THROW.id());
         spell.deliver.projectile.projectile = projectile;
 
-        var damage = new Spell.Impact();
-        damage.action = new Spell.Impact.Action();
-        damage.action.type = Spell.Impact.Action.Type.DAMAGE;
-        damage.action.damage = new Spell.Impact.Action.Damage();
-        damage.action.damage.spell_power_coefficient = 1F;
-        damage.sound = new Sound(RogueSounds.THROW_IMPACT.id());
+        var damage = SpellBuilder.Impacts.damage(1F);
+        damage.sound = Sound.of(RogueSounds.THROW_IMPACT.id());
 
-        var debuff = createEffectImpact(effect.id, 8);
-        debuff.action.status_effect.apply_limit = new Spell.Impact.Action.StatusEffect.ApplyLimit();
-        debuff.action.status_effect.apply_limit.health_base = 100;
-        debuff.action.status_effect.apply_limit.spell_power_multiplier = 2F;
+        var debuff = limitByHealth(SpellBuilder.Impacts.effectSet(effect.id.toString(), 8, 0), 100, 2F);
         debuff.particles = new ParticleBatch[]{
                 new ParticleBatch(SpellEngineParticles.dripping_blood.id().toString(),
                         ParticleBatch.Shape.SPHERE, ParticleBatch.Origin.CENTER,
@@ -387,8 +367,9 @@ public class RogueSpells {
         };
 
         spell.impacts = List.of(damage, debuff);
-        configureCooldown(spell, 8);
-        spell.cost.exhaust = 0.3F;
+
+        SpellBuilder.Cost.cooldown(spell, 8);
+        SpellBuilder.Cost.exhaust(spell, 0.3F);
 
         return new Entry(id, spell, title, description);
     }
@@ -411,14 +392,16 @@ public class RogueSpells {
         charge.output_scaling = 0.5F; // a snap throw still lands at half damage
         charge.bonus.range_add = 12F; // 16 -> 28 blocks at full charge
 
+        // Set directly: `Casting.charge` replaces `active.cast`, and `Casting.visuals` drops the sound.
         spell.active.cast.animation = PlayerAnimation.of("spell_engine:one_handed_throw_charge");
         spell.active.cast.sound = Sound.of(RogueSounds.NET_CASTING.id());
 
-        spell.release.animation = PlayerAnimation.of("spell_engine:one_handed_throw_release_instant");
-        spell.release.sound = Sound.of(RogueSounds.THROW.id());
+        SpellBuilder.Release.visuals(spell,
+                "spell_engine:one_handed_throw_release_instant",
+                null,
+                Sound.of(RogueSounds.THROW.id()));
 
-        spell.target.type = Spell.Target.Type.AIM;
-        spell.target.aim = new Spell.Target.Aim();
+        SpellBuilder.Target.aim(spell);
 
         spell.deliver.type = Spell.Delivery.Type.PROJECTILE;
         spell.deliver.projectile = new Spell.Delivery.ShootProjectile();
@@ -435,24 +418,17 @@ public class RogueSpells {
         projectile.travel_sound_interval = 8;
         spell.deliver.projectile.projectile = projectile;
 
-        var damage = new Spell.Impact();
-        damage.action = new Spell.Impact.Action();
-        damage.action.type = Spell.Impact.Action.Type.DAMAGE;
-        damage.action.damage = new Spell.Impact.Action.Damage();
-        damage.action.damage.spell_power_coefficient = 0.1F; // full-charge value
-        damage.action.damage.knockback = 0.1F; // a net tangles, it doesn't shove
+        // full-charge values; a net tangles, it doesn't shove
+        var damage = SpellBuilder.Impacts.damage(0.1F, 0.1F);
 
-        // Rooted, not stunned — the netted target can still fight back. Gated so it can't pin a boss.
-        var root = createEffectImpact(effect.id, 4);
-        root.action.status_effect.apply_limit = new Spell.Impact.Action.StatusEffect.ApplyLimit();
-        root.action.status_effect.apply_limit.health_base = 100;
-        root.action.status_effect.apply_limit.spell_power_multiplier = 2F;
+        // Rooted, not stunned — the netted target can still fight back.
+        var root = limitByHealth(SpellBuilder.Impacts.effectSet(effect.id.toString(), 4, 0), 100, 2F);
         root.sound = Sound.of(RogueSounds.NET_IMPACT.id());
 
         spell.impacts = List.of(damage, root);
 
-        configureCooldown(spell, 12);
-        spell.cost.exhaust = 0.3F;
+        SpellBuilder.Cost.cooldown(spell, 12);
+        SpellBuilder.Cost.exhaust(spell, 0.3F);
 
         return new Entry(id, spell, title, description);
     }
@@ -468,45 +444,33 @@ public class RogueSpells {
         spell.range = radius;
         spell.tier = 3;
 
-        spell.release.animation = PlayerAnimation.of("spell_engine:one_handed_shout_release");
-        spell.release.sound = new Sound(RogueSounds.SHOUT_RELEASE.id());
-        spell.release.particles = new ParticleBatch[]{
-                SpellBuilder.Particles.area(SpellEngineParticles.area_effect_609.id())
-                        .scale(radius * 0.25F)
-                        .color(Color.RAGE.alpha(0.5F).toRGBA()),
-        };
+        SpellBuilder.Casting.instant(spell);
+        SpellBuilder.Release.visuals(spell,
+                "spell_engine:one_handed_shout_release",
+                new ParticleBatch[]{
+                        SpellBuilder.Particles.area(SpellEngineParticles.area_effect_609.id())
+                                .scale(radius * 0.25F)
+                                .color(Color.RAGE.alpha(0.5F).toRGBA()),
+                },
+                Sound.of(RogueSounds.SHOUT_RELEASE.id()));
 
-        // Area target
-        spell.target.type = Spell.Target.Type.AREA;
-        spell.target.area = new Spell.Target.Area();
-        spell.target.area.vertical_range_multiplier = 0.5F;
+        areaTarget(spell, 0.5F);
 
-        var debuff = createEffectImpact(effect.id, 8);
-        debuff.action.status_effect.apply_mode = Spell.Impact.Action.StatusEffect.ApplyMode.ADD;
-        debuff.action.status_effect.amplifier = 1;
-        debuff.action.status_effect.amplifier_cap = 5;
-        debuff.action.status_effect.apply_limit = new Spell.Impact.Action.StatusEffect.ApplyLimit();
-        debuff.action.status_effect.apply_limit.health_base = 50;
-        debuff.action.status_effect.apply_limit.spell_power_multiplier = 2F;
+        var debuff = limitByHealth(SpellBuilder.Impacts.effectAdd(effect.id.toString(), 8, 1, 5), 50, 2F);
         debuff.particles = new ParticleBatch[]{
                 new ParticleBatch(SpellEngineParticles.smoke_medium.id().toString(),
                         ParticleBatch.Shape.SPHERE, ParticleBatch.Origin.CENTER,
                         25, 0.2F, 0.2F)
                         .color(Color.RAGE.toRGBA())
         };
-        debuff.sound = new Sound(RogueSounds.DEMORALIZE_IMPACT.id());
+        debuff.sound = Sound.of(RogueSounds.DEMORALIZE_IMPACT.id());
 
-        var damage = new Spell.Impact();
-        damage.action = new Spell.Impact.Action();
-        damage.action.type = Spell.Impact.Action.Type.DAMAGE;
-        damage.action.damage = new Spell.Impact.Action.Damage();
-        damage.action.damage.spell_power_coefficient = 0.05F;
-        damage.action.damage.knockback = 0F;
+        var damage = SpellBuilder.Impacts.damage(0.05F, 0F);
 
         spell.impacts = List.of(debuff, damage);
 
-        configureCooldown(spell, 12);
-        spell.cost.exhaust = 0.3F;
+        SpellBuilder.Cost.cooldown(spell, 12);
+        SpellBuilder.Cost.exhaust(spell, 0.3F);
 
         return new Entry(id, spell, title, description);
     }
@@ -521,43 +485,39 @@ public class RogueSpells {
         spell.range = 0;
         spell.tier = 4;
 
-        spell.release.animation = PlayerAnimation.of("spell_engine:one_handed_area_release");
-        spell.release.sound = new Sound(RogueSounds.CHARGE_ACTIVATE.id());
-        spell.release.particles = new ParticleBatch[]{
-                new ParticleBatch(SpellEngineParticles.sign_speed.id().toString(),
-                        ParticleBatch.Shape.LINE_VERTICAL, ParticleBatch.Origin.CENTER,
-                        1, 0.75F, 0.75F)
-                        .scale(0.8F)
-                        .color(Color.RAGE.toRGBA())
-                        .followEntity(true),
-                new ParticleBatch(
-                        SpellEngineParticles.MagicParticles.get(
-                                SpellEngineParticles.MagicParticles.Shape.STRIPE,
-                                SpellEngineParticles.MagicParticles.Motion.FLOAT).id().toString(),
-                        ParticleBatch.Shape.WIDE_PIPE, ParticleBatch.Origin.FEET,
-                        25, 0.2F, 0.25F)
-                        .extent(-0.2F)
-                        .color(Color.RAGE.toRGBA()),
-                new ParticleBatch(
-                        SpellEngineParticles.MagicParticles.get(
-                                SpellEngineParticles.MagicParticles.Shape.SPARK,
-                                SpellEngineParticles.MagicParticles.Motion.DECELERATE).id().toString(),
-                        ParticleBatch.Shape.SPHERE, ParticleBatch.Origin.CENTER,
-                        25, 0.1F, 0.1F)
-                        .extent(0.2F)
-                        .color(Color.RAGE.toRGBA()),
-                new ParticleBatch(SpellEngineParticles.smoke_medium.id().toString(),
-                        ParticleBatch.Shape.CIRCLE, ParticleBatch.Origin.FEET,
-                        50, 0.15F, 0.15F)
-                        .preSpawnTravel(1)
-        };
+        SpellBuilder.Casting.instant(spell);
+        SpellBuilder.Release.visuals(spell,
+                "spell_engine:one_handed_area_release",
+                new ParticleBatch[]{
+                        SpellBuilder.Particles.popUpSign(SpellEngineParticles.sign_speed.id(), Color.RAGE),
+                        new ParticleBatch(
+                                SpellEngineParticles.MagicParticles.get(
+                                        SpellEngineParticles.MagicParticles.Shape.STRIPE,
+                                        SpellEngineParticles.MagicParticles.Motion.FLOAT).id().toString(),
+                                ParticleBatch.Shape.WIDE_PIPE, ParticleBatch.Origin.FEET,
+                                25, 0.2F, 0.25F)
+                                .extent(-0.2F)
+                                .color(Color.RAGE.toRGBA()),
+                        new ParticleBatch(
+                                SpellEngineParticles.MagicParticles.get(
+                                        SpellEngineParticles.MagicParticles.Shape.SPARK,
+                                        SpellEngineParticles.MagicParticles.Motion.DECELERATE).id().toString(),
+                                ParticleBatch.Shape.SPHERE, ParticleBatch.Origin.CENTER,
+                                25, 0.1F, 0.1F)
+                                .extent(0.2F)
+                                .color(Color.RAGE.toRGBA()),
+                        new ParticleBatch(SpellEngineParticles.smoke_medium.id().toString(),
+                                ParticleBatch.Shape.CIRCLE, ParticleBatch.Origin.FEET,
+                                50, 0.15F, 0.15F)
+                                .preSpawnTravel(1)
+                },
+                Sound.of(RogueSounds.CHARGE_ACTIVATE.id()));
 
-
-        var buff = createEffectImpact(effect.id, 2F);
+        var buff = SpellBuilder.Impacts.effectSet(effect.id.toString(), 2F, 0);
         spell.impacts = List.of(buff);
 
-        configureCooldown(spell, 12);
-        spell.cost.exhaust = 0.4F;
+        SpellBuilder.Cost.cooldown(spell, 12);
+        SpellBuilder.Cost.exhaust(spell, 0.4F);
 
         return new Entry(id, spell, title, description);
     }
