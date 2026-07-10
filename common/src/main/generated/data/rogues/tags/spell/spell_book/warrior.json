@@ -9,11 +9,19 @@
       "required": false
     },
     {
+      "id": "rogues:charge",
+      "required": false
+    },
+    {
       "id": "rogues:shout",
       "required": false
     },
     {
-      "id": "rogues:charge",
+      "id": "rogues:last_stand",
+      "required": false
+    },
+    {
+      "id": "rogues:mortal_strike",
       "required": false
     }
   ]

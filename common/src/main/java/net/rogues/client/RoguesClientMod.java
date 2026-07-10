@@ -10,6 +10,7 @@ import net.rogues.client.armor.RogueArmorRenderer;
 import net.rogues.client.armor.WarriorArmorRenderer;
 import net.rogues.client.effect.ChargeParticles;
 import net.rogues.client.effect.DemoralizeParticles;
+import net.rogues.client.effect.RecklessnessParticles;
 import net.rogues.client.effect.ShatterParticles;
 import net.rogues.client.entity.BearTrapEntityModel;
 import net.rogues.client.entity.BearTrapEntityRenderer;
@@ -38,6 +39,7 @@ public class RoguesClientMod {
         CustomParticleStatusEffect.register(RogueEffects.SHATTER.effect, new ShatterParticles(1));
         CustomParticleStatusEffect.register(RogueEffects.DEMORALIZE.effect, new DemoralizeParticles(1));
         CustomParticleStatusEffect.register(RogueEffects.CHARGE.effect, new ChargeParticles(1));
+        CustomParticleStatusEffect.register(RogueEffects.RECKLESSNESS.effect, new RecklessnessParticles());
         CustomModelStatusEffect.register(RogueEffects.NET_TRAP.effect, netTrapModelFxRenderer());
 
         SpellTooltip.addDescriptionMutator(Identifier.of(RoguesMod.NAMESPACE, "throw"), (args) -> {

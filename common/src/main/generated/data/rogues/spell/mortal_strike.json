@@ -1,0 +1,72 @@
+{
+  "school": "spell_power:physical_melee",
+  "range": 0.0,
+  "range_mechanic": "MELEE",
+  "tier": 4,
+  "learn": {},
+  "active": {
+    "cast": {
+      "duration": 0.5,
+      "animation": {
+        "id": "spell_engine:weapon_slam_jump"
+      },
+      "animation_pitch": false,
+      "start_sound": {
+        "id": "spell_engine:weapon_hammer_swing"
+      }
+    }
+  },
+  "release": {
+    "sound": {
+      "id": "spell_engine:weapon_ground_slam"
+    }
+  },
+  "target": {
+    "type": "NONE"
+  },
+  "deliver": {
+    "type": "MELEE",
+    "melee": {
+      "allow_airborne": false,
+      "attacks": [
+        {
+          "damage_bonus": 0.5,
+          "delay": 0.3,
+          "hitbox": {
+            "width": 0.5,
+            "height": 1.5,
+            "roll": 90.0,
+            "arc": 120.0
+          },
+          "animation": {
+            "id": "spell_engine:weapon_slam_end"
+          },
+          "swing_sound": {
+            "id": "spell_engine:weapon_hammer_swing"
+          },
+          "impact_sound": {
+            "id": "spell_engine:weapon_ground_slam"
+          }
+        }
+      ]
+    }
+  },
+  "impacts": [
+    {
+      "action": {
+        "type": "STATUS_EFFECT",
+        "apply_to_caster": true,
+        "status_effect": {
+          "effect_id": "rogues:recklessness",
+          "duration": 1.0
+        }
+      }
+    }
+  ],
+  "cost": {
+    "exhaust": 0.4,
+    "cooldown": {
+      "duration": 15.0
+    }
+  }
+}

@@ -14,6 +14,7 @@ import net.spell_engine.api.spell.fx.Sound;
 import net.spell_engine.client.gui.SpellTooltip;
 import net.spell_engine.client.util.Color;
 import net.spell_engine.fx.SpellEngineParticles;
+import net.spell_engine.fx.SpellEngineSounds;
 import net.spell_engine.internals.target.SpellTarget;
 import org.jetbrains.annotations.Nullable;
 
@@ -66,6 +67,36 @@ public class RogueSpells {
         limit.spell_power_multiplier = spellPowerMultiplier;
         impact.action.status_effect.apply_limit = limit;
         return impact;
+    }
+
+    /// Life steal FX, mirroring SkillTree's Leeching Strike. Copied rather than shared, since
+    /// SkillTree is not a dependency of Rogues.
+    private static ParticleBatch[] leechImpactParticles() {
+        var sparkFloat = SpellEngineParticles.MagicParticles.get(
+                SpellEngineParticles.MagicParticles.Shape.SPARK,
+                SpellEngineParticles.MagicParticles.Motion.FLOAT).id().toString();
+        var sparkDecelerate = SpellEngineParticles.MagicParticles.get(
+                SpellEngineParticles.MagicParticles.Shape.SPARK,
+                SpellEngineParticles.MagicParticles.Motion.DECELERATE).id().toString();
+        return new ParticleBatch[]{
+                new ParticleBatch(sparkFloat,
+                        ParticleBatch.Shape.WIDE_PIPE, ParticleBatch.Origin.CENTER,
+                        15, 0.02F, 0.1F)
+                        .color(Color.BLOOD.toRGBA()),
+                new ParticleBatch(sparkDecelerate,
+                        ParticleBatch.Shape.SPHERE, ParticleBatch.Origin.CENTER,
+                        25, 0.08F, 0.12F)
+                        .invert()
+                        .preSpawnTravel(5)
+                        .followEntity(true)
+                        .color(Color.BLOOD.toRGBA()),
+                new ParticleBatch(SpellEngineParticles.ground_glow.id().toString(),
+                        ParticleBatch.Shape.LINE_VERTICAL, ParticleBatch.Origin.GROUND,
+                        1, 0F, 0F)
+                        .followEntity(true)
+                        .scale(0.8F)
+                        .color(Color.BLOOD.alpha(0.2F).toRGBA())
+        };
     }
 
     /// Area target centered on the caster. `vertical_range_multiplier` keeps ground-level spells from
@@ -322,6 +353,53 @@ public class RogueSpells {
         return new Entry(id, spell, title, description);
     }
 
+    public static final Entry MUTILATE = add(mutilate().book(Book.ROGUE));
+    private static Entry mutilate() {
+        var id = Identifier.of(RoguesMod.NAMESPACE, "mutilate");
+        var title = "Mutilate";
+        var description = "Tear into everything in front of you with both weapons, healing you for {heal} per enemy struck. Strikes with the damage of both held weapons.";
+        var spell = activeSpellBase();
+        // Powered by both hands: the off-hand weapon's damage counts towards this spell.
+        spell.school = ExternalSpellSchools.PHYSICAL_MELEE_DUAL;
+        spell.range = 0;
+        spell.range_mechanic = Spell.RangeMechanic.MELEE;
+        spell.tier = 4;
+        spell.order = 2;
+
+        SpellBuilder.Casting.instant(spell);
+        SpellBuilder.Target.none(spell);
+
+        var attack = new Spell.Delivery.Melee.Attack();
+        attack.attack_speed_multiplier = 1F;
+        attack.delay = 0.1F;
+        attack.hitbox = new Spell.Delivery.Melee.HitBox();
+        attack.hitbox.arc = 160;
+        attack.hitbox.height = 0.2F;
+        attack.hitbox.width = 0.5F;
+        // Unlike Thrust, Mutilate stabs on the spot: no `forward_momentum`, so no slipperiness either.
+        attack.additional_strikes = 4;
+        attack.additional_strike_delay = 0.15F;
+        attack.additional_hits_on_same_target = false;
+        attack.animation = PlayerAnimation.of("spell_engine:weapon_twinstrike_slash_1");
+        attack.swing_sound = Sound.of(SpellEngineSounds.WEAPON_SWORD_SWING.id());
+        attack.impact_sound = Sound.of(SpellEngineSounds.WEAPON_DAGGER_IMPACT.id());
+
+        SpellBuilder.Deliver.melee(spell, List.of(attack));
+        spell.deliver.melee.allow_airborne = false;
+
+        // The swing itself carries the weapon damage, so life steal is the only impact.
+        var leech = SpellBuilder.Impacts.heal(0.1F);
+        leech.action.apply_to_caster = true;
+        leech.particles = leechImpactParticles();
+        leech.sound = Sound.of(SpellEngineSounds.LEECHING_IMPACT.id());
+        spell.impacts = List.of(leech);
+
+        SpellBuilder.Cost.cooldown(spell, 12);
+        SpellBuilder.Cost.exhaust(spell, 0.4F);
+
+        return new Entry(id, spell, title, description);
+    }
+
     public static final Entry WARRIOR_THROW = add(warrior_throw().book(Book.WARRIOR));
     private static Entry warrior_throw() {
         var id = Identifier.of(RoguesMod.NAMESPACE, "throw");
@@ -433,48 +511,6 @@ public class RogueSpells {
         return new Entry(id, spell, title, description);
     }
 
-    public static final Entry SHOUT = add(shout().book(Book.WARRIOR));
-    private static Entry shout() {
-        var id = Identifier.of(RoguesMod.NAMESPACE, "shout");
-        var title = "Demoralizing Shout";
-        var description = "Shout at nearby enemies, reducing their attack damage by {damage_reduction} for {effect_duration} sec, and dealing a small amount of damage.";
-        var effect = RogueEffects.DEMORALIZE;
-        var spell = activeSpellBase();
-        var radius = 12F;
-        spell.range = radius;
-        spell.tier = 3;
-
-        SpellBuilder.Casting.instant(spell);
-        SpellBuilder.Release.visuals(spell,
-                "spell_engine:one_handed_shout_release",
-                new ParticleBatch[]{
-                        SpellBuilder.Particles.area(SpellEngineParticles.area_effect_609.id())
-                                .scale(radius * 0.25F)
-                                .color(Color.RAGE.alpha(0.5F).toRGBA()),
-                },
-                Sound.of(RogueSounds.SHOUT_RELEASE.id()));
-
-        areaTarget(spell, 0.5F);
-
-        var debuff = limitByHealth(SpellBuilder.Impacts.effectAdd(effect.id.toString(), 8, 1, 5), 50, 2F);
-        debuff.particles = new ParticleBatch[]{
-                new ParticleBatch(SpellEngineParticles.smoke_medium.id().toString(),
-                        ParticleBatch.Shape.SPHERE, ParticleBatch.Origin.CENTER,
-                        25, 0.2F, 0.2F)
-                        .color(Color.RAGE.toRGBA())
-        };
-        debuff.sound = Sound.of(RogueSounds.DEMORALIZE_IMPACT.id());
-
-        var damage = SpellBuilder.Impacts.damage(0.05F, 0F);
-
-        spell.impacts = List.of(debuff, damage);
-
-        SpellBuilder.Cost.cooldown(spell, 12);
-        SpellBuilder.Cost.exhaust(spell, 0.3F);
-
-        return new Entry(id, spell, title, description);
-    }
-
     public static final Entry CHARGE = add(charge().book(Book.WARRIOR));
     private static Entry charge() {
         var id = Identifier.of(RoguesMod.NAMESPACE, "charge");
@@ -483,7 +519,7 @@ public class RogueSpells {
         var effect = RogueEffects.CHARGE;
         var spell = activeSpellBase();
         spell.range = 0;
-        spell.tier = 4;
+        spell.tier = 3;
 
         SpellBuilder.Casting.instant(spell);
         SpellBuilder.Release.visuals(spell,
@@ -517,6 +553,155 @@ public class RogueSpells {
         spell.impacts = List.of(buff);
 
         SpellBuilder.Cost.cooldown(spell, 12);
+        SpellBuilder.Cost.exhaust(spell, 0.4F);
+
+        return new Entry(id, spell, title, description);
+    }
+
+    public static final Entry SHOUT = add(shout().book(Book.WARRIOR));
+    private static Entry shout() {
+        var id = Identifier.of(RoguesMod.NAMESPACE, "shout");
+        var title = "Demoralizing Shout";
+        var description = "Shout at nearby enemies, reducing their attack damage by {damage_reduction} for {effect_duration} sec, and dealing a small amount of damage.";
+        var effect = RogueEffects.DEMORALIZE;
+        var spell = activeSpellBase();
+        var radius = 12F;
+        spell.range = radius;
+        spell.tier = 3;
+        spell.order = 2;
+
+        SpellBuilder.Casting.instant(spell);
+        SpellBuilder.Release.visuals(spell,
+                "spell_engine:one_handed_shout_release",
+                new ParticleBatch[]{
+                        SpellBuilder.Particles.area(SpellEngineParticles.area_effect_609.id())
+                                .scale(radius * 0.25F)
+                                .color(Color.RAGE.alpha(0.5F).toRGBA()),
+                },
+                Sound.of(RogueSounds.SHOUT_RELEASE.id()));
+
+        areaTarget(spell, 0.5F);
+
+        var debuff = limitByHealth(SpellBuilder.Impacts.effectAdd(effect.id.toString(), 8, 1, 5), 50, 2F);
+        debuff.particles = new ParticleBatch[]{
+                new ParticleBatch(SpellEngineParticles.smoke_medium.id().toString(),
+                        ParticleBatch.Shape.SPHERE, ParticleBatch.Origin.CENTER,
+                        25, 0.2F, 0.2F)
+                        .color(Color.RAGE.toRGBA())
+        };
+        debuff.sound = Sound.of(RogueSounds.DEMORALIZE_IMPACT.id());
+
+        var damage = SpellBuilder.Impacts.damage(0.05F, 0F);
+
+        spell.impacts = List.of(debuff, damage);
+
+        SpellBuilder.Cost.cooldown(spell, 12);
+        SpellBuilder.Cost.exhaust(spell, 0.3F);
+
+        return new Entry(id, spell, title, description);
+    }
+
+    public static final Entry LAST_STAND = add(last_stand().book(Book.WARRIOR));
+    private static Entry last_stand() {
+        var id = Identifier.of(RoguesMod.NAMESPACE, "last_stand");
+        var title = "Last Stand";
+        var description = "Brace yourself, rooted in place while channeling. Each of the {effect_amplifier_cap} stacks increases your maximum health and reduces damage taken, up to +100% health and -50% damage taken at a full channel. Lasts {effect_duration} sec.";
+        var effect = RogueEffects.LAST_STAND;
+        var stacks = 5;
+
+        // HEALTH school by design: this is a survival cooldown, tinted and grouped with health effects.
+        var spell = SpellBuilder.createSpellActive();
+        spell.school = ExternalSpellSchools.HEALTH;
+        spell.range = 0;
+        spell.tier = 4;
+        spell.order = 2;
+
+        // One stack per channel tick. `movement_speed = 0` roots the caster for the channel's duration.
+        SpellBuilder.Casting.channel(spell, 2.5F, stacks);
+        spell.active.cast.movement_speed = 0F;
+        spell.active.cast.animation = PlayerAnimation.of("spell_engine:two_handed_channeling");
+        spell.active.cast.start_sound = new Sound(SpellEngineSounds.GENERIC_HEALING_CASTING.id());
+        spell.active.cast.sound = new Sound(SpellEngineSounds.GENERIC_HEALING_CASTING.id(), 0);
+        spell.active.cast.particles = new ParticleBatch[]{
+                new ParticleBatch(SpellEngineParticles.MagicParticles.get(
+                        SpellEngineParticles.MagicParticles.Shape.SPARK,
+                        SpellEngineParticles.MagicParticles.Motion.DECELERATE).id().toString(),
+                        ParticleBatch.Shape.SPHERE, ParticleBatch.Origin.CENTER,
+                        8, 0.2F, 0.3F)
+                        .preSpawnTravel(6)
+                        .invert()
+                        .color(Color.BLOOD.toRGBA()),
+                new ParticleBatch(SpellEngineParticles.smoke_medium.id().toString(),
+                        ParticleBatch.Shape.CIRCLE, ParticleBatch.Origin.FEET,
+                        6, 0.05F, 0.1F)
+                        .color(Color.BLOOD.alpha(0.5F).toRGBA())
+        };
+
+        SpellBuilder.Release.visuals(spell,
+                null,
+                null,
+                new Sound(SpellEngineSounds.GENERIC_HEALING_RELEASE.id()));
+
+        spell.target.type = Spell.Target.Type.CASTER;
+
+        // Each channel tick adds a stack; the effect's per-stack modifiers do the scaling.
+        var buff = SpellBuilder.Impacts.effectAdd(effect.id.toString(), 10, 1, stacks - 1);
+        spell.impacts = List.of(buff);
+
+        // Proportional: releasing early (fewer stacks) shortens the cooldown, like Evocation.
+        SpellBuilder.Cost.cooldown(spell, 60);
+        spell.cost.cooldown.proportional = true;
+        SpellBuilder.Cost.exhaust(spell, 0.3F);
+
+        return new Entry(id, spell, title, description);
+    }
+
+    public static final Entry MORTAL_STRIKE = add(mortal_strike().book(Book.WARRIOR));
+    private static Entry mortal_strike() {
+        var id = Identifier.of(RoguesMod.NAMESPACE, "mortal_strike");
+        var title = "Mortal Strike";
+        // No token exists for a melee attack's weapon damage_bonus (the tooltip only estimates DAMAGE
+        // impacts), so the 50% below is stated literally and must track slam.damage_bonus.
+        var description = "Perform an overhead strike for 50% bonus weapon damage, and gain Reckless effect for {effect_duration} sec, increasing critical strike chance by 100%, but also the damage taken by 100%.";
+        var effect = RogueEffects.RECKLESSNESS;
+        var spell = activeSpellBase(); // PHYSICAL_MELEE
+        spell.range = 0;
+        spell.range_mechanic = Spell.RangeMechanic.MELEE;
+        spell.tier = 4;
+
+        // Wind up on the cast (the jump), slam down on the melee attack — GROUND_SLAM's two clips.
+        SpellBuilder.Casting.cast(spell, 0.5F);
+        spell.active.cast.animation = PlayerAnimation.of("spell_engine:weapon_slam_jump");
+        spell.active.cast.animation_pitch = false;
+        spell.active.cast.start_sound = new Sound(SpellEngineSounds.WEAPON_HAMMER_SWING.id());
+        spell.release.sound = new Sound(SpellEngineSounds.WEAPON_GROUND_SLAM.id());
+
+        SpellBuilder.Target.none(spell);
+
+        var slam = new Spell.Delivery.Melee.Attack();
+        slam.damage_bonus = 0.5F;
+        slam.attack_speed_multiplier = 1F;
+        slam.delay = 0.3F;
+        slam.hitbox = new Spell.Delivery.Melee.HitBox();
+        // Vertical overhead chop: `roll = 90` tips the swept arc onto its side so it sweeps
+        // top-to-bottom, and the tall/narrow box matches the downward slam.
+        slam.hitbox.arc = 120;
+        slam.hitbox.roll = 90F;
+        slam.hitbox.height = 1.5F;
+        slam.hitbox.width = 0.5F;
+        slam.animation = PlayerAnimation.of("spell_engine:weapon_slam_end");
+        slam.swing_sound = Sound.of(SpellEngineSounds.WEAPON_HAMMER_SWING.id());
+        slam.impact_sound = Sound.of(SpellEngineSounds.WEAPON_GROUND_SLAM.id());
+
+        SpellBuilder.Deliver.melee(spell, List.of(slam));
+        spell.deliver.melee.allow_airborne = false;
+
+        // Self-buff on impact: the swing's weapon damage lands via player.attack(), this rides on top.
+        var buff = SpellBuilder.Impacts.effectSet(effect.id.toString(), 1, 0);
+        buff.action.apply_to_caster = true;
+        spell.impacts = List.of(buff);
+
+        SpellBuilder.Cost.cooldown(spell, 15);
         SpellBuilder.Cost.exhaust(spell, 0.4F);
 
         return new Entry(id, spell, title, description);
