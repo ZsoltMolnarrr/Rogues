@@ -47,6 +47,9 @@
     }
   },
   "release": {
+    "animation": {
+      "id": "spell_engine:one_handed_shout_release"
+    },
     "sound": {
       "id": "rogues:last_stand_release"
     }

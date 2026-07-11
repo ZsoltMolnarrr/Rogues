@@ -6,9 +6,9 @@
   "learn": {},
   "active": {
     "cast": {
-      "duration": 1.0,
+      "duration": 0.5,
       "animation": {
-        "id": "rogues:mortal_strike_windup"
+        "id": "rogues:ground_slam_windup_2"
       },
       "animation_pitch": false,
       "start_sound": {
@@ -22,7 +22,6 @@
   "deliver": {
     "type": "MELEE",
     "melee": {
-      "allow_airborne": false,
       "attacks": [
         {
           "damage_bonus": 0.5,
@@ -34,10 +33,13 @@
             "arc": 120.0
           },
           "animation": {
-            "id": "rogues:mortal_strike_slash"
+            "id": "rogues:ground_slam_end_2"
+          },
+          "swing_sound": {
+            "id": "rogues:mortal_strike_swing"
           },
           "impact_sound": {
-            "id": "spell_engine:weapon_ground_slam"
+            "id": "rogues:mortal_strike_impact"
           }
         }
       ]
@@ -50,7 +52,8 @@
         "status_effect": {
           "effect_id": "spell_engine:bleed",
           "duration": 6.0,
-          "amplifier": 1
+          "amplifier": 1,
+          "amplifier_power_multiplier": 0.25
         }
       },
       "particles": [
@@ -58,9 +61,9 @@
           "particle_id": "spell_engine:dripping_blood",
           "origin": "CENTER",
           "shape": "SPHERE",
-          "count": 10.0,
-          "min_speed": 0.05,
-          "max_speed": 0.3
+          "count": 40.0,
+          "min_speed": 0.2,
+          "max_speed": 0.4
         }
       ]
     }

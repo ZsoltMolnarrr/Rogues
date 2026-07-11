@@ -484,6 +484,7 @@ public class RogueSpells {
                 Sound.of(RogueSounds.THROW.id()));
 
         SpellBuilder.Target.aim(spell);
+        spell.target.aim.sticky = true;
 
         spell.deliver.type = Spell.Delivery.Type.PROJECTILE;
         spell.deliver.projectile = new Spell.Delivery.ShootProjectile();
@@ -645,7 +646,7 @@ public class RogueSpells {
         // The persistent aura is spawned periodically by the LAST_STAND status effect
         // (see RoguesClientMod), not on release.
         SpellBuilder.Release.visuals(spell,
-                null,
+                "spell_engine:one_handed_shout_release",
                 null,
                 new Sound(RogueSounds.LAST_STAND_RELEASE.id()));
 
@@ -653,13 +654,8 @@ public class RogueSpells {
 
         // Each channel tick adds a stack; the effect's per-stack modifiers do the scaling.
         var buff = SpellBuilder.Impacts.effectAdd(effect.id.toString(), 10, 1, stacks - 1);
-        var heal = new Spell.Impact();
-        heal.action = new Spell.Impact.Action();
-        heal.action.type = Spell.Impact.Action.Type.HEAL;
-        heal.action.heal = new Spell.Impact.Action.Heal();
+        var heal = SpellBuilder.Impacts.heal(1F / stacks);
         heal.attribute = EntityAttributes.GENERIC_MAX_HEALTH.getIdAsString();
-        heal.action.heal.spell_power_coefficient = 1F / stacks;
-        // heal.sound = new Sound(SpellEngineSounds.GENERIC_HEALING_IMPACT_3.id());
 
         spell.impacts = List.of(buff, heal);
 
@@ -682,11 +678,10 @@ public class RogueSpells {
         spell.tier = 4;
 
         // Wind up on the cast (the jump), slam down on the melee attack — GROUND_SLAM's two clips.
-        SpellBuilder.Casting.cast(spell, 1F);
-        spell.active.cast.animation = PlayerAnimation.of("rogues:mortal_strike_windup");
+        SpellBuilder.Casting.cast(spell, 0.5F);
+        spell.active.cast.animation = PlayerAnimation.of("rogues:ground_slam_windup_2");
         spell.active.cast.animation_pitch = false;
         spell.active.cast.start_sound = new Sound(SpellEngineSounds.WEAPON_HAMMER_SWING.id());
-        // spell.release.sound = new Sound(SpellEngineSounds.WEAPON_GROUND_SLAM.id());
 
         SpellBuilder.Target.none(spell);
 
@@ -701,19 +696,19 @@ public class RogueSpells {
         slam.hitbox.roll = 90F;
         slam.hitbox.height = 1.5F;
         slam.hitbox.width = 0.5F;
-        slam.animation = PlayerAnimation.of("rogues:mortal_strike_slash");
-        // slam.swing_sound = Sound.of(SpellEngineSounds.WEAPON_HAMMER_SWING.id());
-        slam.impact_sound = Sound.of(SpellEngineSounds.WEAPON_GROUND_SLAM.id());
+        slam.animation = PlayerAnimation.of("rogues:ground_slam_end_2");
+        slam.swing_sound = Sound.of(RogueSounds.MORTAL_STRIKE_SWING.id());
+        slam.impact_sound = Sound.of(RogueSounds.MORTAL_STRIKE_IMPACT.id());
 
         SpellBuilder.Deliver.melee(spell, List.of(slam));
-        spell.deliver.melee.allow_airborne = false;
 
         // The swing's weapon damage lands via player.attack(); this bleed rides on top, on the target.
-        var bleed = SpellBuilder.Impacts.effectSet(SpellEngineEffects.BLEED.id.toString(), 6, 1);
+        var bleed = SpellBuilder.Impacts.effectSet_ScaledAmplifier(
+                SpellEngineEffects.BLEED.id.toString(), 6, 1, 0.25F);
         bleed.particles = new ParticleBatch[]{
                 new ParticleBatch(SpellEngineParticles.dripping_blood.id().toString(),
                         ParticleBatch.Shape.SPHERE, ParticleBatch.Origin.CENTER,
-                        10, 0.05F, 0.3F)
+                        40, 0.2F, 0.4F)
         };
         spell.impacts = List.of(bleed);
 

@@ -53,6 +53,16 @@
       "rogues:last_stand_start"
     ]
   },
+  "mortal_strike_impact": {
+    "sounds": [
+      "rogues:mortal_strike_impact"
+    ]
+  },
+  "mortal_strike_swing": {
+    "sounds": [
+      "rogues:mortal_strike_swing"
+    ]
+  },
   "mutilate_impact": {
     "sounds": [
       "rogues:mutilate_impact"

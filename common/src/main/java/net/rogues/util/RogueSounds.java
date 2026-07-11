@@ -66,13 +66,10 @@ public class RogueSounds {
         return entry;
     }
 
-    public static final Entry SLICE_AND_DICE = add(new Entry("slice_and_dice"));
-    public static final Entry SHOCK_POWDER_RELEASE = add(new Entry("shock_powder_release"));
-    public static final Entry SHOCK_POWDER_IMPACT = add(new Entry("shock_powder_impact"));
-    public static final Entry SHADOW_STEP_ARRIVE = add(new Entry("shadow_step_arrive"));
-    public static final Entry SHADOW_STEP_DEPART = add(new Entry("shadow_step_depart"));
-    public static final Entry VANISH_RELEASE = add(new Entry("vanish_release"));
-    public static final Entry VANISH_COMBINED = add(new Entry("vanish_combined"));
+    public static final Entry ROGUE_ARMOR_EQUIP = add(new Entry("rogue_armor"));
+    public static final Entry WARRIOR_ARMOR_EQUIP = add(new Entry("warrior_armor"));
+    public static final Entry WORKBENCH = add(new Entry("arms_workbench"));
+
     public static final Entry THROW = add(new Entry("throw"));
     public static final Entry NET_CASTING = add(new Entry("net_casting"));
     public static final Entry NET_TRAVEL = add(new Entry("net_travel"));
@@ -82,19 +79,25 @@ public class RogueSounds {
     public static final Entry DEMORALIZE_IMPACT = add(new Entry("demoralize_impact"));
     public static final Entry CHARGE_ACTIVATE = add(new Entry("charge_activate"));
     public static final Entry WHIRLWIND = add(new Entry("whirlwind"));
-    public static final Entry ROGUE_ARMOR_EQUIP = add(new Entry("rogue_armor"));
-    public static final Entry WARRIOR_ARMOR_EQUIP = add(new Entry("warrior_armor"));
-    public static final Entry WORKBENCH = add(new Entry("arms_workbench"));
-    public static final Entry STEALTH_LEAVE = add(new Entry("stealth_leave"));
-    public static final Entry MUTILATE_IMPACT = add(new Entry("mutilate_impact"));
     public static final Entry LAST_STAND_STARTING = add(new Entry("last_stand_start"));
     public static final Entry LAST_STAND_CASTING = add(new Entry("last_stand_casting"));
     public static final Entry LAST_STAND_RELEASE = add(new Entry("last_stand_release"));
+    public static final Entry MORTAL_STRIKE_SWING = add(new Entry("mortal_strike_swing"));
+    public static final Entry MORTAL_STRIKE_IMPACT = add(new Entry("mortal_strike_impact"));
 
+    public static final Entry SLICE_AND_DICE = add(new Entry("slice_and_dice"));
+    public static final Entry SHOCK_POWDER_RELEASE = add(new Entry("shock_powder_release"));
+    public static final Entry SHOCK_POWDER_IMPACT = add(new Entry("shock_powder_impact"));
+    public static final Entry SHADOW_STEP_ARRIVE = add(new Entry("shadow_step_arrive"));
+    public static final Entry SHADOW_STEP_DEPART = add(new Entry("shadow_step_depart"));
+    public static final Entry STEALTH_LEAVE = add(new Entry("stealth_leave"));
+    public static final Entry MUTILATE_IMPACT = add(new Entry("mutilate_impact"));
     public static final Entry BEAR_TRAP_RELEASE = add(new Entry("bear_trap_release"));
     public static final Entry BEAR_TRAP_SPAWN = add(new Entry("bear_trap_spawn").variants(3));
     public static final Entry BEAR_TRAP_DESPAWN = add(new Entry("bear_trap_despawn").variants(3));
     public static final Entry BEAR_TRAP_IMPACT = add(new Entry("bear_trap_impact"));
+    public static final Entry VANISH_RELEASE = add(new Entry("vanish_release"));
+    public static final Entry VANISH_COMBINED = add(new Entry("vanish_combined"));
 
     public static void register() {
         for (var entry: entries) {
