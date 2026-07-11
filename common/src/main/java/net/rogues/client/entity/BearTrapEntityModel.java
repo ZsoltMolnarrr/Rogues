@@ -27,9 +27,9 @@ public class BearTrapEntityModel extends SinglePartEntityModel<BearTrapEntity> {
 		ModelPartData root = modelPartData.addChild("root", ModelPartBuilder.create().uv(28, 28).cuboid(-8.0F, -2.0F, -1.0F, 16.0F, 2.0F, 2.0F, new Dilation(0.0F))
 		.uv(0, 22).cuboid(-3.0F, -3.0F, -3.0F, 6.0F, 2.0F, 6.0F, new Dilation(0.0F)), ModelTransform.pivot(0.0F, 24.0F, 0.0F));
 
-		ModelPartData beartrap_part_1 = root.addChild("beartrap_part_1", ModelPartBuilder.create().uv(0, 0).cuboid(-9.0F, -3.0F, -6.0F, 15.0F, 4.0F, 7.0F, new Dilation(0.01F)), ModelTransform.pivot(1.5F, -1.0F, -1.0F));
+		ModelPartData beartrap_part_1 = root.addChild("beartrap_part_1", ModelPartBuilder.create().uv(0, 0).cuboid(-9.0F, -3.2F, -6.0F, 15.0F, 4.0F, 7.0F, new Dilation(0.01F)), ModelTransform.pivot(1.5F, -1.0F, -1.0F));
 
-		ModelPartData beartrap_part_2 = root.addChild("beartrap_part_2", ModelPartBuilder.create().uv(0, 11).mirrored().cuboid(-7.0F, -3.0F, -1.0F, 15.0F, 4.0F, 7.0F, new Dilation(0.0F)).mirrored(false), ModelTransform.pivot(-0.5F, -1.0F, 1.0F));
+		ModelPartData beartrap_part_2 = root.addChild("beartrap_part_2", ModelPartBuilder.create().uv(0, 11).mirrored().cuboid(-7.0F, -3.2F, -1.0F, 15.0F, 4.0F, 7.0F, new Dilation(0.0F)).mirrored(false), ModelTransform.pivot(-0.5F, -1.0F, 1.0F));
 		return TexturedModelData.of(modelData, 64, 32);
 	}
 
