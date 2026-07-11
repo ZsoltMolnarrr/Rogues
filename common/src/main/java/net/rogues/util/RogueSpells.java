@@ -5,6 +5,7 @@ import net.rogues.RoguesMod;
 import net.rogues.effect.RogueEffects;
 import net.rogues.entity.RogueEntities;
 import net.spell_engine.api.datagen.SpellBuilder;
+import net.spell_engine.api.effect.SpellEngineEffects;
 import net.spell_engine.api.render.LightEmission;
 import net.spell_engine.api.spell.ExternalSpellSchools;
 import net.spell_engine.api.spell.Spell;
@@ -296,6 +297,7 @@ public class RogueSpells {
         var description = "Set 3 bear traps around you, lasting {cloud_duration} sec. The first enemy to step into a trap springs it shut, taking {damage} damage and being held in place for {effect_duration} sec.";
         var effect = RogueEffects.BEAR_TRAP;
         var spell = activeSpellBase();
+        spell.school = ExternalSpellSchools.PHYSICAL_MELEE_DUAL;
         spell.range = 0;
         spell.tier = 3;
         spell.order = 2;
@@ -377,15 +379,16 @@ public class RogueSpells {
         attack.hitbox.height = 0.2F;
         attack.hitbox.width = 0.5F;
         // Unlike Thrust, Mutilate stabs on the spot: no `forward_momentum`, so no slipperiness either.
-        attack.additional_strikes = 4;
-        attack.additional_strike_delay = 0.15F;
+//        attack.additional_strikes = 4;
+//        attack.additional_strike_delay = 0.15F;
         attack.additional_hits_on_same_target = false;
-        attack.animation = PlayerAnimation.of("spell_engine:weapon_twinstrike_slash_1");
+        attack.animation = PlayerAnimation.of("spell_engine:weapon_dual_slash_cross");
+        attack.delay = 0.5F;
         attack.swing_sound = Sound.of(SpellEngineSounds.WEAPON_SWORD_SWING.id());
         attack.impact_sound = Sound.of(SpellEngineSounds.WEAPON_DAGGER_IMPACT.id());
 
         SpellBuilder.Deliver.melee(spell, List.of(attack));
-        spell.deliver.melee.allow_airborne = false;
+        spell.deliver.melee.allow_airborne = true;
 
         // The swing itself carries the weapon damage, so life steal is the only impact.
         var leech = SpellBuilder.Impacts.heal(0.1F);
@@ -619,7 +622,7 @@ public class RogueSpells {
         // One stack per channel tick. `movement_speed = 0` roots the caster for the channel's duration.
         SpellBuilder.Casting.channel(spell, 2.5F, stacks);
         spell.active.cast.movement_speed = 0F;
-        spell.active.cast.animation = PlayerAnimation.of("spell_engine:two_handed_channeling");
+        spell.active.cast.animation = PlayerAnimation.of("spell_engine:one_handed_ground_charge");
         spell.active.cast.start_sound = new Sound(SpellEngineSounds.GENERIC_HEALING_CASTING.id());
         spell.active.cast.sound = new Sound(SpellEngineSounds.GENERIC_HEALING_CASTING.id(), 0);
         spell.active.cast.particles = new ParticleBatch[]{
@@ -660,21 +663,18 @@ public class RogueSpells {
     private static Entry mortal_strike() {
         var id = Identifier.of(RoguesMod.NAMESPACE, "mortal_strike");
         var title = "Mortal Strike";
-        // No token exists for a melee attack's weapon damage_bonus (the tooltip only estimates DAMAGE
-        // impacts), so the 50% below is stated literally and must track slam.damage_bonus.
-        var description = "Perform an overhead strike for 50% bonus weapon damage, and gain Reckless effect for {effect_duration} sec, increasing critical strike chance by 100%, but also the damage taken by 100%.";
-        var effect = RogueEffects.RECKLESSNESS;
+        var description = "Perform an overhead strike for {weapon_damage_bonus} bonus weapon damage, causing the target to Bleed for {effect_duration} sec.";
         var spell = activeSpellBase(); // PHYSICAL_MELEE
         spell.range = 0;
         spell.range_mechanic = Spell.RangeMechanic.MELEE;
         spell.tier = 4;
 
         // Wind up on the cast (the jump), slam down on the melee attack — GROUND_SLAM's two clips.
-        SpellBuilder.Casting.cast(spell, 0.5F);
-        spell.active.cast.animation = PlayerAnimation.of("spell_engine:weapon_slam_jump");
+        SpellBuilder.Casting.cast(spell, 1F);
+        spell.active.cast.animation = PlayerAnimation.of("rogues:mortal_strike_windup");
         spell.active.cast.animation_pitch = false;
         spell.active.cast.start_sound = new Sound(SpellEngineSounds.WEAPON_HAMMER_SWING.id());
-        spell.release.sound = new Sound(SpellEngineSounds.WEAPON_GROUND_SLAM.id());
+        // spell.release.sound = new Sound(SpellEngineSounds.WEAPON_GROUND_SLAM.id());
 
         SpellBuilder.Target.none(spell);
 
@@ -689,17 +689,21 @@ public class RogueSpells {
         slam.hitbox.roll = 90F;
         slam.hitbox.height = 1.5F;
         slam.hitbox.width = 0.5F;
-        slam.animation = PlayerAnimation.of("spell_engine:weapon_slam_end");
-        slam.swing_sound = Sound.of(SpellEngineSounds.WEAPON_HAMMER_SWING.id());
+        slam.animation = PlayerAnimation.of("rogues:mortal_strike_slash");
+        // slam.swing_sound = Sound.of(SpellEngineSounds.WEAPON_HAMMER_SWING.id());
         slam.impact_sound = Sound.of(SpellEngineSounds.WEAPON_GROUND_SLAM.id());
 
         SpellBuilder.Deliver.melee(spell, List.of(slam));
         spell.deliver.melee.allow_airborne = false;
 
-        // Self-buff on impact: the swing's weapon damage lands via player.attack(), this rides on top.
-        var buff = SpellBuilder.Impacts.effectSet(effect.id.toString(), 1, 0);
-        buff.action.apply_to_caster = true;
-        spell.impacts = List.of(buff);
+        // The swing's weapon damage lands via player.attack(); this bleed rides on top, on the target.
+        var bleed = SpellBuilder.Impacts.effectSet(SpellEngineEffects.BLEED.id.toString(), 6, 1);
+        bleed.particles = new ParticleBatch[]{
+                new ParticleBatch(SpellEngineParticles.dripping_blood.id().toString(),
+                        ParticleBatch.Shape.SPHERE, ParticleBatch.Origin.CENTER,
+                        10, 0.05F, 0.3F)
+        };
+        spell.impacts = List.of(bleed);
 
         SpellBuilder.Cost.cooldown(spell, 15);
         SpellBuilder.Cost.exhaust(spell, 0.4F);

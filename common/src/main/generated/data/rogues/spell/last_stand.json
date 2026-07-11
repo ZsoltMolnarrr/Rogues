@@ -12,7 +12,7 @@
         "ticks": 5
       },
       "animation": {
-        "id": "spell_engine:two_handed_channeling"
+        "id": "spell_engine:one_handed_ground_charge"
       },
       "movement_speed": 0.0,
       "start_sound": {

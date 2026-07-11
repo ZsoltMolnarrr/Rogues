@@ -202,29 +202,6 @@ public class RogueEffects {
             ))
     ));
 
-    /// Reckless frenzy applied to the caster by Mortal Strike: +100% critical strike chance at the
-    /// cost of +100% damage taken. `critical_chance` and `damage_taken` both have a base of 100, so
-    /// `ADD_MULTIPLIED_BASE` of +1.0 doubles each — guaranteed crits, but every hit lands twice as hard.
-    public static final Effects.Entry RECKLESSNESS = add(new Effects.Entry(
-            Identifier.of(RoguesMod.NAMESPACE, "recklessness"),
-            "Recklessness",
-            "Increases critical strike chance, but also damage taken",
-            new CustomStatusEffect(StatusEffectCategory.BENEFICIAL, 0xcc0000),
-            new EffectConfig(List.of(
-                    new AttributeModifier(
-                            "critical_strike:chance",
-                            1.0F,
-                            EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE
-                    ),
-                    new AttributeModifier(
-                            "spell_engine:damage_taken",
-                            1.0F,
-                            EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE
-                    )
-            ))
-    ));
-
-
     /// A root: pins the target in place without silencing them. `canMove = false` makes
     /// `LivingEntity.isImmobile()` report true, which zeroes movement input for mobs and players
     /// alike, and `canJump = false` cancels `jump()`. Everything else stays allowed — a leg in a bear
@@ -256,7 +233,6 @@ public class RogueEffects {
         Synchronized.configure(DEMORALIZE.effect, true);
         Synchronized.configure(CHARGE.effect, true);
         Synchronized.configure(LAST_STAND.effect, true);
-        Synchronized.configure(RECKLESSNESS.effect, true);
 
         CombatEvents.ENTITY_ANY_ATTACK.register((args) -> {
             var attacker = args.attacker();

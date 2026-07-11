@@ -6,19 +6,14 @@
   "learn": {},
   "active": {
     "cast": {
-      "duration": 0.5,
+      "duration": 1.0,
       "animation": {
-        "id": "spell_engine:weapon_slam_jump"
+        "id": "rogues:mortal_strike_windup"
       },
       "animation_pitch": false,
       "start_sound": {
         "id": "spell_engine:weapon_hammer_swing"
       }
-    }
-  },
-  "release": {
-    "sound": {
-      "id": "spell_engine:weapon_ground_slam"
     }
   },
   "target": {
@@ -39,10 +34,7 @@
             "arc": 120.0
           },
           "animation": {
-            "id": "spell_engine:weapon_slam_end"
-          },
-          "swing_sound": {
-            "id": "spell_engine:weapon_hammer_swing"
+            "id": "rogues:mortal_strike_slash"
           },
           "impact_sound": {
             "id": "spell_engine:weapon_ground_slam"
@@ -55,12 +47,22 @@
     {
       "action": {
         "type": "STATUS_EFFECT",
-        "apply_to_caster": true,
         "status_effect": {
-          "effect_id": "rogues:recklessness",
-          "duration": 1.0
+          "effect_id": "spell_engine:bleed",
+          "duration": 6.0,
+          "amplifier": 1
         }
-      }
+      },
+      "particles": [
+        {
+          "particle_id": "spell_engine:dripping_blood",
+          "origin": "CENTER",
+          "shape": "SPHERE",
+          "count": 10.0,
+          "min_speed": 0.05,
+          "max_speed": 0.3
+        }
+      ]
     }
   ],
   "cost": {
