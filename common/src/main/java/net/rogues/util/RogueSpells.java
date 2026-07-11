@@ -374,7 +374,7 @@ public class RogueSpells {
 
         var attack = new Spell.Delivery.Melee.Attack();
         attack.attack_speed_multiplier = 1F;
-        attack.delay = 0.1F;
+        attack.delay = 0.5F;
         attack.hitbox = new Spell.Delivery.Melee.HitBox();
         attack.hitbox.arc = 160;
         attack.hitbox.height = 0.2F;
@@ -384,7 +384,6 @@ public class RogueSpells {
 //        attack.additional_strike_delay = 0.15F;
         attack.additional_hits_on_same_target = false;
         attack.animation = PlayerAnimation.of("spell_engine:weapon_dual_slash_cross");
-        attack.delay = 0.5F;
         attack.swing_sound = Sound.of(SpellEngineSounds.WEAPON_SWORD_SWING.id());
         attack.impact_sound = Sound.of(RogueSounds.MUTILATE_IMPACT.id());
 
