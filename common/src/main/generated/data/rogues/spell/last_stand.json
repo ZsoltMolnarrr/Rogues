@@ -16,10 +16,10 @@
       },
       "movement_speed": 0.0,
       "start_sound": {
-        "id": "spell_engine:generic_healing_casting"
+        "id": "rogues:last_stand_start"
       },
       "sound": {
-        "id": "spell_engine:generic_healing_casting",
+        "id": "rogues:last_stand_casting",
         "randomness": 0.0
       },
       "particles": [
@@ -32,7 +32,7 @@
           "max_speed": 0.3,
           "pre_spawn_travel": 6.0,
           "invert": true,
-          "color_rgba": 3003121919
+          "color_rgba": 2059796479
         },
         {
           "particle_id": "spell_engine:smoke_medium",
@@ -41,14 +41,14 @@
           "count": 6.0,
           "min_speed": 0.05,
           "max_speed": 0.1,
-          "color_rgba": 3003121791
+          "color_rgba": 2059796351
         }
       ]
     }
   },
   "release": {
     "sound": {
-      "id": "spell_engine:generic_healing_release"
+      "id": "rogues:last_stand_release"
     }
   },
   "impacts": [
@@ -60,6 +60,15 @@
           "amplifier": 1,
           "amplifier_cap": 4,
           "apply_mode": "ADD"
+        }
+      }
+    },
+    {
+      "attribute": "minecraft:generic.max_health",
+      "action": {
+        "type": "HEAL",
+        "heal": {
+          "spell_power_coefficient": 0.2
         }
       }
     }

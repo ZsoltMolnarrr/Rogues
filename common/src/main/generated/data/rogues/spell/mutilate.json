@@ -28,7 +28,7 @@
             "id": "spell_engine:weapon_sword_swing"
           },
           "impact_sound": {
-            "id": "spell_engine:weapon_dagger_impact"
+            "id": "rogues:mutilate_impact"
           }
         }
       ]

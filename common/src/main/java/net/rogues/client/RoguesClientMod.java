@@ -15,10 +15,14 @@ import net.rogues.client.entity.BearTrapEntityModel;
 import net.rogues.client.entity.BearTrapEntityRenderer;
 import net.rogues.effect.RogueEffects;
 import net.rogues.entity.BearTrapEntity;
+import net.rogues.util.RogueSpells;
 import net.spell_engine.api.effect.CustomModelStatusEffect;
+import net.spell_engine.api.render.BuffParticleSpawner;
 import net.spell_engine.api.render.LightEmission;
 import net.spell_engine.api.render.ModelFxEffectRenderer;
 import net.spell_engine.api.spell.fx.ModelEffect;
+import net.spell_engine.api.spell.fx.ParticleBatch;
+import net.spell_engine.fx.SpellEngineParticles;
 
 import java.util.List;
 import net.rogues.item.armor.RogueArmors;
@@ -38,6 +42,18 @@ public class RoguesClientMod {
         CustomParticleStatusEffect.register(RogueEffects.SHATTER.effect, new ShatterParticles(1));
         CustomParticleStatusEffect.register(RogueEffects.DEMORALIZE.effect, new DemoralizeParticles(1));
         CustomParticleStatusEffect.register(RogueEffects.CHARGE.effect, new ChargeParticles(1));
+        // Persistent aura pulsed under the player every 20 ticks while Last Stand is active.
+        CustomParticleStatusEffect.register(RogueEffects.LAST_STAND.effect,
+                new BuffParticleSpawner(new ParticleBatch[]{
+                        new ParticleBatch(SpellEngineParticles.area_effect_700.id().toString(),
+                                ParticleBatch.Shape.SPHERE, ParticleBatch.Origin.GROUND,
+                                1, 0F, 0F)
+                                .scale(1.5F)
+                                .color(RogueSpells.LAST_STAND_COLOR.alpha(0.5F).toRGBA())
+                                .followEntity(true)
+                })
+                .withFrequency(20)
+                .scaleWithAmplifier(false));
         CustomModelStatusEffect.register(RogueEffects.NET_TRAP.effect, netTrapModelFxRenderer());
 
         SpellTooltip.addDescriptionMutator(Identifier.of(RoguesMod.NAMESPACE, "throw"), (args) -> {

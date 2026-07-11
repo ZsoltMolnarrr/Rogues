@@ -86,6 +86,10 @@ public class RogueSounds {
     public static final Entry WARRIOR_ARMOR_EQUIP = add(new Entry("warrior_armor"));
     public static final Entry WORKBENCH = add(new Entry("arms_workbench"));
     public static final Entry STEALTH_LEAVE = add(new Entry("stealth_leave"));
+    public static final Entry MUTILATE_IMPACT = add(new Entry("mutilate_impact"));
+    public static final Entry LAST_STAND_STARTING = add(new Entry("last_stand_start"));
+    public static final Entry LAST_STAND_CASTING = add(new Entry("last_stand_casting"));
+    public static final Entry LAST_STAND_RELEASE = add(new Entry("last_stand_release"));
 
     public static final Entry BEAR_TRAP_RELEASE = add(new Entry("bear_trap_release"));
     public static final Entry BEAR_TRAP_SPAWN = add(new Entry("bear_trap_spawn").variants(3));

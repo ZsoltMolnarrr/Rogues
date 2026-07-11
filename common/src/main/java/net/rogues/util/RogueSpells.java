@@ -1,5 +1,6 @@
 package net.rogues.util;
 
+import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.util.Identifier;
 import net.rogues.RoguesMod;
 import net.rogues.effect.RogueEffects;
@@ -385,7 +386,7 @@ public class RogueSpells {
         attack.animation = PlayerAnimation.of("spell_engine:weapon_dual_slash_cross");
         attack.delay = 0.5F;
         attack.swing_sound = Sound.of(SpellEngineSounds.WEAPON_SWORD_SWING.id());
-        attack.impact_sound = Sound.of(SpellEngineSounds.WEAPON_DAGGER_IMPACT.id());
+        attack.impact_sound = Sound.of(RogueSounds.MUTILATE_IMPACT.id());
 
         SpellBuilder.Deliver.melee(spell, List.of(attack));
         spell.deliver.melee.allow_airborne = true;
@@ -604,6 +605,7 @@ public class RogueSpells {
         return new Entry(id, spell, title, description);
     }
 
+    public static final Color LAST_STAND_COLOR = Color.PHYSICAL_BLUE;
     public static final Entry LAST_STAND = add(last_stand().book(Book.WARRIOR));
     private static Entry last_stand() {
         var id = Identifier.of(RoguesMod.NAMESPACE, "last_stand");
@@ -623,8 +625,8 @@ public class RogueSpells {
         SpellBuilder.Casting.channel(spell, 2.5F, stacks);
         spell.active.cast.movement_speed = 0F;
         spell.active.cast.animation = PlayerAnimation.of("spell_engine:one_handed_ground_charge");
-        spell.active.cast.start_sound = new Sound(SpellEngineSounds.GENERIC_HEALING_CASTING.id());
-        spell.active.cast.sound = new Sound(SpellEngineSounds.GENERIC_HEALING_CASTING.id(), 0);
+        spell.active.cast.start_sound = new Sound(RogueSounds.LAST_STAND_STARTING.id());
+        spell.active.cast.sound = new Sound(RogueSounds.LAST_STAND_CASTING.id(), 0);
         spell.active.cast.particles = new ParticleBatch[]{
                 new ParticleBatch(SpellEngineParticles.MagicParticles.get(
                         SpellEngineParticles.MagicParticles.Shape.SPARK,
@@ -633,23 +635,33 @@ public class RogueSpells {
                         8, 0.2F, 0.3F)
                         .preSpawnTravel(6)
                         .invert()
-                        .color(Color.BLOOD.toRGBA()),
+                        .color(LAST_STAND_COLOR.toRGBA()),
                 new ParticleBatch(SpellEngineParticles.smoke_medium.id().toString(),
                         ParticleBatch.Shape.CIRCLE, ParticleBatch.Origin.FEET,
                         6, 0.05F, 0.1F)
-                        .color(Color.BLOOD.alpha(0.5F).toRGBA())
+                        .color(LAST_STAND_COLOR.alpha(0.5F).toRGBA())
         };
 
+        // The persistent aura is spawned periodically by the LAST_STAND status effect
+        // (see RoguesClientMod), not on release.
         SpellBuilder.Release.visuals(spell,
                 null,
                 null,
-                new Sound(SpellEngineSounds.GENERIC_HEALING_RELEASE.id()));
+                new Sound(RogueSounds.LAST_STAND_RELEASE.id()));
 
         spell.target.type = Spell.Target.Type.CASTER;
 
         // Each channel tick adds a stack; the effect's per-stack modifiers do the scaling.
         var buff = SpellBuilder.Impacts.effectAdd(effect.id.toString(), 10, 1, stacks - 1);
-        spell.impacts = List.of(buff);
+        var heal = new Spell.Impact();
+        heal.action = new Spell.Impact.Action();
+        heal.action.type = Spell.Impact.Action.Type.HEAL;
+        heal.action.heal = new Spell.Impact.Action.Heal();
+        heal.attribute = EntityAttributes.GENERIC_MAX_HEALTH.getIdAsString();
+        heal.action.heal.spell_power_coefficient = 1F / stacks;
+        // heal.sound = new Sound(SpellEngineSounds.GENERIC_HEALING_IMPACT_3.id());
+
+        spell.impacts = List.of(buff, heal);
 
         // Proportional: releasing early (fewer stacks) shortens the cooldown, like Evocation.
         SpellBuilder.Cost.cooldown(spell, 60);

@@ -38,6 +38,26 @@
       "rogues:demoralize_impact"
     ]
   },
+  "last_stand_casting": {
+    "sounds": [
+      "rogues:last_stand_casting"
+    ]
+  },
+  "last_stand_release": {
+    "sounds": [
+      "rogues:last_stand_release"
+    ]
+  },
+  "last_stand_start": {
+    "sounds": [
+      "rogues:last_stand_start"
+    ]
+  },
+  "mutilate_impact": {
+    "sounds": [
+      "rogues:mutilate_impact"
+    ]
+  },
   "net_casting": {
     "sounds": [
       "rogues:net_casting"
