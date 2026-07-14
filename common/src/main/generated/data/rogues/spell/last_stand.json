@@ -2,7 +2,7 @@
   "school": "spell_power:health",
   "range": 0.0,
   "tier": 4,
-  "order": 2,
+  "group": "warrior_protection",
   "learn": {},
   "active": {
     "cast": {

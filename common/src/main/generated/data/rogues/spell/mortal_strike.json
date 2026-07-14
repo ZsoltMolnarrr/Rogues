@@ -3,6 +3,7 @@
   "range": 0.0,
   "range_mechanic": "MELEE",
   "tier": 4,
+  "group": "warrior_fury",
   "learn": {},
   "active": {
     "cast": {

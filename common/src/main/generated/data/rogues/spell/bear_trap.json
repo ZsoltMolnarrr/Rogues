@@ -2,7 +2,7 @@
   "school": "spell_power:physical_melee_dual",
   "range": 0.0,
   "tier": 3,
-  "order": 2,
+  "group": "rogue_blade",
   "learn": {},
   "active": {},
   "release": {

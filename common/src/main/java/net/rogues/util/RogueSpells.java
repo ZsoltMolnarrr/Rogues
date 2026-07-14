@@ -54,6 +54,15 @@ public class RogueSpells {
         return entry;
     }
 
+    // MARK: Spell groups
+    // Prefixed by the book they belong to, since a group is only ever read alongside the groups of
+    // other mods, where a bare `protection` would say nothing about whose protection it is.
+
+    public static final String BLADE = "rogue_blade";
+    public static final String SUBTLETY = "rogue_subtlety";
+    public static final String FURY = "warrior_fury";
+    public static final String PROTECTION = "warrior_protection";
+
     /// Class spells are melee-school but not weapon skills: they carry their own cooldowns and are
     /// learned from a book, so this deliberately does not go through `createMeleeSpell`.
     private static Spell activeSpellBase() {
@@ -118,6 +127,7 @@ public class RogueSpells {
         var spell = activeSpellBase();
         spell.range = 0;
         spell.tier = 2;
+        spell.group = BLADE;
 
         SpellBuilder.Casting.instant(spell);
         SpellBuilder.Release.visuals(spell,
@@ -159,6 +169,7 @@ public class RogueSpells {
         var spell = activeSpellBase();
         spell.range = 5;
         spell.tier = 2;
+        spell.group = SUBTLETY;
 
         SpellBuilder.Casting.instant(spell);
         SpellBuilder.Release.visuals(spell,
@@ -208,6 +219,7 @@ public class RogueSpells {
         var spell = activeSpellBase();
         spell.range = 15;
         spell.tier = 3;
+        spell.group = SUBTLETY;
 
         SpellBuilder.Casting.instant(spell);
         SpellBuilder.Release.visuals(spell,
@@ -260,6 +272,7 @@ public class RogueSpells {
         var spell = activeSpellBase();
         spell.range = 0;
         spell.tier = 4;
+        spell.group = SUBTLETY;
 
         SpellBuilder.Casting.instant(spell);
         SpellBuilder.Release.visuals(spell,
@@ -301,7 +314,7 @@ public class RogueSpells {
         spell.school = ExternalSpellSchools.PHYSICAL_MELEE_DUAL;
         spell.range = 0;
         spell.tier = 3;
-        spell.order = 2;
+        spell.group = BLADE;
 
         SpellBuilder.Casting.instant(spell);
         SpellBuilder.Release.visuals(spell,
@@ -367,7 +380,7 @@ public class RogueSpells {
         spell.range = 0;
         spell.range_mechanic = Spell.RangeMechanic.MELEE;
         spell.tier = 4;
-        spell.order = 2;
+        spell.group = BLADE;
 
         SpellBuilder.Casting.instant(spell);
         SpellBuilder.Target.none(spell);
@@ -412,6 +425,7 @@ public class RogueSpells {
         var spell = activeSpellBase();
         spell.range = 24;
         spell.tier = 2;
+        spell.group = FURY;
 
         SpellBuilder.Casting.cast(spell, 0.5F, "spell_engine:one_handed_throw_charge");
         SpellBuilder.Release.visuals(spell,
@@ -464,7 +478,7 @@ public class RogueSpells {
         var spell = activeSpellBase();
         spell.range = 16;
         spell.tier = 2;
-        spell.order = 2;
+        spell.group = PROTECTION;
 
         // Short charge: holding it scales the innate output (base impact values are the FULL-charge
         // values, scaled down toward `1 - output_scaling` as the ratio drops) and the throw distance.
@@ -524,6 +538,7 @@ public class RogueSpells {
         var spell = activeSpellBase();
         spell.range = 0;
         spell.tier = 3;
+        spell.group = FURY;
 
         SpellBuilder.Casting.instant(spell);
         SpellBuilder.Release.visuals(spell,
@@ -572,7 +587,7 @@ public class RogueSpells {
         var radius = 12F;
         spell.range = radius;
         spell.tier = 3;
-        spell.order = 2;
+        spell.group = PROTECTION;
 
         SpellBuilder.Casting.instant(spell);
         SpellBuilder.Release.visuals(spell,
@@ -619,7 +634,7 @@ public class RogueSpells {
         spell.school = ExternalSpellSchools.HEALTH;
         spell.range = 0;
         spell.tier = 4;
-        spell.order = 2;
+        spell.group = PROTECTION;
 
         // One stack per channel tick. `movement_speed = 0` roots the caster for the channel's duration.
         SpellBuilder.Casting.channel(spell, 2.5F, stacks);
@@ -675,6 +690,7 @@ public class RogueSpells {
         spell.range = 0;
         spell.range_mechanic = Spell.RangeMechanic.MELEE;
         spell.tier = 4;
+        spell.group = FURY;
 
         // Wind up on the cast (the jump), slam down on the melee attack — GROUND_SLAM's two clips.
         SpellBuilder.Casting.cast(spell, 0.5F);
