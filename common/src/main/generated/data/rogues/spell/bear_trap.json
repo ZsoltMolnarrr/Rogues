@@ -63,6 +63,11 @@
           "sound": {
             "id": "rogues:bear_trap_spawn"
           }
+        },
+        "despawn": {
+          "sound": {
+            "id": "rogues:bear_trap_despawn"
+          }
         }
       }
     ]

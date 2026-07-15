@@ -336,6 +336,8 @@ public class RogueSpells {
         cloud.spawn_ticks = 20;
         cloud.despawn_ticks = 15;
         cloud.spawn.sound = Sound.of(RogueSounds.BEAR_TRAP_SPAWN.id());
+        // Played as the trap winds down — whether it sprung (BearTrapEntity.ATTACK_TICKS) or timed out.
+        cloud.despawn.sound = Sound.of(RogueSounds.BEAR_TRAP_DESPAWN.id());
         // Slice & Dice's converging spark shell, thinned out and dropped to the ankles — `invert()`
         // plus `preSpawnTravel` makes the sparks rush inward, reading as the jaws snapping closed.
         cloud.impact_particles = new ParticleBatch[]{
