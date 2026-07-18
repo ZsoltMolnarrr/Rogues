@@ -200,7 +200,7 @@ public class RogueSpells {
 
         areaTarget(spell, 0.5F);
 
-        var stun = limitByHealth(SpellBuilder.Impacts.effectSet(effect.id.toString(), 3, 0), 50, 2F);
+        var stun = limitByHealth(SpellBuilder.Impacts.effectSet(effect.id.toString(), 2, 0), 50, 2F);
         stun.sound = Sound.of(RogueSounds.SHOCK_POWDER_IMPACT.id());
         spell.impacts = List.of(stun);
 

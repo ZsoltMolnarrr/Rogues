@@ -5,6 +5,9 @@ Rogue and warrior spell books now offer 6 spells (2 choices across 3 tiers).
 - New Rogue spells: Bear Trap, Mutilate
 - New Warrior spells: Throw Net, Last Stand, Mortal Strike
 
+Other changes:
+- Shock Powder stun duration reduced to be 2 sec by default
+
 # 2.7.0
 
 DISCLAIMER: All spell books and spell scrolls will be reset, due to major API changes. Some (looted) weapons with custom spell containers become non-functional, and need to be re-obtained. Apologies for the inconvenience.
