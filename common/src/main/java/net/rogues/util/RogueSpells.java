@@ -375,7 +375,7 @@ public class RogueSpells {
     private static Entry mutilate() {
         var id = Identifier.of(RoguesMod.NAMESPACE, "mutilate");
         var title = "Mutilate";
-        var description = "Tear into everything in front of you with both weapons, healing you for {heal} per enemy struck. Strikes with the damage of both held weapons.";
+        var description = "Tear into everything in front of you with both weapons. Strikes with the damage of both held weapons.";
         var spell = activeSpellBase();
         // Powered by both hands: the off-hand weapon's damage counts towards this spell.
         spell.school = ExternalSpellSchools.PHYSICAL_MELEE_DUAL;
@@ -406,11 +406,7 @@ public class RogueSpells {
         spell.deliver.melee.allow_airborne = true;
 
         // The swing itself carries the weapon damage, so life steal is the only impact.
-        var leech = SpellBuilder.Impacts.heal(0.1F);
-        leech.action.apply_to_caster = true;
-        leech.particles = leechImpactParticles();
-        leech.sound = Sound.of(SpellEngineSounds.LEECHING_IMPACT.id());
-        spell.impacts = List.of(leech);
+        spell.impacts = List.of();
 
         SpellBuilder.Cost.cooldown(spell, 12);
         SpellBuilder.Cost.exhaust(spell, 0.4F);

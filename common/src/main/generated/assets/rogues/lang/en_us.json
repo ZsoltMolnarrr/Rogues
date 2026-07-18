@@ -113,7 +113,7 @@
   "spell.rogues.last_stand.name": "Last Stand",
   "spell.rogues.mortal_strike.description": "Perform an overhead strike for {weapon_damage_bonus} bonus weapon damage, causing the target to Bleed for {effect_duration} sec.",
   "spell.rogues.mortal_strike.name": "Mortal Strike",
-  "spell.rogues.mutilate.description": "Tear into everything in front of you with both weapons, healing you for {heal} per enemy struck. Strikes with the damage of both held weapons.",
+  "spell.rogues.mutilate.description": "Tear into everything in front of you with both weapons. Strikes with the damage of both held weapons.",
   "spell.rogues.mutilate.name": "Mutilate",
   "spell.rogues.shadow_step.description": "Step through the shadows to appear behind your target.",
   "spell.rogues.shadow_step.name": "Shadowstep",
