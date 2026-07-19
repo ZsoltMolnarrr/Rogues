@@ -1,6 +1,6 @@
 {
   "school": "spell_power:physical_melee",
-  "range": 16.0,
+  "range": 10.0,
   "tier": 2,
   "group": "warrior_protection",
   "learn": {},
@@ -75,7 +75,7 @@
         "type": "STATUS_EFFECT",
         "status_effect": {
           "effect_id": "rogues:net_trap",
-          "duration": 4.0,
+          "duration": 3.0,
           "apply_limit": {
             "health_base": 100.0,
             "spell_power_multiplier": 2.0

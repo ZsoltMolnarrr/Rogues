@@ -474,7 +474,7 @@ public class RogueSpells {
         var description = "Hurl a weighted net, dealing {damage} damage and pinning the target in place for {effect_duration} sec. The longer the cast is held, the harder it lands and the further it flies.";
         var effect = RogueEffects.NET_TRAP;
         var spell = activeSpellBase();
-        spell.range = 16;
+        spell.range = 10;
         spell.tier = 2;
         spell.group = PROTECTION;
 
@@ -516,7 +516,7 @@ public class RogueSpells {
         var damage = SpellBuilder.Impacts.damage(0.1F, 0.1F);
 
         // Rooted, not stunned — the netted target can still fight back.
-        var root = limitByHealth(SpellBuilder.Impacts.effectSet(effect.id.toString(), 4, 0), 100, 2F);
+        var root = limitByHealth(SpellBuilder.Impacts.effectSet(effect.id.toString(), 3, 0), 100, 2F);
         root.sound = Sound.of(RogueSounds.NET_IMPACT.id());
 
         spell.impacts = List.of(damage, root);
