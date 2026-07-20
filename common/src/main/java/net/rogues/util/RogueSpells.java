@@ -703,10 +703,10 @@ public class RogueSpells {
         slam.attack_speed_multiplier = 1F;
         slam.delay = 0.3F;
         slam.hitbox = new Spell.Delivery.Melee.HitBox();
-        // Vertical overhead chop: `roll = 90` tips the swept arc onto its side so it sweeps
-        // top-to-bottom, and the tall/narrow box matches the downward slam.
+        // Vertical overhead chop: a tall, narrow box (height > width) is already a plumb slab in
+        // front of the caster. `roll` spins the cross-section around the aim axis, so it stays 0 here
+        // — a 90 roll would swap the extents and flatten this into a wide horizontal sweep.
         slam.hitbox.arc = 120;
-        slam.hitbox.roll = 90F;
         slam.hitbox.height = 1.5F;
         slam.hitbox.width = 0.5F;
         slam.animation = PlayerAnimation.of("spell_engine:two_handed_slash_vertical_slash");

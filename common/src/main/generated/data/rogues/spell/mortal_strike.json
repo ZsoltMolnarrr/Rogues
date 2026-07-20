@@ -30,7 +30,6 @@
           "hitbox": {
             "width": 0.5,
             "height": 1.5,
-            "roll": 90.0,
             "arc": 120.0
           },
           "animation": {
