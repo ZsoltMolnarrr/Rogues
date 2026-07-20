@@ -1,7 +1,6 @@
 {
 	"format_version": "1.9.0",
 	"credit": "Made with Blockbench",
-	"parent": "net_projectile",
 	"texture_size": [32, 32],
 	"textures": {
 		"1": "rogues:spell_projectile/throw_net"

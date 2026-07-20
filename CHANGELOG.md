@@ -1,3 +1,7 @@
+# 3.0.1
+
+- Fixed invalid `parent` reference in the Throw Net projectile model (exporter artifact)
+
 # 3.0.0
 
 SPELL EXPANSION! - Rogue and warrior spell books now offer 6 spells (2 choices across 3 tiers).
