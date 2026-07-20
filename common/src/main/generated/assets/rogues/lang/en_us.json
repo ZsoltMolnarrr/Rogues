@@ -109,7 +109,7 @@
   "spell.rogues.bear_trap.name": "Bear Trap",
   "spell.rogues.charge.description": "Increases movement speed and knockback resistance, frees you from movement impairing effects, lasts for {effect_duration} sec.",
   "spell.rogues.charge.name": "Charge",
-  "spell.rogues.last_stand.description": "Brace yourself, rooted in place while channeling. Each of the {effect_amplifier_cap} stacks increases your maximum health and reduces damage taken, up to +100% health and -50% damage taken at a full channel. Lasts {effect_duration} sec.",
+  "spell.rogues.last_stand.description": "Brace yourself, rooted in place while channeling. Each of the {effect_amplifier_cap} stacks increases your maximum health and reduces damage taken, up to +100%% health and -50%% damage taken at a full channel. Lasts {effect_duration} sec.",
   "spell.rogues.last_stand.name": "Last Stand",
   "spell.rogues.mortal_strike.description": "Perform an overhead strike for {weapon_damage_bonus} bonus weapon damage, causing the target to Bleed for {effect_duration} sec.",
   "spell.rogues.mortal_strike.name": "Mortal Strike",
