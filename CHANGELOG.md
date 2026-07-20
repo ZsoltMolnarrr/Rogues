@@ -1,6 +1,6 @@
 # 3.0.0
 
-Rogue and warrior spell books now offer 6 spells (2 choices across 3 tiers).
+SPELL EXPANSION! - Rogue and warrior spell books now offer 6 spells (2 choices across 3 tiers).
 
 - New Rogue spells: Bear Trap, Mutilate
 - New Warrior spells: Throw Net, Last Stand, Mortal Strike
