@@ -692,9 +692,9 @@ public class RogueSpells {
 
         // Wind up on the cast (the jump), slam down on the melee attack — GROUND_SLAM's two clips.
         SpellBuilder.Casting.cast(spell, 0.5F);
-        spell.active.cast.animation = PlayerAnimation.of("rogues:ground_slam_windup_2");
+        spell.active.cast.animation = PlayerAnimation.of("spell_engine:two_handed_slash_vertical_windup");
         spell.active.cast.animation_pitch = false;
-        spell.active.cast.start_sound = new Sound(SpellEngineSounds.WEAPON_HAMMER_SWING.id());
+        spell.active.cast.start_sound = new Sound(RogueSounds.MORTAL_STRIKE_SWING.id());
 
         SpellBuilder.Target.none(spell);
 
@@ -709,8 +709,8 @@ public class RogueSpells {
         slam.hitbox.roll = 90F;
         slam.hitbox.height = 1.5F;
         slam.hitbox.width = 0.5F;
-        slam.animation = PlayerAnimation.of("rogues:ground_slam_end_2");
-        slam.swing_sound = Sound.of(RogueSounds.MORTAL_STRIKE_SWING.id());
+        slam.animation = PlayerAnimation.of("spell_engine:two_handed_slash_vertical_slash");
+        slam.swing_sound = Sound.of(RogueSounds.MORTAL_STRIKE_WHOOSH.id());
         slam.impact_sound = Sound.of(RogueSounds.MORTAL_STRIKE_IMPACT.id());
 
         SpellBuilder.Deliver.melee(spell, List.of(slam));

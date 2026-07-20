@@ -9,11 +9,11 @@
     "cast": {
       "duration": 0.5,
       "animation": {
-        "id": "rogues:ground_slam_windup_2"
+        "id": "spell_engine:two_handed_slash_vertical_windup"
       },
       "animation_pitch": false,
       "start_sound": {
-        "id": "spell_engine:weapon_hammer_swing"
+        "id": "rogues:mortal_strike_swing"
       }
     }
   },
@@ -34,10 +34,10 @@
             "arc": 120.0
           },
           "animation": {
-            "id": "rogues:ground_slam_end_2"
+            "id": "spell_engine:two_handed_slash_vertical_slash"
           },
           "swing_sound": {
-            "id": "rogues:mortal_strike_swing"
+            "id": "rogues:mortal_strike_whoosh"
           },
           "impact_sound": {
             "id": "rogues:mortal_strike_impact"

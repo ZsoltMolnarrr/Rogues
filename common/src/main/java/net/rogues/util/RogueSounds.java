@@ -83,6 +83,7 @@ public class RogueSounds {
     public static final Entry LAST_STAND_CASTING = add(new Entry("last_stand_casting"));
     public static final Entry LAST_STAND_RELEASE = add(new Entry("last_stand_release"));
     public static final Entry MORTAL_STRIKE_SWING = add(new Entry("mortal_strike_swing"));
+    public static final Entry MORTAL_STRIKE_WHOOSH = add(new Entry("mortal_strike_whoosh"));
     public static final Entry MORTAL_STRIKE_IMPACT = add(new Entry("mortal_strike_impact"));
 
     public static final Entry SLICE_AND_DICE = add(new Entry("slice_and_dice"));

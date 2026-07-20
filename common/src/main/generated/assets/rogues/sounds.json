@@ -63,6 +63,11 @@
       "rogues:mortal_strike_swing"
     ]
   },
+  "mortal_strike_whoosh": {
+    "sounds": [
+      "rogues:mortal_strike_whoosh"
+    ]
+  },
   "mutilate_impact": {
     "sounds": [
       "rogues:mutilate_impact"
