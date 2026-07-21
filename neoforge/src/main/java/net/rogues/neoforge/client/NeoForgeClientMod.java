@@ -5,9 +5,13 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModLoadingContext;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
+import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
 import net.rogues.RoguesMod;
 import net.rogues.client.RoguesClientMod;
+import net.rogues.client.entity.BearTrapEntityModel;
+import net.rogues.client.entity.BearTrapEntityRenderer;
+import net.rogues.entity.BearTrapEntity;
 import net.spell_engine.client.gui.ConfigMenuScreen;
 
 @EventBusSubscriber(modid = RoguesMod.ID, value = Dist.CLIENT)
@@ -16,5 +20,15 @@ public class NeoForgeClientMod {
     public static void onClientSetup(FMLClientSetupEvent event) {
         RoguesClientMod.init();
         ModLoadingContext.get().registerExtensionPoint(IConfigScreenFactory.class, () -> (modContainer, parent) -> new ConfigMenuScreen(parent));
+    }
+
+    @SubscribeEvent
+    public static void onRegisterLayerDefinitions(EntityRenderersEvent.RegisterLayerDefinitions event) {
+        event.registerLayerDefinition(BearTrapEntityModel.LAYER, BearTrapEntityModel::getTexturedModelData);
+    }
+
+    @SubscribeEvent
+    public static void onRegisterRenderers(EntityRenderersEvent.RegisterRenderers event) {
+        event.registerEntityRenderer(BearTrapEntity.ENTITY_TYPE, BearTrapEntityRenderer::new);
     }
 }

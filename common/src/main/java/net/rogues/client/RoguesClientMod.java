@@ -2,8 +2,6 @@ package net.rogues.client;
 
 import mod.azure.azurelibarmor.common.render.armor.AzArmorRenderer;
 import mod.azure.azurelibarmor.common.render.armor.AzArmorRendererRegistry;
-import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
-import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.minecraft.util.Identifier;
 import net.rogues.RoguesMod;
 import net.rogues.client.armor.RogueArmorRenderer;
@@ -11,10 +9,7 @@ import net.rogues.client.armor.WarriorArmorRenderer;
 import net.rogues.client.effect.ChargeParticles;
 import net.rogues.client.effect.DemoralizeParticles;
 import net.rogues.client.effect.ShatterParticles;
-import net.rogues.client.entity.BearTrapEntityModel;
-import net.rogues.client.entity.BearTrapEntityRenderer;
 import net.rogues.effect.RogueEffects;
-import net.rogues.entity.BearTrapEntity;
 import net.rogues.util.RogueSpells;
 import net.spell_engine.api.effect.CustomModelStatusEffect;
 import net.spell_engine.api.render.BuffParticleSpawner;
@@ -35,8 +30,11 @@ import java.util.function.Supplier;
 
 public class RoguesClientMod {
     public static void init() {
-        EntityModelLayerRegistry.registerModelLayer(BearTrapEntityModel.LAYER, BearTrapEntityModel::getTexturedModelData);
-        EntityRendererRegistry.register(BearTrapEntity.ENTITY_TYPE, BearTrapEntityRenderer::new);
+        // Entity model layers + renderers are registered per-platform:
+        //   Fabric   -> FabricClientMod (Fabric API)
+        //   NeoForge -> NeoForgeClientMod (EntityRenderersEvent.RegisterLayerDefinitions / RegisterRenderers)
+        // Layer definitions MUST be contributed during the RegisterLayerDefinitions phase, which is
+        // over by the time FMLClientSetupEvent (where this init runs on NeoForge) fires.
 
         CustomParticleStatusEffect.register(RogueEffects.SHOCK.effect, new StunParticleSpawner());
         CustomParticleStatusEffect.register(RogueEffects.SHATTER.effect, new ShatterParticles(1));

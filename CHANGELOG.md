@@ -1,3 +1,7 @@
+# 3.0.2
+
+- Fix entity renderer registrations (NeoForge launch halt)
+
 # 3.0.1
 
 - Fixed invalid `parent` reference in the Throw Net projectile model (exporter artifact)
