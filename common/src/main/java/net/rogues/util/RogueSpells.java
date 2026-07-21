@@ -623,7 +623,7 @@ public class RogueSpells {
     private static Entry last_stand() {
         var id = Identifier.of(RoguesMod.NAMESPACE, "last_stand");
         var title = "Last Stand";
-        var description = "Brace yourself, rooted in place while channeling. Each of the {effect_amplifier_cap} stacks increases your maximum health and reduces damage taken, up to +100%% health and -50%% damage taken at a full channel. Lasts {effect_duration} sec.";
+        var description = "Stand your ground while channeling. Each stack increases your maximum health and knockback resistance, up to +100%% at {effect_amplifier_cap} stacks. Lasts {effect_duration} sec.";
         var effect = RogueEffects.LAST_STAND;
         var stacks = 5;
 

@@ -195,8 +195,8 @@ public class RogueEffects {
                             EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE
                     ),
                     new AttributeModifier(
-                            "spell_engine:damage_taken",
-                            -0.1F,
+                            EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE.getIdAsString(),
+                            0.2F,
                             EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE
                     )
             ))
