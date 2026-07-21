@@ -1,7 +1,12 @@
+# 3.0.3
+
+- Last Stand effect grants knockback resistance instead of damage reduction
+- Fix trap entity name translation
+- Shattering Throw spell is now charged instead of casted
+
 # 3.0.2
 
 - Fix entity renderer registrations (NeoForge launch halt)
-- Last Stand effect grants knockback resistance instead of damage reduction
 
 # 3.0.1
 

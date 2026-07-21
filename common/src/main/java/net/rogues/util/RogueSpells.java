@@ -418,14 +418,21 @@ public class RogueSpells {
     private static Entry warrior_throw() {
         var id = Identifier.of(RoguesMod.NAMESPACE, "throw");
         var title = "Shattering Throw";
-        var description = "Throw your weapon at the target, dealing {damage} damage and reducing their armor by {armor_reduction} for {effect_duration} sec.";
+        var description = "Throw your weapon at the target, dealing {damage} damage and reducing their armor by {armor_reduction} for {effect_duration} sec. The longer the cast is held, the harder it hits and the further it flies.";
         var effect = RogueEffects.SHATTER;
         var spell = activeSpellBase();
-        spell.range = 24;
+        // Base range 12, plus up to +12 from the charge bonus below -> the same 24 total at full charge.
+        spell.range = 12;
         spell.tier = 2;
         spell.group = FURY;
 
-        SpellBuilder.Casting.cast(spell, 0.5F, "spell_engine:one_handed_throw_charge");
+        // Charged cast: hold to charge. CHARGE scales the innate output (damage) by default; the charge
+        // bonus additionally extends how far the thrown weapon flies, scaled by the curved release ratio.
+        var charge = SpellBuilder.Casting.charge(spell, 0.5F);
+        charge.bonus.range_add = 12F;
+
+        // Set directly: `Casting.charge` replaces `active.cast`, and `Casting.visuals` drops the sound.
+        spell.active.cast.animation = PlayerAnimation.of("spell_engine:one_handed_throw_charge");
         SpellBuilder.Release.visuals(spell,
                 "spell_engine:one_handed_throw_release_instant",
                 null,
