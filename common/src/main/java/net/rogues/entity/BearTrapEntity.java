@@ -11,7 +11,6 @@ import net.spell_engine.entity.SpellCloud;
 import net.spell_engine.internals.SpellHelper;
 
 public class BearTrapEntity extends SpellCloud {
-    public static EntityType<BearTrapEntity> ENTITY_TYPE;
 
     /// Length of the `attack` clip (1.5s). The jaws snap shut over the first ~2 ticks, hold, then the
     /// trap sinks across the last 10 — so the entity is removed exactly as it finishes going under.

@@ -9,7 +9,7 @@ import net.rogues.block.CustomBlocks;
 import net.rogues.client.RoguesClientMod;
 import net.rogues.client.entity.BearTrapEntityModel;
 import net.rogues.client.entity.BearTrapEntityRenderer;
-import net.rogues.entity.BearTrapEntity;
+import net.rogues.entity.RogueEntities;
 
 public final class FabricClientMod implements ClientModInitializer {
     @Override
@@ -18,7 +18,7 @@ public final class FabricClientMod implements ClientModInitializer {
 
         // Entity model layers + renderers (Fabric API)
         EntityModelLayerRegistry.registerModelLayer(BearTrapEntityModel.LAYER, BearTrapEntityModel::getTexturedModelData);
-        EntityRendererRegistry.register(BearTrapEntity.ENTITY_TYPE, BearTrapEntityRenderer::new);
+        EntityRendererRegistry.register(RogueEntities.BEAR_TRAP.type, BearTrapEntityRenderer::new);
 
         // Fabric-specific render layer registration
         BlockRenderLayerMap.INSTANCE.putBlock(CustomBlocks.WORKBENCH.block(), RenderLayer.getCutout());

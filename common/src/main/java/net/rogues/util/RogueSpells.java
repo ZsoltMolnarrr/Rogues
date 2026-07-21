@@ -327,7 +327,7 @@ public class RogueSpells {
         // windows and no ambient presence.
         spell.deliver.type = Spell.Delivery.Type.CLOUD;
         var cloud = new Spell.Delivery.Cloud();
-        cloud.entity_type_id = RogueEntities.BEAR_TRAP_ID.toString();
+        cloud.entity_type_id = RogueEntities.BEAR_TRAP.id.toString();
         cloud.volume.radius = 0.6F;
         cloud.volume.area.vertical_range_multiplier = 0.5F;
         cloud.impact_tick_interval = 2;

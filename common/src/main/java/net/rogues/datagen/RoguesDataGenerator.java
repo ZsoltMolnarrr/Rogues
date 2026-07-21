@@ -15,6 +15,7 @@ import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.util.Identifier;
 import net.rogues.RoguesMod;
 import net.rogues.effect.RogueEffects;
+import net.rogues.entity.RogueEntities;
 import net.rogues.item.RogueWeapons;
 import net.rogues.item.armor.RogueArmors;
 import net.rogues.util.RogueSounds;
@@ -277,6 +278,11 @@ public class RoguesDataGenerator implements DataGeneratorEntrypoint {
                 addItemName(builder, set.idOf(set.chest), set.chestTranslation);
                 addItemName(builder, set.idOf(set.legs), set.legsTranslation);
                 addItemName(builder, set.idOf(set.feet), set.feetTranslation);
+            }
+
+            // Custom entities — code-sourced display names (paired with the type in RogueEntities.Entry)
+            for (var entry : RogueEntities.entries) {
+                builder.add("entity." + namespace + "." + entry.id.getPath(), entry.name);
             }
 
             // Arms Dealer villager (several key formats are referenced across versions) + workbench

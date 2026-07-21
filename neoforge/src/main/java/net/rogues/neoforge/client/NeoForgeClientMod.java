@@ -11,7 +11,7 @@ import net.rogues.RoguesMod;
 import net.rogues.client.RoguesClientMod;
 import net.rogues.client.entity.BearTrapEntityModel;
 import net.rogues.client.entity.BearTrapEntityRenderer;
-import net.rogues.entity.BearTrapEntity;
+import net.rogues.entity.RogueEntities;
 import net.spell_engine.client.gui.ConfigMenuScreen;
 
 @EventBusSubscriber(modid = RoguesMod.ID, value = Dist.CLIENT)
@@ -29,6 +29,6 @@ public class NeoForgeClientMod {
 
     @SubscribeEvent
     public static void onRegisterRenderers(EntityRenderersEvent.RegisterRenderers event) {
-        event.registerEntityRenderer(BearTrapEntity.ENTITY_TYPE, BearTrapEntityRenderer::new);
+        event.registerEntityRenderer(RogueEntities.BEAR_TRAP.type, BearTrapEntityRenderer::new);
     }
 }
