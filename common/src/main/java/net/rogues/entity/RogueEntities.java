@@ -25,8 +25,8 @@ public class RogueEntities {
         /// English display name, emitted as {@code entity.<namespace>.<path>} by lang datagen.
         public final String name;
         public final EntityType<T> type;
-        /// Attribute defaults for summoned entities (seeded into config/spell_engine/summoned_entities.json).
-        /// Null for entities that aren't spell-power-scaled summons (e.g. the bear trap, a cloud).
+        /// Inline attribute defaults for spell-power-scaled summons, injected directly as the attribute
+        /// source (no config file). Null for entities that aren't such summons (e.g. the bear trap, a cloud).
         @Nullable public final SummonedEntityConfig.Entry summonConfig;
 
         public Entry(Identifier id, String name, EntityType<T> type) {
@@ -63,7 +63,10 @@ public class RogueEntities {
                 // Only summoned (living) entities carry a config; safe by construction.
                 @SuppressWarnings("unchecked")
                 var livingType = (EntityType<? extends LivingEntity>) entry.type;
-                SummonedEntities.registerAttributes(entry.id, livingType, entry.summonConfig);
+                // Inline-constant source: Rogues needs no config file for its summons, so it injects the
+                // in-code default straight in as a Function<Identifier, Entry>. Same seam as the TinyConfig-
+                // backed class mods — it just accepts a non-TinyConfig source.
+                SummonedEntities.registerAttributes(entry.id, livingType, id -> entry.summonConfig);
             }
         }
     }
