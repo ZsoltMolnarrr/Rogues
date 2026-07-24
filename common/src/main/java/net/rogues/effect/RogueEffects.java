@@ -164,7 +164,10 @@ public class RogueEffects {
             Identifier.of(RoguesMod.NAMESPACE, "charge"),
             "Charge",
             "Increases movement speed",
-            new ChargeEffect(StatusEffectCategory.BENEFICIAL, 0xAAAAAA),
+            // Ticking so spells can hook it via an EFFECT_TICK trigger — the freedom from movement
+            // impairing effects now comes from the Warrior tree's Improved Charge node rather than
+            // being baked into the effect. 5-tick interval keeps that dispel responsive (0.25s).
+            new TickingStatusEffect(StatusEffectCategory.BENEFICIAL, 0xAAAAAA).interval(5),
             new EffectConfig(List.of(
                     new AttributeModifier(
                             EntityAttributes.GENERIC_MOVEMENT_SPEED.getIdAsString(),

@@ -538,7 +538,7 @@ public class RogueSpells {
     private static Entry charge() {
         var id = Identifier.of(RoguesMod.NAMESPACE, "charge");
         var title = "Charge";
-        var description = "Increases movement speed and knockback resistance, frees you from movement impairing effects, lasts for {effect_duration} sec.";
+        var description = "Increases movement speed and knockback resistance, lasts for {effect_duration} sec.";
         var effect = RogueEffects.CHARGE;
         var spell = activeSpellBase();
         spell.range = 0;

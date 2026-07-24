@@ -1,3 +1,7 @@
+# 3.0.4
+
+- Charge no longer frees you from movement impairing effects on its own; the Improved Charge skill now grants it
+
 # 3.0.3
 
 - Last Stand effect grants knockback resistance instead of damage reduction

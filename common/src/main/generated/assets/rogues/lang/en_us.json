@@ -108,7 +108,7 @@
   "itemGroup.rogues.general": "Rogues & Warriors",
   "spell.rogues.bear_trap.description": "Set 3 bear traps around you, lasting {cloud_duration} sec. The first enemy to step into a trap springs it shut, taking {damage} damage and being held in place for {effect_duration} sec.",
   "spell.rogues.bear_trap.name": "Bear Trap",
-  "spell.rogues.charge.description": "Increases movement speed and knockback resistance, frees you from movement impairing effects, lasts for {effect_duration} sec.",
+  "spell.rogues.charge.description": "Increases movement speed and knockback resistance, lasts for {effect_duration} sec.",
   "spell.rogues.charge.name": "Charge",
   "spell.rogues.last_stand.description": "Stand your ground while channeling. Each stack increases your maximum health and knockback resistance, up to +100%% at {effect_amplifier_cap} stacks. Lasts {effect_duration} sec.",
   "spell.rogues.last_stand.name": "Last Stand",
