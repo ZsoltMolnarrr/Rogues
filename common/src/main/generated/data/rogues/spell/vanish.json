@@ -9,42 +9,59 @@
     "animation": {
       "id": "spell_engine:dual_handed_weapon_cross"
     },
-    "particles": [
-      {
-        "particle_id": "spell_engine:smoke_medium",
-        "origin": "CENTER",
-        "shape": "SPHERE",
-        "count": 20.0,
-        "min_speed": 0.12,
-        "max_speed": 0.15,
-        "pre_spawn_travel": 3.0
-      },
-      {
-        "particle_id": "spell_engine:smoke_medium",
-        "origin": "FEET",
-        "shape": "CIRCLE",
-        "count": 20.0,
-        "min_speed": 0.12,
-        "max_speed": 0.15,
-        "pre_spawn_travel": 4.0
-      },
-      {
-        "particle_id": "poof",
-        "origin": "CENTER",
-        "shape": "SPHERE",
-        "count": 10.0,
-        "min_speed": 0.01,
-        "max_speed": 0.1
-      },
-      {
-        "particle_id": "campfire_cosy_smoke",
-        "origin": "FEET",
-        "shape": "WIDE_PIPE",
-        "count": 10.0,
-        "min_speed": 0.01,
-        "max_speed": 0.1
-      }
-    ],
+    "visuals": {
+      "particles": [
+        {
+          "id": "spell_engine:smoke_medium",
+          "appearance": {},
+          "batch": {
+            "count": 20.0,
+            "shape": "SPHERE",
+            "anchor": "ENTITY",
+            "min_speed": 0.12,
+            "max_speed": 0.15,
+            "pre_travel": 3.0
+          }
+        },
+        {
+          "id": "spell_engine:smoke_medium",
+          "appearance": {},
+          "batch": {
+            "count": 20.0,
+            "shape": "CIRCLE",
+            "anchor": "ENTITY",
+            "vertical_origin": 0.1,
+            "min_speed": 0.12,
+            "max_speed": 0.15,
+            "pre_travel": 4.0
+          }
+        },
+        {
+          "id": "poof",
+          "appearance": {},
+          "batch": {
+            "count": 10.0,
+            "shape": "SPHERE",
+            "anchor": "ENTITY",
+            "min_speed": 0.01,
+            "max_speed": 0.1
+          }
+        },
+        {
+          "id": "campfire_cosy_smoke",
+          "appearance": {},
+          "batch": {
+            "count": 10.0,
+            "shape": "PIPE",
+            "anchor": "ENTITY",
+            "vertical_origin": 0.1,
+            "min_speed": 0.01,
+            "max_speed": 0.1,
+            "width_factor": 2.0
+          }
+        }
+      ]
+    },
     "sound": {
       "id": "rogues:vanish_combined"
     }

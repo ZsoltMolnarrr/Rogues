@@ -10,7 +10,10 @@ import net.spell_engine.api.effect.SpellEngineEffects;
 import net.spell_engine.api.render.LightEmission;
 import net.spell_engine.api.spell.ExternalSpellSchools;
 import net.spell_engine.api.spell.Spell;
-import net.spell_engine.api.spell.fx.ParticleBatch;
+import net.spell_engine.api.spell.fx.Fx;
+import net.spell_engine.api.spell.fx.ParticleGroup;
+import net.spell_engine.api.spell.fx.ParticleGroupBuilder;
+import net.spell_engine.api.spell.fx.ParticleGroupBuilder.Batches;
 import net.spell_engine.api.spell.fx.PlayerAnimation;
 import net.spell_engine.api.spell.fx.Sound;
 import net.spell_engine.client.gui.SpellTooltip;
@@ -80,34 +83,42 @@ public class RogueSpells {
         return impact;
     }
 
+    // MARK: Particle shorthands
+    // Motion is chosen per effect rather than baked into the particle id, so one registered
+    // `magic_*` texture covers every use of it below.
+
+    private static ParticleGroupBuilder magicSpark(ParticleGroup.Motion motion) {
+        return ParticleGroupBuilder.magic(SpellEngineParticles.magic_spark, motion);
+    }
+
+    private static ParticleGroupBuilder magicStripe(ParticleGroup.Motion motion) {
+        return ParticleGroupBuilder.magic(SpellEngineParticles.magic_stripe, motion);
+    }
+
+    private static ParticleGroupBuilder smoke() {
+        return ParticleGroupBuilder.of(SpellEngineParticles.smoke_medium);
+    }
+
     /// Life steal FX, mirroring SkillTree's Leeching Strike. Copied rather than shared, since
     /// SkillTree is not a dependency of Rogues.
-    private static ParticleBatch[] leechImpactParticles() {
-        var sparkFloat = SpellEngineParticles.MagicParticles.get(
-                SpellEngineParticles.MagicParticles.Shape.SPARK,
-                SpellEngineParticles.MagicParticles.Motion.FLOAT).id().toString();
-        var sparkDecelerate = SpellEngineParticles.MagicParticles.get(
-                SpellEngineParticles.MagicParticles.Shape.SPARK,
-                SpellEngineParticles.MagicParticles.Motion.DECELERATE).id().toString();
-        return new ParticleBatch[]{
-                new ParticleBatch(sparkFloat,
-                        ParticleBatch.Shape.WIDE_PIPE, ParticleBatch.Origin.CENTER,
-                        15, 0.02F, 0.1F)
-                        .color(Color.BLOOD.toRGBA()),
-                new ParticleBatch(sparkDecelerate,
-                        ParticleBatch.Shape.SPHERE, ParticleBatch.Origin.CENTER,
-                        25, 0.08F, 0.12F)
-                        .invert()
-                        .preSpawnTravel(5)
-                        .followEntity(true)
-                        .color(Color.BLOOD.toRGBA()),
-                new ParticleBatch(SpellEngineParticles.ground_glow.id().toString(),
-                        ParticleBatch.Shape.LINE_VERTICAL, ParticleBatch.Origin.GROUND,
-                        1, 0F, 0F)
-                        .followEntity(true)
+    private static List<ParticleGroup> leechImpactParticles() {
+        return List.of(
+                magicSpark(ParticleGroup.Motion.FLOAT)
+                        .color(Color.BLOOD)
+                        .batch(b -> b.shape(ParticleGroup.Shape.PIPE).widthFactor(2F)
+                                .count(15).speed(0.02F, 0.1F)),
+                magicSpark(ParticleGroup.Motion.DECELERATE)
+                        .color(Color.BLOOD)
+                        .attached()
+                        .batch(b -> b.shape(ParticleGroup.Shape.SPHERE).count(25).speed(0.08F, 0.12F)
+                                .invert(true).preTravel(5)),
+                ParticleGroupBuilder.of(SpellEngineParticles.ground_glow)
+                        .attached()
                         .scale(0.8F)
-                        .color(Color.BLOOD.alpha(0.2F).toRGBA())
-        };
+                        .color(Color.BLOOD.alpha(0.2F))
+                        .batch(b -> b.shape(ParticleGroup.Shape.LINE_VERTICAL)
+                                .anchor(ParticleGroup.Anchor.GROUND))
+        );
     }
 
     /// Area target centered on the caster. `vertical_range_multiplier` keeps ground-level spells from
@@ -132,16 +143,13 @@ public class RogueSpells {
         SpellBuilder.Casting.instant(spell);
         SpellBuilder.Release.visuals(spell,
                 "spell_engine:dual_handed_weapon_charge",
-                new ParticleBatch[]{
-                        new ParticleBatch(SpellEngineParticles.MagicParticles.get(
-                                SpellEngineParticles.MagicParticles.Shape.SPARK,
-                                SpellEngineParticles.MagicParticles.Motion.FLOAT).id().toString(),
-                                ParticleBatch.Shape.SPHERE, ParticleBatch.Origin.LAUNCH_POINT,
-                                15, 0.15F, 0.2F)
-                                .preSpawnTravel(7)
-                                .invert()
-                                .color(Color.WHITE.toRGBA())
-                },
+                List.of(
+                        magicSpark(ParticleGroup.Motion.FLOAT)
+                                .color(Color.WHITE)
+                                .batch(b -> b.shape(ParticleGroup.Shape.SPHERE).count(15).speed(0.15F, 0.2F)
+                                        .anchor(ParticleGroup.Anchor.LAUNCH_POINT)
+                                        .preTravel(7).invert(true))
+                ),
                 Sound.of(RogueSounds.SLICE_AND_DICE.id()));
 
         // Each melee impact re-triggers the stash onto the caster, adding a stack.
@@ -174,28 +182,20 @@ public class RogueSpells {
         SpellBuilder.Casting.instant(spell);
         SpellBuilder.Release.visuals(spell,
                 "spell_engine:dual_handed_ground_release",
-                new ParticleBatch[]{
-                        new ParticleBatch(SpellEngineParticles.smoke_medium.id().toString(),
-                                ParticleBatch.Shape.CIRCLE, ParticleBatch.Origin.CENTER,
-                                50, 0.2F, 0.3F)
-                                .preSpawnTravel(6),
-                        new ParticleBatch(SpellEngineParticles.smoke_medium.id().toString(),
-                                ParticleBatch.Shape.CIRCLE, ParticleBatch.Origin.CENTER,
-                                60, 0.2F, 0.3F)
-                                .preSpawnTravel(8),
-                        new ParticleBatch(SpellEngineParticles.smoke_medium.id().toString(),
-                                ParticleBatch.Shape.SPHERE, ParticleBatch.Origin.CENTER,
-                                50, 0.25F, 0.25F)
-                                .preSpawnTravel(4),
-                        new ParticleBatch(SpellEngineParticles.electric_arc_A.id().toString(),
-                                ParticleBatch.Shape.PILLAR, ParticleBatch.Origin.FEET,
-                                6, 0.01F, 0.05F)
-                                .extent(3),
-                        new ParticleBatch(SpellEngineParticles.electric_arc_B.id().toString(),
-                                ParticleBatch.Shape.PILLAR, ParticleBatch.Origin.FEET,
-                                8, 0.01F, 0.05F)
-                                .extent(5)
-                },
+                List.of(
+                        smoke().batch(b -> b.shape(ParticleGroup.Shape.CIRCLE).count(50)
+                                .speed(0.2F, 0.3F).preTravel(6)),
+                        smoke().batch(b -> b.shape(ParticleGroup.Shape.CIRCLE).count(60)
+                                .speed(0.2F, 0.3F).preTravel(8)),
+                        smoke().batch(b -> b.shape(ParticleGroup.Shape.SPHERE).count(50)
+                                .speed(0.25F, 0.25F).preTravel(4)),
+                        ParticleGroupBuilder.of(SpellEngineParticles.electric_arc_A)
+                                .batch(b -> b.shape(ParticleGroup.Shape.PILLAR).count(6)
+                                        .speed(0.01F, 0.05F).verticalOrigin(Batches.FEET).extent(3)),
+                        ParticleGroupBuilder.of(SpellEngineParticles.electric_arc_B)
+                                .batch(b -> b.shape(ParticleGroup.Shape.PILLAR).count(8)
+                                        .speed(0.01F, 0.05F).verticalOrigin(Batches.FEET).extent(5))
+                ),
                 Sound.of(RogueSounds.SHOCK_POWDER_RELEASE.id()));
 
         areaTarget(spell, 0.5F);
@@ -238,19 +238,16 @@ public class RogueSpells {
         teleport.intent = SpellTarget.Intent.HARMFUL;
         teleport.behind_target = new Spell.Impact.Action.Teleport.BehindTarget();
         teleport.behind_target.distance = 1.5F;
-        teleport.depart_particles = new ParticleBatch[]{
-                new ParticleBatch("cloud",
-                        ParticleBatch.Shape.SPHERE, ParticleBatch.Origin.FEET,
-                        20, 0.05F, 0.1F)
-                        .preSpawnTravel(15)
-                        .invert()
-        };
-        teleport.arrive_particles = new ParticleBatch[]{
-                new ParticleBatch("poof",
-                        ParticleBatch.Shape.SPHERE, ParticleBatch.Origin.FEET,
-                        10, 0.05F, 0.1F)
-                        .preSpawnTravel(2)
-        };
+        teleport.depart = Fx.Visuals.of(
+                ParticleGroupBuilder.of("cloud")
+                        .batch(b -> b.shape(ParticleGroup.Shape.SPHERE).count(20).speed(0.05F, 0.1F)
+                                .verticalOrigin(Batches.FEET).preTravel(15).invert(true))
+        );
+        teleport.arrive = Fx.Visuals.of(
+                ParticleGroupBuilder.of("poof")
+                        .batch(b -> b.shape(ParticleGroup.Shape.SPHERE).count(10).speed(0.05F, 0.1F)
+                                .verticalOrigin(Batches.FEET).preTravel(2))
+        );
         impact.action.teleport = teleport;
 
         var buff = SpellBuilder.Impacts.effectSet(effect.id.toString(), 1.5F, 0);
@@ -277,22 +274,17 @@ public class RogueSpells {
         SpellBuilder.Casting.instant(spell);
         SpellBuilder.Release.visuals(spell,
                 "spell_engine:dual_handed_weapon_cross",
-                new ParticleBatch[]{
-                        new ParticleBatch(SpellEngineParticles.smoke_medium.id().toString(),
-                                ParticleBatch.Shape.SPHERE, ParticleBatch.Origin.CENTER,
-                                20, 0.12F, 0.15F)
-                                .preSpawnTravel(3),
-                        new ParticleBatch(SpellEngineParticles.smoke_medium.id().toString(),
-                                ParticleBatch.Shape.CIRCLE, ParticleBatch.Origin.FEET,
-                                20, 0.12F, 0.15F)
-                                .preSpawnTravel(4),
-                        new ParticleBatch("poof",
-                                ParticleBatch.Shape.SPHERE, ParticleBatch.Origin.CENTER,
-                                10, 0.01F, 0.1F),
-                        new ParticleBatch("campfire_cosy_smoke",
-                                ParticleBatch.Shape.WIDE_PIPE, ParticleBatch.Origin.FEET,
-                                10, 0.01F, 0.1F)
-                },
+                List.of(
+                        smoke().batch(b -> b.shape(ParticleGroup.Shape.SPHERE).count(20)
+                                .speed(0.12F, 0.15F).preTravel(3)),
+                        smoke().batch(b -> b.shape(ParticleGroup.Shape.CIRCLE).count(20)
+                                .speed(0.12F, 0.15F).verticalOrigin(Batches.FEET).preTravel(4)),
+                        ParticleGroupBuilder.of("poof")
+                                .batch(b -> b.shape(ParticleGroup.Shape.SPHERE).count(10).speed(0.01F, 0.1F)),
+                        ParticleGroupBuilder.of("campfire_cosy_smoke")
+                                .batch(b -> b.shape(ParticleGroup.Shape.PIPE).widthFactor(2F)
+                                        .count(10).speed(0.01F, 0.1F).verticalOrigin(Batches.FEET))
+                ),
                 Sound.of(RogueSounds.VANISH_COMBINED.id()));
 
         var buff = SpellBuilder.Impacts.effectSet(effect.id.toString(), 8, 0);
@@ -338,17 +330,14 @@ public class RogueSpells {
         cloud.spawn.sound = Sound.of(RogueSounds.BEAR_TRAP_SPAWN.id());
         // Played as the trap winds down — whether it sprung (BearTrapEntity.ATTACK_TICKS) or timed out.
         cloud.despawn.sound = Sound.of(RogueSounds.BEAR_TRAP_DESPAWN.id());
-        // Slice & Dice's converging spark shell, thinned out and dropped to the ankles — `invert()`
-        // plus `preSpawnTravel` makes the sparks rush inward, reading as the jaws snapping closed.
-        cloud.impact_particles = new ParticleBatch[]{
-                new ParticleBatch(SpellEngineParticles.MagicParticles.get(
-                        SpellEngineParticles.MagicParticles.Shape.SPARK,
-                        SpellEngineParticles.MagicParticles.Motion.DECELERATE).id().toString(),
-                        ParticleBatch.Shape.SPHERE, ParticleBatch.Origin.CENTER,
-                        10, 0.2F, 0.3F)
-                        .preSpawnTravel(1)
-                        .color(Color.WHITE.toRGBA())
-        };
+        // Slice & Dice's converging spark shell, thinned out and dropped to the ankles — `invert`
+        // plus `preTravel` makes the sparks rush inward, reading as the jaws snapping closed.
+        cloud.impact = Fx.Visuals.of(
+                magicSpark(ParticleGroup.Motion.DECELERATE)
+                        .color(Color.WHITE)
+                        .batch(b -> b.shape(ParticleGroup.Shape.SPHERE).count(10)
+                                .speed(0.2F, 0.3F).preTravel(1))
+        );
 
         var placements = SpellBuilder.Placements.delayCascade(SpellBuilder.Placements.ring(3, 2F), 3);
         placements.forEach(p -> p.apply_yaw = true);
@@ -460,11 +449,10 @@ public class RogueSpells {
         damage.sound = Sound.of(RogueSounds.THROW_IMPACT.id());
 
         var debuff = limitByHealth(SpellBuilder.Impacts.effectSet(effect.id.toString(), 8, 0), 100, 2F);
-        debuff.particles = new ParticleBatch[]{
-                new ParticleBatch(SpellEngineParticles.dripping_blood.id().toString(),
-                        ParticleBatch.Shape.SPHERE, ParticleBatch.Origin.CENTER,
-                        10, 0.05F, 0.3F)
-        };
+        debuff.visuals = Fx.Visuals.of(
+                ParticleGroupBuilder.of(SpellEngineParticles.dripping_blood)
+                        .batch(b -> b.shape(ParticleGroup.Shape.SPHERE).count(10).speed(0.05F, 0.3F))
+        );
 
         spell.impacts = List.of(damage, debuff);
 
@@ -548,29 +536,19 @@ public class RogueSpells {
         SpellBuilder.Casting.instant(spell);
         SpellBuilder.Release.visuals(spell,
                 "spell_engine:one_handed_area_release",
-                new ParticleBatch[]{
+                List.of(
                         SpellBuilder.Particles.popUpSign(SpellEngineParticles.sign_speed.id(), Color.RAGE),
-                        new ParticleBatch(
-                                SpellEngineParticles.MagicParticles.get(
-                                        SpellEngineParticles.MagicParticles.Shape.STRIPE,
-                                        SpellEngineParticles.MagicParticles.Motion.FLOAT).id().toString(),
-                                ParticleBatch.Shape.WIDE_PIPE, ParticleBatch.Origin.FEET,
-                                25, 0.2F, 0.25F)
-                                .extent(-0.2F)
-                                .color(Color.RAGE.toRGBA()),
-                        new ParticleBatch(
-                                SpellEngineParticles.MagicParticles.get(
-                                        SpellEngineParticles.MagicParticles.Shape.SPARK,
-                                        SpellEngineParticles.MagicParticles.Motion.DECELERATE).id().toString(),
-                                ParticleBatch.Shape.SPHERE, ParticleBatch.Origin.CENTER,
-                                25, 0.1F, 0.1F)
-                                .extent(0.2F)
-                                .color(Color.RAGE.toRGBA()),
-                        new ParticleBatch(SpellEngineParticles.smoke_medium.id().toString(),
-                                ParticleBatch.Shape.CIRCLE, ParticleBatch.Origin.FEET,
-                                50, 0.15F, 0.15F)
-                                .preSpawnTravel(1)
-                },
+                        magicStripe(ParticleGroup.Motion.FLOAT)
+                                .color(Color.RAGE)
+                                .batch(Batches.casting(25, 0.25F)
+                                        .andThen(b -> b.speed(0.2F, 0.25F).extent(-0.2F))),
+                        magicSpark(ParticleGroup.Motion.DECELERATE)
+                                .color(Color.RAGE)
+                                .batch(b -> b.shape(ParticleGroup.Shape.SPHERE).count(25)
+                                        .speed(0.1F, 0.1F).extent(0.2F)),
+                        smoke().batch(b -> b.shape(ParticleGroup.Shape.CIRCLE).count(50)
+                                .speed(0.15F, 0.15F).verticalOrigin(Batches.FEET).preTravel(1))
+                ),
                 Sound.of(RogueSounds.CHARGE_ACTIVATE.id()));
 
         var buff = SpellBuilder.Impacts.effectSet(effect.id.toString(), 2F, 0);
@@ -597,22 +575,20 @@ public class RogueSpells {
         SpellBuilder.Casting.instant(spell);
         SpellBuilder.Release.visuals(spell,
                 "spell_engine:one_handed_shout_release",
-                new ParticleBatch[]{
+                List.of(
                         SpellBuilder.Particles.area(SpellEngineParticles.area_effect_609.id())
-                                .scale(radius * 0.25F)
-                                .color(Color.RAGE.alpha(0.5F).toRGBA()),
-                },
+                                .appearance(a -> a.scale(radius * 0.25F)
+                                        .color(Color.RAGE.alpha(0.5F).toRGBA()))
+                ),
                 Sound.of(RogueSounds.SHOUT_RELEASE.id()));
 
         areaTarget(spell, 0.5F);
 
         var debuff = limitByHealth(SpellBuilder.Impacts.effectAdd(effect.id.toString(), 8, 1, 5), 50, 2F);
-        debuff.particles = new ParticleBatch[]{
-                new ParticleBatch(SpellEngineParticles.smoke_medium.id().toString(),
-                        ParticleBatch.Shape.SPHERE, ParticleBatch.Origin.CENTER,
-                        25, 0.2F, 0.2F)
-                        .color(Color.RAGE.toRGBA())
-        };
+        debuff.visuals = Fx.Visuals.of(
+                smoke().color(Color.RAGE)
+                        .batch(b -> b.shape(ParticleGroup.Shape.SPHERE).count(25).speed(0.2F, 0.2F))
+        );
         debuff.sound = Sound.of(RogueSounds.DEMORALIZE_IMPACT.id());
 
         var damage = SpellBuilder.Impacts.damage(0.05F, 0F);
@@ -647,20 +623,15 @@ public class RogueSpells {
         spell.active.cast.animation = PlayerAnimation.of("spell_engine:one_handed_ground_charge");
         spell.active.cast.start_sound = new Sound(RogueSounds.LAST_STAND_STARTING.id());
         spell.active.cast.sound = new Sound(RogueSounds.LAST_STAND_CASTING.id(), 0);
-        spell.active.cast.particles = new ParticleBatch[]{
-                new ParticleBatch(SpellEngineParticles.MagicParticles.get(
-                        SpellEngineParticles.MagicParticles.Shape.SPARK,
-                        SpellEngineParticles.MagicParticles.Motion.DECELERATE).id().toString(),
-                        ParticleBatch.Shape.SPHERE, ParticleBatch.Origin.CENTER,
-                        8, 0.2F, 0.3F)
-                        .preSpawnTravel(6)
-                        .invert()
-                        .color(LAST_STAND_COLOR.toRGBA()),
-                new ParticleBatch(SpellEngineParticles.smoke_medium.id().toString(),
-                        ParticleBatch.Shape.CIRCLE, ParticleBatch.Origin.FEET,
-                        6, 0.05F, 0.1F)
-                        .color(LAST_STAND_COLOR.alpha(0.5F).toRGBA())
-        };
+        spell.active.cast.particles = List.of(
+                magicSpark(ParticleGroup.Motion.DECELERATE)
+                        .color(LAST_STAND_COLOR)
+                        .batch(b -> b.shape(ParticleGroup.Shape.SPHERE).count(8).speed(0.2F, 0.3F)
+                                .preTravel(6).invert(true)),
+                smoke().color(LAST_STAND_COLOR.alpha(0.5F))
+                        .batch(b -> b.shape(ParticleGroup.Shape.CIRCLE).count(6)
+                                .speed(0.05F, 0.1F).verticalOrigin(Batches.FEET))
+        );
 
         // The persistent aura is spawned periodically by the LAST_STAND status effect
         // (see RoguesClientMod), not on release.
@@ -725,11 +696,10 @@ public class RogueSpells {
         // The swing's weapon damage lands via player.attack(); this bleed rides on top, on the target.
         var bleed = SpellBuilder.Impacts.effectSet_ScaledAmplifier(
                 SpellEngineEffects.BLEED.id.toString(), 6, 1, 0.25F);
-        bleed.particles = new ParticleBatch[]{
-                new ParticleBatch(SpellEngineParticles.dripping_blood.id().toString(),
-                        ParticleBatch.Shape.SPHERE, ParticleBatch.Origin.CENTER,
-                        40, 0.2F, 0.4F)
-        };
+        bleed.visuals = Fx.Visuals.of(
+                ParticleGroupBuilder.of(SpellEngineParticles.dripping_blood)
+                        .batch(b -> b.shape(ParticleGroup.Shape.SPHERE).count(40).speed(0.2F, 0.4F))
+        );
         spell.impacts = List.of(bleed);
 
         SpellBuilder.Cost.cooldown(spell, 15);

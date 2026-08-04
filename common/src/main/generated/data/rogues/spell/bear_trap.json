@@ -29,18 +29,25 @@
         "time_to_live_seconds": 20.0,
         "impact_tick_interval": 2,
         "impact_cap": 1,
-        "impact_particles": [
-          {
-            "particle_id": "spell_engine:magic_spark_decelerate",
-            "origin": "CENTER",
-            "shape": "SPHERE",
-            "count": 10.0,
-            "min_speed": 0.2,
-            "max_speed": 0.3,
-            "pre_spawn_travel": 1.0,
-            "color_rgba": 4294967295
-          }
-        ],
+        "impact": {
+          "particles": [
+            {
+              "id": "spell_engine:magic_spark",
+              "appearance": {
+                "color": 4294967295,
+                "motion": "DECELERATE"
+              },
+              "batch": {
+                "count": 10.0,
+                "shape": "SPHERE",
+                "anchor": "ENTITY",
+                "min_speed": 0.2,
+                "max_speed": 0.3,
+                "pre_travel": 1.0
+              }
+            }
+          ]
+        },
         "placement": {
           "location_offset_by_look": 2.0,
           "apply_yaw": true

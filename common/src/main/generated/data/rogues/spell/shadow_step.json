@@ -27,29 +27,41 @@
           "mode": "BEHIND_TARGET",
           "intent": "HARMFUL",
           "behind_target": {},
-          "depart_particles": [
-            {
-              "particle_id": "cloud",
-              "origin": "FEET",
-              "shape": "SPHERE",
-              "count": 20.0,
-              "min_speed": 0.05,
-              "max_speed": 0.1,
-              "pre_spawn_travel": 15.0,
-              "invert": true
-            }
-          ],
-          "arrive_particles": [
-            {
-              "particle_id": "poof",
-              "origin": "FEET",
-              "shape": "SPHERE",
-              "count": 10.0,
-              "min_speed": 0.05,
-              "max_speed": 0.1,
-              "pre_spawn_travel": 2.0
-            }
-          ]
+          "depart": {
+            "particles": [
+              {
+                "id": "cloud",
+                "appearance": {},
+                "batch": {
+                  "count": 20.0,
+                  "shape": "SPHERE",
+                  "anchor": "ENTITY",
+                  "vertical_origin": 0.1,
+                  "min_speed": 0.05,
+                  "max_speed": 0.1,
+                  "pre_travel": 15.0,
+                  "invert": true
+                }
+              }
+            ]
+          },
+          "arrive": {
+            "particles": [
+              {
+                "id": "poof",
+                "appearance": {},
+                "batch": {
+                  "count": 10.0,
+                  "shape": "SPHERE",
+                  "anchor": "ENTITY",
+                  "vertical_origin": 0.1,
+                  "min_speed": 0.05,
+                  "max_speed": 0.1,
+                  "pre_travel": 2.0
+                }
+              }
+            ]
+          }
         }
       }
     },

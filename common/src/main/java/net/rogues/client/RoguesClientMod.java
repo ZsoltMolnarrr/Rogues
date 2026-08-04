@@ -15,8 +15,10 @@ import net.spell_engine.api.effect.CustomModelStatusEffect;
 import net.spell_engine.api.render.BuffParticleSpawner;
 import net.spell_engine.api.render.LightEmission;
 import net.spell_engine.api.render.ModelFxEffectRenderer;
+import net.spell_engine.api.spell.fx.Easing;
 import net.spell_engine.api.spell.fx.ModelEffect;
-import net.spell_engine.api.spell.fx.ParticleBatch;
+import net.spell_engine.api.spell.fx.ParticleGroup;
+import net.spell_engine.api.spell.fx.ParticleGroupBuilder;
 import net.spell_engine.fx.SpellEngineParticles;
 
 import java.util.List;
@@ -42,14 +44,13 @@ public class RoguesClientMod {
         CustomParticleStatusEffect.register(RogueEffects.CHARGE.effect, new ChargeParticles(1));
         // Persistent aura pulsed under the player every 20 ticks while Last Stand is active.
         CustomParticleStatusEffect.register(RogueEffects.LAST_STAND.effect,
-                new BuffParticleSpawner(new ParticleBatch[]{
-                        new ParticleBatch(SpellEngineParticles.area_effect_700.id().toString(),
-                                ParticleBatch.Shape.SPHERE, ParticleBatch.Origin.GROUND,
-                                1, 0F, 0F)
+                new BuffParticleSpawner(
+                        ParticleGroupBuilder.of(SpellEngineParticles.area_effect_700)
                                 .scale(1.5F)
-                                .color(RogueSpells.LAST_STAND_COLOR.alpha(0.5F).toRGBA())
-                                .followEntity(true)
-                })
+                                .color(RogueSpells.LAST_STAND_COLOR.alpha(0.5F))
+                                .attached()
+                                .batch(ParticleGroupBuilder.Batches.ground(1)
+                                        .andThen(b -> b.shape(ParticleGroup.Shape.SPHERE))))
                 .withFrequency(20)
                 .scaleWithAmplifier(false));
         CustomModelStatusEffect.register(RogueEffects.NET_TRAP.effect, netTrapModelFxRenderer());
@@ -97,13 +98,13 @@ public class RoguesClientMod {
         drop.operation = "translate";
         drop.start = 0; drop.end = 6;
         drop.y = -0.6F;
-        drop.easing = ModelEffect.Easing.EASE_IN_QUAD;
+        drop.easing = Easing.EASE_IN_QUAD;
 
         var snapTaut = new ModelEffect.Animation();
         snapTaut.operation = "scale";
         snapTaut.start = 0; snapTaut.end = 8;
         snapTaut.x = 1F; snapTaut.y = 1F; snapTaut.z = 1F;
-        snapTaut.easing = ModelEffect.Easing.EASE_OUT_BACK;
+        snapTaut.easing = Easing.EASE_OUT_BACK;
 
         var effect = new ModelEffect();
         effect.model_id = Identifier.of(RoguesMod.NAMESPACE, "spell_effect/net_trap").toString();

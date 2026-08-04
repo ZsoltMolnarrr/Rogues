@@ -9,17 +9,23 @@
     "animation": {
       "id": "spell_engine:one_handed_shout_release"
     },
-    "particles": [
-      {
-        "particle_id": "spell_engine:area_effect_609",
-        "origin": "GROUND",
-        "shape": "SPHERE",
-        "count": 1.0,
-        "max_speed": 0.0,
-        "color_rgba": 3208659071,
-        "scale": 3.0
-      }
-    ],
+    "visuals": {
+      "particles": [
+        {
+          "id": "spell_engine:area_effect_609",
+          "appearance": {
+            "color": 3208659071,
+            "scale": 3.0,
+            "facing": "GROUND"
+          },
+          "batch": {
+            "count": 1.0,
+            "shape": "NONE",
+            "anchor": "GROUND"
+          }
+        }
+      ]
+    },
     "sound": {
       "id": "rogues:shout_release"
     }
@@ -46,17 +52,23 @@
           }
         }
       },
-      "particles": [
-        {
-          "particle_id": "spell_engine:smoke_medium",
-          "origin": "CENTER",
-          "shape": "SPHERE",
-          "count": 25.0,
-          "min_speed": 0.2,
-          "max_speed": 0.2,
-          "color_rgba": 3208659199
-        }
-      ],
+      "visuals": {
+        "particles": [
+          {
+            "id": "spell_engine:smoke_medium",
+            "appearance": {
+              "color": 3208659199
+            },
+            "batch": {
+              "count": 25.0,
+              "shape": "SPHERE",
+              "anchor": "ENTITY",
+              "min_speed": 0.2,
+              "max_speed": 0.2
+            }
+          }
+        ]
+      },
       "sound": {
         "id": "rogues:demoralize_impact"
       }

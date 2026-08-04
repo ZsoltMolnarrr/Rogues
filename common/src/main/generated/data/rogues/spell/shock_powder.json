@@ -9,53 +9,72 @@
     "animation": {
       "id": "spell_engine:dual_handed_ground_release"
     },
-    "particles": [
-      {
-        "particle_id": "spell_engine:smoke_medium",
-        "origin": "CENTER",
-        "shape": "CIRCLE",
-        "count": 50.0,
-        "min_speed": 0.2,
-        "max_speed": 0.3,
-        "pre_spawn_travel": 6.0
-      },
-      {
-        "particle_id": "spell_engine:smoke_medium",
-        "origin": "CENTER",
-        "shape": "CIRCLE",
-        "count": 60.0,
-        "min_speed": 0.2,
-        "max_speed": 0.3,
-        "pre_spawn_travel": 8.0
-      },
-      {
-        "particle_id": "spell_engine:smoke_medium",
-        "origin": "CENTER",
-        "shape": "SPHERE",
-        "count": 50.0,
-        "min_speed": 0.25,
-        "max_speed": 0.25,
-        "pre_spawn_travel": 4.0
-      },
-      {
-        "particle_id": "spell_engine:electric_arc_a",
-        "origin": "FEET",
-        "shape": "PILLAR",
-        "count": 6.0,
-        "min_speed": 0.01,
-        "max_speed": 0.05,
-        "extent": 3.0
-      },
-      {
-        "particle_id": "spell_engine:electric_arc_b",
-        "origin": "FEET",
-        "shape": "PILLAR",
-        "count": 8.0,
-        "min_speed": 0.01,
-        "max_speed": 0.05,
-        "extent": 5.0
-      }
-    ],
+    "visuals": {
+      "particles": [
+        {
+          "id": "spell_engine:smoke_medium",
+          "appearance": {},
+          "batch": {
+            "count": 50.0,
+            "shape": "CIRCLE",
+            "anchor": "ENTITY",
+            "min_speed": 0.2,
+            "max_speed": 0.3,
+            "pre_travel": 6.0
+          }
+        },
+        {
+          "id": "spell_engine:smoke_medium",
+          "appearance": {},
+          "batch": {
+            "count": 60.0,
+            "shape": "CIRCLE",
+            "anchor": "ENTITY",
+            "min_speed": 0.2,
+            "max_speed": 0.3,
+            "pre_travel": 8.0
+          }
+        },
+        {
+          "id": "spell_engine:smoke_medium",
+          "appearance": {},
+          "batch": {
+            "count": 50.0,
+            "shape": "SPHERE",
+            "anchor": "ENTITY",
+            "min_speed": 0.25,
+            "max_speed": 0.25,
+            "pre_travel": 4.0
+          }
+        },
+        {
+          "id": "spell_engine:electric_arc_a",
+          "appearance": {},
+          "batch": {
+            "count": 6.0,
+            "shape": "PILLAR",
+            "anchor": "ENTITY",
+            "vertical_origin": 0.1,
+            "min_speed": 0.01,
+            "max_speed": 0.05,
+            "extent": 3.0
+          }
+        },
+        {
+          "id": "spell_engine:electric_arc_b",
+          "appearance": {},
+          "batch": {
+            "count": 8.0,
+            "shape": "PILLAR",
+            "anchor": "ENTITY",
+            "vertical_origin": 0.1,
+            "min_speed": 0.01,
+            "max_speed": 0.05,
+            "extent": 5.0
+          }
+        }
+      ]
+    },
     "sound": {
       "id": "rogues:shock_powder_release"
     }
