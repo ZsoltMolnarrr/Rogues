@@ -79,12 +79,12 @@
   "effect.rogues.stealth.description": "Invisible para los enemigos",
 
   "spell.rogues.throw.name": "Lanzamiento Desgarrador",
-  "spell.rogues.throw.description": "Lanza tu arma al objetivo, infligiendo {damage} daño y reduciendo su armadura en {armor_reduction} por {effect_duration} seg.",
+  "spell.rogues.throw.description": "Lanza tu arma al objetivo, infligiendo {damage} daño y reduciendo su armadura en {effect|rogues:shatter|0||abs} por {effect_duration} seg.",
   "effect.rogues.shatter": "Armadura Desgarrada",
   "effect.rogues.shatter.description": "Reduce la armadura",
 
   "spell.rogues.shout.name": "Grito Desmoralizador",
-  "spell.rogues.shout.description": "Grita a los enemigos cercanos, reduciendo su daño de ataque en {damage_reduction} por {effect_duration} seg, e infligiendo una pequeña cantidad de daño.",
+  "spell.rogues.shout.description": "Grita a los enemigos cercanos, reduciendo su daño de ataque en {effect|rogues:demoralize|0||abs} por {effect_duration} seg, e infligiendo una pequeña cantidad de daño.",
   "effect.rogues.demoralize": "Desmoralizado",
   "effect.rogues.demoralize.description": "Reduce el daño de ataque",
 

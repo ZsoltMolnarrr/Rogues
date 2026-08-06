@@ -16,7 +16,7 @@ import net.spell_engine.api.spell.fx.ParticleGroupBuilder;
 import net.spell_engine.api.spell.fx.ParticleGroupBuilder.Batches;
 import net.spell_engine.api.spell.fx.PlayerAnimation;
 import net.spell_engine.api.spell.fx.Sound;
-import net.spell_engine.client.gui.SpellTooltip;
+import net.spell_engine.api.spell.tooltip.TooltipTokens;
 import net.spell_engine.client.util.Color;
 import net.spell_engine.fx.SpellEngineParticles;
 import net.spell_engine.fx.SpellEngineSounds;
@@ -43,13 +43,12 @@ public class RogueSpells {
         }
     }
     public record Entry(Identifier id, Spell spell, String title, String description,
-                        @Nullable SpellTooltip.DescriptionMutator mutator,
                         @Nullable List<Object> weaponGroups,
                         @Nullable Book book) {
         public Entry(Identifier id, Spell spell, String title, String description) {
-            this(id, spell, title, description, null, List.of(), null);
+            this(id, spell, title, description, List.of(), null);
         }
-        public Entry book(Book book) { return new Entry(id, spell, title, description, mutator, weaponGroups, book); }
+        public Entry book(Book book) { return new Entry(id, spell, title, description, weaponGroups, book); }
     }
     public static final List<Entry> entries = new ArrayList<>();
     private static Entry add(Entry entry) {
@@ -407,7 +406,9 @@ public class RogueSpells {
     private static Entry warrior_throw() {
         var id = Identifier.of(RoguesMod.NAMESPACE, "throw");
         var title = "Shattering Throw";
-        var description = "Throw your weapon at the target, dealing {damage} damage and reducing their armor by {armor_reduction} for {effect_duration} sec. The longer the cast is held, the harder it hits and the further it flies.";
+        var description = "Throw your weapon at the target, dealing {damage} damage and reducing their armor by "
+                + TooltipTokens.effect(RogueEffects.SHATTER.id, 0, null, TooltipTokens.Format.ABS)
+                + " for {effect_duration} sec. The longer the cast is held, the harder it hits and the further it flies.";
         var effect = RogueEffects.SHATTER;
         var spell = activeSpellBase();
         // Base range 12, plus up to +12 from the charge bonus below -> the same 24 total at full charge.
@@ -564,7 +565,9 @@ public class RogueSpells {
     private static Entry shout() {
         var id = Identifier.of(RoguesMod.NAMESPACE, "shout");
         var title = "Demoralizing Shout";
-        var description = "Shout at nearby enemies, reducing their attack damage by {damage_reduction} for {effect_duration} sec, and dealing a small amount of damage.";
+        var description = "Shout at nearby enemies, reducing their attack damage by "
+                + TooltipTokens.effect(RogueEffects.DEMORALIZE.id, 0, null, TooltipTokens.Format.ABS)
+                + " for {effect_duration} sec, and dealing a small amount of damage.";
         var effect = RogueEffects.DEMORALIZE;
         var spell = activeSpellBase();
         var radius = 12F;

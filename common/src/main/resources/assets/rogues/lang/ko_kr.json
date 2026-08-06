@@ -79,12 +79,12 @@
   "effect.rogues.stealth.description": "적에게 보이지 않습니다.",
 
   "spell.rogues.throw.name": "무기 던지기",
-  "spell.rogues.throw.description": "무기를 목표물에 던져 {damage}의 피해를 주고 {effect_duration}초 동안 방어를 {armor_reduction} 감소시킵니다.",
+  "spell.rogues.throw.description": "무기를 목표물에 던져 {damage}의 피해를 주고 {effect_duration}초 동안 방어를 {effect|rogues:shatter|0||abs} 감소시킵니다.",
   "effect.rogues.shatter": "방어 감소",
   "effect.rogues.shatter.description": "방어를 감소시킵니다.",
 
   "spell.rogues.shout.name": "사기 저하 외침",
-  "spell.rogues.shout.description": "근처의 적에게 외쳐 {effect_duration}초 동안 공격 피해를 {damage_reduction} 감소시키고 소량의 피해를 줍니다.",
+  "spell.rogues.shout.description": "근처의 적에게 외쳐 {effect_duration}초 동안 공격 피해를 {effect|rogues:demoralize|0||abs} 감소시키고 소량의 피해를 줍니다.",
   "effect.rogues.demoralize": "사기 저하",
   "effect.rogues.demoralize.description": "공격 피해를 감소시킵니다.",
 

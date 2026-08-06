@@ -79,12 +79,12 @@
   "effect.rogues.stealth.description": "Invisible pour les ennemis",
 
   "spell.rogues.throw.name": "Lancer Fracassant",
-  "spell.rogues.throw.description": "Lancez votre arme sur la cible, infligeant {damage} dégâts et réduisant son armure de {armor_reduction} pendant {effect_duration} sec.",
+  "spell.rogues.throw.description": "Lancez votre arme sur la cible, infligeant {damage} dégâts et réduisant son armure de {effect|rogues:shatter|0||abs} pendant {effect_duration} sec.",
   "effect.rogues.shatter": "Armure Fracassée",
   "effect.rogues.shatter.description": "Réduit l'armure",
 
   "spell.rogues.shout.name": "Cri Démoralisant",
-  "spell.rogues.shout.description": "Criez sur les ennemis proches, réduisant leurs dégâts d'attaque de {damage_reduction} pendant {effect_duration} sec, et infligeant une petite quantité de dégâts.",
+  "spell.rogues.shout.description": "Criez sur les ennemis proches, réduisant leurs dégâts d'attaque de {effect|rogues:demoralize|0||abs} pendant {effect_duration} sec, et infligeant une petite quantité de dégâts.",
   "effect.rogues.demoralize": "Démoralisé",
   "effect.rogues.demoralize.description": "Réduit les dégâts d'attaque",
 

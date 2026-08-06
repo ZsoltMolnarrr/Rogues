@@ -25,7 +25,6 @@ import java.util.List;
 import net.rogues.item.armor.RogueArmors;
 import net.spell_engine.api.effect.CustomParticleStatusEffect;
 import net.spell_engine.api.render.StunParticleSpawner;
-import net.spell_engine.client.gui.SpellTooltip;
 import net.spell_engine.rpg_series.item.Armor;
 
 import java.util.function.Supplier;
@@ -54,20 +53,6 @@ public class RoguesClientMod {
                 .withFrequency(20)
                 .scaleWithAmplifier(false));
         CustomModelStatusEffect.register(RogueEffects.NET_TRAP.effect, netTrapModelFxRenderer());
-
-        SpellTooltip.addDescriptionMutator(Identifier.of(RoguesMod.NAMESPACE, "throw"), (args) -> {
-            var description = args.description();
-            var percent = SpellTooltip.percent(-1F * RogueEffects.SHATTER.config().firstModifier().value);
-            description = description.replace(SpellTooltip.placeholder("armor_reduction"), percent);
-            return description;
-        });
-
-        SpellTooltip.addDescriptionMutator(Identifier.of(RoguesMod.NAMESPACE, "shout"), (args) -> {
-            var description = args.description();
-            var percent = SpellTooltip.percent(-1F * RogueEffects.DEMORALIZE.config().firstModifier().value);
-            description = description.replace(SpellTooltip.placeholder("damage_reduction"), percent);
-            return description;
-        });
 
         registerArmorRenderer(RogueArmors.RogueArmorSet_t1, RogueArmorRenderer::rogue);
         registerArmorRenderer(RogueArmors.RogueArmorSet_t2, RogueArmorRenderer::assassin);

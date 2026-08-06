@@ -97,12 +97,12 @@
   "effect.rogues.stealth_speed.description": "拥有更高移速的潜行状态",
 
   "spell.rogues.throw.name": "碎裂投掷",
-  "spell.rogues.throw.description": "投掷武器攻击目标，造成{damage}点伤害，并降低其{armor_reduction}点护甲，持续{effect_duration}秒。",
+  "spell.rogues.throw.description": "投掷武器攻击目标，造成{damage}点伤害，并降低其{effect|rogues:shatter|0||abs}点护甲，持续{effect_duration}秒。",
   "effect.rogues.shatter": "碎甲",
   "effect.rogues.shatter.description": "护甲值降低",
 
   "spell.rogues.shout.name": "挫志怒吼",
-  "spell.rogues.shout.description": "向附近敌人发出怒吼，降低其{damage_reduction}攻击伤害，持续{effect_duration}秒，并造成少量伤害。",
+  "spell.rogues.shout.description": "向附近敌人发出怒吼，降低其{effect|rogues:demoralize|0||abs}攻击伤害，持续{effect_duration}秒，并造成少量伤害。",
   "effect.rogues.demoralize": "挫志",
   "effect.rogues.demoralize.description": "攻击伤害降低",
 

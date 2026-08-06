@@ -79,12 +79,12 @@
   "effect.rogues.stealth.description": "Invisibile ai nemici",
 
   "spell.rogues.throw.name": "Lancio fracassante",
-  "spell.rogues.throw.description": "Scaglia la tua arma contro il bersaglio, infliggendo {damage} danni e riducendo la sua armatura di {armor_reduction} per {effect_duration} sec.",
+  "spell.rogues.throw.description": "Scaglia la tua arma contro il bersaglio, infliggendo {damage} danni e riducendo la sua armatura di {effect|rogues:shatter|0||abs} per {effect_duration} sec.",
   "effect.rogues.shatter": "Armatura infranta",
   "effect.rogues.shatter.description": "Riduce i punti armatura",
 
   "spell.rogues.shout.name": "Urlo demoralizzante",
-  "spell.rogues.shout.description": "Urla ai nemici vicini, riducendo i loro danni da attacco di {damage_reduction} per {effect_duration} sec e infliggendo una piccola quantità di danni.",
+  "spell.rogues.shout.description": "Urla ai nemici vicini, riducendo i loro danni da attacco di {effect|rogues:demoralize|0||abs} per {effect_duration} sec e infliggendo una piccola quantità di danni.",
   "effect.rogues.demoralize": "Demoralizzato",
   "effect.rogues.demoralize.description": "Riduce i danni d'attacco",
 
