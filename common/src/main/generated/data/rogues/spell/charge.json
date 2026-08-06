@@ -22,6 +22,7 @@
             "count": 1.0,
             "shape": "LINE_VERTICAL",
             "anchor": "ENTITY",
+            "vertical_origin": 0.0,
             "min_speed": 0.8,
             "max_speed": 0.8
           }

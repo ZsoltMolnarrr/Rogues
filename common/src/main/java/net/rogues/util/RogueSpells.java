@@ -189,10 +189,10 @@ public class RogueSpells {
                                 .speed(0.2F, 0.3F).preTravel(8)),
                         smoke().batch(b -> b.shape(ParticleGroup.Shape.SPHERE).count(50)
                                 .speed(0.25F, 0.25F).preTravel(4)),
-                        ParticleGroupBuilder.of(SpellEngineParticles.electric_arc_A)
+                        ParticleGroupBuilder.electricArc(SpellEngineParticles.lightning_arc_A)
                                 .batch(b -> b.shape(ParticleGroup.Shape.PILLAR).count(6)
                                         .speed(0.01F, 0.05F).verticalOrigin(Batches.FEET).extent(3)),
-                        ParticleGroupBuilder.of(SpellEngineParticles.electric_arc_B)
+                        ParticleGroupBuilder.electricArc(SpellEngineParticles.lightning_arc_B)
                                 .batch(b -> b.shape(ParticleGroup.Shape.PILLAR).count(8)
                                         .speed(0.01F, 0.05F).verticalOrigin(Batches.FEET).extent(5))
                 ),

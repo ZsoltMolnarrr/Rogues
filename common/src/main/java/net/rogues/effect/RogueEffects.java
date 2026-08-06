@@ -231,7 +231,7 @@ public class RogueEffects {
         ActionImpairing.configure(NET_TRAP.effect, ROOT);
         KnockbackImmunity.configure(NET_TRAP.effect);
         Synchronized.configure(STEALTH.effect, true);
-        RemoveOnHit.configure(STEALTH.effect, true);
+        RemoveOnHit.configure(STEALTH.effect, RemoveOnHit.Trigger.ANY_HIT);
 
         Synchronized.configure(SHATTER.effect, true);
         Synchronized.configure(DEMORALIZE.effect, true);
