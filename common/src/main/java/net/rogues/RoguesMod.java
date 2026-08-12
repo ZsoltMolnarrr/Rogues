@@ -1,8 +1,7 @@
 package net.rogues;
 
 import net.fabric_extras.structure_pool.api.StructurePoolConfig;
-import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
-import net.fabricmc.loader.api.FabricLoader;
+import net.minecraft.item.ItemGroup;
 import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.attribute.EntityAttributes;
@@ -23,6 +22,7 @@ import net.rogues.item.RogueWeapons;
 import net.rogues.item.armor.RogueArmors;
 import net.rogues.util.RogueSounds;
 import net.rogues.village.RogueVillagers;
+import net.spell_engine.Platform;
 import net.spell_engine.api.config.ConfigFile;
 import net.tiny_config.ConfigManager;
 
@@ -59,7 +59,7 @@ public class RoguesMod {
 
     public static void init() {
         tweaksConfig.refresh();
-        if (FabricLoader.getInstance().isDevelopmentEnvironment()) {
+        if (Platform.util().isDevelopmentEnvironment()) {
             tweaksConfig.value.ignore_items_required_mods = true;
         }
         itemConfig.refresh();
@@ -81,7 +81,7 @@ public class RoguesMod {
     }
 
     public static void registerItems() {
-        Group.ROGUES = FabricItemGroup.builder()
+        Group.ROGUES = new ItemGroup.Builder(ItemGroup.Row.TOP, 0)
                 .icon(() -> new ItemStack(RogueArmors.RogueArmorSet_t2.head))
                 .displayName(Text.translatable("itemGroup." + NAMESPACE + ".general"))
                 .build();
@@ -99,10 +99,6 @@ public class RoguesMod {
 
     public static void registerEntities() {
         RogueEntities.register();
-    }
-
-    public static void registerPOI() {
-        RogueVillagers.registerPOI();
     }
 
     public static void registerVillagers() {

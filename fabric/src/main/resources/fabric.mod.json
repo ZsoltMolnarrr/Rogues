@@ -29,7 +29,7 @@
       "net.spell_engine.fabric.client.compat.ModMenuCompatibility"
     ],
     "fabric-datagen": [
-      "net.rogues.datagen.RoguesDataGenerator"
+      "net.rogues.fabric.datagen.RoguesDataGenerator"
     ]
   },
   "mixins": [

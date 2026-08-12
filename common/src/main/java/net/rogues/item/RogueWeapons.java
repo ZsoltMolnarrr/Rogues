@@ -1,6 +1,6 @@
 package net.rogues.item;
 
-import net.fabricmc.loader.api.FabricLoader;
+import net.spell_engine.Platform;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 import net.minecraft.recipe.Ingredient;
@@ -77,22 +77,22 @@ public class RogueWeapons {
     // MARK: Register
 
     public static void register(Map<String, WeaponConfig> configs) {
-        if (RoguesMod.tweaksConfig.value.ignore_items_required_mods || FabricLoader.getInstance().isModLoaded(BETTER_NETHER)) {
-            var repair = ingredient("betternether:nether_ruby", FabricLoader.getInstance().isModLoaded(BETTER_NETHER), Items.NETHERITE_INGOT);
+        if (RoguesMod.tweaksConfig.value.ignore_items_required_mods || Platform.util().isModLoaded(BETTER_NETHER)) {
+            var repair = ingredient("betternether:nether_ruby", Platform.util().isModLoaded(BETTER_NETHER), Items.NETHERITE_INGOT);
             add(Weapons.daggerWithSkill(RoguesMod.NAMESPACE, "ruby_dagger", Equipment.Tier.TIER_4, repair));
             add(Weapons.sickleWithSkill(RoguesMod.NAMESPACE, "ruby_sickle", Equipment.Tier.TIER_4, repair));
             add(Weapons.doubleAxeWithSkill(RoguesMod.NAMESPACE, "ruby_double_axe", Equipment.Tier.TIER_4, repair));
             add(Weapons.glaiveWithSkill(RoguesMod.NAMESPACE, "ruby_glaive", Equipment.Tier.TIER_4, repair));
         }
-        if (RoguesMod.tweaksConfig.value.ignore_items_required_mods || FabricLoader.getInstance().isModLoaded(BETTER_END)) {
-            var repair = ingredient("betterend:aeternium_ingot", FabricLoader.getInstance().isModLoaded(BETTER_END), Items.NETHERITE_INGOT);
+        if (RoguesMod.tweaksConfig.value.ignore_items_required_mods || Platform.util().isModLoaded(BETTER_END)) {
+            var repair = ingredient("betterend:aeternium_ingot", Platform.util().isModLoaded(BETTER_END), Items.NETHERITE_INGOT);
             add(Weapons.daggerWithSkill(RoguesMod.NAMESPACE, "aeternium_dagger", Equipment.Tier.TIER_4, repair));
             add(Weapons.sickleWithSkill(RoguesMod.NAMESPACE, "aeternium_sickle", Equipment.Tier.TIER_4, repair));
             add(Weapons.doubleAxeWithSkill(RoguesMod.NAMESPACE, "aeternium_double_axe", Equipment.Tier.TIER_4, repair));
             add(Weapons.glaiveWithSkill(RoguesMod.NAMESPACE, "aeternium_glaive", Equipment.Tier.TIER_4, repair));
         }
-        if (RoguesMod.tweaksConfig.value.ignore_items_required_mods || FabricLoader.getInstance().isModLoaded(AETHER)) {
-            var repair = ingredient("aether:ambrosium_shard", FabricLoader.getInstance().isModLoaded(AETHER), Items.NETHERITE_INGOT);
+        if (RoguesMod.tweaksConfig.value.ignore_items_required_mods || Platform.util().isModLoaded(AETHER)) {
+            var repair = ingredient("aether:ambrosium_shard", Platform.util().isModLoaded(AETHER), Items.NETHERITE_INGOT);
             add(Weapons.daggerWithSkill(RoguesMod.NAMESPACE, "aether_dagger", Equipment.Tier.TIER_4, repair)
                     .loot(Equipment.LootProperties.of("aether")));
             add(Weapons.sickleWithSkill(RoguesMod.NAMESPACE, "aether_sickle", Equipment.Tier.TIER_4, repair)

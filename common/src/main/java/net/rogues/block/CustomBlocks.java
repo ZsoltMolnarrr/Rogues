@@ -1,6 +1,5 @@
 package net.rogues.block;
 
-import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.MapColor;
@@ -12,7 +11,6 @@ import net.minecraft.registry.Registry;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.Identifier;
 import net.rogues.RoguesMod;
-import net.rogues.item.Group;
 
 import java.util.ArrayList;
 
@@ -46,10 +44,7 @@ public class CustomBlocks {
             Registry.register(Registries.BLOCK, Identifier.of(RoguesMod.NAMESPACE, entry.name), entry.block);
             Registry.register(Registries.ITEM, Identifier.of(RoguesMod.NAMESPACE, entry.name), entry.item());
         }
-        ItemGroupEvents.modifyEntriesEvent(Group.KEY).register((content) -> {
-            for (var entry : all) {
-                content.add(entry.item());
-            }
-        });
+        // Creative-tab placement (into the Rogues group) is registered per-platform from each loader's
+        // entrypoint, iterating CustomBlocks.all — no Fabric API ItemGroupEvents in common.
     }
 }

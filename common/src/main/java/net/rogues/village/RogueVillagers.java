@@ -2,9 +2,7 @@ package net.rogues.village;
 
 import com.google.common.collect.ImmutableSet;
 import net.fabric_extras.structure_pool.api.StructurePoolAPI;
-import net.fabricmc.fabric.api.object.builder.v1.trade.TradeOfferHelper;
-import net.fabricmc.fabric.api.object.builder.v1.world.poi.PointOfInterestHelper;
-import net.fabricmc.loader.api.FabricLoader;
+import net.minecraft.block.BlockState;
 import net.minecraft.item.Items;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
@@ -18,18 +16,33 @@ import net.rogues.block.CustomBlocks;
 import net.rogues.item.RogueWeapons;
 import net.rogues.item.armor.RogueArmors;
 import net.rogues.util.RogueSounds;
+import net.spell_engine.Platform;
 
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Set;
 
 public class RogueVillagers {
     public static final String MERCHANT = "arms_merchant";
     public static final Identifier POI_ID = Identifier.of(RoguesMod.NAMESPACE, MERCHANT);
+    public static final int POI_TICKET_COUNT = 1;
+    public static final int POI_SEARCH_DISTANCE = 10;
 
-    public static void registerPOI() {
-        var blockStates = ImmutableSet.copyOf(CustomBlocks.WORKBENCH.block().getStateManager().getStates());
-        PointOfInterestHelper.register(POI_ID, 1, 10, blockStates);
+    /// The martial-workbench workstation block states for the POI. Registration itself is loader-specific
+    /// (Fabric: `PointOfInterestHelper`; NeoForge: a plain `Registry.register` of a `PointOfInterestType`,
+    /// whose block-state mapping NeoForge wires via its POI registry callback) — done in each platform's
+    /// entrypoint; this only exposes the shared state set.
+    public static Set<BlockState> poiBlockStates() {
+        return ImmutableSet.copyOf(CustomBlocks.WORKBENCH.block().getStateManager().getStates());
     }
+
+    /// The registered arms-merchant profession, set by {@link #registerVillagers()}. Read by the
+    /// loader-specific trade-offer registration (Fabric `TradeOfferHelper` / NeoForge `VillagerTradesEvent`).
+    public static VillagerProfession PROFESSION;
+
+    /// Trade offers per merchant tier (1..5), populated by {@link #registerVillagers()}. Actual registration
+    /// with the game is loader-specific and lives in each platform's entrypoint.
+    public static final LinkedHashMap<Integer, List<TradeOffers.Factory>> TRADES = new LinkedHashMap<>();
 
     public static VillagerProfession registerProfession(String name, RegistryKey<PointOfInterestType> workStation) {
         var id = Identifier.of(RoguesMod.NAMESPACE, name);
@@ -74,11 +87,11 @@ public class RogueVillagers {
 //    }
 
     public static void registerVillagers() {
-        if (!FabricLoader.getInstance().isModLoaded("lithostitched")) {
+        if (!Platform.util().isModLoaded("lithostitched")) {
             // Only inject the village if the Lithostitched is not present
             StructurePoolAPI.injectAll(RoguesMod.villagesConfig.value);
         }
-        var profession = registerProfession(
+        PROFESSION = registerProfession(
                 MERCHANT,
                 RegistryKey.of(Registries.POINT_OF_INTEREST_TYPE.getKey(), POI_ID));
 
@@ -106,20 +119,20 @@ public class RogueVillagers {
 //                Offer.sell(4, new ItemStack(Items.GOAT_HORN, 1), 15, 12, 5, 0.01f)
 //            );
 
-        LinkedHashMap<Integer, List<TradeOffers.Factory>> trades = new LinkedHashMap<>();
-        trades.put(1, List.of(
+        TRADES.clear();
+        TRADES.put(1, List.of(
                 new TradeOffers.BuyItemFactory(Items.LEATHER, 8, 12, 4, 5),
                 new TradeOffers.SellItemFactory(RogueWeapons.flint_dagger.item(), 6, 1, 12, 3),
                 new TradeOffers.SellItemFactory(RogueWeapons.stone_double_axe.item(), 8, 1, 12, 4)
         ));
-        trades.put(2, List.of(
+        TRADES.put(2, List.of(
                 new TradeOffers.BuyItemFactory(Items.IRON_INGOT, 12, 12, 5, 8),
                 new TradeOffers.SellItemFactory(RogueWeapons.iron_sickle.item(), 12, 1, 12, 10),
                 new TradeOffers.SellItemFactory(RogueWeapons.iron_glaive.item(), 18, 1, 12, 10),
                 new TradeOffers.SellItemFactory(RogueArmors.RogueArmorSet_t1.head, 15, 1, 12, 13),
                 new TradeOffers.SellItemFactory(RogueArmors.WarriorArmorSet_t1.head, 15, 1, 12, 13)
         ));
-        trades.put(3, List.of(
+        TRADES.put(3, List.of(
                 new TradeOffers.SellItemFactory(RogueWeapons.iron_dagger.item(), 14, 1, 12, 15),
                 new TradeOffers.SellItemFactory(RogueWeapons.iron_double_axe.item(), 18, 1, 12, 15),
                 new TradeOffers.SellItemFactory(RogueArmors.RogueArmorSet_t1.feet, 15, 1, 12, 15),
@@ -127,57 +140,20 @@ public class RogueVillagers {
                 new TradeOffers.SellItemFactory(RogueArmors.RogueArmorSet_t1.legs, 15, 1, 12, 15),
                 new TradeOffers.SellItemFactory(RogueArmors.WarriorArmorSet_t1.legs, 15, 1, 12, 15)
         ));
-        trades.put(4, List.of(
+        TRADES.put(4, List.of(
                 new TradeOffers.SellItemFactory(RogueArmors.RogueArmorSet_t1.chest, 15, 1, 12, 15),
                 new TradeOffers.SellItemFactory(RogueArmors.WarriorArmorSet_t1.chest, 15, 1, 12, 15),
                 new TradeOffers.SellItemFactory(Items.GOAT_HORN, 15, 1, 12, 5)
         ));
-
-        for (var entry: trades.entrySet()) {
-            TradeOfferHelper.registerVillagerOffers(profession, entry.getKey(), factories -> {
-                factories.addAll(entry.getValue());
-            });
-        }
-
-
-//        for(var offer: offers) {
-//            TradeOfferHelper.registerVillagerOffers(profession, offer.level, factories -> {
-//                factories.add(((entity, random) -> new TradeOffer(
-//                        offer.input,
-//                        offer.output,
-//                        offer.maxUses, offer.experience, offer.priceMultiplier)
-//                ));
-//            });
-//        }
-        TradeOfferHelper.registerVillagerOffers(profession, 5, factories -> {
-            factories.add(((entity, random) -> new TradeOffers.SellEnchantedToolFactory(
-                    RogueWeapons.diamond_dagger.item(),
-                    30,
-                    3,
-                    30,
-                    0F).create(entity, random)
-            ));
-            factories.add(((entity, random) -> new TradeOffers.SellEnchantedToolFactory(
-                    RogueWeapons.diamond_sickle.item(),
-                    30,
-                    3,
-                    30,
-                    0F).create(entity, random)
-            ));
-            factories.add(((entity, random) -> new TradeOffers.SellEnchantedToolFactory(
-                    RogueWeapons.diamond_double_axe.item(),
-                    40,
-                    3,
-                    30,
-                    0F).create(entity, random)
-            ));
-            factories.add(((entity, random) -> new TradeOffers.SellEnchantedToolFactory(
-                    RogueWeapons.diamond_glaive.item(),
-                    40,
-                    3,
-                    30,
-                    0F).create(entity, random)
-            ));
-        });
+        TRADES.put(5, List.of(
+                (entity, random) -> new TradeOffers.SellEnchantedToolFactory(
+                        RogueWeapons.diamond_dagger.item(), 30, 3, 30, 0F).create(entity, random),
+                (entity, random) -> new TradeOffers.SellEnchantedToolFactory(
+                        RogueWeapons.diamond_sickle.item(), 30, 3, 30, 0F).create(entity, random),
+                (entity, random) -> new TradeOffers.SellEnchantedToolFactory(
+                        RogueWeapons.diamond_double_axe.item(), 40, 3, 30, 0F).create(entity, random),
+                (entity, random) -> new TradeOffers.SellEnchantedToolFactory(
+                        RogueWeapons.diamond_glaive.item(), 40, 3, 30, 0F).create(entity, random)
+        ));
     }
 }

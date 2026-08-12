@@ -54,7 +54,9 @@ public class RogueEntities {
                     .makeFireImmune()
                     .maxTrackingRange(128)
                     .trackingTickInterval(20)
-                    .build()));
+                    // Vanilla build(String id) — the no-arg build() is a Fabric API interface-injected
+                    // default (FabricEntityType.Builder) absent on NeoForge at runtime.
+                    .build("bear_trap")));
 
     public static void register() {
         for (var entry : entries) {
