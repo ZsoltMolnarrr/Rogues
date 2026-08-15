@@ -8,7 +8,7 @@ import net.minecraft.registry.Registries;
 import net.minecraft.registry.tag.ItemTags;
 import net.minecraft.util.Identifier;
 import net.rogues.RoguesMod;
-import net.spell_engine.api.config.WeaponConfig;
+import net.spell_engine.rpg_series.config.WeaponConfig;
 import net.spell_engine.rpg_series.item.Equipment;
 import net.spell_engine.rpg_series.item.Weapon;
 import net.spell_engine.rpg_series.item.Weapons;

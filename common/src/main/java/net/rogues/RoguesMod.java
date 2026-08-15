@@ -23,7 +23,7 @@ import net.rogues.item.armor.RogueArmors;
 import net.rogues.util.RogueSounds;
 import net.rogues.village.RogueVillagers;
 import net.spell_engine.Platform;
-import net.spell_engine.api.config.ConfigFile;
+import net.spell_engine.rpg_series.config.ConfigFile;
 import net.tiny_config.ConfigManager;
 
 public class RoguesMod {
