@@ -1,3 +1,9 @@
+# 3.1.0
+
+- Adopt Spell Engine 1.10 changes
+- NeoForge version no longer depends on Forgified Fabric API
+- Fully translated content, now supporting 20 languages
+
 # 3.0.4
 
 - Charge no longer frees you from movement impairing effects on its own; the Improved Charge skill now grants it

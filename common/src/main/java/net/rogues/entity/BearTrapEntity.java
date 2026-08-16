@@ -8,7 +8,7 @@ import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.world.World;
 import net.spell_engine.api.spell.Spell;
 import net.spell_engine.entity.SpellCloud;
-import net.spell_engine.internals.SpellHelper;
+import net.spell_engine.internals.SpellExecution;
 
 public class BearTrapEntity extends SpellCloud {
 
@@ -37,7 +37,7 @@ public class BearTrapEntity extends SpellCloud {
     }
 
     @Override
-    protected void onImpactPerformed(LivingEntity owner, World world, Spell.Delivery.Cloud cloudData, SpellHelper.ImpactContext context) {
+    protected void onImpactPerformed(LivingEntity owner, World world, Spell.Delivery.Cloud cloudData, SpellExecution.ImpactContext context) {
         super.onImpactPerformed(owner, world, cloudData, context); // impact particles, impactsPerformed++
         // Flag before winding down, so the client never observes DESPAWNING without knowing why and
         // picks the wrong clip for a frame.

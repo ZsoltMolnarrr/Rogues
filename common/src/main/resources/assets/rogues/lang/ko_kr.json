@@ -1,9 +1,7 @@
 {
   "itemGroup.rogues.general": "도적 & 전사 (RPG 시리즈)",
-
   "item.rogues.spell_book/rogue": "도적 지침서",
   "item.rogues.spell_book/warrior": "전사의 책",
-
   "item.rogues.flint_dagger": "부싯돌 단검",
   "item.rogues.golden_dagger": "금 단검",
   "item.rogues.iron_dagger": "철 단검",
@@ -11,14 +9,12 @@
   "item.rogues.netherite_dagger": "네더라이트 단검",
   "item.rogues.aeternium_dagger": "에테르늄 단검",
   "item.rogues.ruby_dagger": "루비 단검",
-
   "item.rogues.iron_sickle": "철 낫",
   "item.rogues.golden_sickle": "금 낫",
   "item.rogues.diamond_sickle": "다이아몬드 낫",
   "item.rogues.netherite_sickle": "네더라이트 낫",
   "item.rogues.aeternium_sickle": "에테르늄 낫",
   "item.rogues.ruby_sickle": "루비 낫",
-
   "item.rogues.stone_double_axe": "돌 양날 도끼",
   "item.rogues.iron_double_axe": "철 양날 도끼",
   "item.rogues.golden_double_axe": "금 양날 도끼",
@@ -26,14 +22,12 @@
   "item.rogues.netherite_double_axe": "네더라이트 양날 도끼",
   "item.rogues.aeternium_double_axe": "에테르늄 양날 도끼",
   "item.rogues.ruby_double_axe": "루비 양날 도끼",
-
   "item.rogues.iron_glaive": "철 글레이브",
   "item.rogues.golden_glaive": "금 글레이브",
   "item.rogues.diamond_glaive": "다이아몬드 글레이브",
   "item.rogues.netherite_glaive": "네더라이트 글레이브",
   "item.rogues.aeternium_glaive": "에테르늄 글레이브",
   "item.rogues.ruby_glaive": "루비 글레이브",
-
   "item.rogues.rogue_armor_head": "도적 복면",
   "item.rogues.rogue_armor_chest": "도적 조끼",
   "item.rogues.rogue_armor_legs": "도적 바지",
@@ -42,7 +36,6 @@
   "item.rogues.assassin_armor_chest": "암살자 조끼",
   "item.rogues.assassin_armor_legs": "암살자 바지",
   "item.rogues.assassin_armor_feet": "암살자 부츠",
-
   "item.rogues.warrior_armor_head": "전사 투구",
   "item.rogues.warrior_armor_chest": "전사 흉갑",
   "item.rogues.warrior_armor_legs": "전사 레깅스",
@@ -51,66 +44,53 @@
   "item.rogues.berserker_armor_chest": "광전사 흉갑",
   "item.rogues.berserker_armor_legs": "광전사 레깅스",
   "item.rogues.berserker_armor_feet": "광전사 부츠",
-
   "entity.minecraft.villager.arms_merchant": "무기 상인",
   "entity.minecraft.villager.rogues.arms_merchant": "무기 상인",
   "entity.minecraft.villager.rogues:arms_merchant": "무기 상인",
   "block.rogues.arms_workbench": "무기 작업대",
   "block.rogues.arms_workbench.hint": "무기 상인 주민을 위한 작업대입니다.",
-
   "spell.rogues.slice_and_dice.name": "슬라이스 & 다이스",
   "spell.rogues.slice_and_dice.description": "전투 광란에 빠져 공격이 각각 추가 힘을 부여합니다. 최대 {max_stack}번까지 중첩되며, {effect_duration}초 후에 만료됩니다.",
   "effect.rogues.slice_and_dice": "슬라이스 & 다이스",
   "effect.rogues.slice_and_dice.description": "공격 피해를 증가시킵니다.",
-
   "spell.rogues.shock_powder.name": "기절 가루",
   "spell.rogues.shock_powder.description": "{effect_duration}초 동안 근처의 적을 기절시킵니다.",
   "effect.rogues.shock": "기절",
   "effect.rogues.shock.description": "움직임과 행동을 방해합니다.",
-
   "spell.rogues.shadow_step.name": "그림자 걷기",
   "spell.rogues.shadow_step.description": "그림자를 통해 목표물 뒤로 이동합니다.",
   "effect.rogues.shadow_step": "그림자 걷기",
   "effect.rogues.shadow_step.description": "추적할 수 없습니다.",
-
   "spell.rogues.vanish.name": "은신",
   "spell.rogues.vanish.description": "시야에서 사라져 {effect_duration}초 동안 잠행 상태에 들어갑니다. 행동을 하거나 피해를 입으면 효과가 깨집니다.",
   "effect.rogues.stealth": "은신",
   "effect.rogues.stealth.description": "적에게 보이지 않습니다.",
-
   "spell.rogues.throw.name": "무기 던지기",
   "spell.rogues.throw.description": "무기를 목표물에 던져 {damage}의 피해를 주고 {effect_duration}초 동안 방어를 {effect|rogues:shatter|0||abs} 감소시킵니다.",
   "effect.rogues.shatter": "방어 감소",
   "effect.rogues.shatter.description": "방어를 감소시킵니다.",
-
   "spell.rogues.shout.name": "사기 저하 외침",
   "spell.rogues.shout.description": "근처의 적에게 외쳐 {effect_duration}초 동안 공격 피해를 {effect|rogues:demoralize|0||abs} 감소시키고 소량의 피해를 줍니다.",
   "effect.rogues.demoralize": "사기 저하",
   "effect.rogues.demoralize.description": "공격 피해를 감소시킵니다.",
-
   "spell.rogues.charge.name": "돌진",
   "spell.rogues.charge.description": "이동 속도와 넉백 저항을 증가시키고, 이동 속도 저하 효과를 해제하며 {effect_duration}초 동안 지속됩니다.",
   "effect.rogues.charge": "돌진",
   "effect.rogues.charge.description": "이동 속도를 증가시킵니다.",
-
   "spell.rogues.whirlwind.name": "회오리 바람",
   "spell.rogues.whirlwind.description": "잡고 있으면 회전하여 주변의 적에게 초당 {damage}의 피해를 줍니다.",
-
   "advancements.rpg_series.path_choose_rogue.title": "속임수의 길",
   "advancements.rpg_series.path_choose_rogue.description": "도적 지침서를 만드세요",
   "advancements.rpg_series.path_choose_warrior.title": "힘의 길",
   "advancements.rpg_series.path_choose_warrior.description": "전사의 책을 만드세요",
-
   "advancements.rpg_series.spell_novice_rogue.title": "음흉한 의도",
   "advancements.rpg_series.spell_novice_rogue.description": "첫 번째 도적 기술을 습득하세요",
   "advancements.rpg_series.spell_novice_warrior.title": "피의 맛",
   "advancements.rpg_series.spell_novice_warrior.description": "첫 번째 전사 기술을 습득하세요",
-
   "advancements.rpg_series.spell_master_rogue.title": "기만의 대가",
   "advancements.rpg_series.spell_master_rogue.description": "모든 도적 기술을 습득하세요",
   "advancements.rpg_series.spell_master_warrior.title": "광란!",
   "advancements.rpg_series.spell_master_warrior.description": "모든 전사 기술을 습득하세요",
-
   "effect.rogues.stealth_speed": "은신 이동 속도",
   "effect.rogues.stealth_speed.description": "은신 상태에서 더 빠르게 이동합니다",
   "advancements.rpg_series.spell_cast_warrior_book.title": "전사 훈련",
@@ -119,7 +99,6 @@
   "advancements.rpg_series.spell_cast_rogue_book.description": "도적 지침서에서 기술 사용하기",
   "advancements.rpg_series.trade_with_arms_dealer.title": "무기 거래",
   "advancements.rpg_series.trade_with_arms_dealer.description": "무기 상인 주민과 거래하기",
-
   "item.rogues.aether_double_axe": "신성한 쌍두 도끼",
   "item.rogues.aether_glaive": "금박 전투 글레이브",
   "item.rogues.netherite_assassin_armor_head": "네더라이트 암살자 가면",
@@ -130,11 +109,27 @@
   "item.rogues.netherite_berserker_armor_chest": "네더라이트 버서커 흉갑",
   "item.rogues.netherite_berserker_armor_legs": "네더라이트 버서커 각반",
   "item.rogues.netherite_berserker_armor_feet": "네더라이트 버서커 부츠",
-
   "item.rogues.spell_scroll/rogue": "도적 기술 스크롤",
   "item.rogues.spell_scroll/warrior": "전사 기술 스크롤",
   "item.rogues.spell_book/rogue.spell_binding.description": "도적의 주문서, 빠른 무기와 기술로 그림자 속에서 적을 공격합니다\n- 장점: 높은 이동성과 근접 공격 피해\n- 약점: 보통 수준의 방어력과 제한된 원거리 공격\n- 장비: 중간 정도의 방어구",
   "item.rogues.spell_book/warrior.spell_binding.description": "전사의 주문서, 무거운 무기와 기술로 근접 전투를 지배합니다\n- 장점: 우수한 이동성을 갖춘 강력한 근접 공격\n- 약점: 제한된 원거리 공격과 보조 기술\n- 장비: 무거운 방어구",
   "item.rogues.aether_dagger": "발키리 시브",
-  "item.rogues.aether_sickle": "천상의 수확자"
+  "item.rogues.aether_sickle": "천상의 수확자",
+  "effect.rogues.bear_trap": "덫에 걸림",
+  "effect.rogues.bear_trap.description": "이동과 점프를 막습니다",
+  "effect.rogues.last_stand": "최후의 저항",
+  "effect.rogues.last_stand.description": "최대 체력을 증가시키고 받는 피해를 감소시킵니다",
+  "effect.rogues.net_trap": "그물에 걸림",
+  "effect.rogues.net_trap.description": "이동과 점프를 막습니다",
+  "entity.rogues.bear_trap": "곰덫",
+  "spell.rogues.bear_trap.description": "주변에 곰덫 3개를 설치하며, {cloud_duration}초 동안 유지됩니다. 덫을 밟은 첫 번째 적은 덫에 걸려 {damage}의 피해를 입고 {effect_duration}초 동안 그 자리에 붙잡힙니다.",
+  "spell.rogues.bear_trap.name": "곰덫",
+  "spell.rogues.last_stand.description": "채널링하는 동안 그 자리를 지킵니다. 중첩될 때마다 최대 체력과 넉백 저항이 증가하며, {effect_amplifier_cap} 중첩 시 최대 +100%%까지 증가합니다. {effect_duration}초 동안 지속됩니다.",
+  "spell.rogues.last_stand.name": "최후의 저항",
+  "spell.rogues.mortal_strike.description": "머리 위에서 내려찍는 강타를 가해 무기 피해에 {weapon_damage_bonus} 추가 피해를 입히고, 대상을 {effect_duration}초 동안 출혈시킵니다.",
+  "spell.rogues.mortal_strike.name": "필사의 일격",
+  "spell.rogues.mutilate.description": "양손 무기로 앞에 있는 모든 대상을 찢어발깁니다. 양손에 든 무기의 피해로 공격합니다.",
+  "spell.rogues.mutilate.name": "절단",
+  "spell.rogues.throw_net.description": "무게추가 달린 그물을 던져 {damage}의 피해를 주고 대상을 {effect_duration}초 동안 그 자리에 붙잡아 둡니다. 시전을 오래 유지할수록 더 강하게 명중하고 더 멀리 날아갑니다.",
+  "spell.rogues.throw_net.name": "그물 던지기"
 }
