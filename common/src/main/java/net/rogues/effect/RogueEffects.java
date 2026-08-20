@@ -232,6 +232,10 @@ public class RogueEffects {
         KnockbackImmunity.configure(NET_TRAP.effect);
         Synchronized.configure(STEALTH.effect, true);
         RemoveOnHit.configure(STEALTH.effect, RemoveOnHit.Trigger.ANY_HIT);
+        // 15% alpha white — fades the whole appearance (armor included) wherever the entity
+        // is rendered at all; vanilla invisibility (see LivingEntityStealth) still hides the
+        // body from entities the stealth is meant to hide from.
+        EntityTints.register(STEALTH.effect, 0x26FFFFFF);
 
         Synchronized.configure(SHATTER.effect, true);
         Synchronized.configure(DEMORALIZE.effect, true);
