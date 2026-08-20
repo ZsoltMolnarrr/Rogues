@@ -5,7 +5,6 @@
 - Adopt Spell Engine 1.10 changes
 - NeoForge version no longer depends on Forgified Fabric API
 - Fully translated content, now supporting 20 languages
-- Replaced armor rendering dependency AzureLibArmor with ArmorModelAPI
 - Vanish (stealth) status effect now renders with translucent armor pieces worn
 
 # 3.0.4

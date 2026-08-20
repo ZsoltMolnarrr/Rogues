@@ -1,26 +1,28 @@
 package net.rogues.client.armor;
 
+import mod.azure.azurelibarmor.common.render.armor.AzArmorRenderer;
+import mod.azure.azurelibarmor.common.render.armor.AzArmorRendererConfig;
+import mod.azure.azurelibarmor.common.render.layer.AzArmorTrimLayer;
 import net.minecraft.util.Identifier;
 import net.rogues.RoguesMod;
-import net.rpg_foundation.armor_api.client.GeoArmorRenderer;
 
-public final class WarriorArmorRenderer {
-    private WarriorArmorRenderer() { }
-
-    public static GeoArmorRenderer warrior() {
-        return make("warrior_armor", "warrior_armor");
+public class WarriorArmorRenderer extends AzArmorRenderer {
+    public static WarriorArmorRenderer warrior() {
+        return new WarriorArmorRenderer("warrior_armor", "warrior_armor");
     }
-    public static GeoArmorRenderer berserker() {
-        return make("warrior_armor", "berserker_armor");
+    public static WarriorArmorRenderer berserker() {
+        return new WarriorArmorRenderer("warrior_armor", "berserker_armor");
     }
-    public static GeoArmorRenderer netheriteBerserker() {
-        return make("warrior_armor", "netherite_berserker_armor");
+    public static WarriorArmorRenderer netheriteBerserker() {
+        return new WarriorArmorRenderer("warrior_armor", "netherite_berserker_armor");
     }
 
-    private static GeoArmorRenderer make(String modelName, String textureName) {
-        return GeoArmorRenderer.of(
+    public WarriorArmorRenderer(String modelName, String textureName) {
+        super(AzArmorRendererConfig.builder(
                 Identifier.of(RoguesMod.NAMESPACE, "geo/" + modelName + ".geo.json"),
                 Identifier.of(RoguesMod.NAMESPACE, "textures/armor/" + textureName + ".png"))
-                .trim(Identifier.of(RoguesMod.NAMESPACE, "armor/trim/" + textureName + "_generic"), false);
+                .addRenderLayer(new AzArmorTrimLayer(Identifier.of(RoguesMod.NAMESPACE, "armor/trim/" + textureName + "_generic"), false))
+                .build()
+        );
     }
 }

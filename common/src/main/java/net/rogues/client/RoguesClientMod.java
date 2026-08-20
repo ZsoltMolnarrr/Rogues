@@ -1,7 +1,7 @@
 package net.rogues.client;
 
-import net.rpg_foundation.armor_api.client.ArmorRenderers;
-import net.rpg_foundation.armor_api.client.GeoArmorRenderer;
+import mod.azure.azurelibarmor.common.render.armor.AzArmorRenderer;
+import mod.azure.azurelibarmor.common.render.armor.AzArmorRendererRegistry;
 import net.minecraft.util.Identifier;
 import net.rogues.RoguesMod;
 import net.rogues.client.armor.RogueArmorRenderer;
@@ -27,6 +27,7 @@ import net.spell_engine.api.effect.CustomParticleStatusEffect;
 import net.spell_engine.api.render.StunParticleSpawner;
 import net.spell_engine.rpg_series.item.Armor;
 
+import java.util.function.Supplier;
 
 public class RoguesClientMod {
     public static void init() {
@@ -53,12 +54,12 @@ public class RoguesClientMod {
                 .scaleWithAmplifier(false));
         CustomModelStatusEffect.register(RogueEffects.NET_TRAP.effect, netTrapModelFxRenderer());
 
-        registerArmorRenderer(RogueArmors.RogueArmorSet_t1, RogueArmorRenderer.rogue());
-        registerArmorRenderer(RogueArmors.RogueArmorSet_t2, RogueArmorRenderer.assassin());
-        registerArmorRenderer(RogueArmors.RogueArmorSet_t3, RogueArmorRenderer.netheriteAssassin());
-        registerArmorRenderer(RogueArmors.WarriorArmorSet_t1, WarriorArmorRenderer.warrior());
-        registerArmorRenderer(RogueArmors.WarriorArmorSet_t2, WarriorArmorRenderer.berserker());
-        registerArmorRenderer(RogueArmors.WarriorArmorSet_t3, WarriorArmorRenderer.netheriteBerserker());
+        registerArmorRenderer(RogueArmors.RogueArmorSet_t1, RogueArmorRenderer::rogue);
+        registerArmorRenderer(RogueArmors.RogueArmorSet_t2, RogueArmorRenderer::assassin);
+        registerArmorRenderer(RogueArmors.RogueArmorSet_t3, RogueArmorRenderer::netheriteAssassin);
+        registerArmorRenderer(RogueArmors.WarriorArmorSet_t1, WarriorArmorRenderer::warrior);
+        registerArmorRenderer(RogueArmors.WarriorArmorSet_t2, WarriorArmorRenderer::berserker);
+        registerArmorRenderer(RogueArmors.WarriorArmorSet_t3, WarriorArmorRenderer::netheriteBerserker);
     }
 
     /// The net pyramid drops onto the victim and snaps taut over ~8 ticks, then holds for the rest of
@@ -101,7 +102,7 @@ public class RoguesClientMod {
                 .entityScaling(ModelFxEffectRenderer.SizeAxis.WIDTH, 0.5F);
     }
 
-    private static void registerArmorRenderer(Armor.Set set, GeoArmorRenderer renderer) {
-        ArmorRenderers.register(renderer, set.head, set.chest, set.legs, set.feet);
+    private static void registerArmorRenderer(Armor.Set set, Supplier<AzArmorRenderer> armorRendererSupplier) {
+        AzArmorRendererRegistry.register(armorRendererSupplier, set.head, set.chest, set.legs, set.feet);
     }
 }
