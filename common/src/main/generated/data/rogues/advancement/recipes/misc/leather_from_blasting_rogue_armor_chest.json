@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:leather_from_blasting_rogue_armor_chest"
+        "recipe": "rogues:leather_from_blasting_rogue_armor_chest"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:leather_from_blasting_rogue_armor_chest"
+      "rogues:leather_from_blasting_rogue_armor_chest"
     ]
   }
 }

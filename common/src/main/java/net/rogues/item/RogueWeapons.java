@@ -33,12 +33,20 @@ public class RogueWeapons {
             };
         } else {
             return () -> {
-                var item = Registries.ITEM.get(id);
-                var ingredient = item != null ? item : fallback;
-                return Ingredient.ofItems(ingredient);
+                // `Registries.ITEM` is a defaulted registry: an unknown id yields AIR, not null, and
+                // `Ingredient.ofItems(AIR)` throws since 1.21.2 — so fall back on empty, not on null.
+                var item = Registries.ITEM.getOptionalValue(id).filter(candidate -> candidate != Items.AIR).orElse(fallback);
+                return Ingredient.ofItems(item);
             };
         }
     }
+
+    /// `#minecraft:stone_tool_materials`, spelled out: SpellEngine resolves the repair ingredient into a
+    /// REPAIRABLE component while items are being registered, long before tags are bound, so a tag-backed
+    /// Ingredient throws "Tags not bound" here.
+    private static final Item[] STONE_TOOL_MATERIALS = {
+            Items.COBBLESTONE, Items.BLACKSTONE, Items.COBBLED_DEEPSLATE
+    };
 
     private static final String AETHER = "aether";
     private static final String BETTER_END = "betterend";
@@ -61,7 +69,7 @@ public class RogueWeapons {
 
     // MARK: Double Axe
 
-    public static final Weapon.Entry stone_double_axe = add(Weapons.doubleAxeWithSkill(RoguesMod.NAMESPACE, "stone_double_axe", Equipment.Tier.TIER_0, () -> Ingredient.ofTag(Registries.ITEM.getOrThrow(ItemTags.STONE_TOOL_MATERIALS))).translatedName("Stone Double Axe"));
+    public static final Weapon.Entry stone_double_axe = add(Weapons.doubleAxeWithSkill(RoguesMod.NAMESPACE, "stone_double_axe", Equipment.Tier.TIER_0, () -> Ingredient.ofItems(STONE_TOOL_MATERIALS)).translatedName("Stone Double Axe"));
     public static final Weapon.Entry iron_double_axe = add(Weapons.doubleAxeWithSkill(RoguesMod.NAMESPACE, "iron_double_axe", Equipment.Tier.TIER_1, () -> Ingredient.ofItems(Items.IRON_INGOT)).translatedName("Iron Double Axe"));
     public static final Weapon.Entry golden_double_axe = add(Weapons.doubleAxeWithSkill(RoguesMod.NAMESPACE, "golden_double_axe", Equipment.Tier.GOLDEN, () -> Ingredient.ofItems(Items.GOLD_INGOT)).translatedName("Golden Double Axe"));
     public static final Weapon.Entry diamond_double_axe = add(Weapons.doubleAxeWithSkill(RoguesMod.NAMESPACE, "diamond_double_axe", Equipment.Tier.TIER_2, () -> Ingredient.ofItems(Items.DIAMOND)).translatedName("Diamond Double Axe"));

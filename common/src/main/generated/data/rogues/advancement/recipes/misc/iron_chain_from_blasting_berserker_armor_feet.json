@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_berserker_armor_legs": {
+    "has_berserker_armor_feet": {
       "conditions": {
         "items": [
           {
-            "items": "rogues:berserker_armor_legs"
+            "items": "rogues:berserker_armor_feet"
           }
         ]
       },
@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:chain_from_smelting_berserker_armor_legs"
+        "recipe": "rogues:iron_chain_from_blasting_berserker_armor_feet"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -21,12 +21,12 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_berserker_armor_legs"
+      "has_berserker_armor_feet"
     ]
   ],
   "rewards": {
     "recipes": [
-      "minecraft:chain_from_smelting_berserker_armor_legs"
+      "rogues:iron_chain_from_blasting_berserker_armor_feet"
     ]
   }
 }

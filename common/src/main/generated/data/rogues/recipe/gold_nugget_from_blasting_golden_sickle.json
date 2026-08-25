@@ -4,9 +4,7 @@
   "cookingtime": 150,
   "experience": 0.1,
   "group": "disassemble",
-  "ingredient": {
-    "item": "rogues:golden_sickle"
-  },
+  "ingredient": "rogues:golden_sickle",
   "result": {
     "id": "minecraft:gold_nugget"
   }

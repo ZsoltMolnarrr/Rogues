@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:gold_nugget_from_blasting_golden_dagger"
+        "recipe": "rogues:gold_nugget_from_blasting_golden_dagger"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:gold_nugget_from_blasting_golden_dagger"
+      "rogues:gold_nugget_from_blasting_golden_dagger"
     ]
   }
 }

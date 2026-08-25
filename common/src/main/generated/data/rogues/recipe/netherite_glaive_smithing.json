@@ -1,16 +1,9 @@
 {
   "type": "minecraft:smithing_transform",
-  "addition": {
-    "item": "minecraft:netherite_ingot"
-  },
-  "base": {
-    "item": "rogues:diamond_glaive"
-  },
+  "addition": "#minecraft:netherite_tool_materials",
+  "base": "rogues:diamond_glaive",
   "result": {
-    "count": 1,
     "id": "rogues:netherite_glaive"
   },
-  "template": {
-    "item": "minecraft:netherite_upgrade_smithing_template"
-  }
+  "template": "minecraft:netherite_upgrade_smithing_template"
 }

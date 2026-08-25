@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:gold_nugget_from_smelting_golden_double_axe"
+        "recipe": "rogues:gold_nugget_from_smelting_golden_double_axe"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:gold_nugget_from_smelting_golden_double_axe"
+      "rogues:gold_nugget_from_smelting_golden_double_axe"
     ]
   }
 }

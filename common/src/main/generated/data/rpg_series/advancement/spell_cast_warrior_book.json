@@ -15,7 +15,7 @@
     },
     "icon": {
       "components": {
-        "spell_engine:item_model": "rogues:item/spell_book/warrior"
+        "minecraft:item_model": "rogues:spell_book/warrior"
       },
       "count": 1,
       "id": "spell_engine:spell_book"

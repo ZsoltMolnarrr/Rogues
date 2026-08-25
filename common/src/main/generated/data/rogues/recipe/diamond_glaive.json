@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "equipment",
   "key": {
-    "M": {
-      "item": "minecraft:diamond"
-    },
-    "S": {
-      "item": "minecraft:stick"
-    }
+    "M": "minecraft:diamond",
+    "S": "minecraft:stick"
   },
   "pattern": [
     " MM",

@@ -2,15 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "equipment",
   "key": {
-    "G": {
-      "item": "minecraft:goat_horn"
-    },
-    "I": {
-      "item": "minecraft:chain"
-    },
-    "T": {
-      "item": "minecraft:netherite_scrap"
-    }
+    "G": "minecraft:goat_horn",
+    "I": "minecraft:iron_chain",
+    "T": "minecraft:netherite_scrap"
   },
   "pattern": [
     "GTG",

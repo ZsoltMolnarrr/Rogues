@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "equipment",
   "key": {
-    "D": {
-      "item": "minecraft:red_dye"
-    },
-    "W": {
-      "tag": "minecraft:wool"
-    }
+    "D": "minecraft:red_dye",
+    "W": "#minecraft:wool"
   },
   "pattern": [
     "WDW",
