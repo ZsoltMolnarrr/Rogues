@@ -19,6 +19,6 @@ public class ShatterParticles implements CustomParticleStatusEffect.Spawner {
     public void spawnParticles(LivingEntity livingEntity, int amplifier) {
         var scaledParticles = particles.copy();
         scaledParticles.batch.count *= (amplifier + 1);
-        ParticleHelper.play(livingEntity.getWorld(), livingEntity, scaledParticles);
+        ParticleHelper.play(livingEntity.getEntityWorld(), livingEntity, scaledParticles);
     }
 }

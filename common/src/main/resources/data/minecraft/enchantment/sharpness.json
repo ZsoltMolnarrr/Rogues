@@ -11,7 +11,7 @@
           "base": 0.08,
           "per_level_above_first": 0.08
         },
-        "attribute": "minecraft:generic.attack_damage",
+        "attribute": "minecraft:attack_damage",
         "id": "minecraft:enchantment.sharpness",
         "operation": "add_multiplied_base"
       }

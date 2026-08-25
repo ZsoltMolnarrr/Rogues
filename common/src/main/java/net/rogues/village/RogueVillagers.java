@@ -7,6 +7,7 @@ import net.minecraft.item.Items;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
+import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.minecraft.village.TradeOffers;
 import net.minecraft.village.VillagerProfession;
@@ -38,16 +39,19 @@ public class RogueVillagers {
 
     /// The registered arms-merchant profession, set by {@link #registerVillagers()}. Read by the
     /// loader-specific trade-offer registration (Fabric `TradeOfferHelper` / NeoForge `VillagerTradesEvent`).
-    public static VillagerProfession PROFESSION;
+    public static RegistryKey<VillagerProfession> PROFESSION;
 
     /// Trade offers per merchant tier (1..5), populated by {@link #registerVillagers()}. Actual registration
     /// with the game is loader-specific and lives in each platform's entrypoint.
     public static final LinkedHashMap<Integer, List<TradeOffers.Factory>> TRADES = new LinkedHashMap<>();
 
-    public static VillagerProfession registerProfession(String name, RegistryKey<PointOfInterestType> workStation) {
+    public static RegistryKey<VillagerProfession> registerProfession(String name, RegistryKey<PointOfInterestType> workStation) {
         var id = Identifier.of(RoguesMod.NAMESPACE, name);
-        return Registry.register(Registries.VILLAGER_PROFESSION, Identifier.of(RoguesMod.NAMESPACE, name), new VillagerProfession(
-                id.toString(),
+        var key = RegistryKey.of(Registries.VILLAGER_PROFESSION.getKey(), id);
+        Registry.register(Registries.VILLAGER_PROFESSION, key, new VillagerProfession(
+                // 1.21.11: the profession record carries its display name as Text (vanilla derives it as
+                // `entity.<namespace>.villager.<path>`); it used to be the plain id string.
+                Text.translatable("entity." + id.getNamespace() + ".villager." + id.getPath()),
                 (entry) -> {
                     return entry.matchesKey(workStation);
                 },
@@ -58,6 +62,7 @@ public class RogueVillagers {
                 ImmutableSet.of(),
                 RogueSounds.WORKBENCH.soundEvent())
         );
+        return key;
     }
 
 //    private static class Offer {
@@ -146,14 +151,14 @@ public class RogueVillagers {
                 new TradeOffers.SellItemFactory(Items.GOAT_HORN, 15, 1, 12, 5)
         ));
         TRADES.put(5, List.of(
-                (entity, random) -> new TradeOffers.SellEnchantedToolFactory(
-                        RogueWeapons.diamond_dagger.item(), 30, 3, 30, 0F).create(entity, random),
-                (entity, random) -> new TradeOffers.SellEnchantedToolFactory(
-                        RogueWeapons.diamond_sickle.item(), 30, 3, 30, 0F).create(entity, random),
-                (entity, random) -> new TradeOffers.SellEnchantedToolFactory(
-                        RogueWeapons.diamond_double_axe.item(), 40, 3, 30, 0F).create(entity, random),
-                (entity, random) -> new TradeOffers.SellEnchantedToolFactory(
-                        RogueWeapons.diamond_glaive.item(), 40, 3, 30, 0F).create(entity, random)
+                (TradeOffers.Factory) (world, entity, random) -> new TradeOffers.SellEnchantedToolFactory(
+                        RogueWeapons.diamond_dagger.item(), 30, 3, 30, 0F).create(world, entity, random),
+                (TradeOffers.Factory) (world, entity, random) -> new TradeOffers.SellEnchantedToolFactory(
+                        RogueWeapons.diamond_sickle.item(), 30, 3, 30, 0F).create(world, entity, random),
+                (TradeOffers.Factory) (world, entity, random) -> new TradeOffers.SellEnchantedToolFactory(
+                        RogueWeapons.diamond_double_axe.item(), 40, 3, 30, 0F).create(world, entity, random),
+                (TradeOffers.Factory) (world, entity, random) -> new TradeOffers.SellEnchantedToolFactory(
+                        RogueWeapons.diamond_glaive.item(), 40, 3, 30, 0F).create(world, entity, random)
         ));
     }
 }

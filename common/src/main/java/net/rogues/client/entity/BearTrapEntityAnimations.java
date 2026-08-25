@@ -1,6 +1,6 @@
 package net.rogues.client.entity;
 
-import net.minecraft.client.render.entity.animation.Animation;
+import net.minecraft.client.render.entity.animation.AnimationDefinition;
 import net.minecraft.client.render.entity.animation.AnimationHelper;
 import net.minecraft.client.render.entity.animation.Keyframe;
 import net.minecraft.client.render.entity.animation.Transformation;
@@ -11,7 +11,7 @@ import net.minecraft.client.render.entity.animation.Transformation;
  * @author Author
  */
 public class BearTrapEntityAnimations {
-	public static final Animation spawn = Animation.Builder.create(1.0F)
+	public static final AnimationDefinition spawn = AnimationDefinition.Builder.create(1.0F)
 		.addBoneAnimation("root", new Transformation(Transformation.Targets.ROTATE,
 			new Keyframe(0.0F, AnimationHelper.createRotationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR),
 			new Keyframe(0.35F, AnimationHelper.createRotationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR),
@@ -20,7 +20,7 @@ public class BearTrapEntityAnimations {
 			new Keyframe(0.7F, AnimationHelper.createRotationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR),
 			new Keyframe(1.0F, AnimationHelper.createRotationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR)
 		))
-		.addBoneAnimation("root", new Transformation(Transformation.Targets.TRANSLATE,
+		.addBoneAnimation("root", new Transformation(Transformation.Targets.MOVE_ORIGIN,
 			new Keyframe(0.0F, AnimationHelper.createTranslationalVector(0.0F, 14.0F, 0.0F), Transformation.Interpolations.LINEAR),
 			new Keyframe(0.05F, AnimationHelper.createTranslationalVector(0.0F, 16.0F, 0.0F), Transformation.Interpolations.CUBIC),
 			new Keyframe(0.15F, AnimationHelper.createTranslationalVector(0.0F, 14.0F, 0.0F), Transformation.Interpolations.LINEAR),
@@ -42,7 +42,7 @@ public class BearTrapEntityAnimations {
 			new Keyframe(0.75F, AnimationHelper.createRotationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.CUBIC),
 			new Keyframe(0.9F, AnimationHelper.createRotationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR)
 		))
-		.addBoneAnimation("beartrap_part_1", new Transformation(Transformation.Targets.TRANSLATE,
+		.addBoneAnimation("beartrap_part_1", new Transformation(Transformation.Targets.MOVE_ORIGIN,
 			new Keyframe(1.0F, AnimationHelper.createTranslationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR)
 		))
 		.addBoneAnimation("beartrap_part_2", new Transformation(Transformation.Targets.ROTATE,
@@ -53,25 +53,25 @@ public class BearTrapEntityAnimations {
 			new Keyframe(0.75F, AnimationHelper.createRotationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.CUBIC),
 			new Keyframe(0.9F, AnimationHelper.createRotationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR)
 		))
-		.addBoneAnimation("beartrap_part_2", new Transformation(Transformation.Targets.TRANSLATE,
+		.addBoneAnimation("beartrap_part_2", new Transformation(Transformation.Targets.MOVE_ORIGIN,
 			new Keyframe(1.0F, AnimationHelper.createTranslationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR)
 		))
 		.build();
 
-	public static final Animation idle = Animation.Builder.create(0.2F).looping()
+	public static final AnimationDefinition idle = AnimationDefinition.Builder.create(0.2F).looping()
 		.addBoneAnimation("root", new Transformation(Transformation.Targets.ROTATE,
 			new Keyframe(0.0F, AnimationHelper.createRotationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR),
 			new Keyframe(0.2F, AnimationHelper.createRotationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR)
 		))
-		.addBoneAnimation("root", new Transformation(Transformation.Targets.TRANSLATE,
+		.addBoneAnimation("root", new Transformation(Transformation.Targets.MOVE_ORIGIN,
 			new Keyframe(0.0F, AnimationHelper.createTranslationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR),
 			new Keyframe(0.2F, AnimationHelper.createTranslationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR)
 		))
-		.addBoneAnimation("beartrap_part_1", new Transformation(Transformation.Targets.TRANSLATE,
+		.addBoneAnimation("beartrap_part_1", new Transformation(Transformation.Targets.MOVE_ORIGIN,
 			new Keyframe(0.0F, AnimationHelper.createTranslationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR),
 			new Keyframe(0.2F, AnimationHelper.createTranslationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR)
 		))
-		.addBoneAnimation("beartrap_part_2", new Transformation(Transformation.Targets.TRANSLATE,
+		.addBoneAnimation("beartrap_part_2", new Transformation(Transformation.Targets.MOVE_ORIGIN,
 			new Keyframe(0.0F, AnimationHelper.createTranslationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR),
 			new Keyframe(0.2F, AnimationHelper.createTranslationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR)
 		))
@@ -79,13 +79,13 @@ public class BearTrapEntityAnimations {
 
 	/// Played across the DESPAWNING phase of a trap that caught something, in place of `despawn`.
 	/// `BearTrapEntity.ATTACK_TICKS` sizes that phase to this clip's 1.5s.
-	public static final Animation attack = Animation.Builder.create(1.5F)
+	public static final AnimationDefinition attack = AnimationDefinition.Builder.create(1.5F)
 		.addBoneAnimation("root", new Transformation(Transformation.Targets.ROTATE,
 			new Keyframe(0.0F, AnimationHelper.createRotationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR),
 			new Keyframe(0.05F, AnimationHelper.createRotationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.CUBIC),
 			new Keyframe(0.1F, AnimationHelper.createRotationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR)
 		))
-		.addBoneAnimation("root", new Transformation(Transformation.Targets.TRANSLATE,
+		.addBoneAnimation("root", new Transformation(Transformation.Targets.MOVE_ORIGIN,
 			new Keyframe(0.0F, AnimationHelper.createTranslationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR),
 			new Keyframe(0.05F, AnimationHelper.createTranslationalVector(0.0F, 0.25F, 0.0F), Transformation.Interpolations.CUBIC),
 			new Keyframe(0.1F, AnimationHelper.createTranslationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR),
@@ -97,7 +97,7 @@ public class BearTrapEntityAnimations {
 			new Keyframe(0.05F, AnimationHelper.createRotationalVector(-67.5F, 0.0F, 0.0F), Transformation.Interpolations.CUBIC),
 			new Keyframe(0.1F, AnimationHelper.createRotationalVector(-67.5F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR)
 		))
-		.addBoneAnimation("beartrap_part_1", new Transformation(Transformation.Targets.TRANSLATE,
+		.addBoneAnimation("beartrap_part_1", new Transformation(Transformation.Targets.MOVE_ORIGIN,
 			new Keyframe(0.0F, AnimationHelper.createTranslationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR),
 			new Keyframe(0.05F, AnimationHelper.createTranslationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.CUBIC),
 			new Keyframe(0.1F, AnimationHelper.createTranslationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR)
@@ -107,15 +107,15 @@ public class BearTrapEntityAnimations {
 			new Keyframe(0.05F, AnimationHelper.createRotationalVector(67.5F, 0.0F, 0.0F), Transformation.Interpolations.CUBIC),
 			new Keyframe(0.1F, AnimationHelper.createRotationalVector(67.5F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR)
 		))
-		.addBoneAnimation("beartrap_part_2", new Transformation(Transformation.Targets.TRANSLATE,
+		.addBoneAnimation("beartrap_part_2", new Transformation(Transformation.Targets.MOVE_ORIGIN,
 			new Keyframe(0.0F, AnimationHelper.createTranslationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR),
 			new Keyframe(0.05F, AnimationHelper.createTranslationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.CUBIC),
 			new Keyframe(0.1F, AnimationHelper.createTranslationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR)
 		))
 		.build();
 
-	public static final Animation despawn = Animation.Builder.create(1.0F)
-		.addBoneAnimation("root", new Transformation(Transformation.Targets.TRANSLATE,
+	public static final AnimationDefinition despawn = AnimationDefinition.Builder.create(1.0F)
+		.addBoneAnimation("root", new Transformation(Transformation.Targets.MOVE_ORIGIN,
 			new Keyframe(0.0F, AnimationHelper.createTranslationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR),
 			new Keyframe(0.75F, AnimationHelper.createTranslationalVector(0.0F, -11.0F, 0.0F), Transformation.Interpolations.LINEAR)
 		))

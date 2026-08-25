@@ -14,16 +14,10 @@
     }
   ],
   "type": "minecraft:smithing_transform",
-  "addition": {
-    "item": "betternether:nether_ruby"
-  },
-  "base": {
-    "item": "rogues:netherite_sickle"
-  },
+  "addition": "betternether:nether_ruby",
+  "base": "rogues:netherite_sickle",
   "result": {
     "id": "rogues:ruby_sickle"
   },
-  "template": {
-    "item": "minecraft:netherite_upgrade_smithing_template"
-  }
+  "template": "minecraft:netherite_upgrade_smithing_template"
 }

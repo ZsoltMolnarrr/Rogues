@@ -4,40 +4,64 @@ import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.MapColor;
 import net.minecraft.block.enums.NoteBlockInstrument;
+import net.minecraft.component.type.TooltipDisplayComponent;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.tooltip.TooltipType;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
+import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.RegistryKeys;
 import net.minecraft.sound.BlockSoundGroup;
+import net.minecraft.text.Text;
+import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
 import net.rogues.RoguesMod;
 
 import java.util.ArrayList;
+import java.util.function.Consumer;
 
 public class CustomBlocks {
 
-    public record Entry(String name, Block block, BlockItem item) {
-        public Entry(String name, Block block) {
-            this(name, block, new BlockItem(block, new Item.Settings()));
-        }
-    }
+    public record Entry(String name, Block block, BlockItem item) { }
 
     public static final ArrayList<Entry> all = new ArrayList<>();
 
-    private static Entry entry(String name, Block block) {
-        var entry = new Entry(name, block);
+    private static Entry entry(Identifier id, Block block, BlockItem item) {
+        var entry = new Entry(id.getPath(), block, item);
         all.add(entry);
         return entry;
     }
 
-    public static final Entry WORKBENCH = entry(MartialWorkbenchBlock.ID.getPath(), new MartialWorkbenchBlock(
+    /// 1.21.5+: `Block#appendTooltip` is gone — the hint line is appended by the block's item instead.
+    private static BlockItem hintedBlockItem(Block block, Identifier id) {
+        var settings = new Item.Settings()
+                .registryKey(RegistryKey.of(RegistryKeys.ITEM, id))
+                .useBlockPrefixedTranslationKey();
+        return new BlockItem(block, settings) {
+            @Override
+            public void appendTooltip(ItemStack stack, Item.TooltipContext context, TooltipDisplayComponent displayComponent,
+                                      Consumer<Text> textConsumer, TooltipType type) {
+                super.appendTooltip(stack, context, displayComponent, textConsumer, type);
+                textConsumer.accept(Text.translatable("block." + id.getNamespace() + "." + id.getPath() + ".hint")
+                        .formatted(Formatting.GRAY, Formatting.ITALIC));
+            }
+        };
+    }
+
+    private static final Block WORKBENCH_BLOCK = new MartialWorkbenchBlock(
             AbstractBlock.Settings.create()
+                    .registryKey(RegistryKey.of(RegistryKeys.BLOCK, MartialWorkbenchBlock.ID))
                     .mapColor(MapColor.OAK_TAN)
                     .instrument(NoteBlockInstrument.BASS)
                     .strength(2.5F)
                     .sounds(BlockSoundGroup.WOOD)
                     .nonOpaque()
-    ));
+    );
+
+    public static final Entry WORKBENCH = entry(MartialWorkbenchBlock.ID, WORKBENCH_BLOCK,
+            hintedBlockItem(WORKBENCH_BLOCK, MartialWorkbenchBlock.ID));
 
     public static void register() {
         for (var entry : all) {

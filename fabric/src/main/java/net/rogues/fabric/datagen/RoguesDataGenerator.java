@@ -6,11 +6,13 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
-import net.minecraft.data.server.recipe.RecipeExporter;
+import net.minecraft.data.recipe.RecipeExporter;
+import net.minecraft.data.recipe.RecipeGenerator;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.Items;
 import net.minecraft.recipe.book.RecipeCategory;
+import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.util.Identifier;
 import net.rogues.RoguesMod;
@@ -31,6 +33,7 @@ import net.spell_engine.rpg_series.datagen.RPGSeriesDataGen;
 import net.spell_engine.rpg_series.item.Armor;
 import net.spell_engine.rpg_series.tags.RPGSeriesItemTags;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
@@ -58,14 +61,14 @@ public class RoguesDataGenerator implements DataGeneratorEntrypoint {
         @Override
         protected void configure(RegistryWrapper.WrapperLookup wrapperLookup) {
             var namespace = RoguesMod.NAMESPACE;
-            var treasureTagBuilder = getOrCreateTagBuilder(SpellTags.TREASURE);
+            var treasureTagBuilder = builder(SpellTags.TREASURE);
             var processedBooks = new HashSet<RogueSpells.Book>();
             RogueSpells.entries.forEach(entry -> {
                 if (entry.book() != null) {
                     var bookTagKey = SpellTags.spellBook(namespace, entry.book().toString().toLowerCase());
-                    getOrCreateTagBuilder(bookTagKey).addOptional(entry.id());
+                    builder(bookTagKey).addOptional(RegistryKey.of(SpellRegistry.KEY, entry.id()));
                     var scrollTagKey = SpellTags.spellScroll(namespace, entry.book().toString().toLowerCase());
-                    getOrCreateTagBuilder(scrollTagKey).addOptional(entry.id());
+                    builder(scrollTagKey).addOptional(RegistryKey.of(SpellRegistry.KEY, entry.id()));
                     if (processedBooks.add(entry.book())) {
                         treasureTagBuilder.addOptionalTag(scrollTagKey);
                     }
@@ -123,77 +126,53 @@ public class RoguesDataGenerator implements DataGeneratorEntrypoint {
         public static int UNSMELT_TIME = 300;
 
         @Override
-        public void generate(RecipeExporter exporter) {
-            disassembleArmor(exporter, RogueArmors.RogueArmorSet_t1, Items.LEATHER);
-            disassembleArmor(exporter, RogueArmors.RogueArmorSet_t2, Items.RABBIT_HIDE);
-            disassembleArmor(exporter, RogueArmors.RogueArmorSet_t3, Items.NETHERITE_SCRAP);
-            disassembleArmor(exporter, RogueArmors.WarriorArmorSet_t1, Items.IRON_NUGGET);
-            disassembleArmor(exporter, RogueArmors.WarriorArmorSet_t2, Items.CHAIN);
-            disassembleArmor(exporter, RogueArmors.WarriorArmorSet_t3, Items.NETHERITE_SCRAP);
-
-            disassemble(exporter,
-                    RogueWeapons.entries.stream()
-                            .filter(entry -> entry.id().getPath().contains("flint"))
-                            .map(entry -> (ItemConvertible) entry.item()).toList(),
-                    Items.FLINT);
-            disassemble(exporter,
-                    RogueWeapons.entries.stream()
-                            .filter(entry -> entry.id().getPath().contains("gold"))
-                            .map(entry -> (ItemConvertible) entry.item()).toList(),
-                    Items.GOLD_NUGGET);
-            disassemble(exporter,
-                    RogueWeapons.entries.stream()
-                            .filter(entry -> entry.id().getPath().contains("iron"))
-                            .map(entry -> (ItemConvertible) entry.item()).toList(),
-                    Items.IRON_NUGGET);
-//            disassemble(exporter,
-//                    Weapons.entries.stream()
-//                            .filter(entry -> entry.id().getPath().contains("diamond"))
-//                            .map(entry -> (ItemConvertible) entry.item()).toList(),
-//                    Items.DIAM);
-            disassemble(exporter,
-                    RogueWeapons.entries.stream()
-                            .filter(entry -> entry.id().getPath().contains("netherite"))
-                            .map(entry -> (ItemConvertible) entry.item()).toList(),
-                    Items.NETHERITE_SCRAP);
+        public String getName() {
+            return "Rogue Disassembly Recipes";
         }
 
-        private static void disassembleArmor(RecipeExporter exporter, Armor.Set armorSet, Item output) {
-            FabricRecipeProvider.offerSmelting(exporter,
-                    armorSet.pieces(),
-                    RecipeCategory.MISC,
-                    output,
-                    0.1f,
-                    UNSMELT_TIME,
-                    "disassemble"
-            );
-            FabricRecipeProvider.offerBlasting(exporter,
-                    armorSet.pieces(),
-                    RecipeCategory.MISC,
-                    output,
-                    0.1f,
-                    UNSMELT_TIME / 2,
-                    "disassemble"
-            );
-        }
+        @Override
+        protected RecipeGenerator getRecipeGenerator(RegistryWrapper.WrapperLookup registries, RecipeExporter exporter) {
+            return new RecipeGenerator(registries, exporter) {
+                @Override
+                public void generate() {
+                    disassembleArmor(RogueArmors.RogueArmorSet_t1, Items.LEATHER);
+                    disassembleArmor(RogueArmors.RogueArmorSet_t2, Items.RABBIT_HIDE);
+                    disassembleArmor(RogueArmors.RogueArmorSet_t3, Items.NETHERITE_SCRAP);
+                    disassembleArmor(RogueArmors.WarriorArmorSet_t1, Items.IRON_NUGGET);
+                    disassembleArmor(RogueArmors.WarriorArmorSet_t2, Items.IRON_CHAIN);
+                    disassembleArmor(RogueArmors.WarriorArmorSet_t3, Items.NETHERITE_SCRAP);
 
-        private static void disassemble(RecipeExporter exporter, List<ItemConvertible> items, Item output) {
-            FabricRecipeProvider.offerSmelting(exporter,
-                    items,
-                    RecipeCategory.MISC,
-                    output,
-                    0.1f,
-                    UNSMELT_TIME,
-                    "disassemble"
-            );
-            FabricRecipeProvider.offerBlasting(exporter,
-                    items,
-                    RecipeCategory.MISC,
-                    output,
-                    0.1f,
-                    UNSMELT_TIME / 2,
-                    "disassemble"
-            );
+                    disassemble(RogueWeapons.entries.stream()
+                                    .filter(entry -> entry.id().getPath().contains("flint"))
+                                    .map(entry -> (ItemConvertible) entry.item()).toList(),
+                            Items.FLINT);
+                    disassemble(RogueWeapons.entries.stream()
+                                    .filter(entry -> entry.id().getPath().contains("gold"))
+                                    .map(entry -> (ItemConvertible) entry.item()).toList(),
+                            Items.GOLD_NUGGET);
+                    disassemble(RogueWeapons.entries.stream()
+                                    .filter(entry -> entry.id().getPath().contains("iron"))
+                                    .map(entry -> (ItemConvertible) entry.item()).toList(),
+                            Items.IRON_NUGGET);
+                    disassemble(RogueWeapons.entries.stream()
+                                    .filter(entry -> entry.id().getPath().contains("netherite"))
+                                    .map(entry -> (ItemConvertible) entry.item()).toList(),
+                            Items.NETHERITE_SCRAP);
+                }
+
+                private void disassembleArmor(Armor.Set armorSet, Item output) {
+                    List<ItemConvertible> pieces = new ArrayList<>();
+                    for (Object piece : armorSet.pieces()) {
+                        pieces.add((ItemConvertible) piece);
+                    }
+                    disassemble(pieces, output);
+                }
+
+                private void disassemble(List<ItemConvertible> items, Item output) {
+                    offerSmelting(items, RecipeCategory.MISC, output, 0.1f, UNSMELT_TIME, "disassemble");
+                    offerBlasting(items, RecipeCategory.MISC, output, 0.1f, UNSMELT_TIME / 2, "disassemble");
+                }
+            };
         }
     }
 
@@ -286,6 +265,9 @@ public class RoguesDataGenerator implements DataGeneratorEntrypoint {
             }
 
             // Arms Dealer villager (several key formats are referenced across versions) + workbench
+            // 1.21.11 derives the profession name as `entity.<namespace>.villager.<path>`; the
+            // `entity.minecraft.villager.*` spellings are kept for older/other lookups.
+            builder.add("entity." + namespace + ".villager.arms_merchant", "Arms Dealer");
             builder.add("entity.minecraft.villager.arms_merchant", "Arms Dealer");
             builder.add("entity.minecraft.villager." + namespace + ".arms_merchant", "Arms Dealer");
             builder.add("entity.minecraft.villager." + namespace + ":arms_merchant", "Arms Dealer");

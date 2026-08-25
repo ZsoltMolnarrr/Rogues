@@ -6,6 +6,8 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.SpawnGroup;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
+import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.RegistryKeys;
 import net.minecraft.util.Identifier;
 import net.rogues.RoguesMod;
 import net.spell_engine.api.spell.summon.SummonedEntities;
@@ -46,17 +48,19 @@ public class RogueEntities {
         return entry;
     }
 
+    private static final Identifier BEAR_TRAP_ID = Identifier.of(RoguesMod.NAMESPACE, "bear_trap");
+
     public static final Entry<BearTrapEntity> BEAR_TRAP = add(new Entry<>(
-            Identifier.of(RoguesMod.NAMESPACE, "bear_trap"),
+            BEAR_TRAP_ID,
             "Bear Trap",
             EntityType.Builder.<BearTrapEntity>create(BearTrapEntity::new, SpawnGroup.MISC)
                     .dimensions(1F, 0.5F) // dimensions in Minecraft units of the render
                     .makeFireImmune()
                     .maxTrackingRange(128)
                     .trackingTickInterval(20)
-                    // Vanilla build(String id) — the no-arg build() is a Fabric API interface-injected
+                    // Vanilla build(RegistryKey) — the no-arg build() is a Fabric API interface-injected
                     // default (FabricEntityType.Builder) absent on NeoForge at runtime.
-                    .build("bear_trap")));
+                    .build(RegistryKey.of(RegistryKeys.ENTITY_TYPE, BEAR_TRAP_ID))));
 
     public static void register() {
         for (var entry : entries) {

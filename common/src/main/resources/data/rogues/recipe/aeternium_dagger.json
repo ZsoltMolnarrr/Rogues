@@ -17,16 +17,10 @@
   "category": "equipment",
   "key": {
     "S": [
-      {
-        "tag": "c:wood_sticks"
-      },
-      {
-        "item": "minecraft:stick"
-      }
+      "#c:wood_sticks",
+      "minecraft:stick"
     ],
-    "M": {
-      "item": "betterend:aeternium_ingot"
-    }
+    "M": "betterend:aeternium_ingot"
   },
   "pattern": [
     " M",

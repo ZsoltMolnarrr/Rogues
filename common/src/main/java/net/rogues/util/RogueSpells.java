@@ -648,7 +648,7 @@ public class RogueSpells {
         // Each channel tick adds a stack; the effect's per-stack modifiers do the scaling.
         var buff = SpellBuilder.Impacts.effectAdd(effect.id.toString(), 10, 1, stacks - 1);
         var heal = SpellBuilder.Impacts.heal(1F / stacks);
-        heal.attribute = EntityAttributes.GENERIC_MAX_HEALTH.getIdAsString();
+        heal.attribute = EntityAttributes.MAX_HEALTH.getIdAsString();
 
         spell.impacts = List.of(buff, heal);
 

@@ -1,12 +1,14 @@
 package net.rogues.item.armor;
 
 import net.minecraft.entity.attribute.EntityAttributeModifier;
-import net.minecraft.item.ArmorItem;
-import net.minecraft.item.ArmorMaterial;
-import net.minecraft.item.Items;
-import net.minecraft.recipe.Ingredient;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.Registry;
+import net.minecraft.entity.attribute.EntityAttributes;
+import net.minecraft.item.Item;
+import net.minecraft.item.equipment.ArmorMaterial;
+import net.minecraft.item.equipment.EquipmentAssetKeys;
+import net.minecraft.item.equipment.EquipmentType;
+import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.tag.ItemTags;
+import net.minecraft.registry.tag.TagKey;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.Identifier;
@@ -22,66 +24,81 @@ import net.spell_engine.rpg_series.item.Equipment;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.function.Supplier;
 
 public class RogueArmors {
 
-    public static RegistryEntry<ArmorMaterial> material(
-            String name, int protectionHead, int protectionChest, int protectionLegs, int protectionFeet,
-            int enchantability, RegistryEntry<SoundEvent> equipSound, Supplier<Ingredient> repairIngredient) {
+    /// Rabbit hide has no vanilla `repairs_*` tag; the tag ships in `data/rogues/tags/item/`.
+    public static final TagKey<Item> REPAIRS_ASSASSIN_ARMOR =
+            TagKey.of(net.minecraft.registry.RegistryKeys.ITEM, Identifier.of(RoguesMod.NAMESPACE, "repairs_assassin_armor"));
 
-        var material = new ArmorMaterial(
+    /// 1.21.2+: `ArmorMaterial` is a plain record (no registry). `durability` is the multiplier
+    /// `EquipmentType#getMaxDamage` applies, so it must match the value handed to
+    /// {@link Armor.Entry#create}, which `Item.Settings#armor` otherwise overrides.
+    /// The equipment asset id is namespaced but intentionally has no `assets/rogues/equipment/*.json`:
+    /// these sets are drawn by ArmorModelAPI, and a missing asset resolves to an empty model.
+    public static ArmorMaterial material(
+            String name, int durability, int protectionHead, int protectionChest, int protectionLegs, int protectionFeet,
+            int enchantability, RegistryEntry<SoundEvent> equipSound, TagKey<Item> repairIngredient) {
+
+        return new ArmorMaterial(
+                durability,
                 Map.of(
-                        ArmorItem.Type.HELMET, protectionHead,
-                        ArmorItem.Type.CHESTPLATE, protectionChest,
-                        ArmorItem.Type.LEGGINGS, protectionLegs,
-                        ArmorItem.Type.BOOTS, protectionFeet),
-                enchantability, equipSound, repairIngredient,
-                List.of(new ArmorMaterial.Layer(Identifier.of(RoguesMod.NAMESPACE, name))),
-                0,0
+                        EquipmentType.HELMET, protectionHead,
+                        EquipmentType.CHESTPLATE, protectionChest,
+                        EquipmentType.LEGGINGS, protectionLegs,
+                        EquipmentType.BOOTS, protectionFeet),
+                enchantability, equipSound,
+                0F, 0F,
+                repairIngredient,
+                RegistryKey.of(EquipmentAssetKeys.REGISTRY_KEY, Identifier.of(RoguesMod.NAMESPACE, name))
         );
-        return Registry.registerReference(Registries.ARMOR_MATERIAL, Identifier.of(RoguesMod.NAMESPACE, name), material);
     }
 
-    public static RegistryEntry<ArmorMaterial> material_rogue_t1 = material(
+    public static ArmorMaterial material_rogue_t1 = material(
             "rogue_armor",
+            15,
             1, 3, 3, 1,
             9,
-            RogueSounds.ROGUE_ARMOR_EQUIP.entry(), () -> { return Ingredient.ofItems(Items.LEATHER); });
+            RogueSounds.ROGUE_ARMOR_EQUIP.entry(), ItemTags.REPAIRS_LEATHER_ARMOR);
 
-    public static RegistryEntry<ArmorMaterial> material_rogue_t2 = material(
+    public static ArmorMaterial material_rogue_t2 = material(
             "assassin_armor",
+            25,
             2, 4, 4, 2,
             10,
-            RogueSounds.ROGUE_ARMOR_EQUIP.entry(), () -> { return Ingredient.ofItems(Items.RABBIT_HIDE); });
+            RogueSounds.ROGUE_ARMOR_EQUIP.entry(), REPAIRS_ASSASSIN_ARMOR);
 
-    public static RegistryEntry<ArmorMaterial> material_rogue_t3 = material(
+    public static ArmorMaterial material_rogue_t3 = material(
             "netherite_assassin_armor",
+            37,
             2, 4, 4, 2,
             15,
-            RogueSounds.ROGUE_ARMOR_EQUIP.entry(), () -> { return Ingredient.ofItems(Items.NETHERITE_INGOT); });
+            RogueSounds.ROGUE_ARMOR_EQUIP.entry(), ItemTags.REPAIRS_NETHERITE_ARMOR);
 
-    public static RegistryEntry<ArmorMaterial> material_warrior_t1 = material(
+    public static ArmorMaterial material_warrior_t1 = material(
             "warrior_armor",
+            15,
             2, 5, 4, 1,
             9,
-            RogueSounds.WARRIOR_ARMOR_EQUIP.entry(), () -> { return Ingredient.ofItems(Items.IRON_INGOT); });
+            RogueSounds.WARRIOR_ARMOR_EQUIP.entry(), ItemTags.REPAIRS_IRON_ARMOR);
 
-    public static RegistryEntry<ArmorMaterial> material_warrior_t2 = material(
+    public static ArmorMaterial material_warrior_t2 = material(
             "berserker_armor",
+            25,
             3, 8, 6, 2,
             10,
-            RogueSounds.WARRIOR_ARMOR_EQUIP.entry(), () -> { return Ingredient.ofItems(Items.IRON_INGOT); });
+            RogueSounds.WARRIOR_ARMOR_EQUIP.entry(), ItemTags.REPAIRS_IRON_ARMOR);
 
-    public static RegistryEntry<ArmorMaterial> material_warrior_t3 = material(
+    public static ArmorMaterial material_warrior_t3 = material(
             "netherite_berserker_armor",
+            37,
             3, 8, 6, 2,
             15,
-            RogueSounds.WARRIOR_ARMOR_EQUIP.entry(), () -> { return Ingredient.ofItems(Items.NETHERITE_INGOT); });
+            RogueSounds.WARRIOR_ARMOR_EQUIP.entry(), ItemTags.REPAIRS_NETHERITE_ARMOR);
 
 
     public static final ArrayList<Armor.Entry> entries = new ArrayList<>();
-    private static Armor.Entry create(RegistryEntry<ArmorMaterial> material, Identifier id, int durability,
+    private static Armor.Entry create(ArmorMaterial material, Identifier id, int durability,
                                       Armor.Set.ItemFactory factory, ArmorSetConfig defaults, int tier) {
         var entry = Armor.Entry.create(
                 material,
@@ -96,11 +113,13 @@ public class RogueArmors {
     }
 
 
-    private static final Identifier ATTACK_DAMAGE_ID = Identifier.ofVanilla("generic.attack_damage");
-    private static final Identifier ATTACK_SPEED_ID = Identifier.ofVanilla("generic.attack_speed");
-    private static final Identifier KNOCKBACK_ID = Identifier.ofVanilla("generic.knockback_resistance");
-    private static final Identifier MOVEMENT_SPEED_ID = Identifier.ofVanilla("generic.movement_speed");
-    private static final Identifier ARMOR_TOUGHNESS_ID = Identifier.ofVanilla("generic.armor_toughness");
+    // 1.21.2+: vanilla attribute ids lost the `generic.` prefix (`minecraft:attack_damage`, ...).
+    // Read them off the registry entries so they can never drift again.
+    private static final Identifier ATTACK_DAMAGE_ID = EntityAttributes.ATTACK_DAMAGE.getKey().orElseThrow().getValue();
+    private static final Identifier ATTACK_SPEED_ID = EntityAttributes.ATTACK_SPEED.getKey().orElseThrow().getValue();
+    private static final Identifier KNOCKBACK_ID = EntityAttributes.KNOCKBACK_RESISTANCE.getKey().orElseThrow().getValue();
+    private static final Identifier MOVEMENT_SPEED_ID = EntityAttributes.MOVEMENT_SPEED.getKey().orElseThrow().getValue();
+    private static final Identifier ARMOR_TOUGHNESS_ID = EntityAttributes.ARMOR_TOUGHNESS.getKey().orElseThrow().getValue();
     private static final String CRIT_MOD_ID = "critical_strike";
     private static final Identifier CRIT_CHANCE_ID = Identifier.of(CRIT_MOD_ID, "chance");
     private static final Identifier CRIT_DAMAGE_ID = Identifier.of(CRIT_MOD_ID, "damage");

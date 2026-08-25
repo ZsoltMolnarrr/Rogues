@@ -14,16 +14,10 @@
     }
   ],
   "type": "minecraft:smithing_transform",
-  "addition": {
-    "item": "betternether:nether_ruby"
-  },
-  "base": {
-    "item": "rogues:netherite_double_axe"
-  },
+  "addition": "betternether:nether_ruby",
+  "base": "rogues:netherite_double_axe",
   "result": {
     "id": "rogues:ruby_double_axe"
   },
-  "template": {
-    "item": "minecraft:netherite_upgrade_smithing_template"
-  }
+  "template": "minecraft:netherite_upgrade_smithing_template"
 }

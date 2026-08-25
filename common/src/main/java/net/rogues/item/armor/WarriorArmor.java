@@ -1,11 +1,11 @@
 package net.rogues.item.armor;
 
-import net.minecraft.item.ArmorMaterial;
-import net.minecraft.registry.entry.RegistryEntry;
+import net.minecraft.item.equipment.ArmorMaterial;
+import net.minecraft.item.equipment.EquipmentType;
 import net.spell_engine.rpg_series.item.Armor;
 
 public class WarriorArmor extends Armor.CustomItem {
-    public WarriorArmor(RegistryEntry<ArmorMaterial> material, Type slot, Settings settings) {
+    public WarriorArmor(ArmorMaterial material, EquipmentType slot, Settings settings) {
         super(material, slot, settings);
     }
 }

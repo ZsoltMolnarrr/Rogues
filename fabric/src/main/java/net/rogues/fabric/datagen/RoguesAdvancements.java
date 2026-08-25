@@ -16,7 +16,7 @@ import net.minecraft.registry.Registries;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
-import net.spell_engine.api.spell.SpellDataComponents;
+import net.minecraft.component.DataComponentTypes;
 import net.spell_engine.misc.criteria.SpellCastCriteria;
 import net.spell_engine.spellbinding.SpellBindingCriteria;
 import net.spell_engine.spellbinding.SpellBookCreationCriteria;
@@ -169,9 +169,12 @@ public class RoguesAdvancements extends FabricAdvancementProvider {
         return new ItemStack(Registries.ITEM.get(Identifier.of(itemId)));
     }
 
+    /// 1.21.11: `minecraft:item_model` names an item-model definition (`assets/<ns>/items/<path>.json`),
+    /// and SpellEngine sets it to the spell pool id verbatim — so the icon uses the same id the in-game
+    /// book carries (`rogues:spell_book/<book>`), not the old `item/`-prefixed model path.
     private static ItemStack spellBookIcon(String book) {
         var stack = new ItemStack(Registries.ITEM.get(Identifier.of("spell_engine", "spell_book")));
-        stack.set(SpellDataComponents.ITEM_MODEL, Identifier.of("rogues", "item/spell_book/" + book));
+        stack.set(DataComponentTypes.ITEM_MODEL, Identifier.of("rogues", "spell_book/" + book));
         return stack;
     }
 

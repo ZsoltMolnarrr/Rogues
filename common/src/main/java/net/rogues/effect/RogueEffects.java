@@ -29,7 +29,7 @@ public class RogueEffects {
             new CustomStatusEffect(StatusEffectCategory.BENEFICIAL, 0x993333),
             new EffectConfig(List.of(
                     new AttributeModifier(
-                            EntityAttributes.GENERIC_ATTACK_DAMAGE.getIdAsString(),
+                            EntityAttributes.ATTACK_DAMAGE.getIdAsString(),
                             0.1F,
                             EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE
                     )
@@ -43,12 +43,12 @@ public class RogueEffects {
             new CustomStatusEffect(StatusEffectCategory.HARMFUL, 0xffffcc),
             new EffectConfig(List.of(
                     new AttributeModifier(
-                            EntityAttributes.GENERIC_MOVEMENT_SPEED.getIdAsString(),
+                            EntityAttributes.MOVEMENT_SPEED.getIdAsString(),
                             -1F,
                             EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE
                     ),
                     new AttributeModifier(
-                            EntityAttributes.GENERIC_JUMP_STRENGTH.getIdAsString(),
+                            EntityAttributes.JUMP_STRENGTH.getIdAsString(),
                             -1F,
                             EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE
                     )
@@ -69,7 +69,7 @@ public class RogueEffects {
             new StealthEffect(StatusEffectCategory.BENEFICIAL, 0xAAAAAA),
             new EffectConfig(List.of(
                     new AttributeModifier(
-                            EntityAttributes.GENERIC_MOVEMENT_SPEED.getIdAsString(),
+                            EntityAttributes.MOVEMENT_SPEED.getIdAsString(),
                             -0.5F,
                             EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE
                     )
@@ -82,7 +82,7 @@ public class RogueEffects {
             new StealthEffect(StatusEffectCategory.BENEFICIAL, 0xAAAAAA),
             new EffectConfig(List.of(
                     new AttributeModifier(
-                            EntityAttributes.GENERIC_MOVEMENT_SPEED.getIdAsString(),
+                            EntityAttributes.MOVEMENT_SPEED.getIdAsString(),
                             0.5F,
                             EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE
                     )
@@ -96,7 +96,7 @@ public class RogueEffects {
             new CustomStatusEffect(StatusEffectCategory.HARMFUL, 0x800000),
             new EffectConfig(List.of(
                     new AttributeModifier(
-                            EntityAttributes.GENERIC_ARMOR.getIdAsString(),
+                            EntityAttributes.ARMOR.getIdAsString(),
                             -0.3F,
                             EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE
                     )
@@ -110,7 +110,7 @@ public class RogueEffects {
             new CustomStatusEffect(StatusEffectCategory.HARMFUL, 0x800000),
             new EffectConfig(List.of(
                     new AttributeModifier(
-                            EntityAttributes.GENERIC_ATTACK_DAMAGE.getIdAsString(),
+                            EntityAttributes.ATTACK_DAMAGE.getIdAsString(),
                             -0.2F,
                             EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE
                     )
@@ -124,12 +124,12 @@ public class RogueEffects {
             new CustomStatusEffect(StatusEffectCategory.HARMFUL, 0x6E6E6E),
             new EffectConfig(List.of(
                     new AttributeModifier(
-                            EntityAttributes.GENERIC_MOVEMENT_SPEED.getIdAsString(),
+                            EntityAttributes.MOVEMENT_SPEED.getIdAsString(),
                             -2F,
                             EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE
                     ),
                     new AttributeModifier(
-                            EntityAttributes.GENERIC_JUMP_STRENGTH.getIdAsString(),
+                            EntityAttributes.JUMP_STRENGTH.getIdAsString(),
                             -2F,
                             EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE
                     )
@@ -143,17 +143,17 @@ public class RogueEffects {
             new CustomStatusEffect(StatusEffectCategory.HARMFUL, 0x8B7355),
             new EffectConfig(List.of(
                     new AttributeModifier(
-                            EntityAttributes.GENERIC_MOVEMENT_SPEED.getIdAsString(),
+                            EntityAttributes.MOVEMENT_SPEED.getIdAsString(),
                             -2F,
                             EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE
                     ),
                     new AttributeModifier(
-                            EntityAttributes.GENERIC_JUMP_STRENGTH.getIdAsString(),
+                            EntityAttributes.JUMP_STRENGTH.getIdAsString(),
                             -2F,
                             EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE
                     ),
                     new AttributeModifier(
-                            EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE.getIdAsString(),
+                            EntityAttributes.KNOCKBACK_RESISTANCE.getIdAsString(),
                             100F,
                             EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE
                     )
@@ -170,12 +170,12 @@ public class RogueEffects {
             new TickingStatusEffect(StatusEffectCategory.BENEFICIAL, 0xAAAAAA).interval(5),
             new EffectConfig(List.of(
                     new AttributeModifier(
-                            EntityAttributes.GENERIC_MOVEMENT_SPEED.getIdAsString(),
+                            EntityAttributes.MOVEMENT_SPEED.getIdAsString(),
                             0.5F,
                             EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE
                     ),
                     new AttributeModifier(
-                            EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE.getIdAsString(),
+                            EntityAttributes.KNOCKBACK_RESISTANCE.getIdAsString(),
                             0.5F,
                             EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE
                     )
@@ -193,12 +193,12 @@ public class RogueEffects {
             new CustomStatusEffect(StatusEffectCategory.BENEFICIAL, 0xcc0000),
             new EffectConfig(List.of(
                     new AttributeModifier(
-                            EntityAttributes.GENERIC_MAX_HEALTH.getIdAsString(),
+                            EntityAttributes.MAX_HEALTH.getIdAsString(),
                             0.2F,
                             EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE
                     ),
                     new AttributeModifier(
-                            EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE.getIdAsString(),
+                            EntityAttributes.KNOCKBACK_RESISTANCE.getIdAsString(),
                             0.2F,
                             EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE
                     )

@@ -68,7 +68,7 @@ public class RoguesMod {
 
         if (tweaksConfig.value.rebalance_strength_attack_damage_multiplier > 0) {
             StatusEffects.STRENGTH.value().addAttributeModifier(
-                    EntityAttributes.GENERIC_ATTACK_DAMAGE,
+                    EntityAttributes.ATTACK_DAMAGE,
                     Identifier.ofVanilla("strength"),
                     tweaksConfig.value.rebalance_strength_attack_damage_multiplier,
                     EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE
