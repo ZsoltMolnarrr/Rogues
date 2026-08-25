@@ -36,9 +36,9 @@ configurations {
 }
 
 repositories {
-    maven { url 'https://maven.fabricmc.net' }
-    maven { url 'https://maven.kosmx.dev/' }
-    maven { url 'https://maven.shedaniel.me/' }
+    maven { url = 'https://maven.fabricmc.net' }
+    maven { url = 'https://repo.redlance.org/public' } // PAL (Player Animation Library)
+    maven { url = 'https://maven.shedaniel.me/' }
     maven {
         name = 'Modrinth'
         url = 'https://api.modrinth.com/maven'
@@ -51,12 +51,6 @@ repositories {
         url = 'https://maven.ladysnake.org/releases'
     }
 
-    // Hosts `dev.emi:trinkets`, inherited transitively from SpellEngine's Fabric artifact.
-    maven {
-        name = "Sleeping Town"
-        url = "https://repo.sleeping.town/"
-    }
-
     mavenLocal()
 }
 
@@ -66,30 +60,29 @@ dependencies {
     common(project(path: ':common', configuration: 'namedElements')) { transitive = false }
     shadowBundle project(path: ':common', configuration: 'transformProductionFabric')
 
-    modImplementation("dev.kosmx.player-anim:player-animation-lib-${platform}:${project.player_anim_version}")
+    modImplementation("com.zigythebird.playeranim:PlayerAnimationLibFabric:${project.player_anim_version}")
     modImplementation("me.shedaniel.cloth:cloth-config-${platform}:${project.cloth_config_version}")
-    modImplementation("maven.modrinth:armor-model-api:${project.armor_model_api_version}-${platform}")
     modImplementation("maven.modrinth:tiny-config:${project.tiny_config_version}-${platform}")
 
-//    // Trinkets
-//    // Trinkets: Modrinth Maven serves minimal POMs (no transitive deps) and
-//    // TerraformersMC has been unreliable in CI. Use Modrinth on CI; use dev.emi
-//    // locally so runClient gets Trinkets' full transitive graph.
-//    if (System.getenv("CI")) {
-//        modImplementation("maven.modrinth:trinkets:${project.trinkets_version}")
-//    } else {
-//        modImplementation("dev.emi:trinkets:${project.trinkets_version}")
-//    }
-    modImplementation("maven.modrinth:trinkets:${project.trinkets_version}")
-    modImplementation("org.ladysnake.cardinal-components-api:cardinal-components-base:6.1.3")
-    modImplementation("org.ladysnake.cardinal-components-api:cardinal-components-entity:6.1.3")
-    
-    modImplementation("maven.modrinth:structure-pool-api:${project.structure_pool_api_version}-${platform}")
-//    modImplementation("net.foundation:structure_pool_api-${platform}:${project.structure_pool_api_version}")
-    modImplementation("maven.modrinth:spell-power:${project.spell_power_version}-${platform}")
-//    modImplementation("net.spell_power:spell_power-${platform}:${project.spell_power_version}")
-    modImplementation("maven.modrinth:spell-engine:${project.spell_engine_version}-${platform}")
-//    modImplementation("net.spell_engine:spell_engine-${platform}:${project.spell_engine_version}")
+//    modImplementation("maven.modrinth:armor-model-api:${project.armor_model_api_version}-${platform}")
+    modImplementation("net.rpg_foundation:armor_model_api-${platform}:${project.armor_model_api_version}")
+//    modImplementation("maven.modrinth:structure-pool-api:${project.structure_pool_api_version}-${platform}")
+    modImplementation("net.foundation:structure_pool_api-${platform}:${project.structure_pool_api_version}")
+//    modImplementation("maven.modrinth:spell-power:${project.spell_power_version}-${platform}")
+    modImplementation("net.spell_power:spell_power-${platform}:${project.spell_power_version}")
+    modImplementation("net.foundation:ranged_weapon_api-${platform}:${project.ranged_weapon_api_version}")
+//    modImplementation("maven.modrinth:spell-engine:${project.spell_engine_version}-${platform}")
+    // `transitive = false`: the local-maven pom drags in dependencies resolved from repositories we do
+    // not declare; everything SpellEngine needs at dev runtime is declared explicitly here.
+    modImplementation("net.spell_engine:spell_engine-${platform}:${project.spell_engine_version}") { transitive = false }
+
+    // Fabric specific
+    modImplementation("maven.modrinth:modmenu:${project.mod_menu_version}")
+    // Trinkets Updated (Patbox); mod id + `dev.emi.trinkets` API package unchanged.
+    modImplementation("maven.modrinth:trinkets-updated:${project.trinkets_version}")
+    // Cardinal Components is JiJ'd inside Trinkets Updated; the dev runtime needs it on the classpath.
+    modImplementation("org.ladysnake.cardinal-components-api:cardinal-components-base:${project.cardinal_components_version}")
+    modImplementation("org.ladysnake.cardinal-components-api:cardinal-components-entity:${project.cardinal_components_version}")
 }
 
 processResources {
