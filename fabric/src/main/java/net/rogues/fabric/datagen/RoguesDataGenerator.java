@@ -13,11 +13,13 @@ import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.Items;
 import net.minecraft.recipe.book.RecipeCategory;
 import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.util.Identifier;
 import net.rogues.RoguesMod;
 import net.rogues.effect.RogueEffects;
 import net.rogues.entity.RogueEntities;
+import net.rogues.item.RogueItemTags;
 import net.rogues.item.RogueWeapons;
 import net.rogues.item.armor.RogueArmors;
 import net.rogues.util.RogueSounds;
@@ -86,6 +88,13 @@ public class RoguesDataGenerator implements DataGeneratorEntrypoint {
         protected void configure(RegistryWrapper.WrapperLookup wrapperLookup) {
             generateWeaponTags(RogueWeapons.entries);
             generateArmorTags(RogueArmors.entries, RPGSeriesItemTags.ArmorMetaType.MELEE);
+
+            // Anvil repair tags (`minecraft:repairable`), one per material
+            for (var repair: RogueItemTags.REPAIR_TAGS) {
+                var tag = builder(repair.tag());
+                repair.required().forEach(id -> tag.add(RegistryKey.of(RegistryKeys.ITEM, id)));
+                repair.optional().forEach(id -> tag.addOptional(RegistryKey.of(RegistryKeys.ITEM, id)));
+            }
         }
     }
 
