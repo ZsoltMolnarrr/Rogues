@@ -1,22 +1,22 @@
 package net.rogues.block;
 
-import net.minecraft.block.AbstractBlock;
-import net.minecraft.block.Block;
-import net.minecraft.block.MapColor;
-import net.minecraft.block.enums.NoteBlockInstrument;
-import net.minecraft.component.type.TooltipDisplayComponent;
-import net.minecraft.item.BlockItem;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.tooltip.TooltipType;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.Registry;
-import net.minecraft.registry.RegistryKey;
-import net.minecraft.registry.RegistryKeys;
-import net.minecraft.sound.BlockSoundGroup;
-import net.minecraft.text.Text;
-import net.minecraft.util.Formatting;
-import net.minecraft.util.Identifier;
+import net.minecraft.ChatFormatting;
+import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.component.TooltipDisplay;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
+import net.minecraft.world.level.material.MapColor;
 import net.rogues.RoguesMod;
 
 import java.util.ArrayList;
@@ -36,28 +36,28 @@ public class CustomBlocks {
 
     /// 1.21.5+: `Block#appendTooltip` is gone — the hint line is appended by the block's item instead.
     private static BlockItem hintedBlockItem(Block block, Identifier id) {
-        var settings = new Item.Settings()
-                .registryKey(RegistryKey.of(RegistryKeys.ITEM, id))
-                .useBlockPrefixedTranslationKey();
+        var settings = new Item.Properties()
+                .setId(ResourceKey.create(Registries.ITEM, id))
+                .useBlockDescriptionPrefix();
         return new BlockItem(block, settings) {
             @Override
-            public void appendTooltip(ItemStack stack, Item.TooltipContext context, TooltipDisplayComponent displayComponent,
-                                      Consumer<Text> textConsumer, TooltipType type) {
-                super.appendTooltip(stack, context, displayComponent, textConsumer, type);
-                textConsumer.accept(Text.translatable("block." + id.getNamespace() + "." + id.getPath() + ".hint")
-                        .formatted(Formatting.GRAY, Formatting.ITALIC));
+            public void appendHoverText(ItemStack stack, Item.TooltipContext context, TooltipDisplay displayComponent,
+                                      Consumer<Component> textConsumer, TooltipFlag type) {
+                super.appendHoverText(stack, context, displayComponent, textConsumer, type);
+                textConsumer.accept(Component.translatable("block." + id.getNamespace() + "." + id.getPath() + ".hint")
+                        .withStyle(ChatFormatting.GRAY, ChatFormatting.ITALIC));
             }
         };
     }
 
     private static final Block WORKBENCH_BLOCK = new MartialWorkbenchBlock(
-            AbstractBlock.Settings.create()
-                    .registryKey(RegistryKey.of(RegistryKeys.BLOCK, MartialWorkbenchBlock.ID))
-                    .mapColor(MapColor.OAK_TAN)
+            BlockBehaviour.Properties.of()
+                    .setId(ResourceKey.create(Registries.BLOCK, MartialWorkbenchBlock.ID))
+                    .mapColor(MapColor.WOOD)
                     .instrument(NoteBlockInstrument.BASS)
                     .strength(2.5F)
-                    .sounds(BlockSoundGroup.WOOD)
-                    .nonOpaque()
+                    .sound(SoundType.WOOD)
+                    .noOcclusion()
     );
 
     public static final Entry WORKBENCH = entry(MartialWorkbenchBlock.ID, WORKBENCH_BLOCK,
@@ -65,8 +65,8 @@ public class CustomBlocks {
 
     public static void register() {
         for (var entry : all) {
-            Registry.register(Registries.BLOCK, Identifier.of(RoguesMod.NAMESPACE, entry.name), entry.block);
-            Registry.register(Registries.ITEM, Identifier.of(RoguesMod.NAMESPACE, entry.name), entry.item());
+            Registry.register(BuiltInRegistries.BLOCK, Identifier.fromNamespaceAndPath(RoguesMod.NAMESPACE, entry.name), entry.block);
+            Registry.register(BuiltInRegistries.ITEM, Identifier.fromNamespaceAndPath(RoguesMod.NAMESPACE, entry.name), entry.item());
         }
         // Creative-tab placement (into the Rogues group) is registered per-platform from each loader's
         // entrypoint, iterating CustomBlocks.all — no Fabric API ItemGroupEvents in common.

@@ -1,19 +1,19 @@
 package net.rogues.block;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.item.ItemPlacementContext;
-import net.minecraft.state.StateManager;
-import net.minecraft.state.property.EnumProperty;
-import net.minecraft.state.property.Properties;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.math.Direction;
+import net.minecraft.core.Direction;
+import net.minecraft.resources.Identifier;
+import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.rogues.RoguesMod;
 import org.jetbrains.annotations.Nullable;
 
 public class MartialWorkbenchBlock extends Block {
-    public static Identifier ID = Identifier.of(RoguesMod.NAMESPACE, "arms_workbench");
-    public MartialWorkbenchBlock(Settings settings) {
+    public static Identifier ID = Identifier.fromNamespaceAndPath(RoguesMod.NAMESPACE, "arms_workbench");
+    public MartialWorkbenchBlock(Properties settings) {
         super(settings);
     }
 
@@ -21,24 +21,24 @@ public class MartialWorkbenchBlock extends Block {
 
     // MARK: Facing
 
-    private static EnumProperty<Direction> FACING = Properties.HORIZONTAL_FACING;
+    private static EnumProperty<Direction> FACING = BlockStateProperties.HORIZONTAL_FACING;
 
     @Nullable
     @Override
-    public BlockState getPlacementState(ItemPlacementContext ctx) {
-        return this.getDefaultState().with(FACING, ctx.getHorizontalPlayerFacing().getOpposite());
+    public BlockState getStateForPlacement(BlockPlaceContext ctx) {
+        return this.defaultBlockState().setValue(FACING, ctx.getHorizontalDirection().getOpposite());
     }
 
     @Override
-    protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
-        FACING = Properties.HORIZONTAL_FACING;
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+        FACING = BlockStateProperties.HORIZONTAL_FACING;
         builder.add(FACING);
     }
 
     // MARK: Partial transparency
 
     @Override
-    protected boolean isTransparent(BlockState state) {
+    protected boolean propagatesSkylightDown(BlockState state) {
         return true;
     }
 }

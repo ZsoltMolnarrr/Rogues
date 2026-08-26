@@ -1,7 +1,7 @@
 package net.rogues.item;
 
 import net.spell_engine.Platform;
-import net.minecraft.registry.tag.ItemTags;
+import net.minecraft.tags.ItemTags;
 import net.rogues.RoguesMod;
 import net.spell_engine.rpg_series.config.WeaponConfig;
 import net.spell_engine.rpg_series.item.Equipment;

@@ -1,14 +1,14 @@
 package net.rogues.entity;
 
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.SpawnGroup;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.Registry;
-import net.minecraft.registry.RegistryKey;
-import net.minecraft.registry.RegistryKeys;
-import net.minecraft.util.Identifier;
+import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.MobCategory;
 import net.rogues.RoguesMod;
 import net.spell_engine.api.spell.summon.SummonedEntities;
 import net.spell_engine.api.spell.summon.SummonedEntityConfig;
@@ -48,23 +48,23 @@ public class RogueEntities {
         return entry;
     }
 
-    private static final Identifier BEAR_TRAP_ID = Identifier.of(RoguesMod.NAMESPACE, "bear_trap");
+    private static final Identifier BEAR_TRAP_ID = Identifier.fromNamespaceAndPath(RoguesMod.NAMESPACE, "bear_trap");
 
     public static final Entry<BearTrapEntity> BEAR_TRAP = add(new Entry<>(
             BEAR_TRAP_ID,
             "Bear Trap",
-            EntityType.Builder.<BearTrapEntity>create(BearTrapEntity::new, SpawnGroup.MISC)
-                    .dimensions(1F, 0.5F) // dimensions in Minecraft units of the render
-                    .makeFireImmune()
-                    .maxTrackingRange(128)
-                    .trackingTickInterval(20)
+            EntityType.Builder.<BearTrapEntity>of(BearTrapEntity::new, MobCategory.MISC)
+                    .sized(1F, 0.5F) // dimensions in Minecraft units of the render
+                    .fireImmune()
+                    .clientTrackingRange(128)
+                    .updateInterval(20)
                     // Vanilla build(RegistryKey) — the no-arg build() is a Fabric API interface-injected
                     // default (FabricEntityType.Builder) absent on NeoForge at runtime.
-                    .build(RegistryKey.of(RegistryKeys.ENTITY_TYPE, BEAR_TRAP_ID))));
+                    .build(ResourceKey.create(Registries.ENTITY_TYPE, BEAR_TRAP_ID))));
 
     public static void register() {
         for (var entry : entries) {
-            Registry.register(Registries.ENTITY_TYPE, entry.id, entry.type);
+            Registry.register(BuiltInRegistries.ENTITY_TYPE, entry.id, entry.type);
             if (entry.summonConfig != null) {
                 // Only summoned (living) entities carry a config; safe by construction.
                 @SuppressWarnings("unchecked")

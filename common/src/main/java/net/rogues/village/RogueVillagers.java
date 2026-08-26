@@ -2,16 +2,16 @@ package net.rogues.village;
 
 import com.google.common.collect.ImmutableSet;
 import net.rpg_foundation.structure_pool.api.StructurePoolAPI;
-import net.minecraft.block.BlockState;
-import net.minecraft.item.Items;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.Registry;
-import net.minecraft.registry.RegistryKey;
-import net.minecraft.text.Text;
-import net.minecraft.util.Identifier;
-import net.minecraft.village.TradeOffers;
-import net.minecraft.village.VillagerProfession;
-import net.minecraft.world.poi.PointOfInterestType;
+import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.entity.ai.village.poi.PoiType;
+import net.minecraft.world.entity.npc.villager.VillagerProfession;
+import net.minecraft.world.entity.npc.villager.VillagerTrades;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.level.block.state.BlockState;
 import net.rogues.RoguesMod;
 import net.rogues.block.CustomBlocks;
 import net.rogues.item.RogueWeapons;
@@ -25,7 +25,7 @@ import java.util.Set;
 
 public class RogueVillagers {
     public static final String MERCHANT = "arms_merchant";
-    public static final Identifier POI_ID = Identifier.of(RoguesMod.NAMESPACE, MERCHANT);
+    public static final Identifier POI_ID = Identifier.fromNamespaceAndPath(RoguesMod.NAMESPACE, MERCHANT);
     public static final int POI_TICKET_COUNT = 1;
     public static final int POI_SEARCH_DISTANCE = 10;
 
@@ -34,29 +34,29 @@ public class RogueVillagers {
     /// whose block-state mapping NeoForge wires via its POI registry callback) — done in each platform's
     /// entrypoint; this only exposes the shared state set.
     public static Set<BlockState> poiBlockStates() {
-        return ImmutableSet.copyOf(CustomBlocks.WORKBENCH.block().getStateManager().getStates());
+        return ImmutableSet.copyOf(CustomBlocks.WORKBENCH.block().getStateDefinition().getPossibleStates());
     }
 
     /// The registered arms-merchant profession, set by {@link #registerVillagers()}. Read by the
     /// loader-specific trade-offer registration (Fabric `TradeOfferHelper` / NeoForge `VillagerTradesEvent`).
-    public static RegistryKey<VillagerProfession> PROFESSION;
+    public static ResourceKey<VillagerProfession> PROFESSION;
 
     /// Trade offers per merchant tier (1..5), populated by {@link #registerVillagers()}. Actual registration
     /// with the game is loader-specific and lives in each platform's entrypoint.
-    public static final LinkedHashMap<Integer, List<TradeOffers.Factory>> TRADES = new LinkedHashMap<>();
+    public static final LinkedHashMap<Integer, List<VillagerTrades.ItemListing>> TRADES = new LinkedHashMap<>();
 
-    public static RegistryKey<VillagerProfession> registerProfession(String name, RegistryKey<PointOfInterestType> workStation) {
-        var id = Identifier.of(RoguesMod.NAMESPACE, name);
-        var key = RegistryKey.of(Registries.VILLAGER_PROFESSION.getKey(), id);
-        Registry.register(Registries.VILLAGER_PROFESSION, key, new VillagerProfession(
+    public static ResourceKey<VillagerProfession> registerProfession(String name, ResourceKey<PoiType> workStation) {
+        var id = Identifier.fromNamespaceAndPath(RoguesMod.NAMESPACE, name);
+        var key = ResourceKey.create(BuiltInRegistries.VILLAGER_PROFESSION.key(), id);
+        Registry.register(BuiltInRegistries.VILLAGER_PROFESSION, key, new VillagerProfession(
                 // 1.21.11: the profession record carries its display name as Text (vanilla derives it as
                 // `entity.<namespace>.villager.<path>`); it used to be the plain id string.
-                Text.translatable("entity." + id.getNamespace() + ".villager." + id.getPath()),
+                Component.translatable("entity." + id.getNamespace() + ".villager." + id.getPath()),
                 (entry) -> {
-                    return entry.matchesKey(workStation);
+                    return entry.is(workStation);
                 },
                 (entry) -> {
-                    return entry.matchesKey(workStation);
+                    return entry.is(workStation);
                 },
                 ImmutableSet.of(),
                 ImmutableSet.of(),
@@ -98,7 +98,7 @@ public class RogueVillagers {
         }
         PROFESSION = registerProfession(
                 MERCHANT,
-                RegistryKey.of(Registries.POINT_OF_INTEREST_TYPE.getKey(), POI_ID));
+                ResourceKey.create(BuiltInRegistries.POINT_OF_INTEREST_TYPE.key(), POI_ID));
 
 //        List<Offer> offers = List.of(
 //                Offer.buy(1, new ItemStack(Items.LEATHER, 8), 5, 12, 4, 0.01f),
@@ -126,39 +126,39 @@ public class RogueVillagers {
 
         TRADES.clear();
         TRADES.put(1, List.of(
-                new TradeOffers.BuyItemFactory(Items.LEATHER, 8, 12, 4, 5),
-                new TradeOffers.SellItemFactory(RogueWeapons.flint_dagger.item(), 6, 1, 12, 3),
-                new TradeOffers.SellItemFactory(RogueWeapons.stone_double_axe.item(), 8, 1, 12, 4)
+                new VillagerTrades.EmeraldForItems(Items.LEATHER, 8, 12, 4, 5),
+                new VillagerTrades.ItemsForEmeralds(RogueWeapons.flint_dagger.item(), 6, 1, 12, 3),
+                new VillagerTrades.ItemsForEmeralds(RogueWeapons.stone_double_axe.item(), 8, 1, 12, 4)
         ));
         TRADES.put(2, List.of(
-                new TradeOffers.BuyItemFactory(Items.IRON_INGOT, 12, 12, 5, 8),
-                new TradeOffers.SellItemFactory(RogueWeapons.iron_sickle.item(), 12, 1, 12, 10),
-                new TradeOffers.SellItemFactory(RogueWeapons.iron_glaive.item(), 18, 1, 12, 10),
-                new TradeOffers.SellItemFactory(RogueArmors.RogueArmorSet_t1.head, 15, 1, 12, 13),
-                new TradeOffers.SellItemFactory(RogueArmors.WarriorArmorSet_t1.head, 15, 1, 12, 13)
+                new VillagerTrades.EmeraldForItems(Items.IRON_INGOT, 12, 12, 5, 8),
+                new VillagerTrades.ItemsForEmeralds(RogueWeapons.iron_sickle.item(), 12, 1, 12, 10),
+                new VillagerTrades.ItemsForEmeralds(RogueWeapons.iron_glaive.item(), 18, 1, 12, 10),
+                new VillagerTrades.ItemsForEmeralds(RogueArmors.RogueArmorSet_t1.head, 15, 1, 12, 13),
+                new VillagerTrades.ItemsForEmeralds(RogueArmors.WarriorArmorSet_t1.head, 15, 1, 12, 13)
         ));
         TRADES.put(3, List.of(
-                new TradeOffers.SellItemFactory(RogueWeapons.iron_dagger.item(), 14, 1, 12, 15),
-                new TradeOffers.SellItemFactory(RogueWeapons.iron_double_axe.item(), 18, 1, 12, 15),
-                new TradeOffers.SellItemFactory(RogueArmors.RogueArmorSet_t1.feet, 15, 1, 12, 15),
-                new TradeOffers.SellItemFactory(RogueArmors.WarriorArmorSet_t1.feet, 15, 1, 12, 15),
-                new TradeOffers.SellItemFactory(RogueArmors.RogueArmorSet_t1.legs, 15, 1, 12, 15),
-                new TradeOffers.SellItemFactory(RogueArmors.WarriorArmorSet_t1.legs, 15, 1, 12, 15)
+                new VillagerTrades.ItemsForEmeralds(RogueWeapons.iron_dagger.item(), 14, 1, 12, 15),
+                new VillagerTrades.ItemsForEmeralds(RogueWeapons.iron_double_axe.item(), 18, 1, 12, 15),
+                new VillagerTrades.ItemsForEmeralds(RogueArmors.RogueArmorSet_t1.feet, 15, 1, 12, 15),
+                new VillagerTrades.ItemsForEmeralds(RogueArmors.WarriorArmorSet_t1.feet, 15, 1, 12, 15),
+                new VillagerTrades.ItemsForEmeralds(RogueArmors.RogueArmorSet_t1.legs, 15, 1, 12, 15),
+                new VillagerTrades.ItemsForEmeralds(RogueArmors.WarriorArmorSet_t1.legs, 15, 1, 12, 15)
         ));
         TRADES.put(4, List.of(
-                new TradeOffers.SellItemFactory(RogueArmors.RogueArmorSet_t1.chest, 15, 1, 12, 15),
-                new TradeOffers.SellItemFactory(RogueArmors.WarriorArmorSet_t1.chest, 15, 1, 12, 15),
-                new TradeOffers.SellItemFactory(Items.GOAT_HORN, 15, 1, 12, 5)
+                new VillagerTrades.ItemsForEmeralds(RogueArmors.RogueArmorSet_t1.chest, 15, 1, 12, 15),
+                new VillagerTrades.ItemsForEmeralds(RogueArmors.WarriorArmorSet_t1.chest, 15, 1, 12, 15),
+                new VillagerTrades.ItemsForEmeralds(Items.GOAT_HORN, 15, 1, 12, 5)
         ));
         TRADES.put(5, List.of(
-                (TradeOffers.Factory) (world, entity, random) -> new TradeOffers.SellEnchantedToolFactory(
-                        RogueWeapons.diamond_dagger.item(), 30, 3, 30, 0F).create(world, entity, random),
-                (TradeOffers.Factory) (world, entity, random) -> new TradeOffers.SellEnchantedToolFactory(
-                        RogueWeapons.diamond_sickle.item(), 30, 3, 30, 0F).create(world, entity, random),
-                (TradeOffers.Factory) (world, entity, random) -> new TradeOffers.SellEnchantedToolFactory(
-                        RogueWeapons.diamond_double_axe.item(), 40, 3, 30, 0F).create(world, entity, random),
-                (TradeOffers.Factory) (world, entity, random) -> new TradeOffers.SellEnchantedToolFactory(
-                        RogueWeapons.diamond_glaive.item(), 40, 3, 30, 0F).create(world, entity, random)
+                (VillagerTrades.ItemListing) (world, entity, random) -> new VillagerTrades.EnchantedItemForEmeralds(
+                        RogueWeapons.diamond_dagger.item(), 30, 3, 30, 0F).getOffer(world, entity, random),
+                (VillagerTrades.ItemListing) (world, entity, random) -> new VillagerTrades.EnchantedItemForEmeralds(
+                        RogueWeapons.diamond_sickle.item(), 30, 3, 30, 0F).getOffer(world, entity, random),
+                (VillagerTrades.ItemListing) (world, entity, random) -> new VillagerTrades.EnchantedItemForEmeralds(
+                        RogueWeapons.diamond_double_axe.item(), 40, 3, 30, 0F).getOffer(world, entity, random),
+                (VillagerTrades.ItemListing) (world, entity, random) -> new VillagerTrades.EnchantedItemForEmeralds(
+                        RogueWeapons.diamond_glaive.item(), 40, 3, 30, 0F).getOffer(world, entity, random)
         ));
     }
 }

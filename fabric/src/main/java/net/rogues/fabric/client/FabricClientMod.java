@@ -4,7 +4,7 @@ import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.rendering.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
-import net.minecraft.client.render.BlockRenderLayer;
+import net.minecraft.client.renderer.chunk.ChunkSectionLayer;
 import net.rogues.block.CustomBlocks;
 import net.rogues.client.RoguesClientMod;
 import net.rogues.client.entity.BearTrapEntityModel;
@@ -21,6 +21,6 @@ public final class FabricClientMod implements ClientModInitializer {
         EntityRendererRegistry.register(RogueEntities.BEAR_TRAP.type, BearTrapEntityRenderer::new);
 
         // Fabric-specific render layer registration
-        BlockRenderLayerMap.putBlock(CustomBlocks.WORKBENCH.block(), BlockRenderLayer.CUTOUT);
+        BlockRenderLayerMap.putBlock(CustomBlocks.WORKBENCH.block(), ChunkSectionLayer.CUTOUT);
     }
 }

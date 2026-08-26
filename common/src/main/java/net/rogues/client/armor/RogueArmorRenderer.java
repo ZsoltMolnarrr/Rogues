@@ -1,6 +1,6 @@
 package net.rogues.client.armor;
 
-import net.minecraft.util.Identifier;
+import net.minecraft.resources.Identifier;
 import net.rogues.RoguesMod;
 import net.rpg_foundation.armor_api.client.GeoArmorRenderer;
 
@@ -19,8 +19,8 @@ public final class RogueArmorRenderer {
 
     private static GeoArmorRenderer make(String modelName, String textureName) {
         return GeoArmorRenderer.of(
-                Identifier.of(RoguesMod.NAMESPACE, "geo/" + modelName + ".geo.json"),
-                Identifier.of(RoguesMod.NAMESPACE, "textures/armor/" + textureName + ".png"))
-                .trim(Identifier.of(RoguesMod.NAMESPACE, "armor/trim/" + textureName + "_generic"), false);
+                Identifier.fromNamespaceAndPath(RoguesMod.NAMESPACE, "geo/" + modelName + ".geo.json"),
+                Identifier.fromNamespaceAndPath(RoguesMod.NAMESPACE, "textures/armor/" + textureName + ".png"))
+                .trim(Identifier.fromNamespaceAndPath(RoguesMod.NAMESPACE, "armor/trim/" + textureName + "_generic"), false);
     }
 }

@@ -1,21 +1,21 @@
 package net.rogues.client.entity;
 
-import net.minecraft.client.render.OverlayTexture;
-import net.minecraft.client.render.command.OrderedRenderCommandQueue;
-import net.minecraft.client.render.entity.EntityRenderer;
-import net.minecraft.client.render.entity.EntityRendererFactory;
-import net.minecraft.client.render.entity.state.EntityRenderState;
-import net.minecraft.client.render.state.CameraRenderState;
-import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.entity.AnimationState;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.math.RotationAxis;
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.math.Axis;
+import net.minecraft.client.renderer.SubmitNodeCollector;
+import net.minecraft.client.renderer.entity.EntityRenderer;
+import net.minecraft.client.renderer.entity.EntityRendererProvider;
+import net.minecraft.client.renderer.entity.state.EntityRenderState;
+import net.minecraft.client.renderer.state.CameraRenderState;
+import net.minecraft.client.renderer.texture.OverlayTexture;
+import net.minecraft.resources.Identifier;
+import net.minecraft.world.entity.AnimationState;
 import net.rogues.RoguesMod;
 import net.rogues.entity.BearTrapEntity;
 
 public class BearTrapEntityRenderer<T extends BearTrapEntity> extends EntityRenderer<T, BearTrapEntityRenderer.State> {
     public static final Identifier TEXTURE =
-            Identifier.of(RoguesMod.NAMESPACE, "textures/entity/bear_trap.png");
+            Identifier.fromNamespaceAndPath(RoguesMod.NAMESPACE, "textures/entity/bear_trap.png");
 
     /// 1.21.11 render states are extracted on the tick thread and consumed on the render thread, so the
     /// entity is never touched from `render`/`setAngles` — everything the model needs is copied here.
@@ -32,9 +32,9 @@ public class BearTrapEntityRenderer<T extends BearTrapEntity> extends EntityRend
 
     private final BearTrapEntityModel model;
 
-    public BearTrapEntityRenderer(EntityRendererFactory.Context context) {
+    public BearTrapEntityRenderer(EntityRendererProvider.Context context) {
         super(context);
-        this.model = new BearTrapEntityModel(context.getPart(BearTrapEntityModel.LAYER));
+        this.model = new BearTrapEntityModel(context.bakeLayer(BearTrapEntityModel.LAYER));
     }
 
     @Override
@@ -43,9 +43,9 @@ public class BearTrapEntityRenderer<T extends BearTrapEntity> extends EntityRend
     }
 
     @Override
-    public void updateRenderState(T entity, State state, float tickDelta) {
-        super.updateRenderState(entity, state, tickDelta);
-        state.yaw = entity.getYaw();
+    public void extractRenderState(T entity, State state, float tickDelta) {
+        super.extractRenderState(entity, state, tickDelta);
+        state.yaw = entity.getYRot();
         state.sprung = entity.isSprung();
         var cloudData = entity.getCloudData();
         state.despawnTicks = cloudData != null ? cloudData.despawn_ticks : 0;
@@ -55,15 +55,15 @@ public class BearTrapEntityRenderer<T extends BearTrapEntity> extends EntityRend
     }
 
     @Override
-    public void render(State state, MatrixStack matrices, OrderedRenderCommandQueue queue, CameraRenderState cameraState) {
-        super.render(state, matrices, queue, cameraState);
-        matrices.push();
-        matrices.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(-state.yaw + 180F));
+    public void submit(State state, PoseStack matrices, SubmitNodeCollector queue, CameraRenderState cameraState) {
+        super.submit(state, matrices, queue, cameraState);
+        matrices.pushPose();
+        matrices.mulPose(Axis.YP.rotationDegrees(-state.yaw + 180F));
         // Standard entity-model space: y-down and x-mirrored, ground plane at y = 1.5
         matrices.scale(-1F, -1F, 1F);
         matrices.translate(0, -1.5, 0);
-        queue.submitModel(model, state, matrices, model.getLayer(TEXTURE),
-                state.light, OverlayTexture.DEFAULT_UV, state.outlineColor, null);
-        matrices.pop();
+        queue.submitModel(model, state, matrices, model.renderType(TEXTURE),
+                state.lightCoords, OverlayTexture.NO_OVERLAY, state.outlineColor, null);
+        matrices.popPose();
     }
 }

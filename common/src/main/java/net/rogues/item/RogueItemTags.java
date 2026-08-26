@@ -1,9 +1,9 @@
 package net.rogues.item;
 
-import net.minecraft.item.Item;
-import net.minecraft.registry.RegistryKeys;
-import net.minecraft.registry.tag.TagKey;
-import net.minecraft.util.Identifier;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.Identifier;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.item.Item;
 import net.rogues.RoguesMod;
 
 import java.util.ArrayList;
@@ -26,7 +26,7 @@ public class RogueItemTags {
     public static final List<RepairTag> REPAIR_TAGS = new ArrayList<>();
 
     private static TagKey<Item> repairs(String material, List<Identifier> required, List<Identifier> optional) {
-        var tag = TagKey.of(RegistryKeys.ITEM, Identifier.of(RoguesMod.NAMESPACE, "repairs_" + material));
+        var tag = TagKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(RoguesMod.NAMESPACE, "repairs_" + material));
         REPAIR_TAGS.add(new RepairTag(tag, required, optional));
         return tag;
     }
@@ -38,10 +38,10 @@ public class RogueItemTags {
     /// Cross-mod material: the foreign item is an optional entry, the vanilla item keeps the item
     /// repairable when that mod is absent.
     private static TagKey<Item> repairsModded(String material, String moddedItem, String vanillaFallback) {
-        return repairs(material, List.of(Identifier.ofVanilla(vanillaFallback)), List.of(Identifier.of(moddedItem)));
+        return repairs(material, List.of(Identifier.withDefaultNamespace(vanillaFallback)), List.of(Identifier.parse(moddedItem)));
     }
 
-    public static final TagKey<Item> REPAIRS_FLINT = repairs("flint", Identifier.ofVanilla("flint"));
+    public static final TagKey<Item> REPAIRS_FLINT = repairs("flint", Identifier.withDefaultNamespace("flint"));
 
     public static final TagKey<Item> REPAIRS_AETERNIUM = repairsModded("aeternium", "betterend:aeternium_ingot", "netherite_ingot");
     public static final TagKey<Item> REPAIRS_NETHER_RUBY = repairsModded("nether_ruby", "betternether:nether_ruby", "netherite_ingot");

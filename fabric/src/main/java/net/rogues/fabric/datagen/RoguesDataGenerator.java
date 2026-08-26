@@ -6,16 +6,16 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
-import net.minecraft.data.recipe.RecipeExporter;
-import net.minecraft.data.recipe.RecipeGenerator;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemConvertible;
-import net.minecraft.item.Items;
-import net.minecraft.recipe.book.RecipeCategory;
-import net.minecraft.registry.RegistryKey;
-import net.minecraft.registry.RegistryKeys;
-import net.minecraft.registry.RegistryWrapper;
-import net.minecraft.util.Identifier;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.data.recipes.RecipeCategory;
+import net.minecraft.data.recipes.RecipeOutput;
+import net.minecraft.data.recipes.RecipeProvider;
+import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.level.ItemLike;
 import net.rogues.RoguesMod;
 import net.rogues.effect.RogueEffects;
 import net.rogues.entity.RogueEntities;
@@ -56,21 +56,21 @@ public class RoguesDataGenerator implements DataGeneratorEntrypoint {
     }
 
     public static class SpellTagGenerator extends FabricTagProvider<Spell> {
-        public SpellTagGenerator(FabricDataOutput output, CompletableFuture<RegistryWrapper.WrapperLookup> registriesFuture) {
+        public SpellTagGenerator(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
             super(output, SpellRegistry.KEY, registriesFuture);
         }
 
         @Override
-        protected void configure(RegistryWrapper.WrapperLookup wrapperLookup) {
+        protected void addTags(HolderLookup.Provider wrapperLookup) {
             var namespace = RoguesMod.NAMESPACE;
             var treasureTagBuilder = builder(SpellTags.TREASURE);
             var processedBooks = new HashSet<RogueSpells.Book>();
             RogueSpells.entries.forEach(entry -> {
                 if (entry.book() != null) {
                     var bookTagKey = SpellTags.spellBook(namespace, entry.book().toString().toLowerCase());
-                    builder(bookTagKey).addOptional(RegistryKey.of(SpellRegistry.KEY, entry.id()));
+                    builder(bookTagKey).addOptional(ResourceKey.create(SpellRegistry.KEY, entry.id()));
                     var scrollTagKey = SpellTags.spellScroll(namespace, entry.book().toString().toLowerCase());
-                    builder(scrollTagKey).addOptional(RegistryKey.of(SpellRegistry.KEY, entry.id()));
+                    builder(scrollTagKey).addOptional(ResourceKey.create(SpellRegistry.KEY, entry.id()));
                     if (processedBooks.add(entry.book())) {
                         treasureTagBuilder.addOptionalTag(scrollTagKey);
                     }
@@ -80,26 +80,26 @@ public class RoguesDataGenerator implements DataGeneratorEntrypoint {
     }
 
     public static class ItemTagGenerator extends RPGSeriesDataGen.ItemTagGenerator {
-        public ItemTagGenerator(FabricDataOutput dataOutput, CompletableFuture<RegistryWrapper.WrapperLookup> registryLookup) {
+        public ItemTagGenerator(FabricDataOutput dataOutput, CompletableFuture<HolderLookup.Provider> registryLookup) {
             super(dataOutput, registryLookup);
         }
 
         @Override
-        protected void configure(RegistryWrapper.WrapperLookup wrapperLookup) {
+        protected void addTags(HolderLookup.Provider wrapperLookup) {
             generateWeaponTags(RogueWeapons.entries);
             generateArmorTags(RogueArmors.entries, RPGSeriesItemTags.ArmorMetaType.MELEE);
 
             // Anvil repair tags (`minecraft:repairable`), one per material
             for (var repair: RogueItemTags.REPAIR_TAGS) {
                 var tag = builder(repair.tag());
-                repair.required().forEach(id -> tag.add(RegistryKey.of(RegistryKeys.ITEM, id)));
-                repair.optional().forEach(id -> tag.addOptional(RegistryKey.of(RegistryKeys.ITEM, id)));
+                repair.required().forEach(id -> tag.add(ResourceKey.create(Registries.ITEM, id)));
+                repair.optional().forEach(id -> tag.addOptional(ResourceKey.create(Registries.ITEM, id)));
             }
         }
     }
 
     public static class SpellGen extends SpellGenerator {
-        public SpellGen(FabricDataOutput dataOutput, CompletableFuture<RegistryWrapper.WrapperLookup> registryLookup) {
+        public SpellGen(FabricDataOutput dataOutput, CompletableFuture<HolderLookup.Provider> registryLookup) {
             super(dataOutput, registryLookup);
         }
 
@@ -112,7 +112,7 @@ public class RoguesDataGenerator implements DataGeneratorEntrypoint {
     }
 
     public static class SoundGen extends SimpleSoundGeneratorV2 {
-        public SoundGen(FabricDataOutput dataOutput, CompletableFuture<RegistryWrapper.WrapperLookup> registryLookup) {
+        public SoundGen(FabricDataOutput dataOutput, CompletableFuture<HolderLookup.Provider> registryLookup) {
             super(dataOutput, registryLookup);
         }
 
@@ -128,7 +128,7 @@ public class RoguesDataGenerator implements DataGeneratorEntrypoint {
     }
 
     public static class UnsmeltGenerator extends FabricRecipeProvider {
-        public UnsmeltGenerator(FabricDataOutput output, CompletableFuture<RegistryWrapper.WrapperLookup> registriesFuture) {
+        public UnsmeltGenerator(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
             super(output, registriesFuture);
         }
 
@@ -140,10 +140,10 @@ public class RoguesDataGenerator implements DataGeneratorEntrypoint {
         }
 
         @Override
-        protected RecipeGenerator getRecipeGenerator(RegistryWrapper.WrapperLookup registries, RecipeExporter exporter) {
-            return new RecipeGenerator(registries, exporter) {
+        protected RecipeProvider createRecipeProvider(HolderLookup.Provider registries, RecipeOutput exporter) {
+            return new RecipeProvider(registries, exporter) {
                 @Override
-                public void generate() {
+                public void buildRecipes() {
                     disassembleArmor(RogueArmors.RogueArmorSet_t1, Items.LEATHER);
                     disassembleArmor(RogueArmors.RogueArmorSet_t2, Items.RABBIT_HIDE);
                     disassembleArmor(RogueArmors.RogueArmorSet_t3, Items.NETHERITE_SCRAP);
@@ -153,40 +153,40 @@ public class RoguesDataGenerator implements DataGeneratorEntrypoint {
 
                     disassemble(RogueWeapons.entries.stream()
                                     .filter(entry -> entry.id().getPath().contains("flint"))
-                                    .map(entry -> (ItemConvertible) entry.item()).toList(),
+                                    .map(entry -> (ItemLike) entry.item()).toList(),
                             Items.FLINT);
                     disassemble(RogueWeapons.entries.stream()
                                     .filter(entry -> entry.id().getPath().contains("gold"))
-                                    .map(entry -> (ItemConvertible) entry.item()).toList(),
+                                    .map(entry -> (ItemLike) entry.item()).toList(),
                             Items.GOLD_NUGGET);
                     disassemble(RogueWeapons.entries.stream()
                                     .filter(entry -> entry.id().getPath().contains("iron"))
-                                    .map(entry -> (ItemConvertible) entry.item()).toList(),
+                                    .map(entry -> (ItemLike) entry.item()).toList(),
                             Items.IRON_NUGGET);
                     disassemble(RogueWeapons.entries.stream()
                                     .filter(entry -> entry.id().getPath().contains("netherite"))
-                                    .map(entry -> (ItemConvertible) entry.item()).toList(),
+                                    .map(entry -> (ItemLike) entry.item()).toList(),
                             Items.NETHERITE_SCRAP);
                 }
 
                 private void disassembleArmor(Armor.Set armorSet, Item output) {
-                    List<ItemConvertible> pieces = new ArrayList<>();
+                    List<ItemLike> pieces = new ArrayList<>();
                     for (Object piece : armorSet.pieces()) {
-                        pieces.add((ItemConvertible) piece);
+                        pieces.add((ItemLike) piece);
                     }
                     disassemble(pieces, output);
                 }
 
-                private void disassemble(List<ItemConvertible> items, Item output) {
-                    offerSmelting(items, RecipeCategory.MISC, output, 0.1f, UNSMELT_TIME, "disassemble");
-                    offerBlasting(items, RecipeCategory.MISC, output, 0.1f, UNSMELT_TIME / 2, "disassemble");
+                private void disassemble(List<ItemLike> items, Item output) {
+                    oreSmelting(items, RecipeCategory.MISC, output, 0.1f, UNSMELT_TIME, "disassemble");
+                    oreBlasting(items, RecipeCategory.MISC, output, 0.1f, UNSMELT_TIME / 2, "disassemble");
                 }
             };
         }
     }
 
     public static class WeaponGen extends WeaponAttributeGenerator {
-        public WeaponGen(FabricDataOutput dataOutput, CompletableFuture<RegistryWrapper.WrapperLookup> registryLookup) {
+        public WeaponGen(FabricDataOutput dataOutput, CompletableFuture<HolderLookup.Provider> registryLookup) {
             super(dataOutput, registryLookup);
         }
 
@@ -206,12 +206,12 @@ public class RoguesDataGenerator implements DataGeneratorEntrypoint {
      * strings (creative tab, villager, workbench) that have no dedicated content entry.
      */
     public static class LangGen extends NamespacedLangGenerator {
-        public LangGen(FabricDataOutput dataOutput, CompletableFuture<RegistryWrapper.WrapperLookup> registryLookup) {
+        public LangGen(FabricDataOutput dataOutput, CompletableFuture<HolderLookup.Provider> registryLookup) {
             super(dataOutput, registryLookup, RoguesMod.NAMESPACE);
         }
 
         @Override
-        public void generateTranslations(RegistryWrapper.WrapperLookup registryLookup, FabricLanguageProvider.TranslationBuilder builder) {
+        public void generateTranslations(HolderLookup.Provider registryLookup, FabricLanguageProvider.TranslationBuilder builder) {
             var namespace = RoguesMod.NAMESPACE;
 
             // Creative tab

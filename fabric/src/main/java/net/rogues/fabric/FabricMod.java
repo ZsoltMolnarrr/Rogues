@@ -31,7 +31,7 @@ public final class FabricMod implements ModInitializer {
         // Custom blocks into the Rogues creative tab — Fabric API.
         ItemGroupEvents.modifyEntriesEvent(Group.KEY).register(content -> {
             for (var entry : CustomBlocks.all) {
-                content.add(entry.item());
+                content.accept(entry.item());
             }
         });
     }

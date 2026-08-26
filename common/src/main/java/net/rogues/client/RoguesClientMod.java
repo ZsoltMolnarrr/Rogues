@@ -2,7 +2,7 @@ package net.rogues.client;
 
 import net.rpg_foundation.armor_api.client.ArmorRenderers;
 import net.rpg_foundation.armor_api.client.GeoArmorRenderer;
-import net.minecraft.util.Identifier;
+import net.minecraft.resources.Identifier;
 import net.rogues.RoguesMod;
 import net.rogues.client.armor.RogueArmorRenderer;
 import net.rogues.client.armor.WarriorArmorRenderer;
@@ -91,7 +91,7 @@ public class RoguesClientMod {
         snapTaut.easing = Easing.EASE_OUT_BACK;
 
         var effect = new ModelEffect();
-        effect.model_id = Identifier.of(RoguesMod.NAMESPACE, "spell_effect/net_trap").toString();
+        effect.model_id = Identifier.fromNamespaceAndPath(RoguesMod.NAMESPACE, "spell_effect/net_trap").toString();
         effect.light_emission = LightEmission.NONE; // rope and iron, not magic — no self-glow
         effect.duration = 8;
         effect.initial = List.of(translateInitial, scaleInitial);

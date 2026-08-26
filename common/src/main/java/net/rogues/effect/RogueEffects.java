@@ -1,9 +1,8 @@
 package net.rogues.effect;
 
-import net.minecraft.entity.attribute.EntityAttributeModifier;
-import net.minecraft.entity.attribute.EntityAttributes;
-import net.minecraft.entity.effect.StatusEffectCategory;
-import net.minecraft.util.Identifier;
+import net.minecraft.resources.Identifier;
+import net.minecraft.world.effect.MobEffectCategory;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.rogues.RoguesMod;
 import net.spell_engine.rpg_series.config.AttributeModifier;
 import net.spell_engine.rpg_series.config.ConfigFile;
@@ -23,161 +22,161 @@ public class RogueEffects {
     }
 
     public static Effects.Entry SLICE_AND_DICE = add(new Effects.Entry(
-            Identifier.of(RoguesMod.NAMESPACE, "slice_and_dice"),
+            Identifier.fromNamespaceAndPath(RoguesMod.NAMESPACE, "slice_and_dice"),
             "Slice & Dice",
             "Increases attack damage",
-            new CustomStatusEffect(StatusEffectCategory.BENEFICIAL, 0x993333),
+            new CustomStatusEffect(MobEffectCategory.BENEFICIAL, 0x993333),
             new EffectConfig(List.of(
                     new AttributeModifier(
-                            EntityAttributes.ATTACK_DAMAGE.getIdAsString(),
+                            Attributes.ATTACK_DAMAGE.getRegisteredName(),
                             0.1F,
-                            EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE
+                            net.minecraft.world.entity.ai.attributes.AttributeModifier.Operation.ADD_MULTIPLIED_BASE
                     )
             ))
     ));
 
     public static Effects.Entry SHOCK = add(new Effects.Entry(
-            Identifier.of(RoguesMod.NAMESPACE, "shock"),
+            Identifier.fromNamespaceAndPath(RoguesMod.NAMESPACE, "shock"),
             "Stunned",
             "Prevents movement and actions",
-            new CustomStatusEffect(StatusEffectCategory.HARMFUL, 0xffffcc),
+            new CustomStatusEffect(MobEffectCategory.HARMFUL, 0xffffcc),
             new EffectConfig(List.of(
                     new AttributeModifier(
-                            EntityAttributes.MOVEMENT_SPEED.getIdAsString(),
+                            Attributes.MOVEMENT_SPEED.getRegisteredName(),
                             -1F,
-                            EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE
+                            net.minecraft.world.entity.ai.attributes.AttributeModifier.Operation.ADD_MULTIPLIED_BASE
                     ),
                     new AttributeModifier(
-                            EntityAttributes.JUMP_STRENGTH.getIdAsString(),
+                            Attributes.JUMP_STRENGTH.getRegisteredName(),
                             -1F,
-                            EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE
+                            net.minecraft.world.entity.ai.attributes.AttributeModifier.Operation.ADD_MULTIPLIED_BASE
                     )
             ))
     ));
 
     public static Effects.Entry SHADOW_STEP = add(new Effects.Entry(
-            Identifier.of(RoguesMod.NAMESPACE, "shadow_step"),
+            Identifier.fromNamespaceAndPath(RoguesMod.NAMESPACE, "shadow_step"),
             "Shadowstep",
             "Untraceable",
-            new CustomStatusEffect(StatusEffectCategory.BENEFICIAL, 0xAAAAAA)
+            new CustomStatusEffect(MobEffectCategory.BENEFICIAL, 0xAAAAAA)
     ));
 
     public static Effects.Entry STEALTH = add(new Effects.Entry(
-            Identifier.of(RoguesMod.NAMESPACE, "stealth"),
+            Identifier.fromNamespaceAndPath(RoguesMod.NAMESPACE, "stealth"),
             "Stealth",
             "Invisible to enemies",
-            new StealthEffect(StatusEffectCategory.BENEFICIAL, 0xAAAAAA),
+            new StealthEffect(MobEffectCategory.BENEFICIAL, 0xAAAAAA),
             new EffectConfig(List.of(
                     new AttributeModifier(
-                            EntityAttributes.MOVEMENT_SPEED.getIdAsString(),
+                            Attributes.MOVEMENT_SPEED.getRegisteredName(),
                             -0.5F,
-                            EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE
+                            net.minecraft.world.entity.ai.attributes.AttributeModifier.Operation.ADD_MULTIPLIED_BASE
                     )
             ))
     ));
     public static Effects.Entry STEALTH_SPEED = add(new Effects.Entry(
-            Identifier.of(RoguesMod.NAMESPACE, "stealth_speed"),
+            Identifier.fromNamespaceAndPath(RoguesMod.NAMESPACE, "stealth_speed"),
             "Stealth Speed",
             "Faster movement in stealth",
-            new StealthEffect(StatusEffectCategory.BENEFICIAL, 0xAAAAAA),
+            new StealthEffect(MobEffectCategory.BENEFICIAL, 0xAAAAAA),
             new EffectConfig(List.of(
                     new AttributeModifier(
-                            EntityAttributes.MOVEMENT_SPEED.getIdAsString(),
+                            Attributes.MOVEMENT_SPEED.getRegisteredName(),
                             0.5F,
-                            EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE
+                            net.minecraft.world.entity.ai.attributes.AttributeModifier.Operation.ADD_MULTIPLIED_BASE
                     )
             ))
     ));
 
     public static Effects.Entry SHATTER = add(new Effects.Entry(
-            Identifier.of(RoguesMod.NAMESPACE, "shatter"),
+            Identifier.fromNamespaceAndPath(RoguesMod.NAMESPACE, "shatter"),
             "Shattered Armor",
             "Reduces armor",
-            new CustomStatusEffect(StatusEffectCategory.HARMFUL, 0x800000),
+            new CustomStatusEffect(MobEffectCategory.HARMFUL, 0x800000),
             new EffectConfig(List.of(
                     new AttributeModifier(
-                            EntityAttributes.ARMOR.getIdAsString(),
+                            Attributes.ARMOR.getRegisteredName(),
                             -0.3F,
-                            EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE
+                            net.minecraft.world.entity.ai.attributes.AttributeModifier.Operation.ADD_MULTIPLIED_BASE
                     )
             ))
     ));
 
     public static final Effects.Entry DEMORALIZE = add(new Effects.Entry(
-            Identifier.of(RoguesMod.NAMESPACE, "demoralize"),
+            Identifier.fromNamespaceAndPath(RoguesMod.NAMESPACE, "demoralize"),
             "Demoralized",
             "Reduces attack damage",
-            new CustomStatusEffect(StatusEffectCategory.HARMFUL, 0x800000),
+            new CustomStatusEffect(MobEffectCategory.HARMFUL, 0x800000),
             new EffectConfig(List.of(
                     new AttributeModifier(
-                            EntityAttributes.ATTACK_DAMAGE.getIdAsString(),
+                            Attributes.ATTACK_DAMAGE.getRegisteredName(),
                             -0.2F,
-                            EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE
+                            net.minecraft.world.entity.ai.attributes.AttributeModifier.Operation.ADD_MULTIPLIED_BASE
                     )
             ))
     ));
 
     public static final Effects.Entry BEAR_TRAP = add(new Effects.Entry(
-            Identifier.of(RoguesMod.NAMESPACE, "bear_trap"),
+            Identifier.fromNamespaceAndPath(RoguesMod.NAMESPACE, "bear_trap"),
             "Trapped",
             "Prevents movement and jumping",
-            new CustomStatusEffect(StatusEffectCategory.HARMFUL, 0x6E6E6E),
+            new CustomStatusEffect(MobEffectCategory.HARMFUL, 0x6E6E6E),
             new EffectConfig(List.of(
                     new AttributeModifier(
-                            EntityAttributes.MOVEMENT_SPEED.getIdAsString(),
+                            Attributes.MOVEMENT_SPEED.getRegisteredName(),
                             -2F,
-                            EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE
+                            net.minecraft.world.entity.ai.attributes.AttributeModifier.Operation.ADD_MULTIPLIED_BASE
                     ),
                     new AttributeModifier(
-                            EntityAttributes.JUMP_STRENGTH.getIdAsString(),
+                            Attributes.JUMP_STRENGTH.getRegisteredName(),
                             -2F,
-                            EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE
+                            net.minecraft.world.entity.ai.attributes.AttributeModifier.Operation.ADD_MULTIPLIED_BASE
                     )
             ))
     ));
 
     public static final Effects.Entry NET_TRAP = add(new Effects.Entry(
-            Identifier.of(RoguesMod.NAMESPACE, "net_trap"),
+            Identifier.fromNamespaceAndPath(RoguesMod.NAMESPACE, "net_trap"),
             "Netted",
             "Prevents movement and jumping",
-            new CustomStatusEffect(StatusEffectCategory.HARMFUL, 0x8B7355),
+            new CustomStatusEffect(MobEffectCategory.HARMFUL, 0x8B7355),
             new EffectConfig(List.of(
                     new AttributeModifier(
-                            EntityAttributes.MOVEMENT_SPEED.getIdAsString(),
+                            Attributes.MOVEMENT_SPEED.getRegisteredName(),
                             -2F,
-                            EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE
+                            net.minecraft.world.entity.ai.attributes.AttributeModifier.Operation.ADD_MULTIPLIED_BASE
                     ),
                     new AttributeModifier(
-                            EntityAttributes.JUMP_STRENGTH.getIdAsString(),
+                            Attributes.JUMP_STRENGTH.getRegisteredName(),
                             -2F,
-                            EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE
+                            net.minecraft.world.entity.ai.attributes.AttributeModifier.Operation.ADD_MULTIPLIED_BASE
                     ),
                     new AttributeModifier(
-                            EntityAttributes.KNOCKBACK_RESISTANCE.getIdAsString(),
+                            Attributes.KNOCKBACK_RESISTANCE.getRegisteredName(),
                             100F,
-                            EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE
+                            net.minecraft.world.entity.ai.attributes.AttributeModifier.Operation.ADD_MULTIPLIED_BASE
                     )
             ))
     ));
 
     public static final Effects.Entry CHARGE = add(new Effects.Entry(
-            Identifier.of(RoguesMod.NAMESPACE, "charge"),
+            Identifier.fromNamespaceAndPath(RoguesMod.NAMESPACE, "charge"),
             "Charge",
             "Increases movement speed",
             // Ticking so spells can hook it via an EFFECT_TICK trigger — the freedom from movement
             // impairing effects now comes from the Warrior tree's Improved Charge node rather than
             // being baked into the effect. 5-tick interval keeps that dispel responsive (0.25s).
-            new TickingStatusEffect(StatusEffectCategory.BENEFICIAL, 0xAAAAAA).interval(5),
+            new TickingStatusEffect(MobEffectCategory.BENEFICIAL, 0xAAAAAA).interval(5),
             new EffectConfig(List.of(
                     new AttributeModifier(
-                            EntityAttributes.MOVEMENT_SPEED.getIdAsString(),
+                            Attributes.MOVEMENT_SPEED.getRegisteredName(),
                             0.5F,
-                            EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE
+                            net.minecraft.world.entity.ai.attributes.AttributeModifier.Operation.ADD_MULTIPLIED_BASE
                     ),
                     new AttributeModifier(
-                            EntityAttributes.KNOCKBACK_RESISTANCE.getIdAsString(),
+                            Attributes.KNOCKBACK_RESISTANCE.getRegisteredName(),
                             0.5F,
-                            EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE
+                            net.minecraft.world.entity.ai.attributes.AttributeModifier.Operation.ADD_MULTIPLIED_BASE
                     )
             ))
     ));
@@ -187,20 +186,20 @@ public class RogueEffects {
     /// `damage_taken` has a base of 100, so `ADD_MULTIPLIED_BASE` of -0.1 lowers the multiplier to
     /// 0.9 per stack.
     public static final Effects.Entry LAST_STAND = add(new Effects.Entry(
-            Identifier.of(RoguesMod.NAMESPACE, "last_stand"),
+            Identifier.fromNamespaceAndPath(RoguesMod.NAMESPACE, "last_stand"),
             "Last Stand",
             "Increases maximum health and reduces damage taken",
-            new CustomStatusEffect(StatusEffectCategory.BENEFICIAL, 0xcc0000),
+            new CustomStatusEffect(MobEffectCategory.BENEFICIAL, 0xcc0000),
             new EffectConfig(List.of(
                     new AttributeModifier(
-                            EntityAttributes.MAX_HEALTH.getIdAsString(),
+                            Attributes.MAX_HEALTH.getRegisteredName(),
                             0.2F,
-                            EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE
+                            net.minecraft.world.entity.ai.attributes.AttributeModifier.Operation.ADD_MULTIPLIED_BASE
                     ),
                     new AttributeModifier(
-                            EntityAttributes.KNOCKBACK_RESISTANCE.getIdAsString(),
+                            Attributes.KNOCKBACK_RESISTANCE.getRegisteredName(),
                             0.2F,
-                            EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE
+                            net.minecraft.world.entity.ai.attributes.AttributeModifier.Operation.ADD_MULTIPLIED_BASE
                     )
             ))
     ));
@@ -244,28 +243,28 @@ public class RogueEffects {
 
         CombatEvents.ENTITY_ANY_ATTACK.register((args) -> {
             var attacker = args.attacker();
-            if (attacker.hasStatusEffect(STEALTH.entry)) {
-                attacker.removeStatusEffect(STEALTH.entry);
+            if (attacker.hasEffect(STEALTH.entry)) {
+                attacker.removeEffect(STEALTH.entry);
             }
         });
-        var vanishId = Identifier.of(RoguesMod.NAMESPACE, "vanish");
+        var vanishId = Identifier.fromNamespaceAndPath(RoguesMod.NAMESPACE, "vanish");
         SpellEvents.SPELL_CAST.register((args) -> {
             var caster = args.caster();
-            var spellId = args.spell().getKey().get().getValue();
-            if (caster.hasStatusEffect(STEALTH.entry) && !spellId.equals(vanishId)) {
-                caster.removeStatusEffect(STEALTH.entry);
+            var spellId = args.spell().unwrapKey().get().identifier();
+            if (caster.hasEffect(STEALTH.entry) && !spellId.equals(vanishId)) {
+                caster.removeEffect(STEALTH.entry);
             }
         });
         CombatEvents.ITEM_USE.register((args) -> {
             var user = args.user();
-            if (user.hasStatusEffect(STEALTH.entry)) {
-                user.removeStatusEffect(STEALTH.entry);
+            if (user.hasEffect(STEALTH.entry)) {
+                user.removeEffect(STEALTH.entry);
             }
         });
         OnRemoval.configure(STEALTH.effect, (context) -> {
             StealthEffect.onRemove(context.entity());
-            if (context.entity().hasStatusEffect(STEALTH_SPEED.entry)) {
-                context.entity().removeStatusEffect(STEALTH_SPEED.entry);
+            if (context.entity().hasEffect(STEALTH_SPEED.entry)) {
+                context.entity().removeEffect(STEALTH_SPEED.entry);
             }
         });
 

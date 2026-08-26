@@ -1,17 +1,15 @@
 package net.rogues;
 
 import net.rpg_foundation.structure_pool.api.StructurePoolConfig;
-import net.minecraft.item.ItemGroup;
-import net.minecraft.entity.attribute.EntityAttribute;
-import net.minecraft.entity.attribute.EntityAttributeModifier;
-import net.minecraft.entity.attribute.EntityAttributes;
-import net.minecraft.entity.effect.StatusEffect;
-import net.minecraft.entity.effect.StatusEffects;
-import net.minecraft.item.ItemStack;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.Registry;
-import net.minecraft.text.Text;
-import net.minecraft.util.Identifier;
+import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.Identifier;
+import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.ItemStack;
 import net.rogues.block.CustomBlocks;
 import net.rogues.config.Default;
 import net.rogues.config.TweaksConfig;
@@ -67,11 +65,11 @@ public class RoguesMod {
         villagesConfig.refresh();
 
         if (tweaksConfig.value.rebalance_strength_attack_damage_multiplier > 0) {
-            StatusEffects.STRENGTH.value().addAttributeModifier(
-                    EntityAttributes.ATTACK_DAMAGE,
-                    Identifier.ofVanilla("strength"),
+            MobEffects.STRENGTH.value().addAttributeModifier(
+                    Attributes.ATTACK_DAMAGE,
+                    Identifier.withDefaultNamespace("strength"),
                     tweaksConfig.value.rebalance_strength_attack_damage_multiplier,
-                    EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE
+                    AttributeModifier.Operation.ADD_MULTIPLIED_BASE
             );
         }
     }
@@ -81,12 +79,12 @@ public class RoguesMod {
     }
 
     public static void registerItems() {
-        Group.ROGUES = new ItemGroup.Builder(ItemGroup.Row.TOP, 0)
+        Group.ROGUES = new CreativeModeTab.Builder(CreativeModeTab.Row.TOP, 0)
                 .icon(() -> new ItemStack(RogueArmors.RogueArmorSet_t2.head))
-                .displayName(Text.translatable("itemGroup." + NAMESPACE + ".general"))
+                .title(Component.translatable("itemGroup." + NAMESPACE + ".general"))
                 .build();
         CustomBlocks.register();
-        Registry.register(Registries.ITEM_GROUP, Group.KEY, Group.ROGUES);
+        Registry.register(BuiltInRegistries.CREATIVE_MODE_TAB, Group.KEY, Group.ROGUES);
         RogueWeapons.register(itemConfig.value.weapons);
         RogueArmors.register(itemConfig.value.armor_sets);
         itemConfig.save();

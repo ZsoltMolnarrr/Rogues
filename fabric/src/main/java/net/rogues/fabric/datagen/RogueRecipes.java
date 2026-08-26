@@ -2,13 +2,13 @@ package net.rogues.fabric.datagen;
 
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
-import net.minecraft.data.recipe.RecipeExporter;
-import net.minecraft.data.recipe.RecipeGenerator;
-import net.minecraft.item.Item;
-import net.minecraft.item.Items;
-import net.minecraft.recipe.book.RecipeCategory;
-import net.minecraft.registry.RegistryWrapper;
-import net.minecraft.registry.tag.ItemTags;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.data.recipes.RecipeCategory;
+import net.minecraft.data.recipes.RecipeOutput;
+import net.minecraft.data.recipes.RecipeProvider;
+import net.minecraft.tags.ItemTags;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 import net.rogues.block.CustomBlocks;
 import net.rogues.item.RogueWeapons;
 import net.rogues.item.armor.RogueArmors;
@@ -23,24 +23,24 @@ import java.util.concurrent.CompletableFuture;
  */
 public class RogueRecipes extends FabricRecipeProvider {
 
-    public RogueRecipes(FabricDataOutput output, CompletableFuture<RegistryWrapper.WrapperLookup> registriesFuture) {
+    public RogueRecipes(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
         super(output, registriesFuture);
     }
 
     /// 1.21.2+: recipe providers hand back a {@link RecipeGenerator}, which owns the builder helpers
     /// (`createShaped`, `conditionsFromItem`, `offerNetheriteUpgradeRecipe`) that used to be statics.
     @Override
-    protected RecipeGenerator getRecipeGenerator(RegistryWrapper.WrapperLookup registries, RecipeExporter exporter) {
+    protected RecipeProvider createRecipeProvider(HolderLookup.Provider registries, RecipeOutput exporter) {
         return new Generator(registries, exporter);
     }
 
-    private static class Generator extends RecipeGenerator {
-        Generator(RegistryWrapper.WrapperLookup registries, RecipeExporter exporter) {
+    private static class Generator extends RecipeProvider {
+        Generator(HolderLookup.Provider registries, RecipeOutput exporter) {
             super(registries, exporter);
         }
 
         @Override
-        public void generate() {
+        public void buildRecipes() {
             generateDaggerRecipes();
             generateSickleRecipes();
             generateDoubleAxeRecipes();
@@ -65,13 +65,13 @@ public class RogueRecipes extends FabricRecipeProvider {
      * Generate dagger recipe with standard pattern: " M" / "S "
      */
     private void dagger(Weapon.Entry daggerEntry, Item material) {
-        createShaped(RecipeCategory.COMBAT, daggerEntry.item())
+        shaped(RecipeCategory.COMBAT, daggerEntry.item())
                 .pattern(" M")
                 .pattern("S ")
-                .input('M', material)
-                .input('S', Items.STICK)
-                .criterion(hasItem(material), conditionsFromItem(material))
-                .offerTo(this.exporter);
+                .define('M', material)
+                .define('S', Items.STICK)
+                .unlockedBy(getHasName(material), has(material))
+                .save(this.output);
     }
 
     // ========================================
@@ -88,13 +88,13 @@ public class RogueRecipes extends FabricRecipeProvider {
      * Generate sickle recipe with standard pattern: "MM" / "S "
      */
     private void sickle(Weapon.Entry sickleEntry, Item material) {
-        createShaped(RecipeCategory.COMBAT, sickleEntry.item())
+        shaped(RecipeCategory.COMBAT, sickleEntry.item())
                 .pattern("MM")
                 .pattern("S ")
-                .input('M', material)
-                .input('S', Items.STICK)
-                .criterion(hasItem(material), conditionsFromItem(material))
-                .offerTo(this.exporter);
+                .define('M', material)
+                .define('S', Items.STICK)
+                .unlockedBy(getHasName(material), has(material))
+                .save(this.output);
     }
 
     // ========================================
@@ -103,14 +103,14 @@ public class RogueRecipes extends FabricRecipeProvider {
 
     private void generateDoubleAxeRecipes() {
         // Stone double axe uses stone tool materials tag
-        createShaped(RecipeCategory.COMBAT, RogueWeapons.stone_double_axe.item())
+        shaped(RecipeCategory.COMBAT, RogueWeapons.stone_double_axe.item())
                 .pattern("MSM")
                 .pattern("MSM")
                 .pattern(" S ")
-                .input('M', ItemTags.STONE_TOOL_MATERIALS)
-                .input('S', Items.STICK)
-                .criterion("has_cobblestone", conditionsFromItem(Items.COBBLESTONE))
-                .offerTo(this.exporter);
+                .define('M', ItemTags.STONE_TOOL_MATERIALS)
+                .define('S', Items.STICK)
+                .unlockedBy("has_cobblestone", has(Items.COBBLESTONE))
+                .save(this.output);
 
         doubleAxe(RogueWeapons.iron_double_axe, Items.IRON_INGOT);
         doubleAxe(RogueWeapons.golden_double_axe, Items.GOLD_INGOT);
@@ -121,14 +121,14 @@ public class RogueRecipes extends FabricRecipeProvider {
      * Generate double axe recipe with standard pattern: "MSM" / "MSM" / " S "
      */
     private void doubleAxe(Weapon.Entry axeEntry, Item material) {
-        createShaped(RecipeCategory.COMBAT, axeEntry.item())
+        shaped(RecipeCategory.COMBAT, axeEntry.item())
                 .pattern("MSM")
                 .pattern("MSM")
                 .pattern(" S ")
-                .input('M', material)
-                .input('S', Items.STICK)
-                .criterion(hasItem(material), conditionsFromItem(material))
-                .offerTo(this.exporter);
+                .define('M', material)
+                .define('S', Items.STICK)
+                .unlockedBy(getHasName(material), has(material))
+                .save(this.output);
     }
 
     // ========================================
@@ -145,14 +145,14 @@ public class RogueRecipes extends FabricRecipeProvider {
      * Generate glaive recipe with standard pattern: " MM" / "MS " / "S  "
      */
     private void glaive(Weapon.Entry glaiveEntry, Item material) {
-        createShaped(RecipeCategory.COMBAT, glaiveEntry.item())
+        shaped(RecipeCategory.COMBAT, glaiveEntry.item())
                 .pattern(" MM")
                 .pattern("MS ")
                 .pattern("S  ")
-                .input('M', material)
-                .input('S', Items.STICK)
-                .criterion(hasItem(material), conditionsFromItem(material))
-                .offerTo(this.exporter);
+                .define('M', material)
+                .define('S', Items.STICK)
+                .unlockedBy(getHasName(material), has(material))
+                .save(this.output);
     }
 
     // ========================================
@@ -178,42 +178,42 @@ public class RogueRecipes extends FabricRecipeProvider {
      */
     private void generateRogueArmorSet(Armor.Set armorSet, Item leather, Item redDye) {
         // Helmet - pattern: "WDW" / " W "
-        createShaped(RecipeCategory.COMBAT, armorSet.head)
+        shaped(RecipeCategory.COMBAT, armorSet.head)
                 .pattern("WDW")
                 .pattern(" W ")
-                .input('D', redDye)
-                .input('W', ItemTags.WOOL)
-                .criterion(hasItem(leather), conditionsFromItem(leather))
-                .offerTo(this.exporter);
+                .define('D', redDye)
+                .define('W', ItemTags.WOOL)
+                .unlockedBy(getHasName(leather), has(leather))
+                .save(this.output);
 
         // Chestplate - pattern: "W W" / "LWL" / "LLL"
-        createShaped(RecipeCategory.COMBAT, armorSet.chest)
+        shaped(RecipeCategory.COMBAT, armorSet.chest)
                 .pattern("W W")
                 .pattern("LWL")
                 .pattern("LLL")
-                .input('L', leather)
-                .input('W', ItemTags.WOOL)
-                .criterion(hasItem(leather), conditionsFromItem(leather))
-                .offerTo(this.exporter);
+                .define('L', leather)
+                .define('W', ItemTags.WOOL)
+                .unlockedBy(getHasName(leather), has(leather))
+                .save(this.output);
 
         // Leggings - pattern: "WWW" / "L L" / "W W"
-        createShaped(RecipeCategory.COMBAT, armorSet.legs)
+        shaped(RecipeCategory.COMBAT, armorSet.legs)
                 .pattern("WWW")
                 .pattern("L L")
                 .pattern("W W")
-                .input('L', leather)
-                .input('W', ItemTags.WOOL)
-                .criterion(hasItem(leather), conditionsFromItem(leather))
-                .offerTo(this.exporter);
+                .define('L', leather)
+                .define('W', ItemTags.WOOL)
+                .unlockedBy(getHasName(leather), has(leather))
+                .save(this.output);
 
         // Boots - pattern: "W W" / "L L"
-        createShaped(RecipeCategory.COMBAT, armorSet.feet)
+        shaped(RecipeCategory.COMBAT, armorSet.feet)
                 .pattern("W W")
                 .pattern("L L")
-                .input('L', leather)
-                .input('W', ItemTags.WOOL)
-                .criterion(hasItem(leather), conditionsFromItem(leather))
-                .offerTo(this.exporter);
+                .define('L', leather)
+                .define('W', ItemTags.WOOL)
+                .unlockedBy(getHasName(leather), has(leather))
+                .save(this.output);
     }
 
     /**
@@ -221,46 +221,46 @@ public class RogueRecipes extends FabricRecipeProvider {
      */
     private void generateAssassinArmorSet(Armor.Set armorSet, Item rabbitHide, Item inkSac, Item gold) {
         // Helmet - pattern: "SGS" / "R R"
-        createShaped(RecipeCategory.COMBAT, armorSet.head)
+        shaped(RecipeCategory.COMBAT, armorSet.head)
                 .pattern("SGS")
                 .pattern("R R")
-                .input('S', inkSac)
-                .input('G', gold)
-                .input('R', rabbitHide)
-                .criterion(hasItem(rabbitHide), conditionsFromItem(rabbitHide))
-                .offerTo(this.exporter);
+                .define('S', inkSac)
+                .define('G', gold)
+                .define('R', rabbitHide)
+                .unlockedBy(getHasName(rabbitHide), has(rabbitHide))
+                .save(this.output);
 
         // Chestplate - pattern: "S S" / "RGR" / "RRR"
-        createShaped(RecipeCategory.COMBAT, armorSet.chest)
+        shaped(RecipeCategory.COMBAT, armorSet.chest)
                 .pattern("S S")
                 .pattern("RGR")
                 .pattern("RRR")
-                .input('S', inkSac)
-                .input('G', gold)
-                .input('R', rabbitHide)
-                .criterion(hasItem(rabbitHide), conditionsFromItem(rabbitHide))
-                .offerTo(this.exporter);
+                .define('S', inkSac)
+                .define('G', gold)
+                .define('R', rabbitHide)
+                .unlockedBy(getHasName(rabbitHide), has(rabbitHide))
+                .save(this.output);
 
         // Leggings - pattern: "SGS" / "R R" / "R R"
-        createShaped(RecipeCategory.COMBAT, armorSet.legs)
+        shaped(RecipeCategory.COMBAT, armorSet.legs)
                 .pattern("SGS")
                 .pattern("R R")
                 .pattern("R R")
-                .input('S', inkSac)
-                .input('G', gold)
-                .input('R', rabbitHide)
-                .criterion(hasItem(rabbitHide), conditionsFromItem(rabbitHide))
-                .offerTo(this.exporter);
+                .define('S', inkSac)
+                .define('G', gold)
+                .define('R', rabbitHide)
+                .unlockedBy(getHasName(rabbitHide), has(rabbitHide))
+                .save(this.output);
 
         // Boots - pattern: "GSG" / "R R"
-        createShaped(RecipeCategory.COMBAT, armorSet.feet)
+        shaped(RecipeCategory.COMBAT, armorSet.feet)
                 .pattern("GSG")
                 .pattern("R R")
-                .input('S', inkSac)
-                .input('G', gold)
-                .input('R', rabbitHide)
-                .criterion(hasItem(rabbitHide), conditionsFromItem(rabbitHide))
-                .offerTo(this.exporter);
+                .define('S', inkSac)
+                .define('G', gold)
+                .define('R', rabbitHide)
+                .unlockedBy(getHasName(rabbitHide), has(rabbitHide))
+                .save(this.output);
     }
 
     /**
@@ -268,43 +268,43 @@ public class RogueRecipes extends FabricRecipeProvider {
      */
     private void generateWarriorArmorSet(Armor.Set armorSet, Item iron, Item leather, Item string) {
         // Helmet - pattern: "ILI" / "I I"
-        createShaped(RecipeCategory.COMBAT, armorSet.head)
+        shaped(RecipeCategory.COMBAT, armorSet.head)
                 .pattern("ILI")
                 .pattern("I I")
-                .input('I', iron)
-                .input('L', leather)
-                .criterion(hasItem(iron), conditionsFromItem(iron))
-                .offerTo(this.exporter);
+                .define('I', iron)
+                .define('L', leather)
+                .unlockedBy(getHasName(iron), has(iron))
+                .save(this.output);
 
         // Chestplate - pattern: "C C" / "III" / "LLL"
-        createShaped(RecipeCategory.COMBAT, armorSet.chest)
+        shaped(RecipeCategory.COMBAT, armorSet.chest)
                 .pattern("C C")
                 .pattern("III")
                 .pattern("LLL")
-                .input('I', iron)
-                .input('L', leather)
-                .input('C', string)
-                .criterion(hasItem(iron), conditionsFromItem(iron))
-                .offerTo(this.exporter);
+                .define('I', iron)
+                .define('L', leather)
+                .define('C', string)
+                .unlockedBy(getHasName(iron), has(iron))
+                .save(this.output);
 
         // Leggings - pattern: "III" / "L L" / "I I"
-        createShaped(RecipeCategory.COMBAT, armorSet.legs)
+        shaped(RecipeCategory.COMBAT, armorSet.legs)
                 .pattern("III")
                 .pattern("L L")
                 .pattern("I I")
-                .input('I', iron)
-                .input('L', leather)
-                .criterion(hasItem(iron), conditionsFromItem(iron))
-                .offerTo(this.exporter);
+                .define('I', iron)
+                .define('L', leather)
+                .unlockedBy(getHasName(iron), has(iron))
+                .save(this.output);
 
         // Boots - pattern: "I I" / "L L"
-        createShaped(RecipeCategory.COMBAT, armorSet.feet)
+        shaped(RecipeCategory.COMBAT, armorSet.feet)
                 .pattern("I I")
                 .pattern("L L")
-                .input('I', iron)
-                .input('L', leather)
-                .criterion(hasItem(iron), conditionsFromItem(iron))
-                .offerTo(this.exporter);
+                .define('I', iron)
+                .define('L', leather)
+                .unlockedBy(getHasName(iron), has(iron))
+                .save(this.output);
     }
 
     /**
@@ -312,44 +312,44 @@ public class RogueRecipes extends FabricRecipeProvider {
      */
     private void generateBerserkerArmorSet(Armor.Set armorSet, Item chain, Item netheriteScrap, Item goatHorn, Item leather) {
         // Helmet - pattern: "GTG" / "I I"
-        createShaped(RecipeCategory.COMBAT, armorSet.head)
+        shaped(RecipeCategory.COMBAT, armorSet.head)
                 .pattern("GTG")
                 .pattern("I I")
-                .input('I', chain)
-                .input('G', goatHorn)
-                .input('T', netheriteScrap)
-                .criterion(hasItem(netheriteScrap), conditionsFromItem(netheriteScrap))
-                .offerTo(this.exporter);
+                .define('I', chain)
+                .define('G', goatHorn)
+                .define('T', netheriteScrap)
+                .unlockedBy(getHasName(netheriteScrap), has(netheriteScrap))
+                .save(this.output);
 
         // Chestplate - pattern: "T T" / "III" / "LLL"
-        createShaped(RecipeCategory.COMBAT, armorSet.chest)
+        shaped(RecipeCategory.COMBAT, armorSet.chest)
                 .pattern("T T")
                 .pattern("III")
                 .pattern("LLL")
-                .input('I', chain)
-                .input('T', netheriteScrap)
-                .input('L', leather)
-                .criterion(hasItem(netheriteScrap), conditionsFromItem(netheriteScrap))
-                .offerTo(this.exporter);
+                .define('I', chain)
+                .define('T', netheriteScrap)
+                .define('L', leather)
+                .unlockedBy(getHasName(netheriteScrap), has(netheriteScrap))
+                .save(this.output);
 
         // Leggings - pattern: "III" / "T T" / "I I"
-        createShaped(RecipeCategory.COMBAT, armorSet.legs)
+        shaped(RecipeCategory.COMBAT, armorSet.legs)
                 .pattern("III")
                 .pattern("T T")
                 .pattern("I I")
-                .input('I', chain)
-                .input('T', netheriteScrap)
-                .criterion(hasItem(netheriteScrap), conditionsFromItem(netheriteScrap))
-                .offerTo(this.exporter);
+                .define('I', chain)
+                .define('T', netheriteScrap)
+                .unlockedBy(getHasName(netheriteScrap), has(netheriteScrap))
+                .save(this.output);
 
         // Boots - pattern: "T T" / "I I"
-        createShaped(RecipeCategory.COMBAT, armorSet.feet)
+        shaped(RecipeCategory.COMBAT, armorSet.feet)
                 .pattern("T T")
                 .pattern("I I")
-                .input('I', chain)
-                .input('T', netheriteScrap)
-                .criterion(hasItem(netheriteScrap), conditionsFromItem(netheriteScrap))
-                .offerTo(this.exporter);
+                .define('I', chain)
+                .define('T', netheriteScrap)
+                .unlockedBy(getHasName(netheriteScrap), has(netheriteScrap))
+                .save(this.output);
     }
 
     // ========================================
@@ -358,16 +358,16 @@ public class RogueRecipes extends FabricRecipeProvider {
 
     private void generateOtherRecipes() {
         // Arms Workbench - pattern: "PIW" / "###"
-        createShaped(RecipeCategory.MISC, CustomBlocks.WORKBENCH.block())
+        shaped(RecipeCategory.MISC, CustomBlocks.WORKBENCH.block())
                 .pattern("PIW")
                 .pattern("###")
-                .input('P', Items.PAPER)
-                .input('I', Items.IRON_INGOT)
-                .input('W', ItemTags.WOOL)
-                .input('#', ItemTags.PLANKS)
-                .criterion(hasItem(Items.PAPER), conditionsFromItem(Items.PAPER))
+                .define('P', Items.PAPER)
+                .define('I', Items.IRON_INGOT)
+                .define('W', ItemTags.WOOL)
+                .define('#', ItemTags.PLANKS)
+                .unlockedBy(getHasName(Items.PAPER), has(Items.PAPER))
                 .showNotification(false)
-                .offerTo(this.exporter);
+                .save(this.output);
     }
 
     // ========================================
@@ -376,22 +376,22 @@ public class RogueRecipes extends FabricRecipeProvider {
 
     private void generateNetheriteUpgrades() {
         // Weapon upgrades - diamond to netherite
-        offerNetheriteUpgradeRecipe(RogueWeapons.diamond_dagger.item(), RecipeCategory.COMBAT, RogueWeapons.netherite_dagger.item());
-        offerNetheriteUpgradeRecipe(RogueWeapons.diamond_sickle.item(), RecipeCategory.COMBAT, RogueWeapons.netherite_sickle.item());
-        offerNetheriteUpgradeRecipe(RogueWeapons.diamond_double_axe.item(), RecipeCategory.COMBAT, RogueWeapons.netherite_double_axe.item());
-        offerNetheriteUpgradeRecipe(RogueWeapons.diamond_glaive.item(), RecipeCategory.COMBAT, RogueWeapons.netherite_glaive.item());
+        netheriteSmithing(RogueWeapons.diamond_dagger.item(), RecipeCategory.COMBAT, RogueWeapons.netherite_dagger.item());
+        netheriteSmithing(RogueWeapons.diamond_sickle.item(), RecipeCategory.COMBAT, RogueWeapons.netherite_sickle.item());
+        netheriteSmithing(RogueWeapons.diamond_double_axe.item(), RecipeCategory.COMBAT, RogueWeapons.netherite_double_axe.item());
+        netheriteSmithing(RogueWeapons.diamond_glaive.item(), RecipeCategory.COMBAT, RogueWeapons.netherite_glaive.item());
 
         // Assassin armor upgrades (T2 -> T3)
-        offerNetheriteUpgradeRecipe(RogueArmors.RogueArmorSet_t2.head, RecipeCategory.COMBAT, RogueArmors.RogueArmorSet_t3.head);
-        offerNetheriteUpgradeRecipe(RogueArmors.RogueArmorSet_t2.chest, RecipeCategory.COMBAT, RogueArmors.RogueArmorSet_t3.chest);
-        offerNetheriteUpgradeRecipe(RogueArmors.RogueArmorSet_t2.legs, RecipeCategory.COMBAT, RogueArmors.RogueArmorSet_t3.legs);
-        offerNetheriteUpgradeRecipe(RogueArmors.RogueArmorSet_t2.feet, RecipeCategory.COMBAT, RogueArmors.RogueArmorSet_t3.feet);
+        netheriteSmithing(RogueArmors.RogueArmorSet_t2.head, RecipeCategory.COMBAT, RogueArmors.RogueArmorSet_t3.head);
+        netheriteSmithing(RogueArmors.RogueArmorSet_t2.chest, RecipeCategory.COMBAT, RogueArmors.RogueArmorSet_t3.chest);
+        netheriteSmithing(RogueArmors.RogueArmorSet_t2.legs, RecipeCategory.COMBAT, RogueArmors.RogueArmorSet_t3.legs);
+        netheriteSmithing(RogueArmors.RogueArmorSet_t2.feet, RecipeCategory.COMBAT, RogueArmors.RogueArmorSet_t3.feet);
 
         // Berserker armor upgrades (T2 -> T3)
-        offerNetheriteUpgradeRecipe(RogueArmors.WarriorArmorSet_t2.head, RecipeCategory.COMBAT, RogueArmors.WarriorArmorSet_t3.head);
-        offerNetheriteUpgradeRecipe(RogueArmors.WarriorArmorSet_t2.chest, RecipeCategory.COMBAT, RogueArmors.WarriorArmorSet_t3.chest);
-        offerNetheriteUpgradeRecipe(RogueArmors.WarriorArmorSet_t2.legs, RecipeCategory.COMBAT, RogueArmors.WarriorArmorSet_t3.legs);
-        offerNetheriteUpgradeRecipe(RogueArmors.WarriorArmorSet_t2.feet, RecipeCategory.COMBAT, RogueArmors.WarriorArmorSet_t3.feet);
+        netheriteSmithing(RogueArmors.WarriorArmorSet_t2.head, RecipeCategory.COMBAT, RogueArmors.WarriorArmorSet_t3.head);
+        netheriteSmithing(RogueArmors.WarriorArmorSet_t2.chest, RecipeCategory.COMBAT, RogueArmors.WarriorArmorSet_t3.chest);
+        netheriteSmithing(RogueArmors.WarriorArmorSet_t2.legs, RecipeCategory.COMBAT, RogueArmors.WarriorArmorSet_t3.legs);
+        netheriteSmithing(RogueArmors.WarriorArmorSet_t2.feet, RecipeCategory.COMBAT, RogueArmors.WarriorArmorSet_t3.feet);
     }
 
     }
