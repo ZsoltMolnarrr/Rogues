@@ -74,7 +74,7 @@ dependencies {
     modImplementation("net.rpg_foundation:structure_pool_api-${platform}:${project.structure_pool_api_version}")
 //    modImplementation("maven.modrinth:spell-power:${project.spell_power_version}-${platform}")
     modImplementation("net.spell_power:spell_power-${platform}:${project.spell_power_version}")
-    modImplementation("net.foundation:ranged_weapon_api-${platform}:${project.ranged_weapon_api_version}")
+    modImplementation("net.rpg_foundation:ranged_weapon_api-${platform}:${project.ranged_weapon_api_version}")
 //    modImplementation("maven.modrinth:spell-engine:${project.spell_engine_version}-${platform}")
     // `transitive = false`: the local-maven pom drags in dependencies resolved from repositories we do
     // not declare; everything SpellEngine needs at dev runtime is declared explicitly here.
