@@ -1,6 +1,6 @@
 package net.rogues;
 
-import net.rpg_foundation.structure_pool_api.api.StructurePoolConfig;
+import net.rpg_foundation.structure_pool.api.StructurePoolConfig;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
