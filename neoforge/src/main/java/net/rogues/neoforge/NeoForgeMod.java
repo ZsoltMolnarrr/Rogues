@@ -6,9 +6,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.world.entity.ai.village.poi.PoiType;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.common.Mod;
-import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
-import net.neoforged.neoforge.event.village.VillagerTradesEvent;
 import net.neoforged.neoforge.registries.RegisterEvent;
 import net.rogues.RoguesMod;
 import net.rogues.block.CustomBlocks;
@@ -23,8 +21,7 @@ public final class NeoForgeMod {
         modBus.addListener(RegisterEvent.class, NeoForgeMod::register);
         // Custom blocks into the Rogues creative tab — NeoForge mod-bus event (replaces ItemGroupEvents).
         modBus.addListener(BuildCreativeModeTabContentsEvent.class, NeoForgeMod::buildTabContents);
-        // Villager trades — game-bus event (fired per profession); replaces Fabric API's TradeOfferHelper.
-        NeoForge.EVENT_BUS.addListener(VillagerTradesEvent.class, NeoForgeMod::onVillagerTrades);
+        // 26.1: villager trades are data-driven — no `VillagerTradesEvent` listener any more.
     }
 
     public static void register(RegisterEvent event) {
@@ -51,7 +48,7 @@ public final class NeoForgeMod {
             } catch (Exception e) { }
         });
         event.register(Registries.VILLAGER_PROFESSION, reg -> {
-            RoguesMod.registerVillagers(); // registers the profession + builds RogueVillagers.TRADES
+            RoguesMod.registerVillagers(); // registers the profession (trades come from JSON)
         });
     }
 
@@ -61,17 +58,5 @@ public final class NeoForgeMod {
                 event.accept(entry.item());
             }
         }
-    }
-
-    private static void onVillagerTrades(VillagerTradesEvent event) {
-        if (event.getType() != RogueVillagers.PROFESSION) {
-            return;
-        }
-        RogueVillagers.TRADES.forEach((tier, factories) -> {
-            var tierList = event.getTrades().get(tier.intValue());
-            if (tierList != null) {
-                tierList.addAll(factories);
-            }
-        });
     }
 }

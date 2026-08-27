@@ -12,7 +12,7 @@ import net.minecraft.world.entity.MobCategory;
 import net.rogues.RoguesMod;
 import net.spell_engine.api.spell.summon.SummonedEntities;
 import net.spell_engine.api.spell.summon.SummonedEntityConfig;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,12 +29,12 @@ public class RogueEntities {
         public final EntityType<T> type;
         /// Inline attribute defaults for spell-power-scaled summons, injected directly as the attribute
         /// source (no config file). Null for entities that aren't such summons (e.g. the bear trap, a cloud).
-        @Nullable public final SummonedEntityConfig.Entry summonConfig;
+        public final SummonedEntityConfig.@Nullable Entry summonConfig;
 
         public Entry(Identifier id, String name, EntityType<T> type) {
             this(id, name, type, null);
         }
-        public Entry(Identifier id, String name, EntityType<T> type, @Nullable SummonedEntityConfig.Entry summonConfig) {
+        public Entry(Identifier id, String name, EntityType<T> type, SummonedEntityConfig.@Nullable Entry summonConfig) {
             this.id = id;
             this.name = name;
             this.type = type;

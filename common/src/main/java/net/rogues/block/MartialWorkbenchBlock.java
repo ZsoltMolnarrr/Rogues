@@ -9,7 +9,7 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.rogues.RoguesMod;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 public class MartialWorkbenchBlock extends Block {
     public static Identifier ID = Identifier.fromNamespaceAndPath(RoguesMod.NAMESPACE, "arms_workbench");

@@ -1,6 +1,6 @@
 package net.rogues.fabric.datagen;
 
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
+import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.recipes.RecipeCategory;
@@ -23,7 +23,7 @@ import java.util.concurrent.CompletableFuture;
  */
 public class RogueRecipes extends FabricRecipeProvider {
 
-    public RogueRecipes(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
+    public RogueRecipes(FabricPackOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
         super(output, registriesFuture);
     }
 

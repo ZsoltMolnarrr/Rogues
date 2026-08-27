@@ -2,10 +2,10 @@ package net.rogues.fabric.datagen;
 
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
+import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
-import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
+import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagsProvider;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.recipes.RecipeCategory;
@@ -14,7 +14,9 @@ import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.CookingBookCategory;
 import net.minecraft.world.level.ItemLike;
 import net.rogues.RoguesMod;
 import net.rogues.effect.RogueEffects;
@@ -55,8 +57,8 @@ public class RoguesDataGenerator implements DataGeneratorEntrypoint {
         pack.addProvider(LangGen::new);
     }
 
-    public static class SpellTagGenerator extends FabricTagProvider<Spell> {
-        public SpellTagGenerator(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
+    public static class SpellTagGenerator extends FabricTagsProvider<Spell> {
+        public SpellTagGenerator(FabricPackOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
             super(output, SpellRegistry.KEY, registriesFuture);
         }
 
@@ -80,7 +82,7 @@ public class RoguesDataGenerator implements DataGeneratorEntrypoint {
     }
 
     public static class ItemTagGenerator extends RPGSeriesDataGen.ItemTagGenerator {
-        public ItemTagGenerator(FabricDataOutput dataOutput, CompletableFuture<HolderLookup.Provider> registryLookup) {
+        public ItemTagGenerator(FabricPackOutput dataOutput, CompletableFuture<HolderLookup.Provider> registryLookup) {
             super(dataOutput, registryLookup);
         }
 
@@ -99,7 +101,7 @@ public class RoguesDataGenerator implements DataGeneratorEntrypoint {
     }
 
     public static class SpellGen extends SpellGenerator {
-        public SpellGen(FabricDataOutput dataOutput, CompletableFuture<HolderLookup.Provider> registryLookup) {
+        public SpellGen(FabricPackOutput dataOutput, CompletableFuture<HolderLookup.Provider> registryLookup) {
             super(dataOutput, registryLookup);
         }
 
@@ -112,7 +114,7 @@ public class RoguesDataGenerator implements DataGeneratorEntrypoint {
     }
 
     public static class SoundGen extends SimpleSoundGeneratorV2 {
-        public SoundGen(FabricDataOutput dataOutput, CompletableFuture<HolderLookup.Provider> registryLookup) {
+        public SoundGen(FabricPackOutput dataOutput, CompletableFuture<HolderLookup.Provider> registryLookup) {
             super(dataOutput, registryLookup);
         }
 
@@ -128,7 +130,7 @@ public class RoguesDataGenerator implements DataGeneratorEntrypoint {
     }
 
     public static class UnsmeltGenerator extends FabricRecipeProvider {
-        public UnsmeltGenerator(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
+        public UnsmeltGenerator(FabricPackOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
             super(output, registriesFuture);
         }
 
@@ -178,15 +180,20 @@ public class RoguesDataGenerator implements DataGeneratorEntrypoint {
                 }
 
                 private void disassemble(List<ItemLike> items, Item output) {
-                    oreSmelting(items, RecipeCategory.MISC, output, 0.1f, UNSMELT_TIME, "disassemble");
-                    oreBlasting(items, RecipeCategory.MISC, output, 0.1f, UNSMELT_TIME / 2, "disassemble");
+                    // 26.1: `oreSmelting`/`oreBlasting` take the recipe-book category explicitly —
+                    // `SimpleCookingRecipeBuilder.smelting/blasting` no longer derive it. This reproduces
+                    // vanilla's old `determineSmeltingRecipeCategory` for our (never edible) outputs.
+                    var cookingCategory = output instanceof BlockItem
+                            ? CookingBookCategory.BLOCKS : CookingBookCategory.MISC;
+                    oreSmelting(items, RecipeCategory.MISC, cookingCategory, output, 0.1f, UNSMELT_TIME, "disassemble");
+                    oreBlasting(items, RecipeCategory.MISC, cookingCategory, output, 0.1f, UNSMELT_TIME / 2, "disassemble");
                 }
             };
         }
     }
 
     public static class WeaponGen extends WeaponAttributeGenerator {
-        public WeaponGen(FabricDataOutput dataOutput, CompletableFuture<HolderLookup.Provider> registryLookup) {
+        public WeaponGen(FabricPackOutput dataOutput, CompletableFuture<HolderLookup.Provider> registryLookup) {
             super(dataOutput, registryLookup);
         }
 
@@ -206,7 +213,7 @@ public class RoguesDataGenerator implements DataGeneratorEntrypoint {
      * strings (creative tab, villager, workbench) that have no dedicated content entry.
      */
     public static class LangGen extends NamespacedLangGenerator {
-        public LangGen(FabricDataOutput dataOutput, CompletableFuture<HolderLookup.Provider> registryLookup) {
+        public LangGen(FabricPackOutput dataOutput, CompletableFuture<HolderLookup.Provider> registryLookup) {
             super(dataOutput, registryLookup, RoguesMod.NAMESPACE);
         }
 

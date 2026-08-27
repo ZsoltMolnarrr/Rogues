@@ -1,26 +1,23 @@
 package net.rogues.village;
 
 import com.google.common.collect.ImmutableSet;
+import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import net.rpg_foundation.structure_pool.api.StructurePoolAPI;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.entity.ai.village.poi.PoiType;
 import net.minecraft.world.entity.npc.villager.VillagerProfession;
-import net.minecraft.world.entity.npc.villager.VillagerTrades;
-import net.minecraft.world.item.Items;
+import net.minecraft.world.item.trading.TradeSet;
 import net.minecraft.world.level.block.state.BlockState;
 import net.rogues.RoguesMod;
 import net.rogues.block.CustomBlocks;
-import net.rogues.item.RogueWeapons;
-import net.rogues.item.armor.RogueArmors;
 import net.rogues.util.RogueSounds;
 import net.spell_engine.Platform;
 
-import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Set;
 
 public class RogueVillagers {
@@ -30,20 +27,34 @@ public class RogueVillagers {
     public static final int POI_SEARCH_DISTANCE = 10;
 
     /// The martial-workbench workstation block states for the POI. Registration itself is loader-specific
-    /// (Fabric: `PointOfInterestHelper`; NeoForge: a plain `Registry.register` of a `PointOfInterestType`,
+    /// (Fabric: `PoiHelper`; NeoForge: a plain `Registry.register` of a `PointOfInterestType`,
     /// whose block-state mapping NeoForge wires via its POI registry callback) — done in each platform's
     /// entrypoint; this only exposes the shared state set.
     public static Set<BlockState> poiBlockStates() {
         return ImmutableSet.copyOf(CustomBlocks.WORKBENCH.block().getStateDefinition().getPossibleStates());
     }
 
-    /// The registered arms-merchant profession, set by {@link #registerVillagers()}. Read by the
-    /// loader-specific trade-offer registration (Fabric `TradeOfferHelper` / NeoForge `VillagerTradesEvent`).
+    /// The registered arms-merchant profession, set by {@link #registerVillagers()}.
     public static ResourceKey<VillagerProfession> PROFESSION;
 
-    /// Trade offers per merchant tier (1..5), populated by {@link #registerVillagers()}. Actual registration
-    /// with the game is loader-specific and lives in each platform's entrypoint.
-    public static final LinkedHashMap<Integer, List<VillagerTrades.ItemListing>> TRADES = new LinkedHashMap<>();
+    /// 26.1: villager trades are data-driven. A profession carries one `TradeSet` key per merchant level;
+    /// the sets themselves live in `data/rogues/trade_set/arms_merchant/level_<n>.json`, each pointing at the
+    /// tag `#rogues:arms_merchant/level_<n>` (`data/rogues/tags/villager_trade/…`) which collects the
+    /// individual `data/rogues/villager_trade/arms_merchant/<n>/*.json` entries.
+    /// There is no Java trade registration any more (`VillagerTrades.ItemListing`, Fabric's
+    /// `TradeOfferHelper` and NeoForge's `VillagerTradesEvent` list are all gone / unused).
+    public static ResourceKey<TradeSet> tradeSet(int level) {
+        return ResourceKey.create(Registries.TRADE_SET,
+                Identifier.fromNamespaceAndPath(RoguesMod.NAMESPACE, MERCHANT + "/level_" + level));
+    }
+
+    private static final Int2ObjectMap<ResourceKey<TradeSet>> TRADE_SETS = Int2ObjectMap.ofEntries(
+            Int2ObjectMap.entry(1, tradeSet(1)),
+            Int2ObjectMap.entry(2, tradeSet(2)),
+            Int2ObjectMap.entry(3, tradeSet(3)),
+            Int2ObjectMap.entry(4, tradeSet(4)),
+            Int2ObjectMap.entry(5, tradeSet(5))
+    );
 
     public static ResourceKey<VillagerProfession> registerProfession(String name, ResourceKey<PoiType> workStation) {
         var id = Identifier.fromNamespaceAndPath(RoguesMod.NAMESPACE, name);
@@ -60,36 +71,12 @@ public class RogueVillagers {
                 },
                 ImmutableSet.of(),
                 ImmutableSet.of(),
-                RogueSounds.WORKBENCH.soundEvent())
+                RogueSounds.WORKBENCH.soundEvent(),
+                // 26.1: the profession points at its data-driven trade sets, one per merchant level.
+                TRADE_SETS)
         );
         return key;
     }
-
-//    private static class Offer {
-//        int level;
-//        ItemStack input;
-//        ItemStack output;
-//        int maxUses;
-//        int experience;
-//        float priceMultiplier;
-//
-//        public Offer(int level, ItemStack input, ItemStack output, int maxUses, int experience, float priceMultiplier) {
-//            this.level = level;
-//            this.input = input;
-//            this.output = output;
-//            this.maxUses = maxUses;
-//            this.experience = experience;
-//            this.priceMultiplier = priceMultiplier;
-//        }
-//
-//        public static Offer buy(int level, ItemStack item, int price, int maxUses, int experience, float priceMultiplier) {
-//            return new Offer(level, item, new ItemStack(Items.EMERALD, price), maxUses, experience, priceMultiplier);
-//        }
-//
-//        public static Offer sell(int level, ItemStack item, int price, int maxUses, int experience, float priceMultiplier) {
-//            return new Offer(level, new ItemStack(Items.EMERALD, price), item, maxUses, experience, priceMultiplier);
-//        }
-//    }
 
     public static void registerVillagers() {
         if (!Platform.util().isModLoaded("lithostitched")) {
@@ -99,66 +86,5 @@ public class RogueVillagers {
         PROFESSION = registerProfession(
                 MERCHANT,
                 ResourceKey.create(BuiltInRegistries.POINT_OF_INTEREST_TYPE.key(), POI_ID));
-
-//        List<Offer> offers = List.of(
-//                Offer.buy(1, new ItemStack(Items.LEATHER, 8), 5, 12, 4, 0.01f),
-//                Offer.sell(1, Weapons.flint_dagger.item().getDefaultStack(), 6, 12, 3, 0.1f),
-//                Offer.sell(1, Weapons.stone_double_axe.item().getDefaultStack(), 8, 12, 4, 0.1f),
-//
-//                Offer.buy(2, new ItemStack(Items.IRON_INGOT, 12), 8, 12, 5, 0.01f),
-//                Offer.sell(2, Weapons.iron_sickle.item().getDefaultStack(), 12, 12, 10, 0.1f),
-//                Offer.sell(2, Weapons.iron_glaive.item().getDefaultStack(), 18, 12, 10, 0.1f),
-//                Offer.sell(2, Armors.RogueArmorSet_t1.head.getDefaultStack(), 15, 12, 13, 0.05f),
-//                Offer.sell(2, Armors.WarriorArmorSet_t1.head.getDefaultStack(), 15, 12, 13, 0.05f),
-//
-//                Offer.sell(3, Weapons.iron_dagger.item().getDefaultStack(), 14, 12, 12, 0.1f),
-//                Offer.sell(3, Weapons.iron_double_axe.item().getDefaultStack(), 18, 12, 12, 0.1f),
-//                Offer.sell(3, Armors.RogueArmorSet_t1.feet.getDefaultStack(), 15, 12, 13, 0.05f),
-//                Offer.sell(3, Armors.WarriorArmorSet_t1.feet.getDefaultStack(), 15, 12, 13, 0.05f),
-//
-//                Offer.sell(3, Armors.RogueArmorSet_t1.legs.getDefaultStack(), 15, 12, 13, 0.05f),
-//                Offer.sell(3, Armors.WarriorArmorSet_t1.legs.getDefaultStack(), 15, 12, 13, 0.05f),
-//
-//                Offer.sell(4, Armors.RogueArmorSet_t1.chest.getDefaultStack(), 15, 12, 13, 0.05f),
-//                Offer.sell(4, Armors.WarriorArmorSet_t1.chest.getDefaultStack(), 15, 12, 13, 0.05f),
-//                Offer.sell(4, new ItemStack(Items.GOAT_HORN, 1), 15, 12, 5, 0.01f)
-//            );
-
-        TRADES.clear();
-        TRADES.put(1, List.of(
-                new VillagerTrades.EmeraldForItems(Items.LEATHER, 8, 12, 4, 5),
-                new VillagerTrades.ItemsForEmeralds(RogueWeapons.flint_dagger.item(), 6, 1, 12, 3),
-                new VillagerTrades.ItemsForEmeralds(RogueWeapons.stone_double_axe.item(), 8, 1, 12, 4)
-        ));
-        TRADES.put(2, List.of(
-                new VillagerTrades.EmeraldForItems(Items.IRON_INGOT, 12, 12, 5, 8),
-                new VillagerTrades.ItemsForEmeralds(RogueWeapons.iron_sickle.item(), 12, 1, 12, 10),
-                new VillagerTrades.ItemsForEmeralds(RogueWeapons.iron_glaive.item(), 18, 1, 12, 10),
-                new VillagerTrades.ItemsForEmeralds(RogueArmors.RogueArmorSet_t1.head, 15, 1, 12, 13),
-                new VillagerTrades.ItemsForEmeralds(RogueArmors.WarriorArmorSet_t1.head, 15, 1, 12, 13)
-        ));
-        TRADES.put(3, List.of(
-                new VillagerTrades.ItemsForEmeralds(RogueWeapons.iron_dagger.item(), 14, 1, 12, 15),
-                new VillagerTrades.ItemsForEmeralds(RogueWeapons.iron_double_axe.item(), 18, 1, 12, 15),
-                new VillagerTrades.ItemsForEmeralds(RogueArmors.RogueArmorSet_t1.feet, 15, 1, 12, 15),
-                new VillagerTrades.ItemsForEmeralds(RogueArmors.WarriorArmorSet_t1.feet, 15, 1, 12, 15),
-                new VillagerTrades.ItemsForEmeralds(RogueArmors.RogueArmorSet_t1.legs, 15, 1, 12, 15),
-                new VillagerTrades.ItemsForEmeralds(RogueArmors.WarriorArmorSet_t1.legs, 15, 1, 12, 15)
-        ));
-        TRADES.put(4, List.of(
-                new VillagerTrades.ItemsForEmeralds(RogueArmors.RogueArmorSet_t1.chest, 15, 1, 12, 15),
-                new VillagerTrades.ItemsForEmeralds(RogueArmors.WarriorArmorSet_t1.chest, 15, 1, 12, 15),
-                new VillagerTrades.ItemsForEmeralds(Items.GOAT_HORN, 15, 1, 12, 5)
-        ));
-        TRADES.put(5, List.of(
-                (VillagerTrades.ItemListing) (world, entity, random) -> new VillagerTrades.EnchantedItemForEmeralds(
-                        RogueWeapons.diamond_dagger.item(), 30, 3, 30, 0F).getOffer(world, entity, random),
-                (VillagerTrades.ItemListing) (world, entity, random) -> new VillagerTrades.EnchantedItemForEmeralds(
-                        RogueWeapons.diamond_sickle.item(), 30, 3, 30, 0F).getOffer(world, entity, random),
-                (VillagerTrades.ItemListing) (world, entity, random) -> new VillagerTrades.EnchantedItemForEmeralds(
-                        RogueWeapons.diamond_double_axe.item(), 40, 3, 30, 0F).getOffer(world, entity, random),
-                (VillagerTrades.ItemListing) (world, entity, random) -> new VillagerTrades.EnchantedItemForEmeralds(
-                        RogueWeapons.diamond_glaive.item(), 40, 3, 30, 0F).getOffer(world, entity, random)
-        ));
     }
 }
