@@ -161,7 +161,7 @@ public class RogueRecipes extends FabricRecipeProvider {
 
     private void generateArmorRecipes() {
         // Rogue Armor (T1) - leather + wool + red dye
-        generateRogueArmorSet(RogueArmors.RogueArmorSet_t1, Items.LEATHER, Items.RED_DYE);
+        generateRogueArmorSet(RogueArmors.RogueArmorSet_t1, Items.LEATHER, Items.DYE.red());
 
         // Assassin Armor (T2) - rabbit hide + ink sac + gold
         generateAssassinArmorSet(RogueArmors.RogueArmorSet_t2, Items.RABBIT_HIDE, Items.INK_SAC, Items.GOLD_INGOT);
