@@ -1,0 +1,41 @@
+{
+  "parent": "rpg_series:misc_items",
+  "criteria": {
+    "trade_with_arms_dealer": {
+      "conditions": {
+        "villager": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "nbt": "{VillagerData:{profession:\"rogues:arms_merchant\"}}"
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:villager_trade"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.rpg_series.trade_with_arms_dealer.description"
+    },
+    "frame": "task",
+    "hidden": true,
+    "icon": {
+      "item": "rogues:iron_double_axe",
+      "nbt": "{Damage:0}"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.rpg_series.trade_with_arms_dealer.title"
+    }
+  },
+  "requirements": [
+    [
+      "trade_with_arms_dealer"
+    ]
+  ],
+  "sends_telemetry_event": false
+}

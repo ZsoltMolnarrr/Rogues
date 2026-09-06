@@ -47,10 +47,10 @@ public class RogueEntities {
     }
 
     public static final Entry<BearTrapEntity> BEAR_TRAP = add(new Entry<>(
-            Identifier.of(RoguesMod.NAMESPACE, "bear_trap"),
+            new Identifier(RoguesMod.NAMESPACE, "bear_trap"),
             "Bear Trap",
             EntityType.Builder.<BearTrapEntity>create(BearTrapEntity::new, SpawnGroup.MISC)
-                    .dimensions(1F, 0.5F) // dimensions in Minecraft units of the render
+                    .setDimensions(1F, 0.5F) // dimensions in Minecraft units of the render
                     .makeFireImmune()
                     .maxTrackingRange(128)
                     .trackingTickInterval(20)

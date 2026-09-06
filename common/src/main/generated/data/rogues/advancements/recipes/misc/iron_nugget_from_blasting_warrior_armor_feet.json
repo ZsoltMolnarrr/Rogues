@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:iron_nugget_from_blasting_warrior_armor_feet"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_warrior_armor_feet": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "rogues:warrior_armor_feet"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_warrior_armor_feet",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:iron_nugget_from_blasting_warrior_armor_feet"
+    ]
+  },
+  "sends_telemetry_event": false
+}

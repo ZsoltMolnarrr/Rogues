@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:smelting",
+  "category": "misc",
+  "cookingtime": 300,
+  "experience": 0.1,
+  "group": "disassemble",
+  "ingredient": {
+    "item": "rogues:netherite_double_axe"
+  },
+  "result": "minecraft:netherite_scrap"
+}

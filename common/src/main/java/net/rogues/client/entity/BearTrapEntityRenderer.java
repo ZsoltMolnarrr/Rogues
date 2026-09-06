@@ -12,7 +12,7 @@ import net.rogues.entity.BearTrapEntity;
 
 public class BearTrapEntityRenderer<T extends BearTrapEntity> extends EntityRenderer<T> {
     public static final Identifier TEXTURE =
-            Identifier.of(RoguesMod.NAMESPACE, "textures/entity/bear_trap.png");
+            new Identifier(RoguesMod.NAMESPACE, "textures/entity/bear_trap.png");
 
     private final BearTrapEntityModel model;
 
@@ -36,7 +36,7 @@ public class BearTrapEntityRenderer<T extends BearTrapEntity> extends EntityRend
         matrices.translate(0, -1.5, 0);
         model.setAngles(entity, 0F, 0F, entity.age + tickDelta, 0F, 0F);
         var vertices = vertexConsumers.getBuffer(model.getLayer(TEXTURE));
-        model.render(matrices, vertices, light, OverlayTexture.DEFAULT_UV, -1);
+        model.render(matrices, vertices, light, OverlayTexture.DEFAULT_UV, 1F, 1F, 1F, 1F);
         matrices.pop();
     }
 }

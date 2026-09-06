@@ -5,6 +5,7 @@ import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.fabricmc.fabric.api.object.builder.v1.trade.TradeOfferHelper;
 import net.fabricmc.fabric.api.object.builder.v1.world.poi.PointOfInterestHelper;
 import net.rogues.RoguesMod;
+import net.rogues.fabric.village.FabricVillageStructures;
 import net.rogues.block.CustomBlocks;
 import net.rogues.item.Group;
 import net.rogues.village.RogueVillagers;
@@ -14,12 +15,15 @@ public final class FabricMod implements ModInitializer {
     public void onInitialize() {
         // Run our common setup.
         RoguesMod.init();
+        // StructurePoolAPI is Fabric-only on 1.20.1; installs the village-injection seam + its config.
+        FabricVillageStructures.install();
         RoguesMod.registerSounds();
+        RoguesMod.registerBlocks();
         RoguesMod.registerItems();
         RoguesMod.registerEffects();
         RoguesMod.registerEntities();
 
-        // Villager POI + trades — Fabric API registration (loader-specific; NeoForge does its own).
+        // Villager POI + trades — Fabric API registration (loader-specific; Forge does its own).
         PointOfInterestHelper.register(RogueVillagers.POI_ID,
                 RogueVillagers.POI_TICKET_COUNT, RogueVillagers.POI_SEARCH_DISTANCE,
                 RogueVillagers.poiBlockStates());

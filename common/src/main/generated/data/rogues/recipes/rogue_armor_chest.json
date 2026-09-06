@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "L": {
+      "item": "minecraft:leather"
+    },
+    "W": {
+      "tag": "minecraft:wool"
+    }
+  },
+  "pattern": [
+    "W W",
+    "LWL",
+    "LLL"
+  ],
+  "result": {
+    "item": "rogues:rogue_armor_chest"
+  },
+  "show_notification": true
+}

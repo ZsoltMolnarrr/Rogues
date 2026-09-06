@@ -2,7 +2,7 @@ package net.rogues.fabric.datagen;
 
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
-import net.minecraft.data.server.recipe.RecipeExporter;
+import net.minecraft.data.server.recipe.RecipeJsonProvider;
 import net.minecraft.data.server.recipe.ShapedRecipeJsonBuilder;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
@@ -15,7 +15,7 @@ import net.rogues.item.armor.RogueArmors;
 import net.spell_engine.rpg_series.item.Armor;
 import net.spell_engine.rpg_series.item.Weapon;
 
-import java.util.concurrent.CompletableFuture;
+import java.util.function.Consumer;
 
 /**
  * Generates all crafting recipes for the Rogues mod using Fabric's built-in API.
@@ -23,12 +23,14 @@ import java.util.concurrent.CompletableFuture;
  */
 public class RogueRecipes extends FabricRecipeProvider {
 
-    public RogueRecipes(FabricDataOutput output, CompletableFuture<RegistryWrapper.WrapperLookup> registriesFuture) {
-        super(output, registriesFuture);
+    /// 1.20.1 / Fabric API 0.92: `FabricRecipeProvider` takes only the data output, and recipes are
+    /// exported through a `Consumer<RecipeJsonProvider>` (the `RecipeExporter` interface arrived in 1.20.2).
+    public RogueRecipes(FabricDataOutput output) {
+        super(output);
     }
 
     @Override
-    public void generate(RecipeExporter exporter) {
+    public void generate(Consumer<RecipeJsonProvider> exporter) {
         generateDaggerRecipes(exporter);
         generateSickleRecipes(exporter);
         generateDoubleAxeRecipes(exporter);
@@ -42,7 +44,7 @@ public class RogueRecipes extends FabricRecipeProvider {
     // DAGGER RECIPES
     // ========================================
 
-    private void generateDaggerRecipes(RecipeExporter exporter) {
+    private void generateDaggerRecipes(Consumer<RecipeJsonProvider> exporter) {
         dagger(exporter, RogueWeapons.flint_dagger, Items.FLINT);
         dagger(exporter, RogueWeapons.iron_dagger, Items.IRON_INGOT);
         dagger(exporter, RogueWeapons.golden_dagger, Items.GOLD_INGOT);
@@ -52,7 +54,7 @@ public class RogueRecipes extends FabricRecipeProvider {
     /**
      * Generate dagger recipe with standard pattern: " M" / "S "
      */
-    private void dagger(RecipeExporter exporter, Weapon.Entry daggerEntry, Item material) {
+    private void dagger(Consumer<RecipeJsonProvider> exporter, Weapon.Entry daggerEntry, Item material) {
         ShapedRecipeJsonBuilder.create(RecipeCategory.COMBAT, daggerEntry.item())
                 .pattern(" M")
                 .pattern("S ")
@@ -66,7 +68,7 @@ public class RogueRecipes extends FabricRecipeProvider {
     // SICKLE RECIPES
     // ========================================
 
-    private void generateSickleRecipes(RecipeExporter exporter) {
+    private void generateSickleRecipes(Consumer<RecipeJsonProvider> exporter) {
         sickle(exporter, RogueWeapons.iron_sickle, Items.IRON_INGOT);
         sickle(exporter, RogueWeapons.golden_sickle, Items.GOLD_INGOT);
         sickle(exporter, RogueWeapons.diamond_sickle, Items.DIAMOND);
@@ -75,7 +77,7 @@ public class RogueRecipes extends FabricRecipeProvider {
     /**
      * Generate sickle recipe with standard pattern: "MM" / "S "
      */
-    private void sickle(RecipeExporter exporter, Weapon.Entry sickleEntry, Item material) {
+    private void sickle(Consumer<RecipeJsonProvider> exporter, Weapon.Entry sickleEntry, Item material) {
         ShapedRecipeJsonBuilder.create(RecipeCategory.COMBAT, sickleEntry.item())
                 .pattern("MM")
                 .pattern("S ")
@@ -89,7 +91,7 @@ public class RogueRecipes extends FabricRecipeProvider {
     // DOUBLE AXE RECIPES
     // ========================================
 
-    private void generateDoubleAxeRecipes(RecipeExporter exporter) {
+    private void generateDoubleAxeRecipes(Consumer<RecipeJsonProvider> exporter) {
         // Stone double axe uses stone tool materials tag
         ShapedRecipeJsonBuilder.create(RecipeCategory.COMBAT, RogueWeapons.stone_double_axe.item())
                 .pattern("MSM")
@@ -108,7 +110,7 @@ public class RogueRecipes extends FabricRecipeProvider {
     /**
      * Generate double axe recipe with standard pattern: "MSM" / "MSM" / " S "
      */
-    private void doubleAxe(RecipeExporter exporter, Weapon.Entry axeEntry, Item material) {
+    private void doubleAxe(Consumer<RecipeJsonProvider> exporter, Weapon.Entry axeEntry, Item material) {
         ShapedRecipeJsonBuilder.create(RecipeCategory.COMBAT, axeEntry.item())
                 .pattern("MSM")
                 .pattern("MSM")
@@ -123,7 +125,7 @@ public class RogueRecipes extends FabricRecipeProvider {
     // GLAIVE RECIPES
     // ========================================
 
-    private void generateGlaiveRecipes(RecipeExporter exporter) {
+    private void generateGlaiveRecipes(Consumer<RecipeJsonProvider> exporter) {
         glaive(exporter, RogueWeapons.iron_glaive, Items.IRON_INGOT);
         glaive(exporter, RogueWeapons.golden_glaive, Items.GOLD_INGOT);
         glaive(exporter, RogueWeapons.diamond_glaive, Items.DIAMOND);
@@ -132,7 +134,7 @@ public class RogueRecipes extends FabricRecipeProvider {
     /**
      * Generate glaive recipe with standard pattern: " MM" / "MS " / "S  "
      */
-    private void glaive(RecipeExporter exporter, Weapon.Entry glaiveEntry, Item material) {
+    private void glaive(Consumer<RecipeJsonProvider> exporter, Weapon.Entry glaiveEntry, Item material) {
         ShapedRecipeJsonBuilder.create(RecipeCategory.COMBAT, glaiveEntry.item())
                 .pattern(" MM")
                 .pattern("MS ")
@@ -147,7 +149,7 @@ public class RogueRecipes extends FabricRecipeProvider {
     // ARMOR RECIPES
     // ========================================
 
-    private void generateArmorRecipes(RecipeExporter exporter) {
+    private void generateArmorRecipes(Consumer<RecipeJsonProvider> exporter) {
         // Rogue Armor (T1) - leather + wool + red dye
         generateRogueArmorSet(exporter, RogueArmors.RogueArmorSet_t1, Items.LEATHER, Items.RED_DYE);
 
@@ -164,7 +166,7 @@ public class RogueRecipes extends FabricRecipeProvider {
     /**
      * Generate Rogue armor set (T1) - leather + wool + red dye
      */
-    private void generateRogueArmorSet(RecipeExporter exporter, Armor.Set armorSet, Item leather, Item redDye) {
+    private void generateRogueArmorSet(Consumer<RecipeJsonProvider> exporter, Armor.Set armorSet, Item leather, Item redDye) {
         // Helmet - pattern: "WDW" / " W "
         ShapedRecipeJsonBuilder.create(RecipeCategory.COMBAT, armorSet.head)
                 .pattern("WDW")
@@ -207,7 +209,7 @@ public class RogueRecipes extends FabricRecipeProvider {
     /**
      * Generate Assassin armor set (T2) - rabbit hide + ink sac + gold
      */
-    private void generateAssassinArmorSet(RecipeExporter exporter, Armor.Set armorSet, Item rabbitHide, Item inkSac, Item gold) {
+    private void generateAssassinArmorSet(Consumer<RecipeJsonProvider> exporter, Armor.Set armorSet, Item rabbitHide, Item inkSac, Item gold) {
         // Helmet - pattern: "SGS" / "R R"
         ShapedRecipeJsonBuilder.create(RecipeCategory.COMBAT, armorSet.head)
                 .pattern("SGS")
@@ -254,7 +256,7 @@ public class RogueRecipes extends FabricRecipeProvider {
     /**
      * Generate Warrior armor set (T1) - iron + leather + string
      */
-    private void generateWarriorArmorSet(RecipeExporter exporter, Armor.Set armorSet, Item iron, Item leather, Item string) {
+    private void generateWarriorArmorSet(Consumer<RecipeJsonProvider> exporter, Armor.Set armorSet, Item iron, Item leather, Item string) {
         // Helmet - pattern: "ILI" / "I I"
         ShapedRecipeJsonBuilder.create(RecipeCategory.COMBAT, armorSet.head)
                 .pattern("ILI")
@@ -298,7 +300,7 @@ public class RogueRecipes extends FabricRecipeProvider {
     /**
      * Generate Berserker armor set (T2) - chain + netherite_scrap + goat_horn + leather
      */
-    private void generateBerserkerArmorSet(RecipeExporter exporter, Armor.Set armorSet, Item chain, Item netheriteScrap, Item goatHorn, Item leather) {
+    private void generateBerserkerArmorSet(Consumer<RecipeJsonProvider> exporter, Armor.Set armorSet, Item chain, Item netheriteScrap, Item goatHorn, Item leather) {
         // Helmet - pattern: "GTG" / "I I"
         ShapedRecipeJsonBuilder.create(RecipeCategory.COMBAT, armorSet.head)
                 .pattern("GTG")
@@ -344,7 +346,7 @@ public class RogueRecipes extends FabricRecipeProvider {
     // OTHER RECIPES
     // ========================================
 
-    private void generateOtherRecipes(RecipeExporter exporter) {
+    private void generateOtherRecipes(Consumer<RecipeJsonProvider> exporter) {
         // Arms Workbench - pattern: "PIW" / "###"
         ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, CustomBlocks.WORKBENCH.block())
                 .pattern("PIW")
@@ -362,7 +364,7 @@ public class RogueRecipes extends FabricRecipeProvider {
     // NETHERITE UPGRADE RECIPES
     // ========================================
 
-    private void generateNetheriteUpgrades(RecipeExporter exporter) {
+    private void generateNetheriteUpgrades(Consumer<RecipeJsonProvider> exporter) {
         // Weapon upgrades - diamond to netherite
         offerNetheriteUpgradeRecipe(exporter, RogueWeapons.diamond_dagger.item(), RecipeCategory.COMBAT, RogueWeapons.netherite_dagger.item());
         offerNetheriteUpgradeRecipe(exporter, RogueWeapons.diamond_sickle.item(), RecipeCategory.COMBAT, RogueWeapons.netherite_sickle.item());

@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "M": {
+      "tag": "minecraft:stone_tool_materials"
+    },
+    "S": {
+      "item": "minecraft:stick"
+    }
+  },
+  "pattern": [
+    "MSM",
+    "MSM",
+    " S "
+  ],
+  "result": {
+    "item": "rogues:stone_double_axe"
+  },
+  "show_notification": true
+}

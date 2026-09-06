@@ -6,11 +6,12 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
-import net.minecraft.data.server.recipe.RecipeExporter;
+import net.minecraft.data.server.recipe.RecipeJsonProvider;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.Items;
 import net.minecraft.recipe.book.RecipeCategory;
+import net.minecraft.registry.RegistryBuilder;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.util.Identifier;
 import net.rogues.RoguesMod;
@@ -34,6 +35,7 @@ import net.spell_engine.rpg_series.tags.RPGSeriesItemTags;
 import java.util.HashSet;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
+import java.util.function.Consumer;
 
 public class RoguesDataGenerator implements DataGeneratorEntrypoint {
     @Override
@@ -48,6 +50,15 @@ public class RoguesDataGenerator implements DataGeneratorEntrypoint {
         pack.addProvider(WeaponGen::new);
         pack.addProvider(RoguesAdvancements::new);
         pack.addProvider(LangGen::new);
+    }
+
+    /// 1.20.1 / Fabric API 0.92: the datagen `WrapperLookup` is assembled from `BuiltinRegistries.REGISTRY_BUILDER`
+    /// plus whatever each entrypoint contributes here — Fabric's `DynamicRegistries.registerSynced` only feeds the
+    /// *runtime* `RegistryLoader`, not data generation. Without this, `FabricTagProvider<Spell>` dies with
+    /// "Registry spell_engine:spell not found".
+    @Override
+    public void buildRegistry(RegistryBuilder registryBuilder) {
+        RPGSeriesDataGen.buildRegistry(registryBuilder);
     }
 
     public static class SpellTagGenerator extends FabricTagProvider<Spell> {
@@ -116,14 +127,14 @@ public class RoguesDataGenerator implements DataGeneratorEntrypoint {
     }
 
     public static class UnsmeltGenerator extends FabricRecipeProvider {
-        public UnsmeltGenerator(FabricDataOutput output, CompletableFuture<RegistryWrapper.WrapperLookup> registriesFuture) {
-            super(output, registriesFuture);
+        public UnsmeltGenerator(FabricDataOutput output) {
+            super(output);
         }
 
         public static int UNSMELT_TIME = 300;
 
         @Override
-        public void generate(RecipeExporter exporter) {
+        public void generate(Consumer<RecipeJsonProvider> exporter) {
             disassembleArmor(exporter, RogueArmors.RogueArmorSet_t1, Items.LEATHER);
             disassembleArmor(exporter, RogueArmors.RogueArmorSet_t2, Items.RABBIT_HIDE);
             disassembleArmor(exporter, RogueArmors.RogueArmorSet_t3, Items.NETHERITE_SCRAP);
@@ -158,7 +169,7 @@ public class RoguesDataGenerator implements DataGeneratorEntrypoint {
                     Items.NETHERITE_SCRAP);
         }
 
-        private static void disassembleArmor(RecipeExporter exporter, Armor.Set armorSet, Item output) {
+        private static void disassembleArmor(Consumer<RecipeJsonProvider> exporter, Armor.Set armorSet, Item output) {
             FabricRecipeProvider.offerSmelting(exporter,
                     armorSet.pieces(),
                     RecipeCategory.MISC,
@@ -177,7 +188,7 @@ public class RoguesDataGenerator implements DataGeneratorEntrypoint {
             );
         }
 
-        private static void disassemble(RecipeExporter exporter, List<ItemConvertible> items, Item output) {
+        private static void disassemble(Consumer<RecipeJsonProvider> exporter, List<ItemConvertible> items, Item output) {
             FabricRecipeProvider.offerSmelting(exporter,
                     items,
                     RecipeCategory.MISC,
@@ -222,8 +233,10 @@ public class RoguesDataGenerator implements DataGeneratorEntrypoint {
             super(dataOutput, registryLookup, RoguesMod.NAMESPACE);
         }
 
+        /// 1.20.1 / Fabric API 0.92: `FabricLanguageProvider` is registry-independent — the callback takes
+        /// only the translation builder.
         @Override
-        public void generateTranslations(RegistryWrapper.WrapperLookup registryLookup, FabricLanguageProvider.TranslationBuilder builder) {
+        public void generateTranslations(FabricLanguageProvider.TranslationBuilder builder) {
             var namespace = RoguesMod.NAMESPACE;
 
             // Creative tab

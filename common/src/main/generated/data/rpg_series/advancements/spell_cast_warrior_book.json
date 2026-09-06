@@ -1,0 +1,33 @@
+{
+  "parent": "rpg_series:spell_novice_warrior",
+  "criteria": {
+    "cast": {
+      "conditions": {
+        "spell": "#rogues:spell_book/warrior"
+      },
+      "trigger": "spell_engine:spell_cast"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "translate": "advancements.rpg_series.spell_cast_warrior_book.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "spell_engine:spell_book",
+      "nbt": "{spell_engine:{item_model:\"rogues:item/spell_book/warrior\"}}"
+    },
+    "show_toast": false,
+    "title": {
+      "translate": "advancements.rpg_series.spell_cast_warrior_book.title"
+    }
+  },
+  "requirements": [
+    [
+      "cast"
+    ]
+  ],
+  "sends_telemetry_event": false
+}

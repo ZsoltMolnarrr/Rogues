@@ -1,6 +1,7 @@
 package net.rogues.util;
 
 import net.minecraft.entity.attribute.EntityAttributes;
+import net.minecraft.registry.Registries;
 import net.minecraft.util.Identifier;
 import net.rogues.RoguesMod;
 import net.rogues.effect.RogueEffects;
@@ -130,7 +131,7 @@ public class RogueSpells {
 
     public static final Entry SLICE_AND_DICE = add(slice_and_dice().book(Book.ROGUE));
     private static Entry slice_and_dice() {
-        var id = Identifier.of(RoguesMod.NAMESPACE, "slice_and_dice");
+        var id = new Identifier(RoguesMod.NAMESPACE, "slice_and_dice");
         var title = "Slice & Dice";
         var description = "Enter a battle trance, during which your attacks will each grant extra power, stacking up to {effect_amplifier_cap} times. Expires after {effect_duration} sec.";
         var effect = RogueEffects.SLICE_AND_DICE;
@@ -169,7 +170,7 @@ public class RogueSpells {
 
     public static final Entry SHOCK_POWDER = add(shock_powder().book(Book.ROGUE));
     private static Entry shock_powder() {
-        var id = Identifier.of(RoguesMod.NAMESPACE, "shock_powder");
+        var id = new Identifier(RoguesMod.NAMESPACE, "shock_powder");
         var title = "Shock Powder";
         var description = "Stuns nearby enemies for {effect_duration} sec.";
         var effect = RogueEffects.SHOCK;
@@ -211,7 +212,7 @@ public class RogueSpells {
 
     public static final Entry SHADOW_STEP = add(shadow_step().book(Book.ROGUE));
     private static Entry shadow_step() {
-        var id = Identifier.of(RoguesMod.NAMESPACE, "shadow_step");
+        var id = new Identifier(RoguesMod.NAMESPACE, "shadow_step");
         var title = "Shadowstep";
         var description = "Step through the shadows to appear behind your target.";
         var effect = RogueEffects.SHADOW_STEP;
@@ -261,7 +262,7 @@ public class RogueSpells {
 
     public static final Entry VANISH = add(vanish().book(Book.ROGUE));
     private static Entry vanish() {
-        var id = Identifier.of(RoguesMod.NAMESPACE, "vanish");
+        var id = new Identifier(RoguesMod.NAMESPACE, "vanish");
         var title = "Vanish";
         var description = "Vanish from sight, entering stealth for {effect_duration} sec. Performing any action or taking damage will break the effect.";
         var effect = RogueEffects.STEALTH;
@@ -297,7 +298,7 @@ public class RogueSpells {
 
     public static final Entry BEAR_TRAP = add(bear_trap().book(Book.ROGUE));
     private static Entry bear_trap() {
-        var id = Identifier.of(RoguesMod.NAMESPACE, "bear_trap");
+        var id = new Identifier(RoguesMod.NAMESPACE, "bear_trap");
         var title = "Bear Trap";
         var description = "Set 3 bear traps around you, lasting {cloud_duration} sec. The first enemy to step into a trap springs it shut, taking {damage} damage and being held in place for {effect_duration} sec.";
         var effect = RogueEffects.BEAR_TRAP;
@@ -361,7 +362,7 @@ public class RogueSpells {
 
     public static final Entry MUTILATE = add(mutilate().book(Book.ROGUE));
     private static Entry mutilate() {
-        var id = Identifier.of(RoguesMod.NAMESPACE, "mutilate");
+        var id = new Identifier(RoguesMod.NAMESPACE, "mutilate");
         var title = "Mutilate";
         var description = "Tear into everything in front of you with both weapons. Strikes with the damage of both held weapons.";
         var spell = activeSpellBase();
@@ -404,7 +405,7 @@ public class RogueSpells {
 
     public static final Entry WARRIOR_THROW = add(warrior_throw().book(Book.WARRIOR));
     private static Entry warrior_throw() {
-        var id = Identifier.of(RoguesMod.NAMESPACE, "throw");
+        var id = new Identifier(RoguesMod.NAMESPACE, "throw");
         var title = "Shattering Throw";
         var description = "Throw your weapon at the target, dealing {damage} damage and reducing their armor by "
                 + TooltipTokens.effect(RogueEffects.SHATTER.id, 0, null, TooltipTokens.Format.ABS)
@@ -465,7 +466,7 @@ public class RogueSpells {
 
     public static final Entry THROW_NET = add(throw_net().book(Book.WARRIOR));
     private static Entry throw_net() {
-        var id = Identifier.of(RoguesMod.NAMESPACE, "throw_net");
+        var id = new Identifier(RoguesMod.NAMESPACE, "throw_net");
         var title = "Throw Net";
         var description = "Hurl a weighted net, dealing {damage} damage and pinning the target in place for {effect_duration} sec. The longer the cast is held, the harder it lands and the further it flies.";
         var effect = RogueEffects.NET_TRAP;
@@ -500,7 +501,7 @@ public class RogueSpells {
         projectile.homing_angle = 1F;
         projectile.client_data = new Spell.ProjectileData.Client();
         var model = SpellBuilder.ProjectileModels.model(
-                Identifier.of(RoguesMod.NAMESPACE, "spell_projectile/throw_net").toString(),
+                new Identifier(RoguesMod.NAMESPACE, "spell_projectile/throw_net").toString(),
                 1F, LightEmission.NONE);
         model.rotate_degrees_per_tick = 12; // a thrown net tumbles slowly
         projectile.client_data.composite_model = SpellBuilder.ProjectileModels.composite(model);
@@ -525,7 +526,7 @@ public class RogueSpells {
 
     public static final Entry CHARGE = add(charge().book(Book.WARRIOR));
     private static Entry charge() {
-        var id = Identifier.of(RoguesMod.NAMESPACE, "charge");
+        var id = new Identifier(RoguesMod.NAMESPACE, "charge");
         var title = "Charge";
         var description = "Increases movement speed and knockback resistance, lasts for {effect_duration} sec.";
         var effect = RogueEffects.CHARGE;
@@ -563,7 +564,7 @@ public class RogueSpells {
 
     public static final Entry SHOUT = add(shout().book(Book.WARRIOR));
     private static Entry shout() {
-        var id = Identifier.of(RoguesMod.NAMESPACE, "shout");
+        var id = new Identifier(RoguesMod.NAMESPACE, "shout");
         var title = "Demoralizing Shout";
         var description = "Shout at nearby enemies, reducing their attack damage by "
                 + TooltipTokens.effect(RogueEffects.DEMORALIZE.id, 0, null, TooltipTokens.Format.ABS)
@@ -607,7 +608,7 @@ public class RogueSpells {
     public static final Color LAST_STAND_COLOR = Color.PHYSICAL_BLUE;
     public static final Entry LAST_STAND = add(last_stand().book(Book.WARRIOR));
     private static Entry last_stand() {
-        var id = Identifier.of(RoguesMod.NAMESPACE, "last_stand");
+        var id = new Identifier(RoguesMod.NAMESPACE, "last_stand");
         var title = "Last Stand";
         var description = "Stand your ground while channeling. Each stack increases your maximum health and knockback resistance, up to +100%% at {effect_amplifier_cap} stacks. Lasts {effect_duration} sec.";
         var effect = RogueEffects.LAST_STAND;
@@ -648,7 +649,8 @@ public class RogueSpells {
         // Each channel tick adds a stack; the effect's per-stack modifiers do the scaling.
         var buff = SpellBuilder.Impacts.effectAdd(effect.id.toString(), 10, 1, stacks - 1);
         var heal = SpellBuilder.Impacts.heal(1F / stacks);
-        heal.attribute = EntityAttributes.GENERIC_MAX_HEALTH.getIdAsString();
+        // 1.20.1 `EntityAttribute` has no `getIdAsString()` — resolve through the registry instead.
+        heal.attribute = Registries.ATTRIBUTE.getId(EntityAttributes.GENERIC_MAX_HEALTH).toString();
 
         spell.impacts = List.of(buff, heal);
 
@@ -662,7 +664,7 @@ public class RogueSpells {
 
     public static final Entry MORTAL_STRIKE = add(mortal_strike().book(Book.WARRIOR));
     private static Entry mortal_strike() {
-        var id = Identifier.of(RoguesMod.NAMESPACE, "mortal_strike");
+        var id = new Identifier(RoguesMod.NAMESPACE, "mortal_strike");
         var title = "Mortal Strike";
         var description = "Perform an overhead strike for {weapon_damage_bonus} bonus weapon damage, causing the target to Bleed for {effect_duration} sec.";
         var spell = activeSpellBase(); // PHYSICAL_MELEE

@@ -1,0 +1,34 @@
+{
+  "parent": "rpg_series:spell_novice_warrior",
+  "criteria": {
+    "bind": {
+      "conditions": {
+        "complete": true,
+        "spell_pool": "rogues:spell_book/warrior"
+      },
+      "trigger": "spell_engine:spell_binding"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.rpg_series.spell_master_warrior.description"
+    },
+    "frame": "challenge",
+    "hidden": false,
+    "icon": {
+      "item": "rogues:netherite_double_axe",
+      "nbt": "{Damage:0}"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.rpg_series.spell_master_warrior.title"
+    }
+  },
+  "requirements": [
+    [
+      "bind"
+    ]
+  ],
+  "sends_telemetry_event": false
+}

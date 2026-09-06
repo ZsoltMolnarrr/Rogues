@@ -6,9 +6,9 @@
 			"rogues"
 		]
 	},
-	"neoforge:conditions": [
+	"forge:conditions": [
 		{
-			"type": "neoforge:mod_loaded",
+			"type": "forge:mod_loaded",
 			"modid": "rogues"
 		}
 	],

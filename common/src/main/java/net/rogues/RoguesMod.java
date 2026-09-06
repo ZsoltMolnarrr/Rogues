@@ -1,6 +1,5 @@
 package net.rogues;
 
-import net.fabric_extras.structure_pool.api.StructurePoolConfig;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
@@ -23,6 +22,7 @@ import net.rogues.item.armor.RogueArmors;
 import net.rogues.util.RogueSounds;
 import net.rogues.village.RogueVillagers;
 import net.spell_engine.Platform;
+import net.spell_power.api.ModifierDefinitions;
 import net.spell_engine.rpg_series.config.ConfigFile;
 import net.tiny_config.ConfigManager;
 
@@ -44,12 +44,8 @@ public class RoguesMod {
             .sanitize(true)
             .build();
 
-    public static ConfigManager<StructurePoolConfig> villagesConfig = new ConfigManager<>
-            ("villages", Default.villages)
-            .builder()
-            .setDirectory(NAMESPACE)
-            .sanitize(true)
-            .build();
+    // NOTE (1.20.1): the village structure-pool config lives in the Fabric module
+    // (`net.rogues.fabric.village.FabricVillageStructures`) — StructurePoolAPI has no Forge artifact.
     public static ConfigManager<TweaksConfig> tweaksConfig = new ConfigManager<>
             ("tweaks", new TweaksConfig())
             .builder()
@@ -64,14 +60,16 @@ public class RoguesMod {
         }
         itemConfig.refresh();
         effectsConfig.refresh();
-        villagesConfig.refresh();
 
         if (tweaksConfig.value.rebalance_strength_attack_damage_multiplier > 0) {
-            StatusEffects.STRENGTH.value().addAttributeModifier(
+            // 1.20.1: `StatusEffects.STRENGTH` is a raw `StatusEffect` and modifiers are UUID-keyed.
+            // The UUID is derived from the id the 1.21 line used, via Spell Power's stable mapping.
+            var modifierId = new Identifier("minecraft", "strength");
+            StatusEffects.STRENGTH.addAttributeModifier(
                     EntityAttributes.GENERIC_ATTACK_DAMAGE,
-                    Identifier.ofVanilla("strength"),
+                    ModifierDefinitions.uuid(modifierId).toString(),
                     tweaksConfig.value.rebalance_strength_attack_damage_multiplier,
-                    EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE
+                    EntityAttributeModifier.Operation.MULTIPLY_BASE
             );
         }
     }
@@ -80,12 +78,16 @@ public class RoguesMod {
         RogueSounds.register();
     }
 
+    public static void registerBlocks() {
+        CustomBlocks.registerBlocks();
+    }
+
     public static void registerItems() {
         Group.ROGUES = new ItemGroup.Builder(ItemGroup.Row.TOP, 0)
                 .icon(() -> new ItemStack(RogueArmors.RogueArmorSet_t2.head))
                 .displayName(Text.translatable("itemGroup." + NAMESPACE + ".general"))
                 .build();
-        CustomBlocks.register();
+        CustomBlocks.registerItems();
         Registry.register(Registries.ITEM_GROUP, Group.KEY, Group.ROGUES);
         RogueWeapons.register(itemConfig.value.weapons);
         RogueArmors.register(itemConfig.value.armor_sets);

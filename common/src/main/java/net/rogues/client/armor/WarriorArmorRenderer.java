@@ -19,8 +19,8 @@ public final class WarriorArmorRenderer {
 
     private static GeoArmorRenderer make(String modelName, String textureName) {
         return GeoArmorRenderer.of(
-                Identifier.of(RoguesMod.NAMESPACE, "geo/" + modelName + ".geo.json"),
-                Identifier.of(RoguesMod.NAMESPACE, "textures/armor/" + textureName + ".png"))
-                .trim(Identifier.of(RoguesMod.NAMESPACE, "armor/trim/" + textureName + "_generic"), false);
+                new Identifier(RoguesMod.NAMESPACE, "geo/" + modelName + ".geo.json"),
+                new Identifier(RoguesMod.NAMESPACE, "textures/armor/" + textureName + ".png"))
+                .trim(new Identifier(RoguesMod.NAMESPACE, "armor/trim/" + textureName + "_generic"), false);
     }
 }

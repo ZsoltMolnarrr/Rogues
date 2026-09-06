@@ -35,7 +35,7 @@ public class BearTrapEntityModel extends SinglePartEntityModel<BearTrapEntity> {
 
 	// HAND-WRITTEN CODE
 
-	public static final EntityModelLayer LAYER = new EntityModelLayer(Identifier.of(RoguesMod.NAMESPACE, "bear_trap"), "main");
+	public static final EntityModelLayer LAYER = new EntityModelLayer(new Identifier(RoguesMod.NAMESPACE, "bear_trap"), "main");
 
 	private static final Vector3f TEMP = new Vector3f();
 

@@ -1,3 +1,7 @@
+# 3.1.1.001
+
+- Ported to Minecraft 1.20.1 (Fabric + Forge 47)
+
 # 3.1.1
 
 - Replaced armor rendering dependency AzureLibArmor with ArmorModelAPI

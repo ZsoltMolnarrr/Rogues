@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "I": {
+      "item": "minecraft:chain"
+    },
+    "L": {
+      "item": "minecraft:leather"
+    },
+    "T": {
+      "item": "minecraft:netherite_scrap"
+    }
+  },
+  "pattern": [
+    "T T",
+    "III",
+    "LLL"
+  ],
+  "result": {
+    "item": "rogues:berserker_armor_chest"
+  },
+  "show_notification": true
+}

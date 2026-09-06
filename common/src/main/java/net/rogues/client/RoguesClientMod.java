@@ -32,9 +32,9 @@ public class RoguesClientMod {
     public static void init() {
         // Entity model layers + renderers are registered per-platform:
         //   Fabric   -> FabricClientMod (Fabric API)
-        //   NeoForge -> NeoForgeClientMod (EntityRenderersEvent.RegisterLayerDefinitions / RegisterRenderers)
+        //   Forge    -> ForgeClientMod (EntityRenderersEvent.RegisterLayerDefinitions / RegisterRenderers)
         // Layer definitions MUST be contributed during the RegisterLayerDefinitions phase, which is
-        // over by the time FMLClientSetupEvent (where this init runs on NeoForge) fires.
+        // over by the time FMLClientSetupEvent (where this init runs on Forge) fires.
 
         CustomParticleStatusEffect.register(RogueEffects.SHOCK.effect, new StunParticleSpawner());
         CustomParticleStatusEffect.register(RogueEffects.SHATTER.effect, new ShatterParticles(1));
@@ -91,7 +91,7 @@ public class RoguesClientMod {
         snapTaut.easing = Easing.EASE_OUT_BACK;
 
         var effect = new ModelEffect();
-        effect.model_id = Identifier.of(RoguesMod.NAMESPACE, "spell_effect/net_trap").toString();
+        effect.model_id = new Identifier(RoguesMod.NAMESPACE, "spell_effect/net_trap").toString();
         effect.light_emission = LightEmission.NONE; // rope and iron, not magic — no self-glow
         effect.duration = 8;
         effect.initial = List.of(translateInitial, scaleInitial);

@@ -28,7 +28,7 @@ public class RogueSounds {
         }
 
         public Entry(String name) {
-            this(Identifier.of(RoguesMod.NAMESPACE, name));
+            this(new Identifier(RoguesMod.NAMESPACE, name));
         }
 
         public Entry(Identifier id) {

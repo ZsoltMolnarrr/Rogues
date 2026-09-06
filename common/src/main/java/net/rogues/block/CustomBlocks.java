@@ -3,7 +3,7 @@ package net.rogues.block;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.MapColor;
-import net.minecraft.block.enums.NoteBlockInstrument;
+import net.minecraft.block.enums.Instrument;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.registry.Registries;
@@ -33,16 +33,23 @@ public class CustomBlocks {
     public static final Entry WORKBENCH = entry(MartialWorkbenchBlock.ID.getPath(), new MartialWorkbenchBlock(
             AbstractBlock.Settings.create()
                     .mapColor(MapColor.OAK_TAN)
-                    .instrument(NoteBlockInstrument.BASS)
+                    .instrument(Instrument.BASS)
                     .strength(2.5F)
                     .sounds(BlockSoundGroup.WOOD)
                     .nonOpaque()
     ));
 
-    public static void register() {
+    /// Split from {@link #registerItems()} for Forge 47: `RegisterEvent` opens one window per registry and
+    /// locks every other one, so blocks and block items cannot be registered from the same window.
+    public static void registerBlocks() {
         for (var entry : all) {
-            Registry.register(Registries.BLOCK, Identifier.of(RoguesMod.NAMESPACE, entry.name), entry.block);
-            Registry.register(Registries.ITEM, Identifier.of(RoguesMod.NAMESPACE, entry.name), entry.item());
+            Registry.register(Registries.BLOCK, new Identifier(RoguesMod.NAMESPACE, entry.name), entry.block);
+        }
+    }
+
+    public static void registerItems() {
+        for (var entry : all) {
+            Registry.register(Registries.ITEM, new Identifier(RoguesMod.NAMESPACE, entry.name), entry.item());
         }
         // Creative-tab placement (into the Rogues group) is registered per-platform from each loader's
         // entrypoint, iterating CustomBlocks.all — no Fabric API ItemGroupEvents in common.

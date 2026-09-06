@@ -5,8 +5,6 @@ import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ArmorMaterial;
 import net.minecraft.item.Items;
 import net.minecraft.recipe.Ingredient;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.Registry;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.Identifier;
@@ -26,54 +24,56 @@ import java.util.function.Supplier;
 
 public class RogueArmors {
 
-    public static RegistryEntry<ArmorMaterial> material(
+    /// 1.20.1: `ArmorMaterial` is a plain interface — no registry, no `Layer` list. SpellEngine's
+    /// `Armor.material(...)` builds a `CustomMaterial` whose `id` doubles as the (single) layer id.
+    /// (SpellEngine 1.10.5.002 resolves the `RegistryEntry<SoundEvent>` overload lazily, so passing
+    /// `RogueSounds.X.entry()` here is safe even though the entry is still null at class-init.)
+    public static ArmorMaterial material(
             String name, int protectionHead, int protectionChest, int protectionLegs, int protectionFeet,
             int enchantability, RegistryEntry<SoundEvent> equipSound, Supplier<Ingredient> repairIngredient) {
 
-        var material = new ArmorMaterial(
+        return Armor.material(
+                new Identifier(RoguesMod.NAMESPACE, name),
                 Map.of(
                         ArmorItem.Type.HELMET, protectionHead,
                         ArmorItem.Type.CHESTPLATE, protectionChest,
                         ArmorItem.Type.LEGGINGS, protectionLegs,
                         ArmorItem.Type.BOOTS, protectionFeet),
                 enchantability, equipSound, repairIngredient,
-                List.of(new ArmorMaterial.Layer(Identifier.of(RoguesMod.NAMESPACE, name))),
-                0,0
-        );
-        return Registry.registerReference(Registries.ARMOR_MATERIAL, Identifier.of(RoguesMod.NAMESPACE, name), material);
+                0, 0);
     }
 
-    public static RegistryEntry<ArmorMaterial> material_rogue_t1 = material(
+    public static ArmorMaterial material_rogue_t1 = material(
             "rogue_armor",
             1, 3, 3, 1,
             9,
             RogueSounds.ROGUE_ARMOR_EQUIP.entry(), () -> { return Ingredient.ofItems(Items.LEATHER); });
 
-    public static RegistryEntry<ArmorMaterial> material_rogue_t2 = material(
+    public static ArmorMaterial material_rogue_t2 = material(
             "assassin_armor",
             2, 4, 4, 2,
             10,
             RogueSounds.ROGUE_ARMOR_EQUIP.entry(), () -> { return Ingredient.ofItems(Items.RABBIT_HIDE); });
 
-    public static RegistryEntry<ArmorMaterial> material_rogue_t3 = material(
+    public static ArmorMaterial material_rogue_t3 = material(
             "netherite_assassin_armor",
             2, 4, 4, 2,
             15,
             RogueSounds.ROGUE_ARMOR_EQUIP.entry(), () -> { return Ingredient.ofItems(Items.NETHERITE_INGOT); });
 
-    public static RegistryEntry<ArmorMaterial> material_warrior_t1 = material(
+    public static ArmorMaterial material_warrior_t1 = material(
             "warrior_armor",
             2, 5, 4, 1,
             9,
             RogueSounds.WARRIOR_ARMOR_EQUIP.entry(), () -> { return Ingredient.ofItems(Items.IRON_INGOT); });
 
-    public static RegistryEntry<ArmorMaterial> material_warrior_t2 = material(
+    public static ArmorMaterial material_warrior_t2 = material(
             "berserker_armor",
             3, 8, 6, 2,
             10,
             RogueSounds.WARRIOR_ARMOR_EQUIP.entry(), () -> { return Ingredient.ofItems(Items.IRON_INGOT); });
 
-    public static RegistryEntry<ArmorMaterial> material_warrior_t3 = material(
+    public static ArmorMaterial material_warrior_t3 = material(
             "netherite_berserker_armor",
             3, 8, 6, 2,
             15,
@@ -81,7 +81,7 @@ public class RogueArmors {
 
 
     public static final ArrayList<Armor.Entry> entries = new ArrayList<>();
-    private static Armor.Entry create(RegistryEntry<ArmorMaterial> material, Identifier id, int durability,
+    private static Armor.Entry create(ArmorMaterial material, Identifier id, int durability,
                                       Armor.Set.ItemFactory factory, ArmorSetConfig defaults, int tier) {
         var entry = Armor.Entry.create(
                 material,
@@ -96,69 +96,69 @@ public class RogueArmors {
     }
 
 
-    private static final Identifier ATTACK_DAMAGE_ID = Identifier.ofVanilla("generic.attack_damage");
-    private static final Identifier ATTACK_SPEED_ID = Identifier.ofVanilla("generic.attack_speed");
-    private static final Identifier KNOCKBACK_ID = Identifier.ofVanilla("generic.knockback_resistance");
-    private static final Identifier MOVEMENT_SPEED_ID = Identifier.ofVanilla("generic.movement_speed");
-    private static final Identifier ARMOR_TOUGHNESS_ID = Identifier.ofVanilla("generic.armor_toughness");
+    private static final Identifier ATTACK_DAMAGE_ID = new Identifier("minecraft", "generic.attack_damage");
+    private static final Identifier ATTACK_SPEED_ID = new Identifier("minecraft", "generic.attack_speed");
+    private static final Identifier KNOCKBACK_ID = new Identifier("minecraft", "generic.knockback_resistance");
+    private static final Identifier MOVEMENT_SPEED_ID = new Identifier("minecraft", "generic.movement_speed");
+    private static final Identifier ARMOR_TOUGHNESS_ID = new Identifier("minecraft", "generic.armor_toughness");
     private static final String CRIT_MOD_ID = "critical_strike";
-    private static final Identifier CRIT_CHANCE_ID = Identifier.of(CRIT_MOD_ID, "chance");
-    private static final Identifier CRIT_DAMAGE_ID = Identifier.of(CRIT_MOD_ID, "damage");
+    private static final Identifier CRIT_CHANCE_ID = new Identifier(CRIT_MOD_ID, "chance");
+    private static final Identifier CRIT_DAMAGE_ID = new Identifier(CRIT_MOD_ID, "damage");
 
     private static AttributeModifier damageMultiplier(float value) {
         return new AttributeModifier(
                 ATTACK_DAMAGE_ID.toString(),
                 value,
-                EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE);
+                EntityAttributeModifier.Operation.MULTIPLY_BASE);
     }
 
     private static AttributeModifier hasteMultiplier(float value) {
         return new AttributeModifier(
                 ATTACK_SPEED_ID.toString(),
                 value,
-                EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE);
+                EntityAttributeModifier.Operation.MULTIPLY_BASE);
     }
 
     private static AttributeModifier knockbackBonus(float value) {
         return new AttributeModifier(
                 KNOCKBACK_ID.toString(),
                 value,
-                EntityAttributeModifier.Operation.ADD_VALUE);
+                EntityAttributeModifier.Operation.ADDITION);
     }
 
     private static AttributeModifier movementSpeed(float value) {
         return new AttributeModifier(
                 MOVEMENT_SPEED_ID.toString(),
                 value,
-                EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE);
+                EntityAttributeModifier.Operation.MULTIPLY_BASE);
     }
 
     private static AttributeModifier evasionBonus(float value) {
         return new AttributeModifier(
                 SpellEngineAttributes.EVASION_CHANCE.id.toString(),
                 value,
-                EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE);
+                EntityAttributeModifier.Operation.MULTIPLY_BASE);
     }
 
     private static AttributeModifier toughnessBonus(float value) {
         return new AttributeModifier(
                 ARMOR_TOUGHNESS_ID.toString(),
                 value,
-                EntityAttributeModifier.Operation.ADD_VALUE);
+                EntityAttributeModifier.Operation.ADDITION);
     }
 
     private static AttributeModifier critChance(float value) {
         return new AttributeModifier(
                 CRIT_CHANCE_ID.toString(),
                 value,
-                EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE);
+                EntityAttributeModifier.Operation.MULTIPLY_BASE);
     }
 
     private static AttributeModifier critDamage(float value) {
         return new AttributeModifier(
                 CRIT_DAMAGE_ID.toString(),
                 value,
-                EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE);
+                EntityAttributeModifier.Operation.MULTIPLY_BASE);
     }
 
     public static final float rogue_t1_evasion = 0.03F;
@@ -188,7 +188,7 @@ public class RogueArmors {
 
     public static final Armor.Set RogueArmorSet_t1 = create(
             material_rogue_t1,
-            Identifier.of(RoguesMod.NAMESPACE, "rogue_armor"),
+            new Identifier(RoguesMod.NAMESPACE, "rogue_armor"),
             15,
             RogueArmor::new,
             ArmorSetConfig.with(
@@ -210,7 +210,7 @@ public class RogueArmors {
 
     public static final Armor.Set RogueArmorSet_t2 = create(
             material_rogue_t2,
-            Identifier.of(RoguesMod.NAMESPACE, "assassin_armor"),
+            new Identifier(RoguesMod.NAMESPACE, "assassin_armor"),
             25,
             RogueArmor::new,
             ArmorSetConfig.with(
@@ -256,7 +256,7 @@ public class RogueArmors {
 
     public static final Armor.Set RogueArmorSet_t3 = create(
             material_rogue_t3,
-            Identifier.of(RoguesMod.NAMESPACE, "netherite_assassin_armor"),
+            new Identifier(RoguesMod.NAMESPACE, "netherite_assassin_armor"),
             37,
             RogueArmor::new,
             ArmorSetConfig.with(
@@ -302,7 +302,7 @@ public class RogueArmors {
 
     public static final Armor.Set WarriorArmorSet_t1 = create(
             material_warrior_t1,
-            Identifier.of(RoguesMod.NAMESPACE, "warrior_armor"),
+            new Identifier(RoguesMod.NAMESPACE, "warrior_armor"),
             15,
             WarriorArmor::new,
             ArmorSetConfig.with(
@@ -320,7 +320,7 @@ public class RogueArmors {
 
     public static final Armor.Set WarriorArmorSet_t2 = create(
             material_warrior_t2,
-            Identifier.of(RoguesMod.NAMESPACE, "berserker_armor"),
+            new Identifier(RoguesMod.NAMESPACE, "berserker_armor"),
             25,
             WarriorArmor::new,
             ArmorSetConfig.with(
@@ -358,7 +358,7 @@ public class RogueArmors {
 
     public static final Armor.Set WarriorArmorSet_t3 = create(
             material_warrior_t3,
-            Identifier.of(RoguesMod.NAMESPACE, "netherite_berserker_armor"),
+            new Identifier(RoguesMod.NAMESPACE, "netherite_berserker_armor"),
             37,
             WarriorArmor::new,
             ArmorSetConfig.with(

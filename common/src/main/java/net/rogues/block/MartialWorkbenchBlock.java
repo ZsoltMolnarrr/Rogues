@@ -2,10 +2,9 @@ package net.rogues.block;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.item.Item;
+import net.minecraft.client.item.TooltipContext;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.tooltip.TooltipType;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.DirectionProperty;
 import net.minecraft.state.property.Properties;
@@ -20,14 +19,14 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 
 public class MartialWorkbenchBlock extends Block {
-    public static Identifier ID = Identifier.of(RoguesMod.NAMESPACE, "arms_workbench");
+    public static Identifier ID = new Identifier(RoguesMod.NAMESPACE, "arms_workbench");
     public MartialWorkbenchBlock(Settings settings) {
         super(settings);
     }
 
     @Override
-    public void appendTooltip(ItemStack stack, Item.TooltipContext context, List<Text> tooltip, TooltipType options) {
-        super.appendTooltip(stack, context, tooltip, options);
+    public void appendTooltip(ItemStack stack, @Nullable BlockView world, List<Text> tooltip, TooltipContext options) {
+        super.appendTooltip(stack, world, tooltip, options);
         tooltip.add(Text.translatable("block." + ID.getNamespace() + "." + ID.getPath() +".hint").formatted(Formatting.GRAY, Formatting.ITALIC));
     }
 

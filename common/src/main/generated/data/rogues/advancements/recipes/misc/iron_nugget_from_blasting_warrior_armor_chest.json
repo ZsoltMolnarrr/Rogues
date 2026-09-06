@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:iron_nugget_from_blasting_warrior_armor_chest"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_warrior_armor_chest": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "rogues:warrior_armor_chest"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_warrior_armor_chest",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:iron_nugget_from_blasting_warrior_armor_chest"
+    ]
+  },
+  "sends_telemetry_event": false
+}

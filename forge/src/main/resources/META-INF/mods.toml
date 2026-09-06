@@ -1,0 +1,48 @@
+modLoader = "javafml"
+loaderVersion = "[47,)"
+issueTrackerURL = "https://github.com/ZsoltMolnarrr/Rogues/issues"
+license = "All-Rights-Reserved"
+
+[[mods]]
+modId = "rogues"
+version = "${version}"
+displayName = "Rogues & Warriors (RPG Series)"
+authors = "Daedelus"
+description = '''
+Silent Blades, Mighty Blows - Dominate with martial skills!
+'''
+logoFile = "icon.png"
+
+[[dependencies.rogues]]
+modId = "forge"
+mandatory = true
+versionRange = "[47,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.rogues]]
+modId = "minecraft"
+mandatory = true
+versionRange = "[1.20.1,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.rogues]]
+modId = "armor_model_api"
+mandatory = true
+versionRange = "[1.0.0,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.rogues]]
+modId = "spell_engine"
+mandatory = true
+versionRange = "[1.10.5,)"
+ordering = "AFTER"
+side = "BOTH"
+
+# StructurePoolAPI has no Forge artifact on 1.20.1; vanilla-village structure injection is Fabric-only
+# (Repurposed Structures / Lithostitched data-driven injection still works on both loaders).
+
+# Mixin configs are declared in the jar MANIFEST (`MixinConfigs:`) by Loom (`loom.forge.mixinConfig`),
+# not in this file — the `[[mixins]]` table is NeoForge-only.

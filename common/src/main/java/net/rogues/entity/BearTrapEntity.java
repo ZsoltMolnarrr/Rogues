@@ -31,9 +31,9 @@ public class BearTrapEntity extends SpellCloud {
     }
 
     @Override
-    protected void initDataTracker(DataTracker.Builder builder) {
-        super.initDataTracker(builder);
-        builder.add(SPRUNG, false);
+    protected void initDataTracker() {
+        super.initDataTracker();
+        this.dataTracker.startTracking(SPRUNG, false);
     }
 
     @Override
