@@ -20,6 +20,8 @@ import net.rogues.item.Group;
 import net.rogues.item.RogueWeapons;
 import net.rogues.item.armor.RogueArmors;
 import net.rogues.util.RogueSounds;
+import net.fabric_extras.structure_pool.api.StructurePoolAPI;
+import net.fabric_extras.structure_pool.api.StructurePoolConfig;
 import net.rogues.village.RogueVillagers;
 import net.spell_engine.Platform;
 import net.spell_engine.PlatformEvents;
@@ -45,8 +47,12 @@ public class RoguesMod {
             .sanitize(true)
             .build();
 
-    // NOTE (1.20.1): the village structure-pool config lives in the Fabric module
-    // (`net.rogues.fabric.village.FabricVillageStructures`) — StructurePoolAPI has no Forge artifact.
+    public static ConfigManager<StructurePoolConfig> villagesConfig = new ConfigManager<>
+            ("villages", Default.villages)
+            .builder()
+            .setDirectory(NAMESPACE)
+            .sanitize(true)
+            .build();
     public static ConfigManager<TweaksConfig> tweaksConfig = new ConfigManager<>
             ("tweaks", new TweaksConfig())
             .builder()
@@ -61,6 +67,17 @@ public class RoguesMod {
         }
         itemConfig.refresh();
         effectsConfig.refresh();
+        villagesConfig.refresh();
+        if (!Platform.util().isModLoaded("lithostitched")) {
+            // Only inject the barracks if Lithostitched is not present - otherwise the data-driven
+            // paths in `resources/data/rogues` already do it.
+            //
+            // `injectAll` only *queues* the entries; StructurePoolAPI's own entrypoint applies them
+            // when the server starts (Fabric SERVER_STARTING / Forge ServerAboutToStartEvent, both
+            // before the spawn region generates). The queue is deliberately never cleared, so this
+            // must be called exactly once, here at mod init - never per world load.
+            StructurePoolAPI.injectAll(villagesConfig.value);
+        }
 
         if (tweaksConfig.value.rebalance_strength_attack_damage_multiplier > 0) {
             // 1.20.1: `StatusEffects.STRENGTH` is a raw `StatusEffect` and modifiers are UUID-keyed.

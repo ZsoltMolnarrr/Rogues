@@ -4,16 +4,13 @@ import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.object.builder.v1.trade.TradeOfferHelper;
 import net.fabricmc.fabric.api.object.builder.v1.world.poi.PointOfInterestHelper;
 import net.rogues.RoguesMod;
-import net.rogues.fabric.village.FabricVillageStructures;
 import net.rogues.village.RogueVillagers;
 
 public final class FabricMod implements ModInitializer {
     @Override
     public void onInitialize() {
-        // Run our common setup.
+        // Run our common setup (also queues the vanilla-village structure injection).
         RoguesMod.init();
-        // StructurePoolAPI is Fabric-only on 1.20.1; installs the village-injection seam + its config.
-        FabricVillageStructures.install();
         RoguesMod.registerSounds();
         RoguesMod.registerBlocks();
         RoguesMod.registerItems();

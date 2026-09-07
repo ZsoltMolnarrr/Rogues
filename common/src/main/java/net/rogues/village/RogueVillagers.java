@@ -95,9 +95,6 @@ public class RogueVillagers {
     }
 
     public static void registerVillagers() {
-        // Vanilla-village structure injection — Fabric-only on 1.20.1 (see VillageStructures).
-        VillageStructures.injectIfAvailable();
-
         PROFESSION = registerProfession(
                 MERCHANT,
                 RegistryKey.of(Registries.POINT_OF_INTEREST_TYPE.getKey(), POI_ID));

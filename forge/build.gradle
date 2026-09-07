@@ -82,7 +82,8 @@ dependencies {
     // `localRuntime` keeps it out of the published POM.
     localRuntime("io.github.llamalad7:mixinextras-forge:${rootProject.mixin_extras_version}")
 
-    // StructurePoolAPI has no Forge artifact on 1.20.1 — see rogues-port-notes.md.
+    // StructurePoolAPI (1.20.1-modern port; mavenLocal). NOT JiJ'd - standalone library mod.
+    modImplementation("net.foundation:structure_pool_api-${platform}:${rootProject.structure_pool_api_version}")
 }
 
 processResources {
@@ -132,7 +133,7 @@ publishMods {
         client = true                    // >=1 of client/server REQUIRED by CurseForge (Error 1021)
         server = true
         changelogType = "markdown"
-        requires("armor-model-api", "spell-engine")
+        requires("armor-model-api", "spell-engine", "structure-pool-api")
     }
 
     modrinth {
@@ -143,6 +144,7 @@ publishMods {
         minecraftVersions.add(project.minecraft_compat_version)
         requires { slug = "armor-model-api" }
         requires { slug = "spell-engine" }
+        requires { slug = "structure-pool-api" }
     }
 
     // Each platform publishes its own GitHub release under a distinct, platform-suffixed
