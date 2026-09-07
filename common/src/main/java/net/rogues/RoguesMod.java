@@ -22,6 +22,7 @@ import net.rogues.item.armor.RogueArmors;
 import net.rogues.util.RogueSounds;
 import net.rogues.village.RogueVillagers;
 import net.spell_engine.Platform;
+import net.spell_engine.PlatformEvents;
 import net.spell_power.api.ModifierDefinitions;
 import net.spell_engine.rpg_series.config.ConfigFile;
 import net.tiny_config.ConfigManager;
@@ -89,6 +90,21 @@ public class RoguesMod {
                 .build();
         CustomBlocks.registerItems();
         Registry.register(Registries.ITEM_GROUP, Group.KEY, Group.ROGUES);
+
+        // Custom blocks into the Rogues creative tab. Dispatched by SpellEngine on both loaders
+        // (Fabric `ItemGroupEvents` / Forge `BuildCreativeModeTabContentsEvent`).
+        //
+        // ORDER MATTERS: on both loaders the group modifiers run in *registration* order, so this listener
+        // is installed BEFORE the weapon/armor registrations install SpellEngine's own listeners — that is
+        // what puts the blocks at the front of the tab. It has to live here rather than in the loader
+        // entrypoints: on Forge the tab event is posted per mod container in mod-load order, so anything a
+        // Rogues-owned listener adds would always land *after* SpellEngine's contributions.
+        PlatformEvents.onItemGroupModify(Group.KEY, (content, context) -> {
+            for (var entry : CustomBlocks.all) {
+                content.add(entry.item());
+            }
+        });
+
         RogueWeapons.register(itemConfig.value.weapons);
         RogueArmors.register(itemConfig.value.armor_sets);
         itemConfig.save();

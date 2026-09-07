@@ -1,13 +1,10 @@
 package net.rogues.fabric;
 
 import net.fabricmc.api.ModInitializer;
-import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.fabricmc.fabric.api.object.builder.v1.trade.TradeOfferHelper;
 import net.fabricmc.fabric.api.object.builder.v1.world.poi.PointOfInterestHelper;
 import net.rogues.RoguesMod;
 import net.rogues.fabric.village.FabricVillageStructures;
-import net.rogues.block.CustomBlocks;
-import net.rogues.item.Group;
 import net.rogues.village.RogueVillagers;
 
 public final class FabricMod implements ModInitializer {
@@ -32,11 +29,8 @@ public final class FabricMod implements ModInitializer {
                 TradeOfferHelper.registerVillagerOffers(RogueVillagers.PROFESSION, tier,
                         list -> list.addAll(factories)));
 
-        // Custom blocks into the Rogues creative tab — Fabric API.
-        ItemGroupEvents.modifyEntriesEvent(Group.KEY).register(content -> {
-            for (var entry : CustomBlocks.all) {
-                content.add(entry.item());
-            }
-        });
+        // Creative-tab placement for the custom blocks is loader-neutral — RoguesMod.registerItems()
+        // installs it through SpellEngine's PlatformEvents.onItemGroupModify, ahead of the weapon/armor
+        // listeners, so the blocks come first in the tab on both loaders.
     }
 }

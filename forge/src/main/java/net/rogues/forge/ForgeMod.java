@@ -6,7 +6,6 @@ import net.minecraft.registry.RegistryKeys;
 import net.minecraft.world.poi.PointOfInterestType;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.event.village.VillagerTradesEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.fml.common.Mod;
@@ -14,9 +13,7 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.fml.loading.FMLEnvironment;
 import net.minecraftforge.registries.RegisterEvent;
 import net.rogues.RoguesMod;
-import net.rogues.block.CustomBlocks;
 import net.rogues.forge.client.ForgeClientMod;
-import net.rogues.item.Group;
 import net.rogues.village.RogueVillagers;
 
 /// Forge 47 entrypoint (1.20.1 port of the NeoForge entrypoint).
@@ -37,8 +34,11 @@ public final class ForgeMod {
         // Explicit event classes: Forge 47's plain addListener(Consumer) infers the event type from the
         // lambda via TypeTools, which is fragile; the 4-arg overload takes it directly.
         modBus.addListener(EventPriority.NORMAL, false, RegisterEvent.class, ForgeMod::register);
-        // Custom blocks into the Rogues creative tab — mod-bus event (replaces ItemGroupEvents).
-        modBus.addListener(EventPriority.NORMAL, false, BuildCreativeModeTabContentsEvent.class, ForgeMod::buildTabContents);
+        // Creative-tab placement for the custom blocks is loader-neutral — RoguesMod.registerItems()
+        // installs it through SpellEngine's PlatformEvents.onItemGroupModify, ahead of the weapon/armor
+        // listeners. It must NOT be a Rogues-owned BuildCreativeModeTabContentsEvent listener: Forge posts
+        // that event per mod container in mod-load order, so anything added here would always land after
+        // SpellEngine's contributions and the blocks could never come first.
         // Villager trades — game-bus event (fired per profession); replaces Fabric API's TradeOfferHelper.
         MinecraftForge.EVENT_BUS.addListener(EventPriority.NORMAL, false, VillagerTradesEvent.class, ForgeMod::onVillagerTrades);
 
@@ -67,14 +67,6 @@ public final class ForgeMod {
         event.register(RegistryKeys.VILLAGER_PROFESSION, reg -> {
             RoguesMod.registerVillagers(); // registers the profession + builds RogueVillagers.TRADES
         });
-    }
-
-    private static void buildTabContents(BuildCreativeModeTabContentsEvent event) {
-        if (event.getTabKey().equals(Group.KEY)) {
-            for (var entry : CustomBlocks.all) {
-                event.accept(() -> entry.item());
-            }
-        }
     }
 
     private static void onVillagerTrades(VillagerTradesEvent event) {

@@ -51,7 +51,8 @@ public class CustomBlocks {
         for (var entry : all) {
             Registry.register(Registries.ITEM, new Identifier(RoguesMod.NAMESPACE, entry.name), entry.item());
         }
-        // Creative-tab placement (into the Rogues group) is registered per-platform from each loader's
-        // entrypoint, iterating CustomBlocks.all — no Fabric API ItemGroupEvents in common.
+        // Creative-tab placement (into the Rogues group) is loader-neutral, dispatched by SpellEngine's
+        // `PlatformEvents.onItemGroupModify` from `RoguesMod.registerItems()` — registered there ahead of
+        // the weapon/armor registrations so the blocks come first in the tab.
     }
 }
