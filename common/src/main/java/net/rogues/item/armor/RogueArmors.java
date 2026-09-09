@@ -3,6 +3,7 @@ package net.rogues.item.armor;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ArmorMaterial;
+import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.registry.entry.RegistryEntry;
@@ -403,6 +404,12 @@ public class RogueArmors {
 
     public static void register(Map<String, ArmorSetConfig> configs) {
         Armor.register(configs, entries, Group.KEY);
+    }
+
+    /// Creation only — see {@link net.spell_engine.rpg_series.item.Armor#itemsToRegister}. A loader that
+    /// registers items itself (Forge) iterates this instead of calling {@link #register}.
+    public static Map<Identifier, Item> itemsToRegister(Map<String, ArmorSetConfig> configs) {
+        return Armor.itemsToRegister(configs, entries, Group.KEY);
     }
 }
 

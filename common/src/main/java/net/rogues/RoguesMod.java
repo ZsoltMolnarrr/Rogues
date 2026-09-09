@@ -101,30 +101,42 @@ public class RoguesMod {
     }
 
     public static void registerItems() {
+        createItemGroup();
+        CustomBlocks.registerItems();
+        Registry.register(Registries.ITEM_GROUP, Group.KEY, Group.ROGUES);
+        installItemGroupContents();
+
+        RogueWeapons.register(itemConfig.value.weapons);
+        RogueArmors.register(itemConfig.value.armor_sets);
+        itemConfig.save();
+    }
+
+    /// Builds {@link Group#ROGUES}. Creation only — nothing is written into the item-group registry, so a
+    /// loader that registers it itself (Forge, from its own `creative_mode_tab` window) calls this and then
+    /// registers `Group.ROGUES` under `Group.KEY`. Idempotent.
+    public static void createItemGroup() {
+        if (Group.ROGUES != null) { return; }
         Group.ROGUES = new ItemGroup.Builder(ItemGroup.Row.TOP, 0)
                 .icon(() -> new ItemStack(RogueArmors.RogueArmorSet_t2.head))
                 .displayName(Text.translatable("itemGroup." + NAMESPACE + ".general"))
                 .build();
-        CustomBlocks.registerItems();
-        Registry.register(Registries.ITEM_GROUP, Group.KEY, Group.ROGUES);
+    }
 
-        // Custom blocks into the Rogues creative tab. Dispatched by SpellEngine on both loaders
-        // (Fabric `ItemGroupEvents` / Forge `BuildCreativeModeTabContentsEvent`).
-        //
-        // ORDER MATTERS: on both loaders the group modifiers run in *registration* order, so this listener
-        // is installed BEFORE the weapon/armor registrations install SpellEngine's own listeners — that is
-        // what puts the blocks at the front of the tab. It has to live here rather than in the loader
-        // entrypoints: on Forge the tab event is posted per mod container in mod-load order, so anything a
-        // Rogues-owned listener adds would always land *after* SpellEngine's contributions.
+    /// Custom blocks into the Rogues creative tab. Dispatched by SpellEngine on both loaders
+    /// (Fabric `ItemGroupEvents` / Forge `BuildCreativeModeTabContentsEvent`).
+    ///
+    /// ORDER MATTERS: on both loaders the group modifiers run in *registration* order, so this listener
+    /// must be installed BEFORE the weapon/armor registrations install SpellEngine's own listeners — that
+    /// is what puts the blocks at the front of the tab. It also has to be a SpellEngine-dispatched
+    /// listener rather than a Rogues-owned `BuildCreativeModeTabContentsEvent` one: on Forge the tab event
+    /// is posted per mod container in mod-load order, so anything a Rogues listener adds would always land
+    /// *after* SpellEngine's contributions. Call exactly once.
+    public static void installItemGroupContents() {
         PlatformEvents.onItemGroupModify(Group.KEY, (content, context) -> {
             for (var entry : CustomBlocks.all) {
                 content.add(entry.item());
             }
         });
-
-        RogueWeapons.register(itemConfig.value.weapons);
-        RogueArmors.register(itemConfig.value.armor_sets);
-        itemConfig.save();
     }
 
     public static void registerEffects() {

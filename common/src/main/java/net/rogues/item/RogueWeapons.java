@@ -5,6 +5,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.registry.Registries;
+import net.minecraft.registry.Registry;
 import net.minecraft.registry.tag.ItemTags;
 import net.minecraft.util.Identifier;
 import net.rogues.RoguesMod;
@@ -77,6 +78,14 @@ public class RogueWeapons {
     // MARK: Register
 
     public static void register(Map<String, WeaponConfig> configs) {
+        itemsToRegister(configs).forEach((id, item) -> Registry.register(Registries.ITEM, id, item));
+    }
+
+    /// Adds the entries gated on optional mods, applies the configs and builds every weapon item, keyed by
+    /// the id it registers under. Creation only — nothing is written here, so a loader that registers items
+    /// itself (Forge) iterates this instead of calling {@link #register}. Call exactly once: the gated
+    /// entries are appended to {@link #entries} unconditionally.
+    public static Map<Identifier, Item> itemsToRegister(Map<String, WeaponConfig> configs) {
         if (RoguesMod.tweaksConfig.value.ignore_items_required_mods || Platform.util().isModLoaded(BETTER_NETHER)) {
             var repair = ingredient("betternether:nether_ruby", Platform.util().isModLoaded(BETTER_NETHER), Items.NETHERITE_INGOT);
             add(Weapons.daggerWithSkill(RoguesMod.NAMESPACE, "ruby_dagger", Equipment.Tier.TIER_4, repair));
@@ -102,6 +111,6 @@ public class RogueWeapons {
             add(Weapons.glaiveWithSkill(RoguesMod.NAMESPACE, "aether_glaive", Equipment.Tier.TIER_4, repair)
                     .loot(Equipment.LootProperties.of("aether")));
         }
-        Weapon.register(configs, entries, Group.KEY);
+        return Weapon.itemsToRegister(configs, entries, Group.KEY);
     }
 }

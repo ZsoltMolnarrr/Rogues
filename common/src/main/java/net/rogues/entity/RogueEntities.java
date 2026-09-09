@@ -13,7 +13,9 @@ import net.spell_engine.api.spell.summon.SummonedEntityConfig;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 public class RogueEntities {
 
@@ -59,8 +61,21 @@ public class RogueEntities {
                     .build("bear_trap")));
 
     public static void register() {
+        entityTypesToRegister().forEach((id, type) -> Registry.register(Registries.ENTITY_TYPE, id, type));
+    }
+
+    /// Every entity type that still needs registering, keyed by the id it registers under, with the
+    /// summoned-entity attribute defaults buffered as a side effect. Creation only — nothing is written
+    /// into the entity-type registry here, so a loader that registers entity types itself (Forge)
+    /// iterates this instead of calling {@link #register()}.
+    ///
+    /// **Must run inside the `ENTITY_TYPE` registration window**: class init calls
+    /// `EntityType.Builder#build`, which constructs an intrusive registry holder.
+    public static Map<Identifier, EntityType<?>> entityTypesToRegister() {
+        var types = new LinkedHashMap<Identifier, EntityType<?>>();
         for (var entry : entries) {
-            Registry.register(Registries.ENTITY_TYPE, entry.id, entry.type);
+            if (Registries.ENTITY_TYPE.containsId(entry.id)) { continue; }
+            types.put(entry.id, entry.type);
             if (entry.summonConfig != null) {
                 // Only summoned (living) entities carry a config; safe by construction.
                 @SuppressWarnings("unchecked")
@@ -71,5 +86,6 @@ public class RogueEntities {
                 SummonedEntities.registerAttributes(entry.id, livingType, id -> entry.summonConfig);
             }
         }
+        return types;
     }
 }

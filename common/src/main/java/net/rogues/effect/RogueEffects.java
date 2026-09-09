@@ -212,6 +212,16 @@ public class RogueEffects {
             EntityActionsAllowed.SemanticType.NONE);
 
     public static void register(ConfigFile.Effects config) {
+        Effects.register(entries, config.effects);
+        installBehaviours();
+    }
+
+    /// Everything the effects do beyond existing in the registry: sync flags, action impairment, tints and
+    /// the combat/spell event hooks that clear stealth. Split out of {@link #register} so a loader that
+    /// registers status effects itself (Forge) can run it after its own registration pass — behaviour
+    /// wiring that reads `Effects.Entry#entry` must come after `Effects.linkEntries`. Call exactly once:
+    /// the `CombatEvents` / `SpellEvents` subscriptions here are not idempotent.
+    public static void installBehaviours() {
         Synchronized.configure(SLICE_AND_DICE.effect, true);
         Synchronized.configure(SHOCK.effect, true);
         ActionImpairing.configure(SHOCK.effect, EntityActionsAllowed.STUN);
@@ -260,7 +270,5 @@ public class RogueEffects {
                 context.entity().removeStatusEffect(STEALTH_SPEED.effect);
             }
         });
-
-        Effects.register(entries, config.effects);
     }
 }
