@@ -15,6 +15,40 @@
 
 - Ported to Minecraft 1.20.1 (Fabric + Forge 47)
 
+### What's new since 1.2.0
+
+Everything below was released between 1.2.0 and 3.1.1 on newer Minecraft versions only.
+
+#### New spells & skills
+
+- Rogue and warrior spell books now offer **6 spells**: two choices across three tiers
+- New rogue spells: **Bear Trap**, **Mutilate**
+- New warrior spells: **Throw Net**, **Last Stand**, **Mortal Strike**
+- Melee weapons grant their own weapon skills; the weapon you hold decides your skill
+
+#### New items & equipment
+
+- Aether dungeon loot: **Valkyrie Shiv**, **Heavenly Harvester**, **Holy Double Axe**, **Gilded Battle Glaive**
+- Armor trim support for every armor set
+- Rogue and warrior armor sets grant Critical Strike bonuses (with the Critical Strike mod installed)
+- All recipes in the vanilla recipe book; smelting recipes disassemble rogue and warrior weapons and armor
+
+#### Progression & world
+
+- Arms Dealer trade advancement and spell casting advancements
+- Barracks also generate through Lithostitched
+
+#### Gameplay & balance
+
+- **Charge** no longer breaks movement-impairing effects by itself; the **Improved Charge** skill does
+- **Last Stand** grants knockback resistance instead of damage reduction
+- **Shock Powder** stun lasts 2 seconds and no longer affects bosses
+- Rogue armor grants **Evade Chance** instead of Movement Speed
+- Vanilla's **Strength** effect gives a percentage attack damage bonus (configurable)
+- **Sharpness** is percentage-based: +8% attack damage per level (configurable)
+- **Vanish** renders worn armor translucently
+- Fully translated into 20 languages
+
 # 3.1.1
 
 - Replaced armor rendering dependency AzureLibArmor with ArmorModelAPI
