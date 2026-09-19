@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "rogues:iron_glaive"
+        "recipes": "rogues:iron_glaive"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

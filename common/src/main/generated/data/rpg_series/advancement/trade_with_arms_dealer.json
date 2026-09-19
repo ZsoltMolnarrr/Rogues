@@ -3,15 +3,13 @@
   "criteria": {
     "trade_with_arms_dealer": {
       "conditions": {
-        "villager": [
-          {
-            "condition": "minecraft:entity_properties",
-            "entity": "this",
-            "predicate": {
-              "minecraft:nbt": "{VillagerData:{profession:\"rogues:arms_merchant\"}}"
-            }
+        "villager": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:nbt": "{VillagerData:{profession:\"rogues:arms_merchant\"}}"
           }
-        ]
+        }
       },
       "trigger": "minecraft:villager_trade"
     }

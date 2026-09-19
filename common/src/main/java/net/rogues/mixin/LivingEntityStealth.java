@@ -3,6 +3,7 @@ package net.rogues.mixin;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import net.minecraft.core.Holder;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
@@ -21,7 +22,7 @@ public class LivingEntityStealth {
     }
 
     @Inject(method = "getVisibilityPercent", at = @At("RETURN"), cancellable = true)
-    private void getAttackDistanceScalingFactor_RETURN_Stealth(Entity entity, CallbackInfoReturnable<Double> cir) {
+    private void getAttackDistanceScalingFactor_RETURN_Stealth(ServerLevel serverLevel, Entity entity, CallbackInfoReturnable<Double> cir) {
         var thisEntity = (LivingEntity) (Object) this;
         if (thisEntity.hasEffect(RogueEffects.STEALTH.entry)) {
             cir.setReturnValue(cir.getReturnValue() * RoguesMod.tweaksConfig.value.stealth_visibility_multiplier);

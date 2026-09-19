@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "rogues:rogue_armor_feet"
+        "recipes": "rogues:rogue_armor_feet"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

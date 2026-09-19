@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "rogues:warrior_armor_head"
+        "recipes": "rogues:warrior_armor_head"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

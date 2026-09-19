@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "rogues:rogue_armor_chest"
+        "recipes": "rogues:rogue_armor_chest"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "rogues:diamond_glaive"
+        "recipes": "rogues:diamond_glaive"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

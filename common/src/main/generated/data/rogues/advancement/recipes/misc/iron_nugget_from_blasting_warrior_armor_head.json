@@ -3,7 +3,7 @@
   "criteria": {
     "has_the_recipe": {
       "conditions": {
-        "recipe": "rogues:iron_nugget_from_blasting_warrior_armor_head"
+        "recipes": "rogues:iron_nugget_from_blasting_warrior_armor_head"
       },
       "trigger": "minecraft:recipe_unlocked"
     },

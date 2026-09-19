@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "rogues:warrior_armor_legs"
+        "recipes": "rogues:warrior_armor_legs"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

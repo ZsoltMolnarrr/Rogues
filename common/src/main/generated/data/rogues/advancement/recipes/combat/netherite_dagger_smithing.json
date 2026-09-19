@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "rogues:netherite_dagger_smithing"
+        "recipes": "rogues:netherite_dagger_smithing"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

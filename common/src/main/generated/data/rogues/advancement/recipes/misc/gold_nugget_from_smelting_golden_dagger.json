@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "rogues:gold_nugget_from_smelting_golden_dagger"
+        "recipes": "rogues:gold_nugget_from_smelting_golden_dagger"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "rogues:golden_sickle"
+        "recipes": "rogues:golden_sickle"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

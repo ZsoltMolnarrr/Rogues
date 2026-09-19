@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "rogues:rabbit_hide_from_blasting_assassin_armor_legs"
+        "recipes": "rogues:rabbit_hide_from_blasting_assassin_armor_legs"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

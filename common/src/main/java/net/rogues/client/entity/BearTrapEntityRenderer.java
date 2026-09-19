@@ -58,12 +58,12 @@ public class BearTrapEntityRenderer<T extends BearTrapEntity> extends EntityRend
     public void submit(State state, PoseStack matrices, SubmitNodeCollector queue, CameraRenderState cameraState) {
         super.submit(state, matrices, queue, cameraState);
         matrices.pushPose();
-        matrices.mulPose(Axis.YP.rotationDegrees(-state.yaw + 180F));
+        matrices.rotateDegrees(Axis.YP, -state.yaw + 180F);
         // Standard entity-model space: y-down and x-mirrored, ground plane at y = 1.5
         matrices.scale(-1F, -1F, 1F);
         matrices.translate(0, -1.5, 0);
         queue.submitModel(model, state, matrices, model.renderType(TEXTURE),
-                state.lightCoords, OverlayTexture.NO_OVERLAY, state.outlineColor, null);
+                state.lightCoords, OverlayTexture.NO_OVERLAY, state.outlineColor);
         matrices.popPose();
     }
 }

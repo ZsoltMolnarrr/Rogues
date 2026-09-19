@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "rogues:leather_from_smelting_rogue_armor_head"
+        "recipes": "rogues:leather_from_smelting_rogue_armor_head"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

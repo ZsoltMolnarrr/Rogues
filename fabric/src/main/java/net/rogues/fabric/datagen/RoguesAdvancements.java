@@ -154,7 +154,6 @@ public class RoguesAdvancements extends FabricAdvancementProvider {
                         icon,
                         Component.translatable(translationKey(id, "title")),
                         Component.translatable(translationKey(id, "description")),
-                        null,
                         frame,
                         showToast,
                         announceToChat,

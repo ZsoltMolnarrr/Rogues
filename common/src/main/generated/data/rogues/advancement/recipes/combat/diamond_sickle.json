@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "rogues:diamond_sickle"
+        "recipes": "rogues:diamond_sickle"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

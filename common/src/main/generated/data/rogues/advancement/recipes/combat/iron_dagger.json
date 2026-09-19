@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "rogues:iron_dagger"
+        "recipes": "rogues:iron_dagger"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

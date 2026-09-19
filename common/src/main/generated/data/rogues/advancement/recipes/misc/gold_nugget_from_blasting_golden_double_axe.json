@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "rogues:gold_nugget_from_blasting_golden_double_axe"
+        "recipes": "rogues:gold_nugget_from_blasting_golden_double_axe"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

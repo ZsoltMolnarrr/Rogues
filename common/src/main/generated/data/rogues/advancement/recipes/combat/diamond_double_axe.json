@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "rogues:diamond_double_axe"
+        "recipes": "rogues:diamond_double_axe"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

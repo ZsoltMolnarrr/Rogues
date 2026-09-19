@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "rogues:arms_workbench"
+        "recipes": "rogues:arms_workbench"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

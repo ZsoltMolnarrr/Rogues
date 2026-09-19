@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "rogues:berserker_armor_feet"
+        "recipes": "rogues:berserker_armor_feet"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

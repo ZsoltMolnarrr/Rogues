@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "rogues:flint_from_smelting_flint_dagger"
+        "recipes": "rogues:flint_from_smelting_flint_dagger"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

@@ -3,7 +3,7 @@
   "criteria": {
     "has_the_recipe": {
       "conditions": {
-        "recipe": "rogues:iron_nugget_from_smelting_warrior_armor_chest"
+        "recipes": "rogues:iron_nugget_from_smelting_warrior_armor_chest"
       },
       "trigger": "minecraft:recipe_unlocked"
     },

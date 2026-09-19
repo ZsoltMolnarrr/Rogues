@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "rogues:berserker_armor_chest"
+        "recipes": "rogues:berserker_armor_chest"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
