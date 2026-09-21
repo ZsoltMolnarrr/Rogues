@@ -12,53 +12,6 @@
       "id": "#rpg_series:weapon_type/claymore",
       "required": false
     },
-    {
-      "id": "rogues:warrior_armor_head",
-      "required": false
-    },
-    {
-      "id": "rogues:warrior_armor_chest",
-      "required": false
-    },
-    {
-      "id": "rogues:warrior_armor_legs",
-      "required": false
-    },
-    {
-      "id": "rogues:warrior_armor_feet",
-      "required": false
-    },
-    {
-      "id": "rogues:berserker_armor_head",
-      "required": false
-    },
-    {
-      "id": "rogues:berserker_armor_chest",
-      "required": false
-    },
-    {
-      "id": "rogues:berserker_armor_legs",
-      "required": false
-    },
-    {
-      "id": "rogues:berserker_armor_feet",
-      "required": false
-    },
-    {
-      "id": "rogues:netherite_berserker_armor_head",
-      "required": false
-    },
-    {
-      "id": "rogues:netherite_berserker_armor_chest",
-      "required": false
-    },
-    {
-      "id": "rogues:netherite_berserker_armor_legs",
-      "required": false
-    },
-    {
-      "id": "rogues:netherite_berserker_armor_feet",
-      "required": false
-    }
+    "#rogues:armor_type/warrior_armor"
   ]
 }
