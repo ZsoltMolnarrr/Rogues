@@ -66,7 +66,7 @@ dependencies {
     implementation("maven.modrinth:tiny-config:${project.tiny_config_version}-${platform}")
 
     // Curios - https://docs.illusivesoulworks.com/category/curios
-    // Gated via enable_curios (see gradle.properties, TODO 26.3 (Curios)). This mod has no Curios code;
+    // Gated via enable_curios (see gradle.properties). This mod has no Curios code;
     // the dependency only added Curios to the NeoForge dev runtime.
     if (rootProject.enable_curios.toBoolean()) {
         implementation("top.theillusivec4.curios:curios-neoforge:${project.curios_version}")
