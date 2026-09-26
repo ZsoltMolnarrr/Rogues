@@ -15,6 +15,7 @@ import net.rogues.block.CustomBlocks;
 import net.rogues.config.Default;
 import net.rogues.config.TweaksConfig;
 import net.rogues.effect.RogueEffects;
+import net.rogues.mixin.DamageModifierStatusEffectAccessor;
 import net.rogues.entity.RogueEntities;
 import net.rogues.item.Group;
 import net.rogues.item.RogueWeapons;
@@ -88,6 +89,12 @@ public class RoguesMod {
                     ModifierDefinitions.uuid(modifierId).toString(),
                     tweaksConfig.value.rebalance_strength_attack_damage_multiplier,
                     EntityAttributeModifier.Operation.MULTIPLY_BASE
+            );
+            // Strength is a `DamageModifierStatusEffect`, whose `adjustModifierAmount` ignores the
+            // modifier's own amount and returns its constructor value (3.0) * (amplifier + 1).
+            // Without this, the replaced modifier would grant +300% base attack damage per level.
+            ((DamageModifierStatusEffectAccessor) StatusEffects.STRENGTH).rogues$setModifier(
+                    tweaksConfig.value.rebalance_strength_attack_damage_multiplier
             );
         }
     }
