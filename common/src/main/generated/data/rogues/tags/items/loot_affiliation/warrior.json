@@ -1,0 +1,18 @@
+{
+  "replace": false,
+  "values": [
+    {
+      "id": "#rpg_series:weapon_type/double_axe",
+      "required": false
+    },
+    {
+      "id": "#rpg_series:weapon_type/glaive",
+      "required": false
+    },
+    {
+      "id": "#rpg_series:weapon_type/claymore",
+      "required": false
+    },
+    "#rogues:armor_type/warrior_armor"
+  ]
+}
