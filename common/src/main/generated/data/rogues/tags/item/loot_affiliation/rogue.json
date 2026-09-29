@@ -1,0 +1,13 @@
+{
+  "values": [
+    {
+      "id": "#rpg_series:weapon_type/dagger",
+      "required": false
+    },
+    {
+      "id": "#rpg_series:weapon_type/sickle",
+      "required": false
+    },
+    "#rogues:armor_type/rogue_armor"
+  ]
+}
