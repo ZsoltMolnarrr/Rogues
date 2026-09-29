@@ -1,5 +1,7 @@
 package net.rogues.fabric.datagen;
 
+import net.spell_engine.rpg_series.item.Equipment;
+import net.minecraft.tags.TagKey;
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
@@ -98,6 +100,46 @@ public class RoguesDataGenerator implements DataGeneratorEntrypoint {
                 var tag = builder(repair.tag());
                 repair.required().forEach(id -> tag.add(ResourceKey.create(Registries.ITEM, id)));
                 repair.optional().forEach(id -> tag.addOptional(ResourceKey.create(Registries.ITEM, id)));
+            }
+
+            var rogueArmor = generateClassArmorTag("rogue_armor",
+                    RogueArmors.entries.stream()
+                            .filter(entry -> entry.name().contains("rogue") || entry.name().contains("assassin"))
+                            .toList());
+            var warriorArmor = generateClassArmorTag("warrior_armor",
+                    RogueArmors.entries.stream()
+                            .filter(entry -> entry.name().contains("warrior") || entry.name().contains("berserker"))
+                            .toList());
+            generateLootAffiliation("rogue",
+                    List.of(Equipment.WeaponType.DAGGER, Equipment.WeaponType.SICKLE),
+                    List.of(rogueArmor));
+            generateLootAffiliation("warrior",
+                    List.of(Equipment.WeaponType.DOUBLE_AXE, Equipment.WeaponType.GLAIVE, Equipment.WeaponType.CLAYMORE),
+                    List.of(warriorArmor));
+        }
+
+        /// Class armor tag: `rogues:armor_type/<name>`, holding every piece of the given armor sets
+        private TagKey<Item> generateClassArmorTag(String name, List<Armor.Entry> armors) {
+            var tagKey = TagKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(RoguesMod.ID, "armor_type/" + name));
+            var tag = builder(tagKey);
+            for (var armor: armors) {
+                for (var id: armor.armorSet().pieceIds()) {
+                    tag.addOptional(ResourceKey.create(Registries.ITEM, (Identifier) id));
+                }
+            }
+            return tagKey;
+        }
+
+        /// Loot affiliation: items relevant for the wearer of the given spell book
+        /// (`rogues:spell_book/<book>` -> `rogues:loot_affiliation/<book>`), these drop more often
+        /// for them from the loot injected by Spell Engine.
+        private void generateLootAffiliation(String book, List<Equipment.WeaponType> weaponTypes, List<TagKey<Item>> armorTags) {
+            var tag = builder(TagKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(RoguesMod.ID, "loot_affiliation/" + book)));
+            for (var type: weaponTypes) {
+                tag.addOptionalTag(RPGSeriesItemTags.WeaponType.get(type));
+            }
+            for (var armorTag: armorTags) {
+                tag.addTag(armorTag);
             }
         }
     }
